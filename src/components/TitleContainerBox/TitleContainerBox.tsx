@@ -5,9 +5,11 @@ function TitleContainerBox(props: TitleContainerBoxProps) {
     const { title } = props;
 
     return (
-        <S.TitleContainerBox>
+        <S.Container>
+            <S.TitleContainerBox>
             {title}
         </S.TitleContainerBox>
+        </S.Container>
     );
 }
 export default TitleContainerBox;
