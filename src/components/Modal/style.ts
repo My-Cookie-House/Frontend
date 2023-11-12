@@ -22,7 +22,7 @@ const ModalWrapper = styled.div<ModalWrapperProps>`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); // 0.5는 투명도를 나타냅니다.
+  background-color: rgba(0, 0, 0, 0.5);
   display: ${props => props.show ? 'block' : 'none'};
   z-index: 999;
 `;
@@ -37,8 +37,7 @@ const ModalContent = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   box-sizing: border-box; 
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding: 19px;
   width: 364px;
   height: 500px;
   color: #572E16; 
@@ -53,11 +52,22 @@ const ModalInnerContent = styled.div`
   overflow: auto;
 `;
 
+const ModalTitle = styled.div`
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  color: #572E16; 
+  font-size: 20px;
+  overflow-y: auto; 
+  
+`;
 
-export const s = {
+
+export const S = {
     fadeIn,
     fadeOut,
     ModalWrapper,
     ModalContent,
     ModalInnerContent,
+    ModalTitle
 }

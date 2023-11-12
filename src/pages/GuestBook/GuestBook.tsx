@@ -14,7 +14,7 @@ function GuestBook() {
         setWirteGuestBookModalOpen(true);
         setModalContent(
             <>
-            
+
             </>
         );
     }
@@ -30,7 +30,7 @@ function GuestBook() {
 
             </S.Container>
 
-            <Modal isOpen={isWirteGuestBookModalOpen} onClose={() => setWirteGuestBookModalOpen(false)}>
+            <Modal modalTitle = {"방명록 남기기"} isOpen={isWirteGuestBookModalOpen} onClose={() => setWirteGuestBookModalOpen(false)}>
                 {modalContent}
             </Modal>
         </>
