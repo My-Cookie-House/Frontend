@@ -5,17 +5,19 @@ import TitleContainerBox from '../../components/TitleContainerBox/TitleContainer
 import BackButton from '../../components/BackButton/BackButton';
 
 function GuestBook() {
-  return (
-    <>
-    <BackButton route='/'/>
-    <TitleContainerBox title = {"방명록"}/>
-        <S.Container>
+    return (
+        <>
+        <BackButton route='/'/>
+            <S.Container>
+            <S.ButtonWrapper>
+                <TitleContainerBox title = {"방명록"}/>
+                <S.WirteGuestBookButton />
+            </S.ButtonWrapper>
 
-
-        </S.Container>
-    </>
-    
-  )
+            </S.Container>
+        </>
+        
+    )
 }
 
 export default GuestBook;

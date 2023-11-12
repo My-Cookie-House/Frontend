@@ -1,21 +1,36 @@
 import { styled } from "styled-components"; 
+import WirteGuestBookButtonImg from '../../assets/Button/WriteGuestBookButton.svg'
 
 const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    //max-width: 390px;
-    //max-height: 844px;
     margin: 0 auto;
     width: 100%;
-    //height: 130vh; //스크롤 테스트용
-    @media (min-width: 768px) {
-    }
+`;
+
+const ButtonWrapper = styled.div`
+    width: 304px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const WirteGuestBookButton = styled.div`
+    position: absolute;
+    top: 241px;
+    left: 257px;
+    width: 24px;
+    height: 24px;
+    background-image: url(${WirteGuestBookButtonImg});
+    background-size: 24px 24px;
+    z-index: 3;
 `;
 
 
-
 export const S = {
-    Container
-
+    Container,
+    WirteGuestBookButton,
+    ButtonWrapper
 }

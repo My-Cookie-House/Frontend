@@ -11,7 +11,7 @@ const Container = styled.div`
 
 const TitleContainerBox = styled.div`
     position: absolute;
-    top: 234px;
+    top: 220px;
     width: 304px;
     height: 62px;
     background-image: url(${TitleContainerBoxImg});
