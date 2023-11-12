@@ -1,7 +1,17 @@
 import React from 'react'
+import Ornaments from '../../components/ImportOrnaments/ImportOrnaments';
+import { S } from './style'
 
-export default function GuestBook() {
+function GuestBook() {
   return (
-    <div>GuestBook</div>
+    <>
+        <S.Container>
+
+
+        </S.Container>
+    </>
+    
   )
 }
+
+export default GuestBook;
