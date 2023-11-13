@@ -1,7 +1,6 @@
-import React from 'react'
+import React from 'react';
+import PageLayout from '../../components/PageLayout/PageLayout';
 
 export default function Mission() {
-  return (
-    <div>Mission</div>
-  )
+  return <PageLayout>Mission</PageLayout>;
 }
