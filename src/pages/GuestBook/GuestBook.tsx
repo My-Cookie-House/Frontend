@@ -19,23 +19,33 @@ function GuestBook() {
   const [ornamentId, setOrnamentId] = useState<number>(1);
 
   const [reloadUserInfo, setReloadUserInfo] = useState(false); //편지를 보낼 때 마다 상대방 정보를 업데이트 하기 위해 생선한 상태변수, 이유는 상대방 페이지에서 2개의 편지를 쓰면 실시간으로 나무가 물들게 하기 위해.
+   // 방명록 남기기 모달 상태관리
   const { 
     isOpen: isMediumModalOpen, 
     openModal: openMediumModal, 
     closeModal: closeMediumModal } = useModal();
- // 첫 번째 모달 상태 (방명록 남기기)
-  // 두 번째 모달 상태 (오너먼트 고르기)
+
+  // 오너먼트 고르기 모달 상태관리
   const {
     isOpen: isOrnamentModalOpen,
     openModal: openOrnamentModal,
     closeModal: closeOrnamentModal
   } = useModal();
-  //방명록 조회 모달
+
+  //방명록 조회 모달 상태관리
   const {
     isOpen: isGuestBookModalOpen,
     openModal: openGuestBookModal,
     closeModal: closeGuestBookModal
   } = useModal();
+
+  //방명록 조회 모달 상태관리
+  const {
+    isOpen: isSuccessSendGuestBookOpen,
+    openModal: openSuccessSendGuestBookModal,
+    closeModal: closeSuccessSendGuestBookModal
+  } = useModal();
+
   const [readingGuestBookId, setReadingGuestBookId] = useState<number>(1);
   const [readingGuestBookAuthor, setReadingGuestBookAuthor] = useState<string>("김민성");
   const [readingGuestBookContent, setReadingGuestBookContent] = useState<string>("김민성 왔다감");
@@ -210,6 +220,7 @@ function GuestBook() {
     setReloadUserInfo(prevState => !prevState);  // 상태를 반대로 토글합니다.
     closeMediumModal();
     closeOrnamentModal();
+    openSuccessSendGuestBookModal();
     
   } catch (error: unknown) { //에러 일 경우
     if (error instanceof AxiosError) {
@@ -330,16 +341,16 @@ function GuestBook() {
         {/* 방명록 남겼다고 알림 모달 */}
         <Modal 
           modalTitle={'방명록'}
-          isOpen={isGuestBookModalOpen}
-          onClose={closeGuestBookModal}
+          isOpen={isSuccessSendGuestBookOpen}
+          onClose={closeSuccessSendGuestBookModal}
           imageType={"MediumModal"}
         >
-          <ModalCloseButton onClick={closeGuestBookModal} />
+          <ModalCloseButton onClick={closeSuccessSendGuestBookModal} />
           <S.ModalInnerWrapper>
             <S.OrnamentImg style={{ backgroundImage: `url(${ornaments[ornamentId].image})` }} />
             <S.AuthorName>{author}</S.AuthorName>
             <S.ModalText>방명록을 남겼어요!</S.ModalText>
-            <ModalOKButton buttonName="확인하기" onClick={closeGuestBookModal}/>
+            <ModalOKButton buttonName="확인하기" onClick={closeSuccessSendGuestBookModal}/>
           </S.ModalInnerWrapper>
           
         </Modal>
