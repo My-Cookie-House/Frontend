@@ -2,7 +2,7 @@ import React, {useState, useRef} from 'react';
 import leftButton from '../assets/onboardingAssets/leftButton.svg';
 import rightButton from '../assets/onboardingAssets/rightButton.svg';
 import skipButton from '../assets/onboardingAssets/skipButton.svg';
-import NavigatableButton from '../components/BackButton/NavigatableButton';
+import NavigatableButton from '../BackButton/NavigatableButton';
 
 interface SliderProps {
   images: string[];
