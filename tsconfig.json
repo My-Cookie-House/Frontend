@@ -5,7 +5,6 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "types": ["@types/node", "@types/babel__generator"],
 
     /* Bundler mode */
     "moduleResolution": "node",
@@ -21,12 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": [
-    "src",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.d.ts",
-    "src/typings/**/*.d.ts"
-  ],
+  "include": ["src"],
   "references": [{"path": "./tsconfig.node.json"}]
 }
