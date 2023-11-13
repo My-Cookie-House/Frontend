@@ -1,7 +1,9 @@
-import {useState, useRef} from 'react';
+import React, {useState, useRef} from 'react';
+
 import leftButton from '../assets/onboardingAssets/leftButton.svg';
 import rightButton from '../assets/onboardingAssets/rightButton.svg';
 import skipButton from '../assets/onboardingAssets/skipButton.svg';
+import NavigatableButton from '../components/BackButton/NavigatableButton';
 
 interface SliderProps {
   images: string[];
@@ -77,7 +79,11 @@ const Slider: React.FC<SliderProps> = ({
           height: '12px',
         }}
       />
-      {index === images.length - 1 && <img src={skipButton} />}
+      {index === images.length - 1 && (
+        <NavigatableButton route={'/'}>
+          <img src={skipButton} />
+        </NavigatableButton>
+      )}
       <img src={rightButton} onClick={handleRightClick} />
     </div>
   );
