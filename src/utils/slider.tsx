@@ -1,4 +1,6 @@
-import React, {useState, useRef} from 'react';
+import {useState, useRef} from 'react';
+import leftButton from '../assets/onboardingAssets/leftButton.svg';
+import rightButton from '../assets/onboardingAssets/rightButton.svg';
 
 interface SliderProps {
   images: string[];
@@ -38,12 +40,25 @@ const Slider: React.FC<SliderProps> = ({
     }
   };
 
+  const handleLeftClick = () => {
+    if (index > 0) {
+      setIndex(index - 1);
+    }
+  };
+
+  const handleRightClick = () => {
+    if (index < images.length - 1) {
+      setIndex(index + 1);
+    }
+  };
+
   return (
     <div
       ref={touchRef}
       onTouchStart={(e) => handleStart(e.touches[0].clientX)}
       onTouchEnd={(e) => handleEnd(e.changedTouches[0].clientX)}
     >
+      <img src={leftButton} alt="left button" onClick={handleLeftClick} />
       <p>{topTexts[index]}</p>
       <img
         src={images[index]}
@@ -61,6 +76,7 @@ const Slider: React.FC<SliderProps> = ({
           height: '12px',
         }}
       />
+      <img src={rightButton} onClick={handleRightClick} />
     </div>
   );
 };
