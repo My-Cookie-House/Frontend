@@ -143,6 +143,7 @@ function GuestBook() {
         <Modal
           modalTitle={'방명록 남기기'}
           isOpen={isOpen} onClose={closeModal}
+          imageType={"MediumModal"}
         >
           <ModalCloseButton onClick={closeModal} />
           <>
