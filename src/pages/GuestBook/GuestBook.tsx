@@ -16,6 +16,8 @@ function GuestBook() {
   const { userId } = useParams();
   const [author, setAuthor] = useState('');  // 보내는 사람 이름을 관리하는 상태
   const [content, setContent] = useState('');  // 편지 내용을 관리하는 상태
+  const [ornamentId, setOrnamentId] = useState<number>(1);
+
   const [reloadUserInfo, setReloadUserInfo] = useState(false); //편지를 보낼 때 마다 상대방 정보를 업데이트 하기 위해 생선한 상태변수, 이유는 상대방 페이지에서 2개의 편지를 쓰면 실시간으로 나무가 물들게 하기 위해.
   const { 
     isOpen: isMediumModalOpen, 
@@ -34,7 +36,6 @@ function GuestBook() {
     openModal: openGuestBookModal,
     closeModal: closeGuestBookModal
   } = useModal();
-  const [ornamentId, setOrnamentId] = useState<number | null>(null);
   const [readingGuestBookId, setReadingGuestBookId] = useState<number>(1);
   const [readingGuestBookAuthor, setReadingGuestBookAuthor] = useState<string>("김민성");
   const [readingGuestBookContent, setReadingGuestBookContent] = useState<string>("김민성 왔다감");
@@ -243,7 +244,7 @@ function GuestBook() {
     openOrnamentModal(); //테스트용
   };
 
-    // 버튼 클릭 이벤트 핸들러
+    // 방명록 조회 함수, userId로 판별해 주인만 볼 수 있게 로직 추가해야 함.
     const handleShowGuestBookContent = (ornamentId: number, author: string, content: string) => {
       openGuestBookModal();
       setReadingGuestBookId(ornamentId);
@@ -325,6 +326,24 @@ function GuestBook() {
           </S.Form>
           
         </Modal>
+
+        {/* 방명록 남겼다고 알림 모달 */}
+        <Modal 
+          modalTitle={'방명록'}
+          isOpen={isGuestBookModalOpen}
+          onClose={closeGuestBookModal}
+          imageType={"MediumModal"}
+        >
+          <ModalCloseButton onClick={closeGuestBookModal} />
+          <S.ModalInnerWrapper>
+            <S.OrnamentImg style={{ backgroundImage: `url(${ornaments[ornamentId].image})` }} />
+            <S.AuthorName>{author}</S.AuthorName>
+            <S.ModalText>방명록을 남겼어요!</S.ModalText>
+            <ModalOKButton buttonName="확인하기" onClick={closeGuestBookModal}/>
+          </S.ModalInnerWrapper>
+          
+        </Modal>
+      
         
         {/* 방명록 내용 보기 모달 */}
         <Modal 
