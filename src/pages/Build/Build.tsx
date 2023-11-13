@@ -2,19 +2,30 @@ import * as S from './style';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import BuildTypeButton from '../../components/Buttons/BuildTypeButton/BuildTypeButton';
 import LongButton from '../../components/Buttons/LongButton/LongButton';
-import {useCallback, useState} from 'react';
-
-type BuildType = 'unselected' | 'random' | 'custom';
+import {useCallback} from 'react';
+import {useRecoilState} from 'recoil';
+import {BuildStateAtom, buildStateAtom} from '../../atoms/BuildAtom';
 
 export default function Build() {
-  const [buildType, setBuildType] = useState<BuildType>('unselected');
+  const [buildState, setBuildState] =
+    useRecoilState<BuildStateAtom>(buildStateAtom);
 
   const handleRandomSelect = useCallback(
-    () => setBuildType((prev) => (prev === 'random' ? 'unselected' : 'random')),
+    () =>
+      setBuildState((prev) =>
+        prev.type === 'random'
+          ? {...prev, type: 'unselected'}
+          : {...prev, type: 'random'},
+      ),
     [],
   );
   const handleCustomSelect = useCallback(
-    () => setBuildType((prev) => (prev === 'custom' ? 'unselected' : 'custom')),
+    () =>
+      setBuildState((prev) =>
+        prev.type === 'custom'
+          ? {...prev, type: 'unselected'}
+          : {...prev, type: 'custom'},
+      ),
     [],
   );
 
@@ -27,19 +38,19 @@ export default function Build() {
         margin="19.68px 0 0 0"
         title="랜덤으로 분양받을래요!"
         description={'랜덤으로 커스텀된 쿠키하우스에\n입주하게 됩니다'}
-        dark={buildType === 'random'}
+        dark={buildState.type === 'random'}
       />
       <BuildTypeButton
         onClick={handleCustomSelect}
         margin="22px 0 0 0"
         title="제가 직접 지을래요!"
         description={'과자를 선택해 쿠키하우스를 커스텀하고\n입주하게 됩니다'}
-        dark={buildType === 'custom'}
+        dark={buildState.type === 'custom'}
       />
       <LongButton
-        route={`/build/${buildType}`}
+        route={`/build/${buildState.type}`}
         margin="84px 0 0 0"
-        disabled={buildType === 'unselected'}
+        disabled={buildState.type === 'unselected'}
       >
         <S.NextStepText>집 보러가기</S.NextStepText>
       </LongButton>

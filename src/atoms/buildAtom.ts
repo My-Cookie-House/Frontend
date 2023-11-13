@@ -1,12 +1,12 @@
 import {atom} from 'recoil';
 
-export type BuildState = {
+export type BuildStateAtom = {
   type: 'unselected' | 'random' | 'custom';
   cookieId: number[] | null;
   icingId: number | null;
 };
 
-const buildState = atom({
+export const buildStateAtom = atom<BuildStateAtom>({
   key: 'buildState',
   default: {
     type: 'random',

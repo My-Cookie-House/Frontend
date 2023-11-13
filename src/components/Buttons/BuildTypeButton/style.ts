@@ -26,4 +26,5 @@ export const Description = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  white-space: pre-wrap;
 `;
