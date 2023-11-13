@@ -52,6 +52,7 @@ function GuestBook() {
 
   
   const [guestBook, setGuestBook] = useState([
+    //더미데이터. 나중에 지워야함 //////////////////////////////////////////////////
     {
       "author": "홍길동",
       "content": "adsfkjalksj~",
