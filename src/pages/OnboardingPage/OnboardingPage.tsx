@@ -51,6 +51,9 @@ function OnboardingPage() {
           progresses={progresses}
         />
       </div>
+      <LongButton disabled>
+        <span>START</span>
+      </LongButton>
     </PageLayout>
   );
 }

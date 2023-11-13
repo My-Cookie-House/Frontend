@@ -8,7 +8,7 @@ export default function Button(props: ButtonProps) {
   const handleNavigate = () => {
     navigate(props.route!);
   };
-
+  console.log(props.disabled);
   return (
     <SButton
       width={props.width}
@@ -17,6 +17,7 @@ export default function Button(props: ButtonProps) {
       padding={props.padding}
       onClick={props.route ? handleNavigate : props.onClick}
       background={props.background}
+      disabled={props.disabled}
     >
       {props.children}
     </SButton>

@@ -7,4 +7,5 @@ export type ButtonProps = {
   margin?: string;
   padding?: string;
   background?: string;
+  disabled?: boolean;
 };
