@@ -3,6 +3,7 @@ import leftButton from '../../assets/onboardingAssets/leftButton.svg';
 import rightButton from '../../assets/onboardingAssets/rightButton.svg';
 import skipButton from '../../assets/onboardingAssets/skipButton.svg';
 import NavigatableButton from '../BackButton/NavigatableButton';
+import LongButton from '../Buttons/LongButton/LongButton';
 
 interface SliderProps {
   images: string[];
@@ -60,7 +61,8 @@ const Slider: React.FC<SliderProps> = ({
       onTouchStart={(e) => handleStart(e.touches[0].clientX)}
       onTouchEnd={(e) => handleEnd(e.changedTouches[0].clientX)}
     >
-      <img src={leftButton} onClick={handleLeftClick} />
+      {index !== 0 && <img src={leftButton} onClick={handleLeftClick} />}
+
       <p>{topTexts[index]}</p>
       <img
         src={images[index]}
@@ -71,20 +73,26 @@ const Slider: React.FC<SliderProps> = ({
       />
       {bottomTexts[index]}
       {extraTexts[index]}
-      <img
-        src={progresses[index]}
-        style={{
-          width: '56px',
-          height: '12px',
-        }}
-      />
+      {index !== 0 && (
+        <img
+          src={progresses[index]}
+          style={{
+            width: '56px',
+            height: '12px',
+          }}
+        />
+      )}
 
-      {index === images.length - 1 && (
-        <NavigatableButton route={'/'}>
+      {index === 0 && (
+        <LongButton onClick={handleRightClick}>Start!</LongButton>
+      )}
+
+      {index !== 0 && (
+        <NavigatableButton route={'/build'}>
           <img src={skipButton} />
         </NavigatableButton>
       )}
-      <img src={rightButton} onClick={handleRightClick} />
+      {index !== 0 && <img src={rightButton} onClick={handleRightClick} />}
     </div>
   );
 };

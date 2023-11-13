@@ -10,9 +10,10 @@ import Progress3 from '../../assets/OnboardingAssets/progress3.svg';
 import PageLayout from '../../components/PageLayout/PageLayout';
 
 function OnboardingPage() {
-  const images = [Image1, Image2, Image3];
+  const images = [CookieHouse, Image1, Image2, Image3];
 
   const topTexts = [
+    '쿠키하우스에 오신 것을 환영해요!',
     '미션으로 일년의 추억을 회고해요!',
     '나만의 집을 꾸며보세요!',
     '친구를 초대해 보세요!',
@@ -35,11 +36,12 @@ function OnboardingPage() {
   ];
 
   const extraTexts = [
+    '',
     '(미션은 다음날이 지나면, 완수할 수 없으니 주의!)',
     '',
     '',
   ];
-  const progresses = [Progress1, Progress2, Progress3];
+  const progresses = ['', Progress1, Progress2, Progress3];
   return (
     <PageLayout>
       <div>
