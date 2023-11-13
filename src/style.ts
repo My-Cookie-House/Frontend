@@ -29,3 +29,11 @@ export const GlobalStyle = createGlobalStyle`
     z-index: 1;
   }
 `;
+
+export const theme = {
+  colors: {
+    white: '#ffffff',
+    textMain: '#F9F1E1',
+    textBrown: '#572E16',
+  },
+};
