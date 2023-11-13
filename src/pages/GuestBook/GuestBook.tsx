@@ -132,23 +132,23 @@ function GuestBook() {
         setModalContent(
             <>
                 <S.Form onSubmit={handleWirteGuestBook}>
-                <S.NameInput
-                    type="text"
-                    placeholder="이름을 남겨주세요."
-                    value={guestName}
-                    onChange={writeName}
-                />
-                <S.LetterArea
-                    placeholder="방명록을 남겨주세요."
-                    value={guestBookContent}
-                    onChange={WirteContent}
-                />
-                <S.CheckTextLength>{guestName.length}/500자</S.CheckTextLength>
-                <S.SendButton 
-                type="submit"
-                >
-                    물들이기
-                </S.SendButton>
+                    <S.NameInput
+                        type="text"
+                        placeholder="이름을 남겨주세요."
+                        value={guestName}
+                        onChange={writeName}
+                    />
+                    <S.LetterArea
+                        placeholder="방명록을 남겨주세요."
+                        value={guestBookContent}
+                        onChange={WirteContent}
+                    />
+                    <S.CheckTextLength>{guestName.length}/500자</S.CheckTextLength>
+                    <S.SendButton 
+                    type="submit"
+                    >
+                        물들이기
+                    </S.SendButton>
                 </S.Form>
             </>
         );

@@ -12,3 +12,7 @@ export interface ModalProps {
     children: React.ReactNode;
     modalTitle: string;
   }
+
+  export interface ModalOKButtonProps {
+    buttonName: string; 
+}

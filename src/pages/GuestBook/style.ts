@@ -86,8 +86,9 @@ const SendButton = styled.button`
   border: 0px transparent; // 테두리 색상을 투명
   position: relative;
   z-index: 2;
-  border: dotted;
+  border: 10px dotted;
   border-color: #572E16;
+  background-color: #572E16;
 `;
 
 
