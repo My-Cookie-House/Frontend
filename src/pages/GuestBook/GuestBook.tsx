@@ -5,6 +5,8 @@ import BackButton from '../../components/BackButton/BackButton';
 import Modal from '../../components/Modal/Modal';
 import axios, {AxiosError} from 'axios';
 import PageLayout from '../../components/PageLayout/PageLayout';
+import ModalOKButton from '../../components/ModalOKButton/ModalOKButton';
+
 function GuestBook() {
   const userId = 'default'; //userId 이거 수정해야함. 어떻게 저장할지 아직 모름
   const [isWirteGuestBookModalOpen, setWirteGuestBookModalOpen] =
@@ -90,6 +92,7 @@ function GuestBook() {
       guestBookContent,
     };
 
+
     try {
       // 백엔드로 방명록 데이터를 보냅니다.
       //수정 필요.
@@ -121,6 +124,30 @@ function GuestBook() {
         }
       }
       return null;
+
+    const handleWirteGuestBookModalOpen = () => {
+        setWirteGuestBookModalOpen(true);
+        setModalContent(
+            <>
+                <S.Form onSubmit={handleWirteGuestBook}>
+                    <S.NameInput
+                        type="text"
+                        placeholder="이름을 남겨주세요."
+                        value={guestName}
+                        onChange={writeName}
+                    />
+                    <S.LetterArea
+                        placeholder="방명록을 남겨주세요."
+                        value={guestBookContent}
+                        onChange={WirteContent}
+                    />
+                    <S.CheckTextLength>{guestName.length}/500자</S.CheckTextLength>
+                    
+                    <ModalOKButton buttonName='물들이기' />
+                </S.Form>
+            </>
+        );
+
     }
   };
 
