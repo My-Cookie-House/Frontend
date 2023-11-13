@@ -38,9 +38,23 @@ const getModalBackgroundImage = (imageType?: 'SmallModal' | 'MediumModal' | 'Lar
     case 'LargeModal':
       return LargeModalImg;
     default:
-      return MediumModalImg; 
+      return LargeModalImg; 
   }
 };
+
+const getModalSize = (imageType?: 'SmallModal' | 'MediumModal' | 'LargeModal') => {
+  switch (imageType) {
+    case 'SmallModal':
+      return { width: '311px', height: '339px' };
+    case 'MediumModal':
+      return { width: '311px', height: '418px' };
+    case 'LargeModal':
+      return { width: '311px', height: '617px' };
+    default:
+      return { width: '311px', height: '418px' }; // 기본값
+  }
+};
+
 
 const ModalContent = styled.div<ModalContentProps>`
   position: fixed;
@@ -48,18 +62,23 @@ const ModalContent = styled.div<ModalContentProps>`
   left: 50%;
   transform: translate(-50%, -50%);
   background-image: url(${props => getModalBackgroundImage(props.imageType)});
-  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   padding: 15px;
-  width: 311px;
-  height: 418px;
-  color: #572E16; 
+  ${({ imageType }) => {
+    const { width, height } = getModalSize(imageType);
+    return `
+      width: ${width};
+      height: ${height};
+    `;
+  }}
+  color: #572E16;
   font-size: 20px;
-  overflow-y: auto; 
+  overflow-y: auto;
   
 `;
+
 
 const ModalInnerContent = styled.div`
   width: 100%;

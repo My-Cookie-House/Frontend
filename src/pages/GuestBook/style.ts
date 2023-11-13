@@ -7,6 +7,7 @@ const Container = styled.div`
     align-items: center;
     margin: 0 auto;
     width: 100%;
+    height: 100%;
 `;
 
 const ButtonWrapper = styled.div`
@@ -86,6 +87,23 @@ font-size: 16px;
   margin-bottom: -22px;
 `;
 
+const ModalText = styled.div`
+color: ${props => props.theme.colors.textBrown};
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+text-align: center;
+margin-top: 54.01px;
+margin-bottom: 29px;
+`;
+
+const OrnamentButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center; 
+  justify-content: center;
+`;
 
 
 export const S = {
@@ -96,4 +114,6 @@ export const S = {
     NameInput,
     CheckTextLength,
     LetterArea,
+    ModalText,
+    OrnamentButtonWrapper
 }

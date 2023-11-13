@@ -15,7 +15,11 @@ function GuestBook() {
   const [senderName, setSenderName] = useState('');  // 보내는 사람 이름을 관리하는 상태
   const [letterContent, setLetterContent] = useState('');  // 편지 내용을 관리하는 상태
   const [reloadUserInfo, setReloadUserInfo] = useState(false); //편지를 보낼 때 마다 상대방 정보를 업데이트 하기 위해 생선한 상태변수, 이유는 상대방 페이지에서 2개의 편지를 쓰면 실시간으로 나무가 물들게 하기 위해.
-  const { isOpen, openModal, closeModal } = useModal(); // 첫 번째 모달 상태 (방명록 남기기)
+  const { 
+    isOpen: isMediumModalOpen, 
+    openModal: openMediumModal, 
+    closeModal: closeMediumModal } = useModal();
+ // 첫 번째 모달 상태 (방명록 남기기)
   // 두 번째 모달 상태 (오너먼트 고르기)
   const {
     isOpen: isOrnamentModalOpen,
@@ -84,12 +88,12 @@ function GuestBook() {
   }
 
  // 편지를 보내는 함수입니다.
- const handleSendLetter = async (event: React.FormEvent) => {
+ const handleSendGuestBook = async (event: React.FormEvent) => {
   event.preventDefault();
 
   // 입력값을 검사합니다.
   if (!senderName.trim() || !letterContent.trim()) {
-
+    alert("이름과 방명록 내용을 작성해주세요!")
     return;
   }
 
@@ -140,7 +144,7 @@ function GuestBook() {
         <BackButton route="/" />
         <S.ButtonWrapper>
           <TitleContainerBox title={'방명록'} />
-            <S.WirteGuestBookButton onClick={openModal} />
+            <S.WirteGuestBookButton onClick={openMediumModal} />
         </S.ButtonWrapper>
         <PageLayout>
           
@@ -148,12 +152,12 @@ function GuestBook() {
 
         <Modal
           modalTitle={'방명록 남기기'}
-          isOpen={isOpen} onClose={closeModal}
+          isOpen={isMediumModalOpen} onClose={closeMediumModal}
           imageType={"MediumModal"}
         >
-          <ModalCloseButton onClick={closeModal} />
+          <ModalCloseButton onClick={closeMediumModal} />
           <>
-            <S.Form onSubmit={handleSendLetter}>
+            <S.Form onSubmit={handleSendGuestBook}>
               <S.NameInput
                 type="text"
                 name="guestName" // 상태와 일치하는 name 속성
@@ -168,20 +172,30 @@ function GuestBook() {
               />
               <S.CheckTextLength>{letterContent?.length}/500자</S.CheckTextLength>
               <ModalOKButton buttonName="오너먼트 고르기" onClick={openOrnamentModal}/>
-
-              {/* 오너먼트 고르기 모달 */}
-              <Modal
-                modalTitle={'오너먼트 고르기'}
-                isOpen={isOrnamentModalOpen}
-                onClose={closeOrnamentModal}
-                imageType={"LargeModal"}
-              >
-                <ModalCloseButton onClick={closeOrnamentModal} />
-                {/* 오너먼트 선택 내용 */}
-              </Modal>
             </S.Form>
           </>
         </Modal>
+
+        {/* 오너먼트 고르기 모달 */}
+        <Modal 
+          modalTitle={'오너먼트 고르기'}
+          isOpen={isOrnamentModalOpen}
+          onClose={closeOrnamentModal}
+          imageType={"LargeModal"}
+        >
+          <S.ModalText>
+            오너먼트 1개를 골라주세요
+          </S.ModalText>
+          <ModalCloseButton onClick={closeOrnamentModal} />
+          <S.Form>
+            <S.OrnamentButtonWrapper>
+
+            </S.OrnamentButtonWrapper>
+            <ModalOKButton buttonName="선택완료" onClick={handleSendGuestBook}/>
+          </S.Form>
+          
+        </Modal>
+            
       </>
     );
   };
