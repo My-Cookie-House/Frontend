@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import Ornaments from '../../components/ImportOrnaments/ImportOrnaments';
 import {S} from './style';
 import TitleContainerBox from '../../components/TitleContainerBox/TitleContainerBox';
 import BackButton from '../../components/BackButton/BackButton';
