@@ -3,11 +3,39 @@ import * as SBuild from '../style';
 import PageLayout from '../../../components/PageLayout/PageLayout';
 import LongButton from '../../../components/Buttons/LongButton/LongButton';
 import {useEffect, useState} from 'react';
+import {useSetRecoilState} from 'recoil';
+import {buildStateAtom} from '../../../atoms/buildAtom';
+
+const COOKIE_COUNT = 6;
+const ICING_COUNT = 5;
 
 export default function Random() {
+  const setBuildState = useSetRecoilState(buildStateAtom);
+
   const [isConstructing, setIsConstructing] = useState(true);
 
+  // 쿠키 2개 랜덤 생성
+  const makeRandomCookies = () => {
+    const cookie1 = Math.floor(Math.random() * COOKIE_COUNT + 1);
+    let cookie2 = Math.floor(Math.random() * COOKIE_COUNT + 1);
+
+    // 쿠키 2개가 다르도록 보장
+    while (cookie1 === cookie2) {
+      cookie2 = Math.floor(Math.random() * COOKIE_COUNT + 1);
+    }
+
+    setBuildState((prev) => ({...prev, cookieId: [cookie1, cookie2]}));
+  };
+
+  // 아이싱 랜덤 생성
+  const makeRandomIcing = () => {
+    const icing = Math.floor(Math.random() * ICING_COUNT + 1);
+    setBuildState((prev) => ({...prev, icingId: icing}));
+  };
+
   useEffect(() => {
+    makeRandomCookies();
+    makeRandomIcing();
     setTimeout(() => setIsConstructing(false), 1500);
   }, []);
 
