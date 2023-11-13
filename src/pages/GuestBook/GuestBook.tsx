@@ -5,6 +5,7 @@ import TitleContainerBox from '../../components/TitleContainerBox/TitleContainer
 import BackButton from '../../components/BackButton/BackButton';
 import Modal from '../../components/Modal/Modal';
 import axios, {AxiosError} from 'axios'
+import ModalOKButton from '../../components/ModalOKButton/ModalOKButton';
 function GuestBook() {
     const userId = "default"; //userId 이거 수정해야함. 어떻게 저장할지 아직 모름
     const [isWirteGuestBookModalOpen, setWirteGuestBookModalOpen] = useState<boolean>(false);
@@ -132,23 +133,20 @@ function GuestBook() {
         setModalContent(
             <>
                 <S.Form onSubmit={handleWirteGuestBook}>
-                <S.NameInput
-                    type="text"
-                    placeholder="이름을 남겨주세요."
-                    value={guestName}
-                    onChange={writeName}
-                />
-                <S.LetterArea
-                    placeholder="방명록을 남겨주세요."
-                    value={guestBookContent}
-                    onChange={WirteContent}
-                />
-                <S.CheckTextLength>{guestName.length}/500자</S.CheckTextLength>
-                <S.SendButton 
-                type="submit"
-                >
-                    물들이기
-                </S.SendButton>
+                    <S.NameInput
+                        type="text"
+                        placeholder="이름을 남겨주세요."
+                        value={guestName}
+                        onChange={writeName}
+                    />
+                    <S.LetterArea
+                        placeholder="방명록을 남겨주세요."
+                        value={guestBookContent}
+                        onChange={WirteContent}
+                    />
+                    <S.CheckTextLength>{guestName.length}/500자</S.CheckTextLength>
+                    
+                    <ModalOKButton buttonName='물들이기' />
                 </S.Form>
             </>
         );
