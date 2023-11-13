@@ -16,3 +16,7 @@ export interface ModalProps {
   export interface ModalOKButtonProps {
     buttonName: string; 
 }
+
+export interface ModalButtonProps {
+    onClick: React.MouseEventHandler<HTMLButtonElement>;
+  }

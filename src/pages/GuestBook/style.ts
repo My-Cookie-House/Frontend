@@ -40,24 +40,25 @@ const Form = styled.form`
 const NameInput = styled.input`
 //position: absolute;
 margin-top: 60px;
-width: 235px;
-height: 50px;
+width: 225px;
+height: 40px;
 border: dotted;
-border-color: #572E16;
+border-color: ${props => props.theme.colors.textBrown};
 border-radius: 30px;
-color: #572E16;
+color: ${props => props.theme.colors.textBrown};
 margin-bottom: 32px;
 background-color: transparent;
 font-size: 16px;
 &::placeholder {
-    color: #572E16; 
+    color: ${props => props.theme.colors.textBrown};
     font-size: 16px;
   }
 `;
 
+
 const CheckTextLength = styled.div`
-margin-top: -60px;
-margin-right: 20px;;
+margin-top: -25px;
+margin-right: 30px;;
 display: flex;
 flex-direction: column;
 align-self: flex-end;   // 이 부분을 추가
@@ -68,20 +69,21 @@ margin-bottom: 53px;
 `;
 
 const LetterArea = styled.textarea`
-width: 274px;
-height: 149px;
+width: 220px;
+height: 110px;
 border: none;
-color: #222;
+border-radius: 10px;
+color: ${props => props.theme.colors.textBrown};
 overflow: auto;
-margin-bottom: 20px;
 padding: 13px;
 resize: none;
 background-color: rgba(87, 46, 22, 0.15);
 font-size: 16px;
 &::placeholder {
-    color: #572E16;
+    color: rgba(87, 46, 22, 0.60);
     font-size: 16px;
   }
+  margin-bottom: -22px;
 `;
 
 

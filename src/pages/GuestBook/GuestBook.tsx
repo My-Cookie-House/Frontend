@@ -6,15 +6,16 @@ import Modal from '../../components/Modal/Modal';
 import axios, {AxiosError} from 'axios';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import ModalOKButton from '../../components/ModalOKButton/ModalOKButton';
+import ModalCloseButton from '../../components/ModalCloseButton/ModalCloseButton';
+import useModal from '../../hooks/UseModal/UseModal';
 
 function GuestBook() {
   const userId = 'default'; //userId 이거 수정해야함. 어떻게 저장할지 아직 모름
-  const [isWirteGuestBookModalOpen, setWriteGuestBookModalOpen] =
-    useState<boolean>(false);
-  const [modalContent, setModalContent] = useState<React.ReactNode>(null); // 모달에 표시될 내용을 저장
+
   const [senderName, setSenderName] = useState('');  // 보내는 사람 이름을 관리하는 상태
   const [letterContent, setLetterContent] = useState('');  // 편지 내용을 관리하는 상태
   const [reloadUserInfo, setReloadUserInfo] = useState(false); //편지를 보낼 때 마다 상대방 정보를 업데이트 하기 위해 생선한 상태변수, 이유는 상대방 페이지에서 2개의 편지를 쓰면 실시간으로 나무가 물들게 하기 위해.
+  const { isOpen, openModal, closeModal } = useModal();
 
   // 사용자의 방명록 정보를 가져오는 함수
   const getUserInfoFromServer = async (userId: string) => {
@@ -105,8 +106,6 @@ function GuestBook() {
       setSenderName('');
       setLetterContent('');
 
-      // 모달을 닫습니다.
-      setWriteGuestBookModalOpen(false);
     }
     setReloadUserInfo(prevState => !prevState);  // 상태를 반대로 토글합니다.
 
@@ -127,30 +126,7 @@ function GuestBook() {
   }
 };
 
-      // 방명록을 남기는 모달의 내용을 설정하는 함수입니다.
-  const handleWirteGuestBookModalOpen = () => {
-    setWriteGuestBookModalOpen(true);
-    setModalContent(
-      <>
-        <S.Form onSubmit={handleSendLetter}>
-          <S.NameInput
-            type="text"
-            name="guestName" // 상태와 일치하는 name 속성
-            placeholder="이름을 남겨주세요."
-            value={senderName}
-            onChange={writeName}
-          />
-          <S.LetterArea
-            placeholder="방명록을 남겨주세요."
-            value={letterContent}
-            onChange={writeLetter}
-          />
-          <S.CheckTextLength>{letterContent?.length}/500자</S.CheckTextLength>
-          <ModalOKButton buttonName="물들이기" />
-        </S.Form>
-      </>,
-    );
-  };
+
 
 
     return (
@@ -158,7 +134,7 @@ function GuestBook() {
         <BackButton route="/" />
         <S.ButtonWrapper>
           <TitleContainerBox title={'방명록'} />
-            <S.WirteGuestBookButton onClick={handleWirteGuestBookModalOpen} />
+            <S.WirteGuestBookButton onClick={openModal} />
         </S.ButtonWrapper>
         <PageLayout>
           
@@ -166,27 +142,27 @@ function GuestBook() {
 
         <Modal
           modalTitle={'방명록 남기기'}
-          isOpen={isWirteGuestBookModalOpen}
-          onClose={() => setWriteGuestBookModalOpen(false)}
+          isOpen={isOpen} onClose={closeModal}
         >
+          <ModalCloseButton onClick={closeModal} />
           <>
-        <S.Form onSubmit={handleSendLetter}>
-          <S.NameInput
-            type="text"
-            name="guestName" // 상태와 일치하는 name 속성
-            placeholder="이름을 남겨주세요."
-            value={senderName}
-            onChange={writeName}
-          />
-          <S.LetterArea
-            placeholder="방명록을 남겨주세요."
-            value={letterContent}
-            onChange={writeLetter}
-          />
-          <S.CheckTextLength>{letterContent?.length}/500자</S.CheckTextLength>
-          <ModalOKButton buttonName="물들이기" />
-        </S.Form>
-      </>
+            <S.Form onSubmit={handleSendLetter}>
+              <S.NameInput
+                type="text"
+                name="guestName" // 상태와 일치하는 name 속성
+                placeholder="이름을 남겨주세요."
+                value={senderName}
+                onChange={writeName}
+              />
+              <S.LetterArea
+                placeholder="방명록을 남겨주세요."
+                value={letterContent}
+                onChange={writeLetter}
+              />
+              <S.CheckTextLength>{letterContent?.length}/500자</S.CheckTextLength>
+              <ModalOKButton buttonName="오너먼트 고르기" onClick={openModal}/>
+            </S.Form>
+          </>
         </Modal>
       </>
     );
