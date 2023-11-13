@@ -8,7 +8,6 @@ export default function Button(props: ButtonProps) {
   const handleNavigate = () => {
     navigate(props.route!);
   };
-  console.log(props.disabled);
   return (
     <SButton
       width={props.width}
