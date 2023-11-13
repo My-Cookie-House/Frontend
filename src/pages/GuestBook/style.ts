@@ -58,7 +58,7 @@ font-size: 16px;
 
 
 const CheckTextLength = styled.div`
-margin-top: -25px;
+margin-top: -10px;
 margin-right: 30px;;
 display: flex;
 flex-direction: column;
