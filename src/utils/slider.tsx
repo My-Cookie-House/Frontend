@@ -4,9 +4,17 @@ interface SliderProps {
   images: string[];
   topTexts: string[];
   bottomTexts: React.ReactNode[];
+  extraTexts: string[];
+  progresses: string[];
 }
 
-const Slider: React.FC<SliderProps> = ({images, topTexts, bottomTexts}) => {
+const Slider: React.FC<SliderProps> = ({
+  images,
+  topTexts,
+  bottomTexts,
+  extraTexts,
+  progresses,
+}) => {
   const [index, setIndex] = useState(0);
   const [startX, setStartX] = useState(0);
   const [dragging, setDragging] = useState(false);
@@ -45,6 +53,14 @@ const Slider: React.FC<SliderProps> = ({images, topTexts, bottomTexts}) => {
         }}
       />
       {bottomTexts[index]}
+      {extraTexts[index]}
+      <img
+        src={progresses[index]}
+        style={{
+          width: '56px',
+          height: '12px',
+        }}
+      />
     </div>
   );
 };

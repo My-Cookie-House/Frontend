@@ -4,8 +4,13 @@ import Image1 from '../assets/onboardingAssets/onboarding1.svg';
 import Image2 from '../assets/onboardingAssets/onboarding2.svg';
 import Image3 from '../assets/onboardingAssets/onboarding3.svg';
 
+import Progress1 from '../assets/onboardingAssets/progress1.svg';
+import Progress2 from '../assets/onboardingAssets/progress2.svg';
+import Progress3 from '../assets/onboardingAssets/progress3.svg';
+
 function OnboardingPage() {
   const images = [Image1, Image2, Image3];
+
   const topTexts = [
     '미션으로 일년의 추억을 회고해요!',
     '나만의 집을 꾸며보세요!',
@@ -27,9 +32,21 @@ function OnboardingPage() {
     </>,
   ];
 
+  const extraTexts = [
+    '(미션은 다음날이 지나면, 완수할 수 없으니 주의!)',
+    '',
+    '',
+  ];
+  const progresses = [Progress1, Progress2, Progress3];
   return (
     <div>
-      <Slider topTexts={topTexts} images={images} bottomTexts={bottomTexts} />
+      <Slider
+        topTexts={topTexts}
+        images={images}
+        bottomTexts={bottomTexts}
+        extraTexts={extraTexts}
+        progresses={progresses}
+      />
     </div>
   );
 }
