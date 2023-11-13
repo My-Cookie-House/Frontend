@@ -1,11 +1,12 @@
 import Slider from '../../components/OnboardingComponents/Slider';
-import Image1 from '../assets/OnboardingAssets/onboarding1.svg';
-import Image2 from '../assets/OnboardingAssets/onboarding2.svg';
-import Image3 from '../assets/OnboardingAssets/onboarding3.svg';
+import CookieHouse from '../../assets/OnboardingAssets/CookieHouse.svg';
+import Image1 from '../../assets/OnboardingAssets/onboarding1.svg';
+import Image2 from '../../assets/OnboardingAssets/onboarding2.svg';
+import Image3 from '../../assets/OnboardingAssets/onboarding3.svg';
 
-import Progress1 from '../assets/OnboardingAssets/progress1.svg';
-import Progress2 from '../assets/OnboardingAssets/progress2.svg';
-import Progress3 from '../assets/OnboardingAssets/progress3.svg';
+import Progress1 from '../../assets/OnboardingAssets/progress1.svg';
+import Progress2 from '../../assets/OnboardingAssets/progress2.svg';
+import Progress3 from '../../assets/OnboardingAssets/progress3.svg';
 import PageLayout from '../../components/PageLayout/PageLayout';
 
 function OnboardingPage() {
@@ -17,6 +18,7 @@ function OnboardingPage() {
     '친구를 초대해 보세요!',
   ];
   const bottomTexts = [
+    '',
     <>
       <p>매일 미션이 도착해요!</p>
       <p>미션에 맞는 추억의 사진을 찾아 포스팅하면</p>

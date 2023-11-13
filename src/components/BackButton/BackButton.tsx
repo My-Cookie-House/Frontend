@@ -1,5 +1,4 @@
 import {S} from './style';
-import React from 'react';
 import {BackButtonNavigateProps} from '../../type/type';
 import {useNavigate} from 'react-router-dom';
 
