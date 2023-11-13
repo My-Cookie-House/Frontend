@@ -4,7 +4,7 @@ import BuildTypeButton from '../../components/Buttons/BuildTypeButton/BuildTypeB
 import LongButton from '../../components/Buttons/LongButton/LongButton';
 import {useCallback} from 'react';
 import {useRecoilState} from 'recoil';
-import {BuildStateAtom, buildStateAtom} from '../../atoms/BuildAtom';
+import {BuildStateAtom, buildStateAtom} from '../../atoms/buildAtom';
 
 export default function Build() {
   const [buildState, setBuildState] =
@@ -17,7 +17,7 @@ export default function Build() {
           ? {...prev, type: 'unselected'}
           : {...prev, type: 'random'},
       ),
-    [],
+    [buildState.type],
   );
   const handleCustomSelect = useCallback(
     () =>
@@ -26,7 +26,7 @@ export default function Build() {
           ? {...prev, type: 'unselected'}
           : {...prev, type: 'custom'},
       ),
-    [],
+    [buildState.type],
   );
 
   return (

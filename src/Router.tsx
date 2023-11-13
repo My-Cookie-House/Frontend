@@ -5,6 +5,7 @@ import OnboardingPage from './pages/OnboardingPage/OnboardingPage';
 import Login from './pages/Login/Login';
 import Build from './pages/Build/Build';
 import Random from './pages/Build/Random/Random';
+import Preview from './pages/Build/Preview/Preview';
 
 export default function Router() {
   return (
@@ -17,6 +18,7 @@ export default function Router() {
         <Route path="/build" element={<Build />} />
         <Route path="/build/random" element={<Random />} />
         <Route path="/build/custom" />
+        <Route path="/build/preview" element={<Preview />} />
       </Routes>
     </BrowserRouter>
   );

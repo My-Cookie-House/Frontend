@@ -9,7 +9,7 @@ export type BuildStateAtom = {
 export const buildStateAtom = atom<BuildStateAtom>({
   key: 'buildState',
   default: {
-    type: 'random',
+    type: 'unselected',
     cookieId: null,
     icingId: null,
   },
