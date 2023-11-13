@@ -15,7 +15,13 @@ function GuestBook() {
   const [senderName, setSenderName] = useState('');  // 보내는 사람 이름을 관리하는 상태
   const [letterContent, setLetterContent] = useState('');  // 편지 내용을 관리하는 상태
   const [reloadUserInfo, setReloadUserInfo] = useState(false); //편지를 보낼 때 마다 상대방 정보를 업데이트 하기 위해 생선한 상태변수, 이유는 상대방 페이지에서 2개의 편지를 쓰면 실시간으로 나무가 물들게 하기 위해.
-  const { isOpen, openModal, closeModal } = useModal();
+  const { isOpen, openModal, closeModal } = useModal(); // 첫 번째 모달 상태 (방명록 남기기)
+  // 두 번째 모달 상태 (오너먼트 고르기)
+  const {
+    isOpen: isOrnamentModalOpen,
+    openModal: openOrnamentModal,
+    closeModal: closeOrnamentModal
+  } = useModal();
 
   // 사용자의 방명록 정보를 가져오는 함수
   const getUserInfoFromServer = async (userId: string) => {
@@ -161,7 +167,18 @@ function GuestBook() {
                 onChange={writeLetter}
               />
               <S.CheckTextLength>{letterContent?.length}/500자</S.CheckTextLength>
-              <ModalOKButton buttonName="오너먼트 고르기" onClick={openModal}/>
+              <ModalOKButton buttonName="오너먼트 고르기" onClick={openOrnamentModal}/>
+
+              {/* 오너먼트 고르기 모달 */}
+              <Modal
+                modalTitle={'오너먼트 고르기'}
+                isOpen={isOrnamentModalOpen}
+                onClose={closeOrnamentModal}
+                imageType={"LargeModal"}
+              >
+                <ModalCloseButton onClick={closeOrnamentModal} />
+                {/* 오너먼트 선택 내용 */}
+              </Modal>
             </S.Form>
           </>
         </Modal>
