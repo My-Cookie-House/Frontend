@@ -19,7 +19,6 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 700;
     margin: 0;
     font-size: 16px;
-
   }
 
   #content {
