@@ -48,6 +48,10 @@ color: #572E16;
 margin-bottom: 32px;
 background-color: transparent;
 font-size: 16px;
+&::placeholder {
+    color: #572E16; 
+    font-size: 16px;
+  }
 `;
 
 const CheckTextLength = styled.div`
@@ -55,11 +59,11 @@ margin-top: -60px;
 margin-right: 20px;;
 display: flex;
 flex-direction: column;
-color: #666 !important;
 align-self: flex-end;   // 이 부분을 추가
 font-size: 14px;
 font-weight: 400;
-color: rgba(87, 46, 22, 0.60);
+color: rgba(87, 46, 22, 0.60) !important;
+margin-bottom: 53px;
 `;
 
 const LetterArea = styled.textarea`
@@ -73,7 +77,10 @@ padding: 13px;
 resize: none;
 background-color: rgba(87, 46, 22, 0.15);
 font-size: 16px;
-
+&::placeholder {
+    color: #572E16;
+    font-size: 16px;
+  }
 `;
 
 

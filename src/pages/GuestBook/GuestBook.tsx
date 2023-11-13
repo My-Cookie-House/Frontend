@@ -59,12 +59,12 @@ function GuestBook() {
     // 이름을 작성하는 함수입니다.
     const writeName = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-
-        // senderName의 길이가 5자를 넘지 않는 경우에만 상태 업데이트
+    
+        // 이름의 길이가 5자 이하인 경우에만 값을 업데이트
         if (value.length <= 5) {
             setGuestName(value);
         }
-    }
+    }    
 
     // 편지를 작성하는 함수입니다.
     const WirteContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -134,18 +134,18 @@ function GuestBook() {
             <>
                 <S.Form onSubmit={handleWirteGuestBook}>
                     <S.NameInput
-                        type="text"
+                        name="guestName"
                         placeholder="이름을 남겨주세요."
                         value={guestName}
                         onChange={writeName}
                     />
                     <S.LetterArea
+                        name="guestBookContent"
                         placeholder="방명록을 남겨주세요."
                         value={guestBookContent}
                         onChange={WirteContent}
                     />
-                    <S.CheckTextLength>{guestName.length}/500자</S.CheckTextLength>
-                    
+                    <S.CheckTextLength>{guestBookContent.length}/500자</S.CheckTextLength>
                     <ModalOKButton buttonName='물들이기' />
                 </S.Form>
             </>
