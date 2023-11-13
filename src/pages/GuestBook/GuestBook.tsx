@@ -92,7 +92,6 @@ function GuestBook() {
       guestBookContent,
     };
 
-
     try {
       // 백엔드로 방명록 데이터를 보냅니다.
       //수정 필요.
@@ -125,74 +124,74 @@ function GuestBook() {
       }
       return null;
 
-    const handleWirteGuestBookModalOpen = () => {
+      const handleWirteGuestBookModalOpen = () => {
         setWirteGuestBookModalOpen(true);
         setModalContent(
-            <>
-                <S.Form onSubmit={handleWirteGuestBook}>
-                    <S.NameInput
-                        type="text"
-                        placeholder="이름을 남겨주세요."
-                        value={guestName}
-                        onChange={writeName}
-                    />
-                    <S.LetterArea
-                        placeholder="방명록을 남겨주세요."
-                        value={guestBookContent}
-                        onChange={WirteContent}
-                    />
-                    <S.CheckTextLength>{guestName.length}/500자</S.CheckTextLength>
-                    
-                    <ModalOKButton buttonName='물들이기' />
-                </S.Form>
-            </>
+          <>
+            <S.Form onSubmit={handleWirteGuestBook}>
+              <S.NameInput
+                type="text"
+                placeholder="이름을 남겨주세요."
+                value={guestName}
+                onChange={writeName}
+              />
+              <S.LetterArea
+                placeholder="방명록을 남겨주세요."
+                value={guestBookContent}
+                onChange={WirteContent}
+              />
+              <S.CheckTextLength>{guestName.length}/500자</S.CheckTextLength>
+
+              <ModalOKButton buttonName="물들이기" />
+            </S.Form>
+          </>,
         );
-
+      };
     }
-  };
 
-  const handleWirteGuestBookModalOpen = () => {
-    setWirteGuestBookModalOpen(true);
-    setModalContent(
+    const handleWirteGuestBookModalOpen = () => {
+      setWirteGuestBookModalOpen(true);
+      setModalContent(
+        <>
+          <S.Form onSubmit={handleWirteGuestBook}>
+            <S.NameInput
+              type="text"
+              placeholder="이름을 남겨주세요."
+              value={guestName}
+              onChange={writeName}
+            />
+            <S.LetterArea
+              placeholder="방명록을 남겨주세요."
+              value={guestBookContent}
+              onChange={WirteContent}
+            />
+            <S.CheckTextLength>{guestName.length}/500자</S.CheckTextLength>
+            <button type="submit">물들이기</button>
+          </S.Form>
+        </>,
+      );
+    };
+
+    return (
       <>
-        <S.Form onSubmit={handleWirteGuestBook}>
-          <S.NameInput
-            type="text"
-            placeholder="이름을 남겨주세요."
-            value={guestName}
-            onChange={writeName}
-          />
-          <S.LetterArea
-            placeholder="방명록을 남겨주세요."
-            value={guestBookContent}
-            onChange={WirteContent}
-          />
-          <S.CheckTextLength>{guestName.length}/500자</S.CheckTextLength>
-          <S.SendButton type="submit">물들이기</S.SendButton>
-        </S.Form>
-      </>,
+        <BackButton route="/" />
+        <PageLayout>
+          <S.ButtonWrapper>
+            <TitleContainerBox title={'방명록'} />
+            <S.WirteGuestBookButton onClick={handleWirteGuestBookModalOpen} />
+          </S.ButtonWrapper>
+        </PageLayout>
+
+        <Modal
+          modalTitle={'방명록 남기기'}
+          isOpen={isWirteGuestBookModalOpen}
+          onClose={() => setWirteGuestBookModalOpen(false)}
+        >
+          {modalContent}
+        </Modal>
+      </>
     );
   };
-
-  return (
-    <>
-      <BackButton route="/" />
-      <PageLayout>
-        <S.ButtonWrapper>
-          <TitleContainerBox title={'방명록'} />
-          <S.WirteGuestBookButton onClick={handleWirteGuestBookModalOpen} />
-        </S.ButtonWrapper>
-      </PageLayout>
-
-      <Modal
-        modalTitle={'방명록 남기기'}
-        isOpen={isWirteGuestBookModalOpen}
-        onClose={() => setWirteGuestBookModalOpen(false)}
-      >
-        {modalContent}
-      </Modal>
-    </>
-  );
 }
 
 export default GuestBook;
