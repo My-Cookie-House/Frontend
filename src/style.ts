@@ -1,6 +1,5 @@
 import {createGlobalStyle} from 'styled-components';
 import Pretendard from './static/font/Pretendard-Medium.woff2';
-import Background from './assets/Background/Background.svg';
 export const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Pretendard';
@@ -29,11 +28,3 @@ export const GlobalStyle = createGlobalStyle`
     z-index: 1;
   }
 `;
-
-export const theme = {
-  colors: {
-    white: '#ffffff',
-    textMain: '#F9F1E1',
-    textBrown: '#572E16',
-  },
-};

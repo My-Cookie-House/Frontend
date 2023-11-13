@@ -1,13 +1,14 @@
 import Slider from '../../components/OnboardingComponents/Slider';
-import React from 'react';
-import Image1 from '../assets/onboardingAssets/onboarding1.svg';
-import Image2 from '../assets/onboardingAssets/onboarding2.svg';
-import Image3 from '../assets/onboardingAssets/onboarding3.svg';
+import Image1 from '../../assets/OnboardingAssets/onboarding1.svg';
+import Image2 from '../../assets/OnboardingAssets/onboarding2.svg';
+import Image3 from '../../assets/OnboardingAssets/onboarding3.svg';
 
-import Progress1 from '../assets/onboardingAssets/progress1.svg';
-import Progress2 from '../assets/onboardingAssets/progress2.svg';
-import Progress3 from '../assets/onboardingAssets/progress3.svg';
+import Progress1 from '../../assets/OnboardingAssets/progress1.svg';
+import Progress2 from '../../assets/OnboardingAssets/progress2.svg';
+import Progress3 from '../../assets/OnboardingAssets/progress3.svg';
 import PageLayout from '../../components/PageLayout/PageLayout';
+
+import LongButton from '../../components/Buttons/LongButton/LongButton';
 
 function OnboardingPage() {
   const images = [Image1, Image2, Image3];
