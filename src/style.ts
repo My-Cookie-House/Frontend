@@ -1,6 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import Pretendard from "./static/font/Pretendard-Medium.woff2";
-import Background from "./assets/Background/Background.svg"
+import {createGlobalStyle} from 'styled-components';
+import Pretendard from './static/font/Pretendard-Medium.woff2';
 export const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Pretendard';
@@ -11,7 +10,8 @@ export const GlobalStyle = createGlobalStyle`
 
   html {
     font-size: 16px; // 16px 기본 설정
-
+    background-color:  #8a6149;
+    overflow-x: hidden;
   }
 
   body, html {
@@ -19,14 +19,6 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 700;
     margin: 0;
     font-size: 16px;
-    background: url(${Background});
-    width: 100%;
-    height: 1080px;
-    background-repeat: no-repeat;
-    background-size: 976.056px 1080px;
-    background-position: center; // 배경 이미지가 중앙에 위치하도록 설정
-    background-attachment: scroll; // 이 부분을 추가
-    background-color: #8a6149;
   }
 
   #content {
