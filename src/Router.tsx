@@ -3,6 +3,8 @@ import GuestBook from './pages/GuestBook/GuestBook';
 import Mission from './pages/Mission/Mission';
 import OnboardingPage from './pages/OnboardingPage/OnboardingPage';
 import Login from './pages/Login/Login';
+import Build from './pages/Build/Build';
+import Random from './pages/Build/Random/Random';
 
 export default function Router() {
   return (
@@ -12,6 +14,9 @@ export default function Router() {
         <Route path="/" element={<OnboardingPage />} />
         <Route path="/:id/guests" element={<GuestBook />} />
         <Route path="/mission" element={<Mission />} />
+        <Route path="/build" element={<Build />} />
+        <Route path="/build/random" element={<Random />} />
+        <Route path="/build/custom" />
       </Routes>
     </BrowserRouter>
   );

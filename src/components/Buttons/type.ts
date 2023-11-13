@@ -8,4 +8,5 @@ export type ButtonProps = {
   padding?: string;
   background?: string;
   disabled?: boolean;
+  dark?: boolean;
 };

@@ -11,6 +11,7 @@ export const GlobalStyle = createGlobalStyle`
   html {
     font-size: 16px; // 16px 기본 설정
     background-color:  #8a6149;
+    white-space: pre-wrap;
   }
 
   body, html {

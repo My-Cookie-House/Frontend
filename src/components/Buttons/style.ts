@@ -6,6 +6,7 @@ type ButtonStyleProps = {
   width: number;
   height: number;
   margin?: string;
+  dark?: boolean;
   padding?: string;
 };
 
@@ -24,6 +25,6 @@ export const Button = styled.button<ButtonStyleProps>`
   z-index: 2;
   box-shadow: none;
   color: ${theme.colors.textBrown};
-  cursor: ${(props) => (props.disabled ? 'pointer' : 'cursor')};
-  filter: ${(props) => props.disabled && 'brightness(0.6)'};
+  cursor: ${(props) => (props.disabled || props.dark ? 'cursor' : 'pointer')};
+  filter: ${(props) => (props.disabled || props.dark) && 'brightness(0.7)'};
 `;
