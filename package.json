@@ -21,9 +21,11 @@
     "styled-components": "^6.1.1"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/node": "^20.9.0",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.7",
+    "@types/react-query": "^1.2.9",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
     "@vitejs/plugin-react": "^4.0.3",

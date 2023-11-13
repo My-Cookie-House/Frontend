@@ -5,6 +5,8 @@ import BackButton from '../../components/BackButton/BackButton';
 import Modal from '../../components/Modal/Modal';
 import axios, {AxiosError} from 'axios';
 import PageLayout from '../../components/PageLayout/PageLayout';
+import ModalOKButton from '../../components/ModalOKButton/ModalOKButton';
+
 function GuestBook() {
   const userId = 'default'; //userId 이거 수정해야함. 어떻게 저장할지 아직 모름
   const [isWirteGuestBookModalOpen, setWirteGuestBookModalOpen] =
@@ -121,51 +123,75 @@ function GuestBook() {
         }
       }
       return null;
-    }
-  };
 
-  const handleWirteGuestBookModalOpen = () => {
-    setWirteGuestBookModalOpen(true);
-    setModalContent(
+      const handleWirteGuestBookModalOpen = () => {
+        setWirteGuestBookModalOpen(true);
+        setModalContent(
+          <>
+            <S.Form onSubmit={handleWirteGuestBook}>
+              <S.NameInput
+                type="text"
+                placeholder="이름을 남겨주세요."
+                value={guestName}
+                onChange={writeName}
+              />
+              <S.LetterArea
+                placeholder="방명록을 남겨주세요."
+                value={guestBookContent}
+                onChange={WirteContent}
+              />
+              <S.CheckTextLength>{guestName.length}/500자</S.CheckTextLength>
+
+              <ModalOKButton buttonName="물들이기" />
+            </S.Form>
+          </>,
+        );
+      };
+    }
+
+    const handleWirteGuestBookModalOpen = () => {
+      setWirteGuestBookModalOpen(true);
+      setModalContent(
+        <>
+          <S.Form onSubmit={handleWirteGuestBook}>
+            <S.NameInput
+              type="text"
+              placeholder="이름을 남겨주세요."
+              value={guestName}
+              onChange={writeName}
+            />
+            <S.LetterArea
+              placeholder="방명록을 남겨주세요."
+              value={guestBookContent}
+              onChange={WirteContent}
+            />
+            <S.CheckTextLength>{guestName.length}/500자</S.CheckTextLength>
+            <button type="submit">물들이기</button>
+          </S.Form>
+        </>,
+      );
+    };
+
+    return (
       <>
-        <S.Form onSubmit={handleWirteGuestBook}>
-          <S.NameInput
-            type="text"
-            placeholder="이름을 남겨주세요."
-            value={guestName}
-            onChange={writeName}
-          />
-          <S.LetterArea
-            placeholder="방명록을 남겨주세요."
-            value={guestBookContent}
-            onChange={WirteContent}
-          />
-          <S.CheckTextLength>{guestName.length}/500자</S.CheckTextLength>
-          <S.SendButton type="submit">물들이기</S.SendButton>
-        </S.Form>
-      </>,
+        <BackButton route="/" />
+        <PageLayout>
+          <S.ButtonWrapper>
+            <TitleContainerBox title={'방명록'} />
+            <S.WirteGuestBookButton onClick={handleWirteGuestBookModalOpen} />
+          </S.ButtonWrapper>
+        </PageLayout>
+
+        <Modal
+          modalTitle={'방명록 남기기'}
+          isOpen={isWirteGuestBookModalOpen}
+          onClose={() => setWirteGuestBookModalOpen(false)}
+        >
+          {modalContent}
+        </Modal>
+      </>
     );
   };
-
-  return (
-    <>
-      <BackButton route="/" />
-      <PageLayout>
-        <S.ButtonWrapper>
-          <TitleContainerBox title={'방명록'} />
-          <S.WirteGuestBookButton onClick={handleWirteGuestBookModalOpen} />
-        </S.ButtonWrapper>
-      </PageLayout>
-
-      <Modal
-        modalTitle={'방명록 남기기'}
-        isOpen={isWirteGuestBookModalOpen}
-        onClose={() => setWirteGuestBookModalOpen(false)}
-      >
-        {modalContent}
-      </Modal>
-    </>
-  );
 }
 
 export default GuestBook;
