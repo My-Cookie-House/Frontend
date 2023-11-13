@@ -8,12 +8,14 @@ import PageLayout from '../../components/PageLayout/PageLayout';
 import ModalOKButton from '../../components/ModalOKButton/ModalOKButton';
 import ModalCloseButton from '../../components/ModalCloseButton/ModalCloseButton';
 import useModal from '../../hooks/UseModal/UseModal';
+import DecorationButton from '../../components/Buttons/DecorationButton/DecorationButton';
+import ornaments from '../../components/ImportOrnaments/ImportOrnaments';
+import { useParams } from 'react-router-dom';
 
 function GuestBook() {
-  const userId = 'default'; //userId 이거 수정해야함. 어떻게 저장할지 아직 모름
-
-  const [senderName, setSenderName] = useState('');  // 보내는 사람 이름을 관리하는 상태
-  const [letterContent, setLetterContent] = useState('');  // 편지 내용을 관리하는 상태
+  const { userId } = useParams();
+  const [author, setAuthor] = useState('');  // 보내는 사람 이름을 관리하는 상태
+  const [content, setContent] = useState('');  // 편지 내용을 관리하는 상태
   const [reloadUserInfo, setReloadUserInfo] = useState(false); //편지를 보낼 때 마다 상대방 정보를 업데이트 하기 위해 생선한 상태변수, 이유는 상대방 페이지에서 2개의 편지를 쓰면 실시간으로 나무가 물들게 하기 위해.
   const { 
     isOpen: isMediumModalOpen, 
@@ -26,21 +28,110 @@ function GuestBook() {
     openModal: openOrnamentModal,
     closeModal: closeOrnamentModal
   } = useModal();
+  //방명록 조회 모달
+  const {
+    isOpen: isGuestBookModalOpen,
+    openModal: openGuestBookModal,
+    closeModal: closeGuestBookModal
+  } = useModal();
+  const [ornamentId, setOrnamentId] = useState<number | null>(null);
+  const [readingGuestBookId, setReadingGuestBookId] = useState<number>(1);
+  const [readingGuestBookAuthor, setReadingGuestBookAuthor] = useState<string>("김민성");
+  const [readingGuestBookContent, setReadingGuestBookContent] = useState<string>("김민성 왔다감");
+
+  
+  const [guestBook, setGuestBook] = useState([
+    {
+      "author": "홍길동",
+      "content": "adsfkjalksj~",
+      "ornamentId": "2"
+    },
+    {
+      "author": "홍길동",
+      "content": "adsfkjalksj~",
+      "ornamentId": "3"
+    },
+    {
+      "author": "홍길동",
+      "content": "adsfkjalksj~",
+      "ornamentId": "4"
+    },
+    {
+      "author": "홍길동",
+      "content": "adsfkjalksj~",
+      "ornamentId": "5"
+    },
+    {
+      "author": "홍길동",
+      "content": "adsfkjalksj~",
+      "ornamentId": "6"
+    },
+    {
+      "author": "홍길동",
+      "content": "adsfkjalksj~",
+      "ornamentId": "7"
+    },
+    {
+      "author": "홍길동",
+      "content": "adsfkjalksj~",
+      "ornamentId": "2"
+    },
+    {
+      "author": "홍길동",
+      "content": "adsfkjalksj~",
+      "ornamentId": "3"
+    },
+    {
+      "author": "홍길동",
+      "content": "adsfkjalksj~",
+      "ornamentId": "4"
+    },
+    {
+      "author": "홍길동",
+      "content": "adsfkjalksj~",
+      "ornamentId": "5"
+    },
+    {
+      "author": "홍길동",
+      "content": "adsfkjalksj~",
+      "ornamentId": "6"
+    },
+    {
+      "author": "홍길동",
+      "content": "adsfkjalksj~",
+      "ornamentId": "7"
+    },
+    {
+      "author": "홍길동",
+      "content": "adsfkjalksj~",
+      "ornamentId": "2"
+    },
+
+  ]);  const [houseName, setHouseName] = useState<string>("코알라하우스");
 
   // 사용자의 방명록 정보를 가져오는 함수
   const getUserInfoFromServer = async (userId: string) => {
     try {
+      // 서버로부터 데이터 요청
       const response = await axios.get(`~/guest-book/${userId}`);
+  
+      // 응답 데이터에서 guestBook 추출
+      const guestBook = response.data?.guestBook;
+      if (guestBook) {
+        setGuestBook(guestBook); // 상태 업데이트
+      }
 
-      const userInfo = response.data;
-
-      return {
-        guestBook: userInfo.guestBook,
-      };
-    } catch (error: unknown) {
-      //에러 일 경우
-      if (error instanceof AxiosError) {
-        const status = error?.response?.status;
+      // 응답 데이터에서 houseName 추출
+      const houseName = response.data?.houseName;
+      if (houseName) {
+        setHouseName(houseName); // 상태 업데이트
+      }
+      // guestBook 데이터 반환
+      return guestBook;
+    } catch (error) {
+      // 에러 처리
+      if (axios.isAxiosError(error)) {
+        const status = error.response?.status;
         alert('유저의 정보를 불러오지 못했어요.');
         if (status === 404) {
           // 리소스를 찾을 수 없음
@@ -49,10 +140,13 @@ function GuestBook() {
         } else {
           // 기타 상태 코드 처리
         }
+      } else {
+        console.error('An unexpected error occurred:', error);
       }
       return null;
     }
   };
+  
 
   // 컴포넌트가 마운트될 때 사용자 정보를 가져옵니다.
   useEffect(() => {
@@ -73,7 +167,7 @@ function GuestBook() {
 
     // senderName의 길이가 10자를 넘지 않는 경우에만 상태 업데이트
     if (value.length <= 10) {
-      setSenderName(value);
+      setAuthor(value);
     }
   }
 
@@ -83,7 +177,7 @@ function GuestBook() {
 
     // letterContent의 길이가 200자를 넘지 않는 경우에만 상태 업데이트
     if (value.length <= 200) {
-      setLetterContent(value);
+      setContent(value);
     }
   }
 
@@ -91,16 +185,11 @@ function GuestBook() {
  const handleSendGuestBook = async (event: React.FormEvent) => {
   event.preventDefault();
 
-  // 입력값을 검사합니다.
-  if (!senderName.trim() || !letterContent.trim()) {
-    alert("이름과 방명록 내용을 작성해주세요!")
-    return;
-  }
-
   // 백엔드로 보낼 데이터를 정의합니다.
   const letterData = {
-    senderName,
-    letterContent,
+    author,
+    content,
+    ornamentId
   };
 
   try {
@@ -113,17 +202,18 @@ function GuestBook() {
     });
     if(response.status===200) {
       // 입력 필드를 초기화합니다.
-      setSenderName('');
-      setLetterContent('');
+      setAuthor('');
+      setContent('');
 
     }
     setReloadUserInfo(prevState => !prevState);  // 상태를 반대로 토글합니다.
-
+    closeMediumModal();
+    closeOrnamentModal();
     
   } catch (error: unknown) { //에러 일 경우
     if (error instanceof AxiosError) {
         const status = error?.response?.status;
-       
+        alert("유저의 정보를 불러오지 못했어요.")
         if (status === 404) {
             // 리소스를 찾을 수 없음
         } else if (status === 500) {
@@ -136,18 +226,50 @@ function GuestBook() {
   }
 };
 
+  // 버튼 클릭 이벤트 핸들러
+  const handleOrnamentClick = (id: number, event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault(); // 기본 동작 방지
+    setOrnamentId(id);
+  };
 
+  const handleOpenOrnamentModal = () => {
+    // 입력값을 검사합니다.
+    if (!author.trim() || !content.trim()) {
+      alert("이름과 방명록 내용을 작성해주세요!")
+      return;
+    } else {
+      openOrnamentModal();
+    }
+    openOrnamentModal(); //테스트용
+  };
 
+    // 버튼 클릭 이벤트 핸들러
+    const handleShowGuestBookContent = (ornamentId: number, author: string, content: string) => {
+      openGuestBookModal();
+      setReadingGuestBookId(ornamentId);
+      setReadingGuestBookAuthor(author);
+      setReadingGuestBookContent(content);
+    };
 
     return (
       <>
         <BackButton route="/" />
         <S.ButtonWrapper>
-          <TitleContainerBox title={'방명록'} />
+          <TitleContainerBox title={houseName} />
             <S.WirteGuestBookButton onClick={openMediumModal} />
         </S.ButtonWrapper>
         <PageLayout>
-          
+          <S.GuestBookEntryGrid>
+            {guestBook.map((entry : any) => (
+              <S.GuestBookEntry key={entry.ornamentId}>
+              <S.OrnamentButton 
+              style={{ backgroundImage: `url(${ornaments[entry.ornamentId - 1].image})` }} 
+              onClick={() => handleShowGuestBookContent(entry.ornamentId - 1, entry.author, entry.content)}
+              />
+                <S.AuthorName>{entry.author}</S.AuthorName>
+              </S.GuestBookEntry>
+            ))}
+          </S.GuestBookEntryGrid>
         </PageLayout>
 
         <Modal
@@ -162,16 +284,16 @@ function GuestBook() {
                 type="text"
                 name="guestName" // 상태와 일치하는 name 속성
                 placeholder="이름을 남겨주세요."
-                value={senderName}
+                value={author}
                 onChange={writeName}
               />
               <S.LetterArea
                 placeholder="방명록을 남겨주세요."
-                value={letterContent}
+                value={content}
                 onChange={writeLetter}
               />
-              <S.CheckTextLength>{letterContent?.length}/500자</S.CheckTextLength>
-              <ModalOKButton buttonName="오너먼트 고르기" onClick={openOrnamentModal}/>
+              <S.CheckTextLength>{content?.length}/500자</S.CheckTextLength>
+              <ModalOKButton buttonName="오너먼트 고르기" onClick={handleOpenOrnamentModal}/>
             </S.Form>
           </>
         </Modal>
@@ -189,13 +311,36 @@ function GuestBook() {
           <ModalCloseButton onClick={closeOrnamentModal} />
           <S.Form>
             <S.OrnamentButtonWrapper>
-
+              {ornaments.map((ornament) => (
+                <DecorationButton
+                  key={ornament.id}
+                  size={84}
+                  image={ornament.image}
+                  dark={ornament.id === ornamentId}
+                  onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleOrnamentClick(ornament.id, event)}
+                  />
+              ))}
             </S.OrnamentButtonWrapper>
             <ModalOKButton buttonName="선택완료" onClick={handleSendGuestBook}/>
           </S.Form>
           
         </Modal>
-            
+        
+        {/* 방명록 내용 보기 모달 */}
+        <Modal 
+          modalTitle={'방명록'}
+          isOpen={isGuestBookModalOpen}
+          onClose={closeGuestBookModal}
+          imageType={"MediumModal"}
+        >
+          <ModalCloseButton onClick={closeGuestBookModal} />
+          <S.ModalInnerWrapper>
+            <S.OrnamentImg style={{ backgroundImage: `url(${ornaments[readingGuestBookId].image})` }} />
+            <S.AuthorName>{readingGuestBookAuthor}</S.AuthorName>
+            <S.GuestBookContent>{readingGuestBookContent}</S.GuestBookContent>
+          </S.ModalInnerWrapper>
+          
+        </Modal>
       </>
     );
   };
