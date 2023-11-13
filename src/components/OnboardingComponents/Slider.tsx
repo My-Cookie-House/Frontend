@@ -78,6 +78,7 @@ const Slider: React.FC<SliderProps> = ({
           height: '12px',
         }}
       />
+
       {index === images.length - 1 && (
         <NavigatableButton route={'/'}>
           <img src={skipButton} />
