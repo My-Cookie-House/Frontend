@@ -15,16 +15,17 @@ const ButtonWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0 auto;
 `;
 
 const WirteGuestBookButton = styled.div`
     position: absolute;
-    top: 241px;
-    left: 257px;
-    width: 24px;
-    height: 24px;
+    top: 186px;
+    left: 230px;
+    width: 18.933px;
+    height: 18.933px;
     background-image: url(${WirteGuestBookButtonImg});
-    background-size: 24px 24px;
+    background-size: 18.933px 18.933px;
     z-index: 3;
 `;
 

@@ -154,11 +154,12 @@ function GuestBook() {
     return (
       <>
         <BackButton route="/" />
+        <S.ButtonWrapper>
+          <TitleContainerBox title={'방명록'} />
+          <S.WirteGuestBookButton onClick={handleWirteGuestBookModalOpen} />
+        </S.ButtonWrapper>
         <PageLayout>
-          <S.ButtonWrapper>
-            <TitleContainerBox title={'방명록'} />
-            <S.WirteGuestBookButton onClick={handleWirteGuestBookModalOpen} />
-          </S.ButtonWrapper>
+          
         </PageLayout>
 
         <Modal

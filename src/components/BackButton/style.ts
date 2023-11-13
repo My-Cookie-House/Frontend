@@ -11,12 +11,12 @@ const Container = styled.div`
 
 const BackButton = styled.div`
     position: absolute;
-    top: 121px;
+    top: 91.78px;
     margin-right: 330px;
-    width: 12.5px;
-    height: 24px;
+    width: 9.861px;
+height: 18.933px;
     background-image: url(${BackButtonImg});
-    background-size: 12.5px 24px;
+    background-size: 9.861px 18.933px;
     text-align: center;
     flex-direction: column;
     display: flex;

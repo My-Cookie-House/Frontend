@@ -11,6 +11,7 @@ export const GlobalStyle = createGlobalStyle`
 
   html {
     font-size: 16px; // 16px 기본 설정
+    background-color: #8a6149;
 
   }
 
@@ -19,7 +20,6 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 700;
     margin: 0;
     font-size: 16px;
-
   }
 
   #content {
