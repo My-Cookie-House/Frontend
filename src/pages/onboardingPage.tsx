@@ -1,5 +1,5 @@
 import Slider from '../utils/slider';
-
+import React from 'react';
 import Image1 from '../assets/onboardingAssets/onboarding1.svg';
 import Image2 from '../assets/onboardingAssets/onboarding2.svg';
 import Image3 from '../assets/onboardingAssets/onboarding3.svg';
