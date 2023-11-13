@@ -40,8 +40,8 @@ const Form = styled.form`
 const NameInput = styled.input`
 //position: absolute;
 margin-top: 60px;
-width: 304px;
-height: 64px;
+width: 235px;
+height: 50px;
 border: dotted;
 border-color: #572E16;
 border-radius: 30px;

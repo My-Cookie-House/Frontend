@@ -37,9 +37,9 @@ const ModalContent = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   box-sizing: border-box; 
-  padding: 19px;
-  width: 364px;
-  height: 500px;
+  padding: 15px;
+  width: 311px;
+  height: 418px;
   color: #572E16; 
   font-size: 20px;
   overflow-y: auto; 
