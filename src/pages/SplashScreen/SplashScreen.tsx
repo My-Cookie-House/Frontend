@@ -12,14 +12,18 @@ export default function SplashScreen(): JSX.Element {
     useRecoilValue<LoginState>(loginStateAtom);
 
   useEffect(() => {
+    console.log(loggedIn, isHouseBuilt);
     const timer = setTimeout(() => {
-      if (loggedIn) navigate(`/${userId}`);
-      if (isHouseBuilt === false) navigate('/build');
-      navigate('/login');
+      if (loggedIn && isHouseBuilt === false)
+        navigate(
+          '/build',
+        ); // 로그인은 했지만 쿠키하우스를 빌드한 적이 없는 경우
+      else if (loggedIn) navigate(`/${userId}`);
+      else navigate('/login');
     }, 2500);
 
     return () => clearTimeout(timer); // 컴포넌트가 언마운트되면 타이머를 취소
-  }, [navigate]);
+  }, [navigate, loggedIn, userId]);
 
   return (
     <PageLayout>

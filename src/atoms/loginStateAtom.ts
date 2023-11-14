@@ -17,14 +17,19 @@ export const initialLoginState: LoginState = {
   todayMissionComplete: null,
 };
 
-export const loginStateAtom = selector<LoginState>({
+export const loginStateAtom = atom<LoginState>({
   key: 'loginState',
-  get: async () => {
-    try {
-      const data = await auth.getLoginUserInfo();
-      return {loggedIn: true, ...data};
-    } catch (err) {
-      return initialLoginState; // 로그인 안된 상태
-    }
-  },
+  default: initialLoginState,
 });
+
+// export const loginStateAtom = selector<LoginState>({
+//   key: 'loginState',
+//   get: async () => {
+//     try {
+//       const data = await auth.getLoginUserInfo();
+//       return {loggedIn: true, ...data};
+//     } catch (err) {
+//       return initialLoginState; // 로그인 안된 상태
+//     }
+//   },
+// });
