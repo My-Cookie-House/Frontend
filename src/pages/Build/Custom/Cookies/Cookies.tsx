@@ -5,6 +5,8 @@ import DecorationButton from '../../../../components/Buttons/DecorationButton/De
 import LongButton from '../../../../components/Buttons/LongButton/LongButton';
 import {useRecoilState} from 'recoil';
 import {BuildStateAtom, buildStateAtom} from '../../../../atoms/buildAtom';
+import CookieHouse from '../../../../assets/House/Outside/Cookies';
+import {useEffect} from 'react';
 
 export default function Cookies() {
   const [buildState, setBuildState] =
@@ -34,6 +36,14 @@ export default function Cookies() {
             : {...prev, cookieIds: [cookie1, id]};
     });
   };
+
+  useEffect(() => {
+    if (!buildState.cookieIds.includes(null)) {
+      const [num1, num2] = [...buildState.cookieIds].sort((a, b) => a - b);
+      const img = new Image();
+      img.src = CookieHouse[`Cookie${num1}${num2}`];
+    }
+  }, [buildState]);
 
   return (
     <>

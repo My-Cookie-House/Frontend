@@ -31,9 +31,3 @@ export default {
   Cookie46,
   Cookie56,
 };
-
-// export const getCookie = (num1: number, num2: number) => {
-// //   const cookie = require(`./${num1}-${num2}`);
-//   import cookie from `./${num1}-${num2}`
-//   return cookie;
-// };
