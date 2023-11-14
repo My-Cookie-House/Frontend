@@ -1,6 +1,5 @@
 import * as S from './style';
 import * as SBuild from '../style';
-import PageLayout from '../../../components/PageLayout/PageLayout';
 import Cookies from '../../../assets/Cookies';
 import DecorationButton from '../../../components/Buttons/DecorationButton/DecorationButton';
 import LongButton from '../../../components/Buttons/LongButton/LongButton';
@@ -37,7 +36,7 @@ export default function Custom() {
   };
 
   return (
-    <PageLayout>
+    <>
       <SBuild.Title>{'쿠키하우스 지을 과자재료를\n선택해주세요!'}</SBuild.Title>
       <SBuild.Description>{'두 가지를 선택해주세요!'}</SBuild.Description>
       <S.GridBox>
@@ -60,6 +59,6 @@ export default function Custom() {
       >
         <SBuild.NextStepText>{'다 골랐어요!'}</SBuild.NextStepText>
       </LongButton>
-    </PageLayout>
+    </>
   );
 }

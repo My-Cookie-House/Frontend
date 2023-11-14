@@ -1,5 +1,4 @@
 import * as S from './style';
-import PageLayout from '../../components/PageLayout/PageLayout';
 import BuildTypeButton from '../../components/Buttons/BuildTypeButton/BuildTypeButton';
 import LongButton from '../../components/Buttons/LongButton/LongButton';
 import {useCallback} from 'react';
@@ -30,7 +29,7 @@ export default function Build() {
   );
 
   return (
-    <PageLayout>
+    <>
       <S.Title>쿠키하우스 입주하기</S.Title>
       <S.Description>하나를 선택해주세요!</S.Description>
       <BuildTypeButton
@@ -54,6 +53,6 @@ export default function Build() {
       >
         <S.NextStepText>집 보러가기</S.NextStepText>
       </LongButton>
-    </PageLayout>
+    </>
   );
 }
