@@ -9,7 +9,6 @@ import Preview from './pages/Build/Preview/Preview';
 import SplashScreen from './pages/SplashScreen/SplashScreen';
 import Cookies from './pages/Build/Custom/Cookies/Cookies';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
-import PageLayout from './components/PageLayout/PageLayout';
 import Icing from './pages/Build/Custom/Icing/Icing';
 import BuildLayout from './pages/Build/BuildLayout';
 
