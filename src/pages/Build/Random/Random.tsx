@@ -1,6 +1,5 @@
 import * as S from './style';
 import * as SBuild from '../style';
-import PageLayout from '../../../components/PageLayout/PageLayout';
 import LongButton from '../../../components/Buttons/LongButton/LongButton';
 import {useEffect, useState} from 'react';
 import {useSetRecoilState} from 'recoil';
@@ -24,7 +23,7 @@ export default function Random() {
       cookie2 = Math.floor(Math.random() * COOKIE_COUNT + 1);
     }
 
-    setBuildState((prev) => ({...prev, cookieId: [cookie1, cookie2]}));
+    setBuildState((prev) => ({...prev, cookieIds: [cookie1, cookie2]}));
   };
 
   // 아이싱 랜덤 생성
@@ -40,7 +39,7 @@ export default function Random() {
   }, []);
 
   return (
-    <PageLayout>
+    <>
       <SBuild.Title>랜덤 쿠키하우스를 선택했어요!</SBuild.Title>
       <SBuild.Description>
         {isConstructing
@@ -59,6 +58,6 @@ export default function Random() {
           {isConstructing ? '쿠키하우스 공사중' : '집 보러가기'}
         </SBuild.NextStepText>
       </LongButton>
-    </PageLayout>
+    </>
   );
 }
