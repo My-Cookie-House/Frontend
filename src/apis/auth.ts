@@ -3,17 +3,17 @@
 export default {
   getLoginUserInfo: () =>
     new Promise((res, rej) => {
-      res({
-        code: 200,
-        message: '유저 조회에 성공했습니다.',
-        data: {
-          userId: 1,
-          userName: '황태환',
-          isHouseBuilt: false,
-          todayMissionComplete: false,
-        },
-      });
-      // rej();
+      // res({
+      //   code: 200,
+      //   message: '유저 조회에 성공했습니다.',
+      //   data: {
+      //     userId: 1,
+      //     userName: '황태환',
+      //     isHouseBuilt: false,
+      //     todayMissionComplete: false,
+      //   },
+      // });
+      rej();
     })
       .then((res: any) => res.data)
       .catch((err) => {
