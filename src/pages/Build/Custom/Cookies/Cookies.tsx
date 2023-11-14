@@ -38,12 +38,12 @@ export default function Cookies() {
   };
 
   useEffect(() => {
-    if (!buildState.cookieIds.includes(null)) {
-      const [num1, num2] = [...buildState.cookieIds].sort((a, b) => a - b);
+    const keys = Object.values(CookieHouse);
+    for (let i = 0; i < 15; i++) {
       const img = new Image();
-      img.src = CookieHouse[`Cookie${num1}${num2}`];
+      img.src = keys[i];
     }
-  }, [buildState]);
+  }, []);
 
   return (
     <>
