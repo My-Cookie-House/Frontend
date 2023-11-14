@@ -13,5 +13,10 @@ export default {
           todayMissionComplete: false,
         },
       });
-    }).then((res: any) => res.data),
+      // rej();
+    })
+      .then((res: any) => res.data)
+      .catch((err) => {
+        throw new Error();
+      }),
 };

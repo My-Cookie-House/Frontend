@@ -1,12 +1,10 @@
-import {Outlet} from 'react-router-dom';
+import {Outlet, useParams} from 'react-router-dom';
 import PageLayout from '../../components/PageLayout/PageLayout';
-import useAuth from '../../hooks/useAuth';
-import {ILoginUser} from '../../interfaces/auth';
 
 export default function House() {
-  const user: null | ILoginUser = useAuth();
+  const {id} = useParams();
   return (
-    <PageLayout mission guestBook>
+    <PageLayout guestBook="/id/guests" mission>
       <Outlet />
     </PageLayout>
   );

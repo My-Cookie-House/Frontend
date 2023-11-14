@@ -1,15 +1,16 @@
 import {useLayoutEffect, useState} from 'react';
 import Envelope from '../../assets/Button/envelope.svg';
 import Book from '../../assets/Button/book.svg';
-
+import BackButton from '../../assets/Button/BackButton.svg';
 import * as S from './style';
 import {useLocation} from 'react-router-dom';
 import Button from '../Buttons/Button';
 
 type Props = {
   children: React.ReactNode;
-  guestBook?: boolean;
-  mission?: boolean;
+  guestBook?: string; // 방문록 (경로)
+  mission?: boolean; // 미션
+  goBack?: string; // 뒤로가기 (경로)
 };
 
 // 로고 안들어가는 경로들
@@ -17,8 +18,9 @@ const NO_LOGO_PATHS = ['/build/custom/icing', '/build/preview'];
 
 export default function PageLayout({
   children,
-  guestBook = false,
+  guestBook,
   mission = false,
+  goBack,
 }: Props) {
   const [logo, setLogo] = useState(true);
   const location = useLocation();
@@ -38,6 +40,14 @@ export default function PageLayout({
       <S.Wrapper isSplashScreen={location.pathname === '/'}>
         {logo && (
           <S.Nav>
+            {goBack && (
+              <Button
+                width={10}
+                height={19}
+                background={BackButton}
+                route={goBack}
+              />
+            )}
             <S.Logo>로고...</S.Logo>
             <S.ButtonBox>
               {mission && (
@@ -48,7 +58,7 @@ export default function PageLayout({
                   width={22}
                   height={19}
                   background={Book}
-                  route="/:id/guests"
+                  route={guestBook} // TODO: 실제 유저 아이디 넣어줘야 함
                 />
               )}
             </S.ButtonBox>
