@@ -1,6 +1,4 @@
-
-import {useLocation,useLayoutEffect, useState} from 'react-router-dom';
-
+import {useLayoutEffect, useState} from 'react';
 
 import * as S from './style';
 import {useLocation} from 'react-router-dom';
