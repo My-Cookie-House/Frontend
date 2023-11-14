@@ -47,7 +47,9 @@ export default function Build() {
         dark={buildState.type === 'custom'}
       />
       <LongButton
-        route={`/build/${buildState.type}`}
+        route={`/build/${
+          buildState.type === 'custom' ? 'custom/cookies' : 'random'
+        }`}
         margin="84px 0 0 0"
         disabled={buildState.type === 'unselected'}
       >

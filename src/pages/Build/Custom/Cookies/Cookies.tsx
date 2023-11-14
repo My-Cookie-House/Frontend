@@ -1,12 +1,12 @@
 import * as S from './style';
-import * as SBuild from '../style';
-import Cookies from '../../../assets/Cookies';
-import DecorationButton from '../../../components/Buttons/DecorationButton/DecorationButton';
-import LongButton from '../../../components/Buttons/LongButton/LongButton';
+import * as SBuild from '../../style';
+import CookiesImgs from '../../../../assets/Cookies';
+import DecorationButton from '../../../../components/Buttons/DecorationButton/DecorationButton';
+import LongButton from '../../../../components/Buttons/LongButton/LongButton';
 import {useRecoilState} from 'recoil';
-import {BuildStateAtom, buildStateAtom} from '../../../atoms/buildAtom';
+import {BuildStateAtom, buildStateAtom} from '../../../../atoms/buildAtom';
 
-export default function Custom() {
+export default function Cookies() {
   const [buildState, setBuildState] =
     useRecoilState<BuildStateAtom>(buildStateAtom);
 
@@ -40,7 +40,7 @@ export default function Custom() {
       <SBuild.Title>{'쿠키하우스 지을 과자재료를\n선택해주세요!'}</SBuild.Title>
       <SBuild.Description>{'두 가지를 선택해주세요!'}</SBuild.Description>
       <S.GridBox>
-        {Cookies.map((image, idx) => (
+        {CookiesImgs.map((image, idx) => (
           <DecorationButton
             key={idx}
             size={122}
@@ -55,7 +55,7 @@ export default function Custom() {
         disabled={
           buildState.cookieId[0] === null || buildState.cookieId[1] === null
         }
-        route="/build/preview"
+        route="/build/custom/icing"
       >
         <SBuild.NextStepText>{'다 골랐어요!'}</SBuild.NextStepText>
       </LongButton>
