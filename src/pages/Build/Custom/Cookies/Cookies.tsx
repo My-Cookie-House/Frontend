@@ -52,9 +52,7 @@ export default function Cookies() {
       </S.GridBox>
       <LongButton
         margin="20.5px 0 0 0"
-        disabled={
-          buildState.cookieId[0] === null || buildState.cookieId[1] === null
-        }
+        disabled={buildState.cookieId.includes(null)}
         route="/build/custom/icing"
       >
         <SBuild.NextStepText>{'다 골랐어요!'}</SBuild.NextStepText>

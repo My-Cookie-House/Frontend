@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import theme from '../../theme';
 
-export const Title = styled.h1`
+export const Title = styled.h1<{marginTop?: string}>`
   color: ${theme.colors.textMain};
   text-align: center;
   font-size: 20px;
@@ -9,7 +9,7 @@ export const Title = styled.h1`
   font-weight: 700;
   line-height: normal;
   letter-spacing: 1px;
-  margin-top: 55.62px;
+  margin-top: ${(props) => (props.marginTop ? props.marginTop : '55.62px')};
   white-space: pre-wrap;
 `;
 
