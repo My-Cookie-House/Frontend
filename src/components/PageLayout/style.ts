@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Background from '../../assets/Background/Background.svg';
+import SplashScreenBackground from '../../assets/SplashScreenAssets/SplashScreenBackground.svg';
 
 export const Layout = styled.div`
   width: 100vw;
@@ -8,14 +9,15 @@ export const Layout = styled.div`
   justify-content: center;
   background-color: #8a6149;
 `;
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{isSplashScreen?: boolean}>`
   width: 393px;
   height: 852px;
-  background: url(${Background});
+  background: url(${(props) =>
+    props.isSplashScreen ? SplashScreenBackground : Background});
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center; // 배경 이미지가 중앙에 위치하도록 설정
-  background-attachment: scroll; // 이 부분을 추가
+  background-position: center;
+  background-attachment: scroll;
   padding-top: 76px;
   display: flex;
   flex-direction: column;

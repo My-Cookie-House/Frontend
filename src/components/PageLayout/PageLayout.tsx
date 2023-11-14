@@ -1,4 +1,7 @@
-import {useLayoutEffect, useState} from 'react';
+
+import {useLocation,useLayoutEffect, useState} from 'react-router-dom';
+
+
 import * as S from './style';
 import {useLocation} from 'react-router-dom';
 
@@ -11,6 +14,7 @@ const NO_LOGO_PATHS = ['/build/custom/icing'];
 
 export default function PageLayout({children}: Props) {
   const [logo, setLogo] = useState(true);
+  const location = useLocation();
   const {pathname} = useLocation();
 
   useLayoutEffect(() => {
@@ -20,7 +24,7 @@ export default function PageLayout({children}: Props) {
 
   return (
     <S.Layout>
-      <S.Wrapper>
+      <S.Wrapper isSplashScreen={location.pathname === '/'}>
         {logo && <S.Logo>로고...</S.Logo>}
         {children}
       </S.Wrapper>
