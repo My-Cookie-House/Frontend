@@ -9,8 +9,11 @@ export default function Login() {
     <PageLayout>
       <img src={LoginText} />
       <img src={whiteTree} />
-      <img src={KakaoLogin} />
-
+      <img
+        src={KakaoLogin}
+        alt="KakaoLogin"
+        style={{width: '240.845px', height: '53.239px'}}
+      />
       <img src={GoogleLogin} />
     </PageLayout>
   );

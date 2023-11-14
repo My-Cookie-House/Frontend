@@ -8,7 +8,7 @@ export default function SplashScreen(): JSX.Element {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate('/login');
-    }, 500);
+    }, 1000);
 
     return () => clearTimeout(timer); // 컴포넌트가 언마운트되면 타이머를 취소
   }, [navigate]);
