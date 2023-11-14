@@ -10,7 +10,6 @@ import {
 } from '../../../atoms/buildAtom';
 import {useRecoilState} from 'recoil';
 import {useNavigate} from 'react-router-dom';
-import {type} from '../../../theme';
 
 const MAX_LENGTH = 10;
 
