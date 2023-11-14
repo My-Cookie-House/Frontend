@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react';
-import leftButton from '../../assets/onboardingAssets/leftButton.svg';
-import rightButton from '../../assets/onboardingAssets/rightButton.svg';
-import skipButton from '../../assets/onboardingAssets/skipButton.svg';
+import leftButton from '../../assets/OnboardingAssets/leftButton.svg';
+import rightButton from '../../assets/OnboardingAssets/rightButton.svg';
+import skipButton from '../../assets/OnboardingAssets/skipButton.svg';
 import NavigatableButton from '../BackButton/NavigatableButton';
 import LongButton from '../Buttons/LongButton/LongButton';
 
