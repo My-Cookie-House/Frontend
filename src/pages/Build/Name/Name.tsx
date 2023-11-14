@@ -3,34 +3,40 @@ import LongButton from '../../../components/Buttons/LongButton/LongButton';
 import useInput from '../../../hooks/useInput';
 import * as SBuild from '../style';
 import * as S from './style';
-import {BuildStateAtom, buildStateAtom} from '../../../atoms/buildAtom';
-import {useRecoilValue} from 'recoil';
+import {
+  BuildStateAtom,
+  buildStateAtom,
+  initalBuildState,
+} from '../../../atoms/buildAtom';
+import {useRecoilState} from 'recoil';
 import {useNavigate} from 'react-router-dom';
+import {type} from '../../../theme';
 
 const MAX_LENGTH = 10;
 
-interface IMutateHouse {
-  icingId: number;
-  cookieId: number[];
-}
-
 /**
+ * 아래는 예제 코드
  * TODO: 실제 api 호출함수로 변경해야함
  */
-const mutateHouse = (data: IMutateHouse) =>
-  new Promise((res, rej) => {
+const mutateHouse = (data: Omit<BuildStateAtom, 'type'>) =>
+  new Promise((res) => {
     res('success');
   });
 
 export default function Name() {
-  const buildState = useRecoilValue<BuildStateAtom>(buildStateAtom);
+  const [buildState, setBuildState] =
+    useRecoilState<BuildStateAtom>(buildStateAtom);
   const name = useInput<HTMLInputElement>();
 
   const navigate = useNavigate();
 
   const {mutate} = useMutation({
     mutationFn: () =>
-      mutateHouse({icingId: buildState.icingId, cookieId: buildState.cookieId}),
+      mutateHouse({
+        icingId: buildState.icingId,
+        cookieId: buildState.cookieId,
+        name: name.value,
+      }),
     onSuccess: () => {
       /**
        * TODO: 유저 아이디 가져와서 아이디에 맞는 path로 이동
@@ -39,9 +45,21 @@ export default function Name() {
     },
   });
 
+  // buildState 데이터들이 유효한지(null 값이 없는지) 체크
+  const isValid = () => {
+    if (buildState.cookieId.includes(null) || buildState.icingId === null) {
+      // null 값이 포함 된 경우
+      alert('건너뛴 단계가 존재합니다.\n처음부터 다시 시작합니다.');
+      setBuildState(initalBuildState);
+      navigate('/build');
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = () => {
     // 서버에 빌드 완료한 쿠키 하우스 데이터 전송
-    mutate();
+    if (isValid()) mutate();
   };
 
   return (
@@ -67,8 +85,13 @@ export default function Name() {
           border: '1px solid black',
         }}
       />
-      <LongButton margin="38px 0 0 0" onClick={handleSubmit}>
-        <SBuild.NextStepText>{'집 다시  짓기'}</SBuild.NextStepText>
+      <LongButton
+        margin="38px 0 0 0"
+        onClick={handleSubmit}
+        disabled={name.value.length === 0}
+        type="submit"
+      >
+        <SBuild.NextStepText>{'입력 완료'}</SBuild.NextStepText>
       </LongButton>
     </>
   );

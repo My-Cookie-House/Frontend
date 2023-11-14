@@ -13,7 +13,6 @@ export default function Preview() {
 
   const navigate = useNavigate();
 
-  const handleMoveIn = () => {};
   const handleRebuild = () => {
     // buildState 초기화 시키기
     setBuildState(initalBuildState);
@@ -37,7 +36,7 @@ export default function Preview() {
           border: '1px solid black',
         }}
       />
-      <LongButton margin="72px 0 0 0" onClick={handleMoveIn}>
+      <LongButton margin="72px 0 0 0" route="/build/name">
         <SBuild.NextStepText>{'입주하기'}</SBuild.NextStepText>
       </LongButton>
       <LongButton margin="10px 0 0 0" onClick={handleRebuild}>
