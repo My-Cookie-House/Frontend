@@ -10,6 +10,7 @@ export const Title = styled.h1`
   line-height: normal;
   letter-spacing: 1px;
   margin-top: 55.62px;
+  white-space: pre-wrap;
 `;
 
 export const Description = styled.h3`
