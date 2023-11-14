@@ -8,12 +8,14 @@ export default function SplashScreen(): JSX.Element {
   const navigate = useNavigate();
 
   // 로그인 상태 가져오기
-  const {loggedIn, userId} = useRecoilValue<LoginState>(loginStateAtom);
+  const {loggedIn, userId, isHouseBuilt} =
+    useRecoilValue<LoginState>(loginStateAtom);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (loggedIn) navigate(`/${userId}`);
-      else navigate('/login');
+      if (isHouseBuilt === false) navigate('/build');
+      navigate('/login');
     }, 2500);
 
     return () => clearTimeout(timer); // 컴포넌트가 언마운트되면 타이머를 취소
