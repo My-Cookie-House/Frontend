@@ -7,15 +7,17 @@ import axios, {AxiosError} from 'axios';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import ModalOKButton from '../../components/ModalOKButton/ModalOKButton';
 import ModalCloseButton from '../../components/ModalCloseButton/ModalCloseButton';
-import useModal from '../../hooks/UseModal/UseModal';
+import useModal from '../../hooks/useModal';
 import DecorationButton from '../../components/Buttons/DecorationButton/DecorationButton';
 import ornaments from '../../components/ImportOrnaments/ImportOrnaments';
 import {useParams} from 'react-router-dom';
+import useInput from '../../hooks/useInput';
 
 function GuestBook() {
   const {userId} = useParams();
-  const [author, setAuthor] = useState(''); // 보내는 사람 이름을 관리하는 상태
-  const [content, setContent] = useState(''); // 편지 내용을 관리하는 상태
+
+  const author = useInput<HTMLInputElement>(20); // 보내는 사람 이름을 관리하는 상태
+  const content = useInput<HTMLTextAreaElement>(100); // 편지 내용을 관리하는 상태
   const [ornamentId, setOrnamentId] = useState<number>(1);
 
   const [reloadUserInfo, setReloadUserInfo] = useState(false); //편지를 보낼 때 마다 상대방 정보를 업데이트 하기 위해 생선한 상태변수, 이유는 상대방 페이지에서 2개의 편지를 쓰면 실시간으로 나무가 물들게 하기 위해.
@@ -124,20 +126,18 @@ function GuestBook() {
   const [houseName, setHouseName] = useState<string>('코알라하우스');
 
   // 사용자의 방명록 정보를 가져오는 함수
-  /**
-   * 
 
   const getUserInfoFromServer = async (userId: string) => {
     try {
       // 서버로부터 데이터 요청
       const response = await axios.get(`~/guest-book/${userId}`);
-      
+
       // 응답 데이터에서 guestBook 추출
       const guestBook = response.data?.guestBook;
       if (guestBook) {
         setGuestBook(guestBook); // 상태 업데이트
       }
-      
+
       // 응답 데이터에서 houseName 추출
       const houseName = response.data?.houseName;
       if (houseName) {
@@ -163,7 +163,6 @@ function GuestBook() {
       return null;
     }
   };
-  */
 
   // 컴포넌트가 마운트될 때 사용자 정보를 가져옵니다.
   useEffect(() => {
@@ -176,34 +175,14 @@ function GuestBook() {
     fetchUserInfo();
   }, [reloadUserInfo]);
 
-  // 이름을 작성하는 함수입니다.
-  const writeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-
-    // senderName의 길이가 10자를 넘지 않는 경우에만 상태 업데이트
-    if (value.length <= 10) {
-      setAuthor(value);
-    }
-  };
-
-  // 편지를 작성하는 함수입니다.
-  const writeLetter = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
-
-    // letterContent의 길이가 200자를 넘지 않는 경우에만 상태 업데이트
-    if (value.length <= 200) {
-      setContent(value);
-    }
-  };
-
   // 편지를 보내는 함수입니다.
   const handleSendGuestBook = async (event: React.FormEvent) => {
     event.preventDefault();
 
     // 백엔드로 보낼 데이터를 정의합니다.
     const letterData = {
-      author,
-      content,
+      author: author.value,
+      content: content.value,
       ornamentId,
     };
 
@@ -217,8 +196,8 @@ function GuestBook() {
       });
       if (response.status === 200) {
         // 입력 필드를 초기화합니다.
-        setAuthor('');
-        setContent('');
+        author.reset();
+        content.reset();
       }
       setReloadUserInfo((prevState) => !prevState); // 상태를 반대로 토글합니다.
       closeMediumModal();
@@ -252,7 +231,7 @@ function GuestBook() {
 
   const handleOpenOrnamentModal = () => {
     // 입력값을 검사합니다.
-    if (!author.trim() || !content.trim()) {
+    if (!author.value.trim() || !content.value.trim()) {
       alert('이름과 방명록 내용을 작성해주세요!');
       return;
     } else {
@@ -317,15 +296,15 @@ function GuestBook() {
               type="text"
               name="guestName" // 상태와 일치하는 name 속성
               placeholder="이름을 남겨주세요."
-              value={author}
-              onChange={writeName}
+              value={author.value}
+              onChange={author.handleChange}
             />
             <S.LetterArea
               placeholder="방명록을 남겨주세요."
-              value={content}
-              onChange={writeLetter}
+              value={content.value}
+              onChange={content.handleChange}
             />
-            <S.CheckTextLength>{content?.length}/500자</S.CheckTextLength>
+            <S.CheckTextLength>{content.value.length}/500자</S.CheckTextLength>
             <ModalOKButton
               buttonName="오너먼트 고르기"
               onClick={handleOpenOrnamentModal}
@@ -373,7 +352,7 @@ function GuestBook() {
           <S.OrnamentImg
             style={{backgroundImage: `url(${ornaments[ornamentId].image})`}}
           />
-          <S.AuthorName>{author}</S.AuthorName>
+          <S.AuthorName>{author.value}</S.AuthorName>
           <S.ModalText>방명록을 남겼어요!</S.ModalText>
           <ModalOKButton
             buttonName="확인하기"

@@ -8,7 +8,7 @@ type Props = {
 };
 
 // 로고 안들어가는 경로들
-const NO_LOGO_PATHS = ['/build/custom/icing'];
+const NO_LOGO_PATHS = ['/build/custom/icing', '/build/preview'];
 
 export default function PageLayout({children}: Props) {
   const [logo, setLogo] = useState(true);
