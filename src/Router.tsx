@@ -6,13 +6,15 @@ import Login from './pages/Login/Login';
 import Build from './pages/Build/Build';
 import Random from './pages/Build/Random/Random';
 import Preview from './pages/Build/Preview/Preview';
+import SplashScreen from './pages/SplashScreen/SplashScreen';
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<SplashScreen />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Onboarding />} />
+        <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/:id/guests" element={<GuestBook />} />
         <Route path="/mission" element={<Mission />} />
         <Route path="/build" element={<Build />} />
