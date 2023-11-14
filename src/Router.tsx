@@ -7,10 +7,12 @@ import Build from './pages/Build/Build';
 import Random from './pages/Build/Random/Random';
 import Preview from './pages/Build/Preview/Preview';
 import Custom from './pages/Build/Custom/Custom';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 export default function Router() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<OnboardingPage />} />
