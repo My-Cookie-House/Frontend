@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import NameBackground from '../../assets/Button/LongButton.svg';
 
 export const HouseName = styled.p`
-  background: url(NameBackground);
+  background: url(${NameBackground});
   background-size: cover;
   width: 237.5px;
   height: 50px;
