@@ -11,6 +11,7 @@ import Cookies from './pages/Build/Custom/Cookies/Cookies';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import Icing from './pages/Build/Custom/Icing/Icing';
 import BuildLayout from './pages/Build/BuildLayout';
+import Name from './pages/Build/Name/Name';
 
 export default function Router() {
   return (
@@ -30,6 +31,7 @@ export default function Router() {
           <Route path="custom/cookies" element={<Cookies />} />
           <Route path="custom/icing" element={<Icing />} />
           <Route path="preview" element={<Preview />} />
+          <Route path="name" element={<Name />} />
         </Route>
       </Routes>
     </BrowserRouter>

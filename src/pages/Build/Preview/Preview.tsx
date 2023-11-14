@@ -1,5 +1,5 @@
 import * as SBuild from '../style';
-import {useRecoilState} from 'recoil';
+import {useSetRecoilState} from 'recoil';
 import {
   BuildStateAtom,
   buildStateAtom,
@@ -7,41 +7,13 @@ import {
 } from '../../../atoms/buildAtom';
 import LongButton from '../../../components/Buttons/LongButton/LongButton';
 import {useNavigate} from 'react-router-dom';
-import {useMutation} from '@tanstack/react-query';
-
-interface IMutateHouse {
-  icingId: number;
-  cookieId: number[];
-}
-
-/**
- * TODO: 실제 api 호출함수로 변경해야함
- */
-const mutateHouse = (data: IMutateHouse) =>
-  new Promise((res, rej) => {
-    res('success');
-  });
 
 export default function Preview() {
-  const [buildState, setBuildState] =
-    useRecoilState<BuildStateAtom>(buildStateAtom);
+  const setBuildState = useSetRecoilState<BuildStateAtom>(buildStateAtom);
 
   const navigate = useNavigate();
 
-  const {mutate} = useMutation({
-    mutationFn: () =>
-      mutateHouse({icingId: buildState.icingId, cookieId: buildState.cookieId}),
-    onSuccess: () => {
-      /**
-       * TODO: 유저 아이디 가져와서 아이디에 맞는 path로 이동
-       */
-      navigate('/');
-    },
-  });
-
-  const handleMoveIn = () => {
-    mutate();
-  };
+  const handleMoveIn = () => {};
   const handleRebuild = () => {
     // buildState 초기화 시키기
     setBuildState(initalBuildState);

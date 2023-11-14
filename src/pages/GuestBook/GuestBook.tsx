@@ -16,8 +16,8 @@ import useInput from '../../hooks/useInput';
 function GuestBook() {
   const {userId} = useParams();
 
-  const author = useInput<HTMLInputElement>(20); // 보내는 사람 이름을 관리하는 상태
-  const content = useInput<HTMLTextAreaElement>(100); // 편지 내용을 관리하는 상태
+  const author = useInput<HTMLInputElement>(); // 보내는 사람 이름을 관리하는 상태
+  const content = useInput<HTMLTextAreaElement>(); // 편지 내용을 관리하는 상태
   const [ornamentId, setOrnamentId] = useState<number>(1);
 
   const [reloadUserInfo, setReloadUserInfo] = useState(false); //편지를 보낼 때 마다 상대방 정보를 업데이트 하기 위해 생선한 상태변수, 이유는 상대방 페이지에서 2개의 편지를 쓰면 실시간으로 나무가 물들게 하기 위해.
@@ -293,6 +293,7 @@ function GuestBook() {
         <>
           <S.Form onSubmit={handleSendGuestBook}>
             <S.NameInput
+              maxLength={10}
               type="text"
               name="guestName" // 상태와 일치하는 name 속성
               placeholder="이름을 남겨주세요."
@@ -301,6 +302,7 @@ function GuestBook() {
             />
             <S.LetterArea
               placeholder="방명록을 남겨주세요."
+              maxLength={200}
               value={content.value}
               onChange={content.handleChange}
             />
