@@ -124,17 +124,20 @@ function GuestBook() {
   const [houseName, setHouseName] = useState<string>('코알라하우스');
 
   // 사용자의 방명록 정보를 가져오는 함수
+  /**
+   * 
+
   const getUserInfoFromServer = async (userId: string) => {
     try {
       // 서버로부터 데이터 요청
       const response = await axios.get(`~/guest-book/${userId}`);
-
+      
       // 응답 데이터에서 guestBook 추출
       const guestBook = response.data?.guestBook;
       if (guestBook) {
         setGuestBook(guestBook); // 상태 업데이트
       }
-
+      
       // 응답 데이터에서 houseName 추출
       const houseName = response.data?.houseName;
       if (houseName) {
@@ -160,6 +163,7 @@ function GuestBook() {
       return null;
     }
   };
+  */
 
   // 컴포넌트가 마운트될 때 사용자 정보를 가져옵니다.
   useEffect(() => {
