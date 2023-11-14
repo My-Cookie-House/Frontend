@@ -23,7 +23,7 @@ export default function Random() {
       cookie2 = Math.floor(Math.random() * COOKIE_COUNT + 1);
     }
 
-    setBuildState((prev) => ({...prev, cookieId: [cookie1, cookie2]}));
+    setBuildState((prev) => ({...prev, cookieIds: [cookie1, cookie2]}));
   };
 
   // 아이싱 랜덤 생성

@@ -41,12 +41,14 @@ export default function PageLayout({
         {logo && (
           <S.Nav>
             {goBack && (
-              <Button
-                width={10}
-                height={19}
-                background={BackButton}
-                route={goBack}
-              />
+              <S.GoBackContainer>
+                <Button
+                  width={10}
+                  height={19}
+                  background={BackButton}
+                  route={goBack}
+                />
+              </S.GoBackContainer>
             )}
             <S.Logo>로고...</S.Logo>
             <S.ButtonBox>

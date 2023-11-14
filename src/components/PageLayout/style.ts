@@ -51,9 +51,12 @@ export const ButtonBox = styled.div`
   right: 0;
 `;
 
-export const Button = styled.button<{img: string}>`
-  width: 23px;
-  height: 19px;
-  background: ${(props) => `url(${props.img}`};
-  background-size: cover;
+export const GoBackContainer = styled.div`
+  width: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
 `;

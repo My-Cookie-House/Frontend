@@ -16,22 +16,22 @@ export default function Cookies() {
     // 만약 이미 두 개가 선택된 상태면 더 이상 선택 불가
     // 변경 하려면 이전에 선택한 쿠키를 다시 클릭해서 취소해줘야 한다
     if (
-      !buildState.cookieId.includes(id) &&
-      buildState.cookieId[0] !== null &&
-      buildState.cookieId[1] !== null
+      !buildState.cookieIds.includes(id) &&
+      buildState.cookieIds[0] !== null &&
+      buildState.cookieIds[1] !== null
     )
       return;
 
     setBuildState((prev) => {
-      const [cookie1, cookie2] = prev.cookieId;
+      const [cookie1, cookie2] = prev.cookieIds;
 
       return cookie1 === id
-        ? {...prev, cookieId: [null, cookie2]}
+        ? {...prev, cookieIds: [null, cookie2]}
         : cookie2 === id
-          ? {...prev, cookieId: [cookie1, null]}
+          ? {...prev, cookieIds: [cookie1, null]}
           : cookie1 === null
-            ? {...prev, cookieId: [id, cookie2]}
-            : {...prev, cookieId: [cookie1, id]};
+            ? {...prev, cookieIds: [id, cookie2]}
+            : {...prev, cookieIds: [cookie1, id]};
     });
   };
 
@@ -46,13 +46,13 @@ export default function Cookies() {
             size={122}
             image={image}
             onClick={() => handleToggleSelect(idx + 1)}
-            dark={buildState.cookieId.includes(idx + 1)}
+            dark={buildState.cookieIds.includes(idx + 1)}
           />
         ))}
       </S.GridBox>
       <LongButton
         margin="20.5px 0 0 0"
-        disabled={buildState.cookieId.includes(null)}
+        disabled={buildState.cookieIds.includes(null)}
         route="/build/custom/icing"
       >
         <SBuild.NextStepText>{'다 골랐어요!'}</SBuild.NextStepText>

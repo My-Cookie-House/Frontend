@@ -33,7 +33,7 @@ export default function Name() {
     mutationFn: () =>
       mutateHouse({
         icingId: buildState.icingId,
-        cookieId: buildState.cookieId,
+        cookieIds: buildState.cookieIds,
         name: name.value,
       }),
     onSuccess: () => {
@@ -46,7 +46,7 @@ export default function Name() {
 
   // buildState 데이터들이 유효한지(null 값이 없는지) 체크
   const isValid = () => {
-    if (buildState.cookieId.includes(null) || buildState.icingId === null) {
+    if (buildState.cookieIds.includes(null) || buildState.icingId === null) {
       // null 값이 포함 된 경우
       alert('건너뛴 단계가 존재합니다.\n처음부터 다시 시작합니다.');
       setBuildState(initalBuildState);
