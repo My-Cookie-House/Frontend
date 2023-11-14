@@ -10,7 +10,7 @@ import Mission from '../../pages/Mission/Mission';
 type Props = {
   children: React.ReactNode;
   guestBook?: string; // 방문록 (경로)
-  mission?: boolean; // 미션
+  mission?: () => void; // mission prop을 함수 타입으로 
   goBack?: string; // 뒤로가기 (경로)
 };
 
@@ -20,19 +20,19 @@ const NO_LOGO_PATHS = ['/build/custom/icing', '/build/preview'];
 export default function PageLayout({
   children,
   guestBook,
-  mission = false,
+  mission,
   goBack,
 }: Props) {
   const [logo, setLogo] = useState(true);
   const location = useLocation();
   const {pathname} = useLocation();
+  const [isMissionOpen, setIsMissionOpen] = useState(false);
 
+  // Mission 버튼 클릭 핸들러
   const handleMissionClick = () => {
-    return (
-      <Mission />
-    )
+    setIsMissionOpen(true); // Mission 모달 상태를 true로 설정하여 모달을 열게 함
   };
-  
+
   useLayoutEffect(() => {
     if (NO_LOGO_PATHS.includes(pathname)) setLogo(false);
     else setLogo(true);
@@ -57,7 +57,7 @@ export default function PageLayout({
             <S.ButtonBox>
               {mission && (
                 <Button width={25} height={18} background={Envelope} 
-                onClick={handleMissionClick} // 미션 버튼 클릭 핸들러
+                onClick={handleMissionClick} // Mission 버튼 클릭 시 핸들러 호출
                 />
               )}
               {guestBook && (
@@ -73,6 +73,14 @@ export default function PageLayout({
         )}
         {children}
       </S.Wrapper>
+
+      {/* Mission 모달 상태에 따라 Mission 컴포넌트 렌더링 */}
+      {isMissionOpen && (
+        <Mission
+          isOpen={isMissionOpen}
+          onClose={() => setIsMissionOpen(false)}
+        />
+      )}
     </S.Layout>
   );
 }
