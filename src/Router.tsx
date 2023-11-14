@@ -12,6 +12,9 @@ import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import Icing from './pages/Build/Custom/Icing/Icing';
 import BuildLayout from './pages/Build/BuildLayout';
 import Name from './pages/Build/Name/Name';
+import House from './pages/House/House';
+import Outside from './pages/House/Outside/Outside';
+import Inside from './pages/House/Inside/Inside';
 
 export default function Router() {
   return (
@@ -23,6 +26,12 @@ export default function Router() {
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/:id/guests" element={<GuestBook />} />
         <Route path="/mission" element={<Mission />} />
+
+        {/* 쿠키하우스 하위 경로 */}
+        <Route path="/:id" element={<House />}>
+          <Route path="" element={<Outside />} />
+          <Route path="inside" element={<Inside />} />
+        </Route>
 
         {/* 쿠키하우스 빌딩 하위 경로 */}
         <Route path="/build" element={<BuildLayout />}>
