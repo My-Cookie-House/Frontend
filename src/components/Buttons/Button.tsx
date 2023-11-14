@@ -17,7 +17,7 @@ export default function Button(props: ButtonProps) {
       onClick={props.route ? handleNavigate : props.onClick}
       background={props.background}
       disabled={props.disabled}
-      dark={props.dark}
+      dark={props.dark ? props.dark : undefined}
     >
       {props.children}
     </S.Button>
