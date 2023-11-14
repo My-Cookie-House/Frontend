@@ -2,7 +2,7 @@ import {atom} from 'recoil';
 
 export type BuildStateAtom = {
   type: 'unselected' | 'random' | 'custom';
-  cookieId: number[] | null;
+  cookieId: (number | null)[];
   icingId: number | null;
 };
 
@@ -10,7 +10,7 @@ export const buildStateAtom = atom<BuildStateAtom>({
   key: 'buildState',
   default: {
     type: 'unselected',
-    cookieId: null,
+    cookieId: [null, null],
     icingId: null,
   },
 });
