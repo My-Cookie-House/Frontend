@@ -19,6 +19,8 @@ export const Button = styled.button<ButtonStyleProps>`
   width: ${(props) => `${props.width}px`};
   height: ${(props) => `${props.height}px`};
   margin: ${(props) => `${props.margin}`};
+  padding: ${(props) => (props.padding ? `${props.padding}` : 0)};
+
   height: ${(props) => `${props.height}`};
   outline: none;
   border: none;

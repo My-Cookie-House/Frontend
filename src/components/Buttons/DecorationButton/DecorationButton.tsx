@@ -13,7 +13,6 @@ export default function DecorationButton(props: DecorationButtonProps) {
     <Button
       width={props.size}
       height={props.size}
-      padding="12px"
       background={DecorationButtonImage}
       {...props}
     >
