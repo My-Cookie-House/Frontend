@@ -64,13 +64,24 @@ const Slider: React.FC<SliderProps> = ({
       {index !== 0 && <img src={leftButton} onClick={handleLeftClick} />}
 
       <p>{topTexts[index]}</p>
-      <img
-        src={images[index]}
-        style={{
-          width: '36px',
-          height: '38px',
-        }}
-      />
+      {index === 0 ? (
+        <img
+          src={images[index]}
+          style={{
+            width: '354px',
+            height: '472px',
+          }}
+        />
+      ) : (
+        <img
+          src={images[index]}
+          style={{
+            width: '36px',
+            height: '38px',
+          }}
+        />
+      )}
+
       {bottomTexts[index]}
       {extraTexts[index]}
       {index !== 0 && (
