@@ -68,16 +68,16 @@ const Slider: React.FC<SliderProps> = ({
         <img
           src={images[index]}
           style={{
-            width: '354px',
-            height: '472px',
+            width: '280px',
+            height: '374px',
           }}
         />
       ) : (
         <img
           src={images[index]}
           style={{
-            width: '36px',
-            height: '38px',
+            width: '282px',
+            height: '302px',
           }}
         />
       )}
