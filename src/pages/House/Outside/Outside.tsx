@@ -7,15 +7,13 @@ import {useRecoilValue} from 'recoil';
 import {loginStateAtom} from '../../../atoms/loginStateAtom';
 import LongButton from '../../../components/Buttons/LongButton/LongButton';
 import {NextStepText} from '../../Build/style';
+import useIsMyHouse from '../../../hooks/useIsMyHouse';
 
 const STALE_MIN = 5;
 
 export default function Outside() {
-  const {id} = useParams(); // 현재 접속한 쿠키하우스 주인의 아이디
-  const {userId} = useRecoilValue(loginStateAtom); // 로그인한 사람의 아이디
+  const {id, isMyHouse} = useIsMyHouse();
 
-  const isMyHouse = useMemo(() => +id === userId, [id, userId]);
-  console.log(id, userId, isMyHouse);
   const {data} = useSuspenseQuery<IHouseOutside>({
     queryKey: ['house', 'outside', id],
     queryFn: () => house.getHouseOutside(+id),

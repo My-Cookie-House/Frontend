@@ -8,8 +8,10 @@ import {
   buildStateAtom,
   initalBuildState,
 } from '../../../atoms/buildAtom';
-import {useRecoilState} from 'recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
 import {useNavigate} from 'react-router-dom';
+import {loginStateAtom} from '../../../atoms/loginStateAtom';
+import {useMemo} from 'react';
 
 const MAX_LENGTH = 10;
 
@@ -23,6 +25,7 @@ const mutateHouse = (data: Omit<BuildStateAtom, 'type'>) =>
   });
 
 export default function Name() {
+  const {userId} = useRecoilValue(loginStateAtom);
   const [buildState, setBuildState] =
     useRecoilState<BuildStateAtom>(buildStateAtom);
   const name = useInput<HTMLInputElement>();
@@ -40,12 +43,12 @@ export default function Name() {
       /**
        * TODO: 유저 아이디 가져와서 아이디에 맞는 path로 이동
        */
-      navigate('/:id');
+      navigate(`/${userId}`);
     },
   });
 
   // buildState 데이터들이 유효한지(null 값이 없는지) 체크
-  const isValid = () => {
+  const isValid = useMemo(() => {
     if (buildState.cookieIds.includes(null) || buildState.icingId === null) {
       // null 값이 포함 된 경우
       alert('건너뛴 단계가 존재합니다.\n처음부터 다시 시작합니다.');
@@ -54,11 +57,11 @@ export default function Name() {
       return false;
     }
     return true;
-  };
+  }, [buildState, navigate, setBuildState]);
 
   const handleSubmit = () => {
     // 서버에 빌드 완료한 쿠키 하우스 데이터 전송
-    if (isValid()) mutate();
+    if (isValid) mutate();
   };
 
   return (

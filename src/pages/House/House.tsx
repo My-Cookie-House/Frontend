@@ -7,12 +7,12 @@ import {useQuery} from '@tanstack/react-query';
 import house from '../../apis/house';
 import {IHouseOutside} from '../../interfaces/house';
 import {Suspense} from 'react';
+import useIsMyHouse from '../../hooks/useIsMyHouse';
 
 const STALE_MIN = 5;
 
 export default function House() {
-  const {id} = useParams(); // 현재 접속한 쿠키하우스 주인의 아이디
-  const {userId} = useRecoilValue(loginStateAtom); // 로그인한 사람의 아이디
+  const {id, userId} = useIsMyHouse();
   const {pathname} = useLocation();
 
   const {data} = useQuery<IHouseOutside>({
