@@ -5,10 +5,14 @@ import DecorationButton from '../../../../components/Buttons/DecorationButton/De
 import LongButton from '../../../../components/Buttons/LongButton/LongButton';
 import {useRecoilState} from 'recoil';
 import {BuildStateAtom, buildStateAtom} from '../../../../atoms/buildAtom';
+import Cookies from '../../../../assets/House/Outside/Cookies';
 
 export default function Icing() {
   const [buildState, setBuildState] =
     useRecoilState<BuildStateAtom>(buildStateAtom);
+
+  // 쿠키를 import 하기 위한 배열
+  const [num1, num2] = [...buildState.cookieIds].sort((a, b) => a - b);
 
   const handleSelect = (id: number) => {
     // icingId는 인덱스+1
@@ -33,15 +37,9 @@ export default function Icing() {
       {/**
        * TODO: 미리보기 이미지 넣기!
        */}
-      <img
+      <S.HouseImg
         alt="쿠키하우스 외관 미리보기"
-        src=""
-        style={{
-          marginTop: '68.83px',
-          width: '281px',
-          height: '281px',
-          border: '1px solid black',
-        }}
+        src={Cookies[`Cookie${num1}${num2}`]}
       />
       <SBuild.Description>{'아이싱 1개를 선택해주세요!'}</SBuild.Description>
       <S.Box>
