@@ -5,6 +5,7 @@ import BackButton from '../../assets/Button/BackButton.svg';
 import * as S from './style';
 import {useLocation} from 'react-router-dom';
 import Button from '../Buttons/Button';
+import Mission from '../../pages/Mission/Mission';
 
 type Props = {
   children: React.ReactNode;
@@ -27,9 +28,11 @@ export default function PageLayout({
   const {pathname} = useLocation();
 
   const handleMissionClick = () => {
-    // TODO: 미션 페이지 만들어지면 추가해야함
+    return (
+      <Mission />
+    )
   };
-
+  
   useLayoutEffect(() => {
     if (NO_LOGO_PATHS.includes(pathname)) setLogo(false);
     else setLogo(true);
@@ -53,7 +56,9 @@ export default function PageLayout({
             <S.Logo>로고...</S.Logo>
             <S.ButtonBox>
               {mission && (
-                <Button width={25} height={18} background={Envelope} />
+                <Button width={25} height={18} background={Envelope} 
+                onClick={handleMissionClick} // 미션 버튼 클릭 핸들러
+                />
               )}
               {guestBook && (
                 <Button

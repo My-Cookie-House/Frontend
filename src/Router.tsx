@@ -25,7 +25,6 @@ export default function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/:id/guests" element={<GuestBook />} />
-        <Route path="/mission" element={<Mission />} />
 
         {/* 쿠키하우스 하위 경로 */}
         <Route path="/:id" element={<House />}>
