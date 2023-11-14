@@ -6,11 +6,13 @@ export type BuildStateAtom = {
   icingId: number | null;
 };
 
+export const initalBuildState: BuildStateAtom = {
+  type: 'unselected',
+  cookieId: [null, null],
+  icingId: null,
+};
+
 export const buildStateAtom = atom<BuildStateAtom>({
   key: 'buildState',
-  default: {
-    type: 'unselected',
-    cookieId: [null, null],
-    icingId: null,
-  },
+  default: initalBuildState,
 });
