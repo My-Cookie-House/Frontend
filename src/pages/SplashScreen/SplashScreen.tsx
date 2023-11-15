@@ -14,10 +14,15 @@ export default function SplashScreen(): JSX.Element {
   useEffect(() => {
     console.log(loggedIn, isHouseBuilt);
     const timer = setTimeout(() => {
-      if (loggedIn === false && isHouseBuilt === false) navigate('/build');
-      // 로그인은 했지만 쿠키하우스를 빌드한 적이 없는 경우
-      else if (loggedIn) navigate(`/${userId}`);
-      else navigate('/login');
+      if (loggedIn) {
+        if (isHouseBuilt) {
+          navigate(`/${userId}`); // 로그인하였고 쿠키하우스를 지은 경우
+        } else {
+          navigate('/build'); // 로그인은 했지만 쿠키하우스를 지은 적이 없는 경우
+        }
+      } else {
+        navigate('/login'); // 로그인하지 않은 경우
+      }
     }, 2500);
 
     return () => clearTimeout(timer); // 컴포넌트가 언마운트되면 타이머를 취소
