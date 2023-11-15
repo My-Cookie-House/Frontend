@@ -9,6 +9,7 @@ import axios, { AxiosError } from 'axios';
 import {useParams} from 'react-router-dom';
 import DecorationButton from '../../components/Buttons/DecorationButton/DecorationButton';
 import furniture from '../../components/ImportFurniture/ImportFurniture';
+import SelectFurnitureModal from '../../components/Modal/SelectFurnitureModal/SelectFurnitureModal';
 function Mission({ isOpen, onClose }) {
   const {userId} = useParams();
 
@@ -31,6 +32,13 @@ function Mission({ isOpen, onClose }) {
       isOpen: isTodayFurnitureModalOpen,
       openModal: openTodayFurnitureModal,
       closeModal: closeTodayFurnitureModal,
+    } = useModal();
+
+    // 오늘의 가구를 선택하는 모달 상태관리
+    const {
+      isOpen: isSelectFurnitureModalOpen,
+      openModal: openSelectFurnitureModal,
+      closeModal: closeSelectFurnitureModal,
     } = useModal();
 
     const content = useInput<HTMLTextAreaElement>(); // 편지 내용을 관리하는 상태
@@ -136,6 +144,13 @@ function Mission({ isOpen, onClose }) {
   
   
 
+  const handleAllModalCloseAndOpenTodayFurnitureModal = () => {
+    closeMissionArriveModal();
+    closeUploadImageMessageModal();
+    closeTodayFurnitureModal();
+    openSelectFurnitureModal();
+  }
+
 
   
   return (
@@ -220,11 +235,18 @@ function Mission({ isOpen, onClose }) {
           
           <ModalOKButton
             buttonName="보러가기"
-            onClick={handleMissionCheck}
+            onClick={handleAllModalCloseAndOpenTodayFurnitureModal}
           />
         </S.ModalInnerWrapper>
       </Modal>
 
+      <SelectFurnitureModal
+      modalTitle={'오늘의 가구'}
+      isOpen={isSelectFurnitureModalOpen}
+      onClose={closeSelectFurnitureModal}
+      >
+
+      </SelectFurnitureModal>
     </>
   )
 }
