@@ -6,13 +6,24 @@ import useIsMyHouse from '../../../hooks/useIsMyHouse';
 import {useCallback, useState} from 'react';
 import ShareModal from '../../../components/Modal/ShareModal/ShareModal';
 import Overlap from '../../../components/Overlap/Overlap';
+import {useSuspenseQuery} from '@tanstack/react-query';
+import mission from '../../../apis/mission';
+import {IAllCompletedMissions} from '../../../interfaces/mission';
 
 export default function Inside() {
   const [modalOpen, setModalOpen] = useState(false);
-  const {isMyHouse} = useIsMyHouse();
+  const {isMyHouse, id} = useIsMyHouse();
   const handleShare = () => setModalOpen(true);
 
   const closeModal = useCallback(() => setModalOpen(false), [setModalOpen]);
+
+  const {data} = useSuspenseQuery<IAllCompletedMissions>({
+    queryKey: ['house', 'inside', id],
+    queryFn: () => mission.getAllCompletedMissions(id),
+  });
+  const furnitures = data.completedMissions.map(
+    (mission) => mission.missionCompleteFurniture,
+  );
 
   const handleFurnitureClick = () => {};
 

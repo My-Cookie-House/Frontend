@@ -26,7 +26,7 @@ export default {
   },
 
   // 수행한 모든 미션 조회
-  getAllCompletedMissions: async () => {
+  getAllCompletedMissions: async (userId: string) => {
     const res: any = await new Promise((res, rej) => {
       setTimeout(() => {
         res({
