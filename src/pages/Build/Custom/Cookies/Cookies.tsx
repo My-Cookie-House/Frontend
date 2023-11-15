@@ -5,7 +5,8 @@ import DecorationButton from '../../../../components/Buttons/DecorationButton/De
 import LongButton from '../../../../components/Buttons/LongButton/LongButton';
 import {useRecoilState} from 'recoil';
 import {BuildStateAtom, buildStateAtom} from '../../../../atoms/buildAtom';
-import CookieHouse from '../../../../assets/House/Outside/Cookies';
+import CookieLayers from '../../../../assets/House/Outside/Cookies';
+import IcingLayers from '../../../../assets/House/Outside/Icings';
 import {useEffect} from 'react';
 
 export default function Cookies() {
@@ -38,11 +39,15 @@ export default function Cookies() {
   };
 
   useEffect(() => {
-    const keys = Object.values(CookieHouse);
-    for (let i = 0; i < 15; i++) {
+    // 쿠키 레이어와 아이싱 레이어 preloading
+    Object.values(CookieLayers).forEach((v) => {
       const img = new Image();
-      img.src = keys[i];
-    }
+      img.src = v;
+    });
+    Object.values(IcingLayers).forEach((v) => {
+      const img = new Image();
+      img.src = v;
+    });
   }, []);
 
   return (
