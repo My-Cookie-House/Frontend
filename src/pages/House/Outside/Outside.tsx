@@ -29,7 +29,7 @@ export default function Outside() {
         height={400}
         margin="40px 0 0 0"
         // TODO: 배열 두 번째 값 실제 아이싱 데이터 반영해야함
-        imgs={[Cookies[`Cookie${num1}${num2}`], Cookies.Cookie12]}
+        imgs={[Cookies[`LgCookie${num1}${num2}`], Cookies.LgCookie12]}
       />
       <LongButton margin="34px 0 0 0" route={`/${id}/inside`}>
         <NextStepText>
