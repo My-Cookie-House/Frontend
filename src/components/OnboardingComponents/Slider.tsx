@@ -1,6 +1,7 @@
 import React, {useState, useRef} from 'react';
 import LongButton from '../Buttons/LongButton/LongButton';
 import {S} from './style';
+import SkipButton from '../Buttons/SkipButton/SkipButton';
 
 interface SliderProps {
   images: string[];
@@ -95,6 +96,9 @@ const Slider: React.FC<SliderProps> = ({
                 height: '12px',
               }}
             />
+          </S.Centering>
+          <S.Centering>
+            <SkipButton />
           </S.Centering>
         </>
       )}
