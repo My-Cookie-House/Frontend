@@ -31,4 +31,29 @@ export const ShareBtn = styled.button`
   border: none;
   outline: none;
   padding: 0;
+  color: #f9f1e1;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  cursor: pointer;
+`;
+
+export const Link = styled.p`
+  color: #572e16;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  width: 150px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow-x: scroll;
+  margin-left: 15px;
 `;
