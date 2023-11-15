@@ -3,10 +3,7 @@ import Share from '../../../assets/Button/Share.svg';
 import ShareIcon from '../../../assets/Icons/ShareIcon.svg';
 import Button from '../../../components/Buttons/Button';
 import useIsMyHouse from '../../../hooks/useIsMyHouse';
-import Modal from '../../../components/Modal/Modal';
 import {useCallback, useState} from 'react';
-import BackButton from '../../../components/BackButton/BackButton';
-import ModalCloseButton from '../../../components/ModalCloseButton/ModalCloseButton';
 import ShareModal from '../../../components/Modal/ShareModal/ShareModal';
 
 export default function Inside() {
