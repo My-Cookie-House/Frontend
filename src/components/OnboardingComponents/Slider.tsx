@@ -2,6 +2,7 @@ import React, {useState, useRef} from 'react';
 import LongButton from '../Buttons/LongButton/LongButton';
 import {S} from './style';
 import SkipButton from '../Buttons/SkipButton/SkipButton';
+import BuildStartButton from '../Buttons/BuildStartButton/BuildStartButton';
 
 interface SliderProps {
   images: string[];
@@ -82,7 +83,7 @@ const Slider: React.FC<SliderProps> = ({
       )}
       {index === images.length - 1 && (
         <S.Centering>
-          <LongButton onClick={handleRightClick}>가볼까요?</LongButton>
+          <BuildStartButton />
         </S.Centering>
       )}
 
