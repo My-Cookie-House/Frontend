@@ -6,7 +6,7 @@ import LongButton from '../../../../components/Buttons/LongButton/LongButton';
 import {useRecoilState} from 'recoil';
 import {BuildStateAtom, buildStateAtom} from '../../../../atoms/buildAtom';
 import Cookies from '../../../../assets/House/Outside/Cookies';
-import Preview from '../../../../components/Preview/Preview';
+import Overlap from '../../../../components/Overlap/Overlap';
 
 export default function Icing() {
   const [buildState, setBuildState] =
@@ -39,7 +39,7 @@ export default function Icing() {
        * TODO: 미리보기 이미지 넣기!
        */}
 
-      <Preview
+      <Overlap
         width={260}
         height={360}
         margin="30px 0 0 0"
