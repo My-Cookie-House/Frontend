@@ -1,4 +1,3 @@
-// BackButton.tsx
 import {S} from './style';
 import {BackButtonNavigateProps} from '../../../type/type';
 import NavigatableButton from '../NavigatableButton/NavigatableButton';
