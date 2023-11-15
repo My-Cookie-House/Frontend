@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {S} from './style';
 import TitleContainerBox from '../../components/TitleContainerBox/TitleContainerBox';
-import BackButton from '../../components/BackButton/BackButton';
+import BackButton from '../../components/Buttons/BackButton/BackButton';
 import Modal from '../../components/Modal/Modal';
 import axios, {AxiosError} from 'axios';
 import PageLayout from '../../components/PageLayout/PageLayout';
