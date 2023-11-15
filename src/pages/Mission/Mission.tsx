@@ -156,9 +156,9 @@ function Mission({ isOpen, onClose }) {
   return (
     <>
 
-      {/* 방명록 남겼다고 알림 모달 */}
+      {/* 미션 도착 알림 모달 */}
       <Modal
-        modalTitle={'방명록'}
+        modalTitle={'미션함'}
         isOpen={isOpen}
         onClose={onClose}
         imageType={'MediumModal'}
