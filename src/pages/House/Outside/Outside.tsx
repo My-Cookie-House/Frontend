@@ -6,6 +6,7 @@ import {NextStepText} from '../../Build/style';
 import useIsMyHouse from '../../../hooks/useIsMyHouse';
 import Overlap from '../../../components/Overlap/Overlap';
 import Cookies from '../../../assets/House/Outside/Cookies';
+import Icings from '../../../assets/House/Outside/Icings';
 
 const STALE_MIN = 5;
 const GC_MIN = 5;
@@ -29,7 +30,10 @@ export default function Outside() {
         height={400}
         margin="40px 0 0 0"
         // TODO: 배열 두 번째 값 실제 아이싱 데이터 반영해야함
-        imgs={[Cookies[`LgCookie${num1}${num2}`], Cookies.LgCookie12]}
+        imgs={[
+          Cookies[`LgCookie${num1}${num2}`],
+          Icings[`LgIcing${data.icingId}`],
+        ]}
       />
       <LongButton margin="34px 0 0 0" route={`/${id}/inside`}>
         <NextStepText>

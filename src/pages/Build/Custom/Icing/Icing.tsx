@@ -11,6 +11,7 @@ import {
 } from '../../../../atoms/buildAtom';
 import Cookies from '../../../../assets/House/Outside/Cookies';
 import Overlap from '../../../../components/Overlap/Overlap';
+import IcingLayers from '../../../../assets/House/Outside/Icings/index';
 
 export default function Icing() {
   const [buildState, setBuildState] =
@@ -46,7 +47,10 @@ export default function Icing() {
         width={260}
         height={360}
         margin="30px 0 0 0"
-        imgs={[Cookies[`Cookie${num1}${num2}`]]}
+        imgs={[
+          Cookies[`Cookie${num1}${num2}`],
+          IcingLayers[`Icing${buildState.icingId}`],
+        ]}
       />
 
       <SBuild.Description>{'아이싱 1개를 선택해주세요!'}</SBuild.Description>
