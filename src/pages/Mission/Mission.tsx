@@ -28,7 +28,7 @@ function Mission({ isOpen, onClose }) {
       >
         <ModalCloseButton onClick={onClose} />
         <S.ModalInnerWrapper>
-          
+          <S.SwappingEnvelope />
           <S.ModalText>미션이 도착했어요!</S.ModalText>
           <ModalOKButton
             buttonName="확인하기"
