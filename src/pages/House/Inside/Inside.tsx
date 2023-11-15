@@ -9,23 +9,41 @@ import Overlap from '../../../components/Overlap/Overlap';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import mission from '../../../apis/mission';
 import {IAllCompletedMissions} from '../../../interfaces/mission';
+import CompletedMissionModal from '../../../components/Modal/CompletedMissionModal/CompletedMissionModal';
 
 export default function Inside() {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [shareModalOpen, setShareModalOpen] = useState(false);
+  const [missionModalOpen, setMissionModalOpen] = useState(false);
   const {isMyHouse, id} = useIsMyHouse();
-  const handleShare = () => setModalOpen(true);
+  const handleShare = () => setShareModalOpen(true);
 
-  const closeModal = useCallback(() => setModalOpen(false), [setModalOpen]);
+  const closeShareModal = useCallback(
+    () => setShareModalOpen(false),
+    [setShareModalOpen],
+  );
+  const closeMissionModal = useCallback(
+    () => setMissionModalOpen(false),
+    [setMissionModalOpen],
+  );
 
   const {data} = useSuspenseQuery<IAllCompletedMissions>({
     queryKey: ['house', 'inside', id],
     queryFn: () => mission.getAllCompletedMissions(id),
   });
+
+  /**
+   * TODO: furnitures 배열로 부터 가구들의 이미지를 가져와서 imgs 배열에 넣어주기!
+   */
   const furnitures = data.completedMissions.map(
     (mission) => mission.missionCompleteFurniture,
   );
 
-  const handleFurnitureClick = () => {};
+  /**
+   * TODO: 가구 레이어 받으면, 아래 함수를 연결해 준다
+   */
+  const handleFurnitureClick = () => {
+    setMissionModalOpen(true);
+  };
 
   return (
     <>
@@ -43,7 +61,13 @@ export default function Inside() {
       )}
 
       {/* 공유하기 모달 */}
-      <ShareModal closeModal={closeModal} isOpen={modalOpen} />
+      <ShareModal closeModal={closeShareModal} isOpen={shareModalOpen} />
+      {/* 미션 조회 모달 */}
+      <CompletedMissionModal
+        closeModal={closeMissionModal}
+        isOpen={missionModalOpen}
+        date={'2023-12-25'} // TODO: 실제 가구에 해당하는 미션 날짜를 담아줘야함
+      />
     </>
   );
 }

@@ -1,7 +1,7 @@
 // TODO: 실제 api로 바꾸기
 export default {
   // 수행한 특정 미션 조회
-  getCompletedMissionByDate: async () => {
+  getCompletedMissionByDate: async (date: string) => {
     const res: any = await new Promise((res, rej) => {
       setTimeout(() => {
         res({
