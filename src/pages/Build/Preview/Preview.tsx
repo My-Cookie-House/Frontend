@@ -6,9 +6,10 @@ import {
   initalBuildState,
 } from '../../../atoms/buildAtom';
 import LongButton from '../../../components/Buttons/LongButton/LongButton';
+import Preview from '../../../components/Preview/Preview';
 import {useNavigate} from 'react-router-dom';
 
-export default function Preview() {
+export default function PreviewPage() {
   const setBuildState = useSetRecoilState<BuildStateAtom>(buildStateAtom);
 
   const navigate = useNavigate();
@@ -36,11 +37,12 @@ export default function Preview() {
           border: '1px solid black',
         }}
       />
+
       <LongButton margin="72px 0 0 0" route="/build/name">
         <SBuild.NextStepText>{'입주하기'}</SBuild.NextStepText>
       </LongButton>
       <LongButton margin="10px 0 0 0" onClick={handleRebuild}>
-        <SBuild.NextStepText>{'집 다시  짓기'}</SBuild.NextStepText>
+        <SBuild.NextStepText>{'집 다시 짓기'}</SBuild.NextStepText>
       </LongButton>
     </>
   );

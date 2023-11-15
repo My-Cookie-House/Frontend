@@ -6,12 +6,13 @@ import LongButton from '../../../../components/Buttons/LongButton/LongButton';
 import {useRecoilState} from 'recoil';
 import {BuildStateAtom, buildStateAtom} from '../../../../atoms/buildAtom';
 import Cookies from '../../../../assets/House/Outside/Cookies';
+import Preview from '../../../../components/Preview/Preview';
 
 export default function Icing() {
   const [buildState, setBuildState] =
     useRecoilState<BuildStateAtom>(buildStateAtom);
 
-  // 쿠키를 import 하기 위한 배열
+  // 쿠키를 import 하기 위해 cookieIds 배열 정렬
   const [num1, num2] = [...buildState.cookieIds].sort((a, b) => a - b);
 
   const handleSelect = (id: number) => {
@@ -37,10 +38,14 @@ export default function Icing() {
       {/**
        * TODO: 미리보기 이미지 넣기!
        */}
-      <S.HouseImg
-        alt="쿠키하우스 외관 미리보기"
-        src={Cookies[`Cookie${num1}${num2}`]}
+
+      <Preview
+        width={260}
+        height={360}
+        margin="30px 0 0 0"
+        imgs={[Cookies[`Cookie${num1}${num2}`]]}
       />
+
       <SBuild.Description>{'아이싱 1개를 선택해주세요!'}</SBuild.Description>
       <S.Box>
         {Icings.map((icing, idx) => (
