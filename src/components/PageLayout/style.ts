@@ -30,3 +30,33 @@ export const Logo = styled.div`
   background-color: gray;
   text-align: center;
 `;
+
+export const Nav = styled.nav`
+  width: 340px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+`;
+
+export const ButtonBox = styled.div`
+  width: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
+
+export const GoBackContainer = styled.div`
+  width: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;

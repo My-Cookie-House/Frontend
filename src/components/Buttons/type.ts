@@ -10,4 +10,5 @@ export type ButtonProps = {
   background?: string;
   disabled?: boolean;
   dark?: boolean;
+  type?: string;
 };
