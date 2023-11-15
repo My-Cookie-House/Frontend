@@ -1,15 +1,14 @@
-import {useQueryClient, useSuspenseQuery} from '@tanstack/react-query';
-import {Suspense, useMemo} from 'react';
-import {useParams} from 'react-router-dom';
+import {useSuspenseQuery} from '@tanstack/react-query';
 import {IHouseOutside} from '../../../interfaces/house';
 import house from '../../../apis/house';
-import {useRecoilValue} from 'recoil';
-import {loginStateAtom} from '../../../atoms/loginStateAtom';
 import LongButton from '../../../components/Buttons/LongButton/LongButton';
 import {NextStepText} from '../../Build/style';
 import useIsMyHouse from '../../../hooks/useIsMyHouse';
+import Overlap from '../../../components/Overlap/Overlap';
+import Cookies from '../../../assets/House/Outside/Cookies';
 
 const STALE_MIN = 5;
+const GC_MIN = 5;
 
 export default function Outside() {
   const {id, isMyHouse} = useIsMyHouse();
@@ -18,20 +17,19 @@ export default function Outside() {
     queryKey: ['house', 'outside', id],
     queryFn: () => house.getHouseOutside(+id),
     staleTime: 1000 * 60 * STALE_MIN,
-    gcTime: 1000 * 60 * STALE_MIN,
+    gcTime: 1000 * 60 * GC_MIN,
   });
+
+  const [num1, num2] = data.cookieIds;
 
   return (
     <>
-      <img
-        alt="쿠키하우스 외부"
-        src=""
-        style={{
-          width: '295px',
-          height: '364px',
-          border: '1px solid black',
-          marginTop: '43px',
-        }}
+      <Overlap
+        width={300}
+        height={400}
+        margin="40px 0 0 0"
+        // TODO: 배열 두 번째 값 실제 아이싱 데이터 반영해야함
+        imgs={[Cookies[`Cookie${num1}${num2}`], Cookies.Cookie12]}
       />
       <LongButton margin="34px 0 0 0" route={`/${id}/inside`}>
         <NextStepText>
