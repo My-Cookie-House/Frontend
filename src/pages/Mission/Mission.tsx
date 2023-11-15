@@ -7,6 +7,7 @@ import { S } from "./style"
 import useInput from '../../hooks/useInput';
 import axios, { AxiosError } from 'axios';
 import {useParams} from 'react-router-dom';
+import DecorationButton from '../../components/Buttons/DecorationButton/DecorationButton';
 
 function Mission({ isOpen, onClose }) {
   const {userId} = useParams();
@@ -37,6 +38,7 @@ function Mission({ isOpen, onClose }) {
     const [imageFile, setImageFile] = useState(null); // 업로드할 이미지 파일을 관리하는 상태
     const [missionDate, setMissionDate] = useState<string>("2020-12-20");
     const [missionMessage, setMissionMessage] = useState<string>("오늘 먹은 점심");
+    const [missionId, setMissionId] = useState(1);
 
     const fetchTodayMissionData = async () => {
       try {
@@ -45,6 +47,7 @@ function Mission({ isOpen, onClose }) {
             // 데이터를 상태에 저장합니다.
             setMissionDate(response.data.data.missionDate);
             setMissionMessage(response.data.data.missionMessage)
+            setMissionId(response.data.data.missionId)
           }
         } catch (error) {
           console.error('데이터를 가져오는데 실패했습니다.', error);
@@ -52,10 +55,7 @@ function Mission({ isOpen, onClose }) {
         }
       }
 
-      useEffect(() => {
-        fetchTodayMissionData();
-      }, []); 
-
+    
   React.useEffect(() => {
     openMissionArriveModal(); // 컴포넌트 마운트 시 모달을 열기
   }, [openMissionArriveModal]);
@@ -66,6 +66,10 @@ function Mission({ isOpen, onClose }) {
     const formatedDate = `${month}월 ${day}일`
     return formatedDate
   };
+
+  useEffect(() => {
+    fetchTodayMissionData();
+  }, []); 
 
   // 이미지 업로드 핸들링
   const handleFileInputChange = (event) => {
@@ -206,8 +210,15 @@ function Mission({ isOpen, onClose }) {
       >
         <ModalCloseButton onClick={closeTodayFurnitureModal} />
         <S.ModalInnerWrapper>
-          <S.SwappingEnvelope />
-          <S.ModalText>{"여기에 가구 리스트에서 day별로 가져와야함."}</S.ModalText> {/*TODO:여기에 가구 리스트에서 day별로 가져와야함.*/}
+          <S.ModalText2>{"여기에 가구 리스트에서 day별로 가져와야함."}</S.ModalText2> {/*TODO:여기에 가구 리스트에서 day별로 가져와야함.*/}
+          <S.GuestBookEntryGrid>
+            <DecorationButton
+              size={90}
+              image={""}
+              >
+              </DecorationButton>
+          </S.GuestBookEntryGrid>
+          
           <ModalOKButton
             buttonName="보러가기"
             onClick={handleMissionCheck}
