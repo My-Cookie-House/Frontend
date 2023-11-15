@@ -31,7 +31,7 @@ export default function House() {
     try {
         const response = await axios.get(`~/mission-complete/${userId}`); //TODO: 엔드포인트 변경
         setCompleteMissionDatesAndContents(response.data.data.completedMissions);
-        setFurnitureData(response.data.data.completedMissions.missionCompleteFurniture.furnitureId);
+        setFurnitureData(response.data.data.completedMissions.furnitureId);
         
       } catch (error) {
         console.error('데이터를 가져오는데 실패했습니다.', error);
