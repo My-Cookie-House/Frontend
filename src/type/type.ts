@@ -31,3 +31,7 @@ export interface ModalContentProps {
 export interface ModalWrapperProps {
   show: boolean;
 }
+
+export interface ImagePreviewProps {
+  src: string; // 여기서는 string 타입만 받도록 설정
+}
