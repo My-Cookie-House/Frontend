@@ -1,7 +1,7 @@
 // BackButton.tsx
 import {S} from './style';
-import {BackButtonNavigateProps} from '../../type/type';
-import NavigatableButton from './NavigatableButton';
+import {BackButtonNavigateProps} from '../../../type/type';
+import NavigatableButton from '../NavigatableButton/NavigatableButton';
 
 function BackButton(props: BackButtonNavigateProps) {
   const {route} = props;
