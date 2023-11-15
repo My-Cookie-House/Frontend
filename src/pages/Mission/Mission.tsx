@@ -76,15 +76,7 @@ function Mission({ isOpen, onClose }) {
     } catch (error: unknown) {
       //에러 일 경우
       if (error instanceof AxiosError) {
-        const status = error?.response?.status;
         alert('업로드에 실패했어요.');
-        if (status === 404) {
-          // 리소스를 찾을 수 없음
-        } else if (status === 500) {
-          // 서버 내부 오류
-        } else {
-          // 기타 상태 코드 처리
-        }
       }
       return null;
     }
