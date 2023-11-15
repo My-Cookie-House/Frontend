@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {S} from './style';
 import TitleContainerBox from '../../components/TitleContainerBox/TitleContainerBox';
-import BackButton from '../../components/BackButton/BackButton';
+import BackButton from '../../components/Buttons/BackButton/BackButton';
 import Modal from '../../components/Modal/Modal';
 import axios, {AxiosError} from 'axios';
 import PageLayout from '../../components/PageLayout/PageLayout';
@@ -56,7 +56,7 @@ function GuestBook() {
     useState<string>('김민성 왔다감');
 
   const [guestBook, setGuestBook] = useState([
-    //더미데이터. 나중에 지워야함 //////////////////////////////////////////////////
+    //TODO: 더미데이터. 나중에 지워야함
     {
       author: '홍길동',
       content: 'adsfkjalksj~',
@@ -127,39 +127,26 @@ function GuestBook() {
 
   // 사용자의 방명록 정보를 가져오는 함수
 
-  const getUserInfoFromServer = async (userId: string) => {
+  const getUserInfoFromServer = async () => {
     try {
       // 서버로부터 데이터 요청
       const response = await axios.get(`~/guest-book/${userId}`);
 
       // 응답 데이터에서 guestBook 추출
-      const guestBook = response.data?.guestBook;
+      const guestBook = response.data.data.guestBook;
       if (guestBook) {
         setGuestBook(guestBook); // 상태 업데이트
       }
 
       // 응답 데이터에서 houseName 추출
-      const houseName = response.data?.houseName;
+      const houseName = response.data.data.houseName;
       if (houseName) {
         setHouseName(houseName); // 상태 업데이트
       }
       // guestBook 데이터 반환
       return guestBook;
     } catch (error) {
-      // 에러 처리
-      if (axios.isAxiosError(error)) {
-        const status = error.response?.status;
         alert('유저의 정보를 불러오지 못했어요.');
-        if (status === 404) {
-          // 리소스를 찾을 수 없음
-        } else if (status === 500) {
-          // 서버 내부 오류
-        } else {
-          // 기타 상태 코드 처리
-        }
-      } else {
-        console.error('An unexpected error occurred:', error);
-      }
       return null;
     }
   };
@@ -167,10 +154,8 @@ function GuestBook() {
   // 컴포넌트가 마운트될 때 사용자 정보를 가져옵니다.
   useEffect(() => {
     const fetchUserInfo = async () => {
-      if (userId) {
-        // const userInfo = await getUserInfoFromServer(userId);
-        //setGuestBookContent(userInfo?.guestBook);
-      }
+      getUserInfoFromServer();
+      
     };
     fetchUserInfo();
   }, [reloadUserInfo]);

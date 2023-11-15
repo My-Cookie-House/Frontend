@@ -7,11 +7,15 @@ import {
   BuildStateAtom,
   buildStateAtom,
   initalBuildState,
+  sortedCookieIdsSelector,
 } from '../../../atoms/buildAtom';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {useNavigate} from 'react-router-dom';
 import {loginStateAtom} from '../../../atoms/loginStateAtom';
 import {useMemo} from 'react';
+import Overlap from '../../../components/Overlap/Overlap';
+import Cookies from '../../../assets/House/Outside/Cookies';
+import Icings from '../../../assets/House/Outside/Icings';
 
 const MAX_LENGTH = 10;
 
@@ -28,6 +32,8 @@ export default function Name() {
   const {userId} = useRecoilValue(loginStateAtom);
   const [buildState, setBuildState] =
     useRecoilState<BuildStateAtom>(buildStateAtom);
+  const [num1, num2] = useRecoilValue(sortedCookieIdsSelector);
+
   const name = useInput<HTMLInputElement>();
 
   const navigate = useNavigate();
@@ -40,9 +46,6 @@ export default function Name() {
         name: name.value,
       }),
     onSuccess: () => {
-      /**
-       * TODO: 유저 아이디 가져와서 아이디에 맞는 path로 이동
-       */
       navigate(`/${userId}`);
     },
   });
@@ -74,18 +77,14 @@ export default function Name() {
         spellCheck={false}
         placeholder={'이름을 입력해주세요'}
       />
-      {/**
-       * TODO: 미리보기 이미지 추가
-       */}
-      <img
-        alt="쿠키하우스 외관 미리보기"
-        src=""
-        style={{
-          marginTop: '58.89px',
-          width: '236px',
-          height: '291px',
-          border: '1px solid black',
-        }}
+      <Overlap
+        width={260}
+        height={360}
+        margin="30px 0 0 0"
+        imgs={[
+          Cookies[`Cookie${num1}${num2}`],
+          Icings[`Icing${buildState.icingId}`],
+        ]}
       />
       <LongButton
         margin="38px 0 0 0"

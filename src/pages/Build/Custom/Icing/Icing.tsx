@@ -3,16 +3,21 @@ import * as SBuild from '../../style';
 import Icings from '../../../../assets/Icings';
 import DecorationButton from '../../../../components/Buttons/DecorationButton/DecorationButton';
 import LongButton from '../../../../components/Buttons/LongButton/LongButton';
-import {useRecoilState} from 'recoil';
-import {BuildStateAtom, buildStateAtom} from '../../../../atoms/buildAtom';
+import {useRecoilState, useRecoilValue} from 'recoil';
+import {
+  BuildStateAtom,
+  buildStateAtom,
+  sortedCookieIdsSelector,
+} from '../../../../atoms/buildAtom';
 import Cookies from '../../../../assets/House/Outside/Cookies';
+import Overlap from '../../../../components/Overlap/Overlap';
+import IcingLayers from '../../../../assets/House/Outside/Icings/index';
 
 export default function Icing() {
   const [buildState, setBuildState] =
     useRecoilState<BuildStateAtom>(buildStateAtom);
 
-  // 쿠키를 import 하기 위한 배열
-  const [num1, num2] = [...buildState.cookieIds].sort((a, b) => a - b);
+  const [num1, num2] = useRecoilValue(sortedCookieIdsSelector);
 
   const handleSelect = (id: number) => {
     // icingId는 인덱스+1
@@ -37,10 +42,17 @@ export default function Icing() {
       {/**
        * TODO: 미리보기 이미지 넣기!
        */}
-      <S.HouseImg
-        alt="쿠키하우스 외관 미리보기"
-        src={Cookies[`Cookie${num1}${num2}`]}
+
+      <Overlap
+        width={260}
+        height={360}
+        margin="30px 0 0 0"
+        imgs={[
+          Cookies[`Cookie${num1}${num2}`],
+          IcingLayers[`Icing${buildState.icingId}`],
+        ]}
       />
+
       <SBuild.Description>{'아이싱 1개를 선택해주세요!'}</SBuild.Description>
       <S.Box>
         {Icings.map((icing, idx) => (
