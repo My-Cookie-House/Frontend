@@ -6,8 +6,11 @@ import ModalOKButton from "../../components/ModalOKButton/ModalOKButton";
 import { S } from "./style"
 import useInput from '../../hooks/useInput';
 import axios, { AxiosError } from 'axios';
+import {useParams} from 'react-router-dom';
 
 function Mission({ isOpen, onClose }) {
+  const {userId} = useParams();
+
   // 미션이 도착했어요! 모달 상태관리
   const {
     isOpen: isMissionArriveModalOpen,
@@ -22,22 +25,26 @@ function Mission({ isOpen, onClose }) {
       closeModal: closeUploadImageMessageModal,
     } = useModal();
 
+    // 오늘의 가구 보여주는 모달 상태관리
+    const {
+      isOpen: isTodayFurnitureModalOpen,
+      openModal: openTodayFurnitureModal,
+      closeModal: closeTodayFurnitureModal,
+    } = useModal();
+
     const content = useInput<HTMLTextAreaElement>(); // 편지 내용을 관리하는 상태
     const [uploadedImage, setUploadedImage] = useState<string | ArrayBuffer>(''); // 업로드 된 이미지 url 관리하는 상태
     const [imageFile, setImageFile] = useState(null); // 업로드할 이미지 파일을 관리하는 상태
     const [missionDate, setMissionDate] = useState<string>("2020-12-20");
     const [missionMessage, setMissionMessage] = useState<string>("오늘 먹은 점심");
-    const [furnitureData, setFurnitureData] = useState([]);
 
-    // 컴포넌트가 마운트되면 서버로부터 데이터를 가져옵니다.
-    const fetchData = async () => {
+    const fetchTodayMissionData = async () => {
       try {
-          const response = await axios.get('서버의 엔드포인트 URL');
+          const response = await axios.get('~/missions/today-mission'); //TODO: 엔드포인트 변경
           if (response.status === 200 && response.data) {
             // 데이터를 상태에 저장합니다.
             setMissionDate(response.data.data.missionDate);
             setMissionMessage(response.data.data.missionMessage)
-            setFurnitureData(response.data.data.todayFurnitures);
           }
         } catch (error) {
           console.error('데이터를 가져오는데 실패했습니다.', error);
@@ -46,8 +53,8 @@ function Mission({ isOpen, onClose }) {
       }
 
       useEffect(() => {
-        fetchData();
-      }, []); // 의존성 배열 추가
+        fetchTodayMissionData();
+      }, []); 
 
   React.useEffect(() => {
     openMissionArriveModal(); // 컴포넌트 마운트 시 모달을 열기
@@ -80,10 +87,15 @@ function Mission({ isOpen, onClose }) {
   
 
   // 이미지와 메시지를 서버에 업로드하는 함수
-  const handleUploadImageMessage = async () => {
+  const handleUploadImageMessage = async (event) => {
+     // 이벤트 버블링 방지
+    event.preventDefault();
+    event.stopPropagation();
     if (!imageFile || !content.value.trim()) {
       alert('이미지와 메시지를 모두 입력해야 합니다.');
       //return; //TODO: 실제 환경에서 주석 해제하기
+      closeUploadImageMessageModal(); //TODO: 테스트용. 배포환경에서 지워야함
+      openTodayFurnitureModal(); //TODO: 테스트용. 배포환경에서 지워야함
     }
 
     // FormData 객체 생성
@@ -103,12 +115,13 @@ function Mission({ isOpen, onClose }) {
         setImageFile(null); // 이미지 파일 상태 초기화
         content.reset(); // 메시지 입력 상태 초기화
         closeUploadImageMessageModal();
+        openTodayFurnitureModal();
     } catch (error: unknown) {
       //에러 일 경우
-      if (error instanceof AxiosError) {
+      openTodayFurnitureModal(); //TODO: 테스트용. 배포환경에서 지워야함
         alert('업로드에 실패했어요.');
-      }
-      return null;
+      
+      //return null;
     }
   };
 
@@ -183,6 +196,25 @@ function Mission({ isOpen, onClose }) {
           <ModalOKButton buttonName="입력완료" onClick={handleUploadImageMessage} />
         </S.Form>
       </Modal>
+
+      {/* 오늘의 가구 보여주는 모달 */}
+      <Modal
+        modalTitle={'오늘의 가구'}
+        isOpen={isTodayFurnitureModalOpen}
+        onClose={closeTodayFurnitureModal}
+        imageType={'MediumModal'}
+      >
+        <ModalCloseButton onClick={closeTodayFurnitureModal} />
+        <S.ModalInnerWrapper>
+          <S.SwappingEnvelope />
+          <S.ModalText>{"여기에 가구 리스트에서 day별로 가져와야함."}</S.ModalText> {/*TODO:여기에 가구 리스트에서 day별로 가져와야함.*/}
+          <ModalOKButton
+            buttonName="보러가기"
+            onClick={handleMissionCheck}
+          />
+        </S.ModalInnerWrapper>
+      </Modal>
+
     </>
   )
 }
