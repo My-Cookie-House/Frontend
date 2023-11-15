@@ -134,3 +134,11 @@ input:focus:-ms-input-placeholder {
 input:focus::-ms-input-placeholder {
   color: transparent;
 }
+
+/*스크롤바 안보여주는 박스*/
+.box {
+  -ms-overflow-style: none;
+}
+.box::-webkit-scrollbar {
+  display: none;
+}
