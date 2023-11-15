@@ -35,3 +35,14 @@ export interface ModalWrapperProps {
 export interface ImagePreviewProps {
   src: string; // 여기서는 string 타입만 받도록 설정
 }
+
+export type LoginResponse = {
+  code: number;
+  message: string;
+  data: {
+    userId: number;
+    refreshToken: string;
+    accessToken: string;
+    isRegistered: boolean;
+  };
+};
