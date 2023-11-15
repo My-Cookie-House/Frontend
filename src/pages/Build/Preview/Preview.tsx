@@ -1,9 +1,10 @@
 import * as SBuild from '../style';
-import {useRecoilState} from 'recoil';
+import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
 import {
   BuildStateAtom,
   buildStateAtom,
   initalBuildState,
+  sortedCookieIdsSelector,
 } from '../../../atoms/buildAtom';
 import LongButton from '../../../components/Buttons/LongButton/LongButton';
 import Overlap from '../../../components/Overlap/Overlap';
@@ -11,11 +12,9 @@ import {useNavigate} from 'react-router-dom';
 import Cookies from '../../../assets/House/Outside/Cookies';
 
 export default function Preview() {
-  const [buildState, setBuildState] =
-    useRecoilState<BuildStateAtom>(buildStateAtom);
+  const setBuildState = useSetRecoilState<BuildStateAtom>(buildStateAtom);
 
-  // 쿠키를 import 하기 위해 cookieIds 배열 정렬
-  const [num1, num2] = [...buildState.cookieIds].sort((a, b) => a - b);
+  const [num1, num2] = useRecoilValue(sortedCookieIdsSelector);
 
   const navigate = useNavigate();
 

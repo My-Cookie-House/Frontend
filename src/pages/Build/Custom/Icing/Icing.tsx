@@ -3,8 +3,12 @@ import * as SBuild from '../../style';
 import Icings from '../../../../assets/Icings';
 import DecorationButton from '../../../../components/Buttons/DecorationButton/DecorationButton';
 import LongButton from '../../../../components/Buttons/LongButton/LongButton';
-import {useRecoilState} from 'recoil';
-import {BuildStateAtom, buildStateAtom} from '../../../../atoms/buildAtom';
+import {useRecoilState, useRecoilValue} from 'recoil';
+import {
+  BuildStateAtom,
+  buildStateAtom,
+  sortedCookieIdsSelector,
+} from '../../../../atoms/buildAtom';
 import Cookies from '../../../../assets/House/Outside/Cookies';
 import Overlap from '../../../../components/Overlap/Overlap';
 
@@ -12,8 +16,7 @@ export default function Icing() {
   const [buildState, setBuildState] =
     useRecoilState<BuildStateAtom>(buildStateAtom);
 
-  // 쿠키를 import 하기 위해 cookieIds 배열 정렬
-  const [num1, num2] = [...buildState.cookieIds].sort((a, b) => a - b);
+  const [num1, num2] = useRecoilValue(sortedCookieIdsSelector);
 
   const handleSelect = (id: number) => {
     // icingId는 인덱스+1
