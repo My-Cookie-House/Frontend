@@ -8,7 +8,7 @@ import useInput from '../../hooks/useInput';
 import axios, { AxiosError } from 'axios';
 import {useParams} from 'react-router-dom';
 import DecorationButton from '../../components/Buttons/DecorationButton/DecorationButton';
-
+import furniture from '../../components/ImportFurniture/ImportFurniture';
 function Mission({ isOpen, onClose }) {
   const {userId} = useParams();
 
@@ -211,13 +211,12 @@ function Mission({ isOpen, onClose }) {
         <ModalCloseButton onClick={closeTodayFurnitureModal} />
         <S.ModalInnerWrapper>
           <S.ModalText2>{"여기에 가구 리스트에서 day별로 가져와야함."}</S.ModalText2> {/*TODO:여기에 가구 리스트에서 day별로 가져와야함.*/}
-          <S.GuestBookEntryGrid>
-            <DecorationButton
-              size={90}
-              image={""}
-              >
-              </DecorationButton>
-          </S.GuestBookEntryGrid>
+            <S.GuestBookEntryGrid>
+            {furniture[missionId - 1].map((item, i) => (
+              <DecorationButton key={i} size={90} image={item.image} />
+            ))}
+            </S.GuestBookEntryGrid>
+          
           
           <ModalOKButton
             buttonName="보러가기"

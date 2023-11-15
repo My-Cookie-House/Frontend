@@ -1,19 +1,18 @@
 interface Furniture {
-    id: number;
+
     image: string;
   }
   
   const furniture: Furniture[][] = [];
   
-  for (let i = 1; i <= 25; i++) {
+  for (let i = 0; i <= 24; i++) {
     const row: Furniture[] = [];
-    for (let j = 1; j <= 4; j++) {
-      const imageName = `Furniture[${i}]-[${j}]`;
-      const imagePath = `../../assets/${imageName}.svg`;
-      row.push({ id: i * 4 + (j - 1), image: imagePath });
+    for (let j = 0; j <= 3; j++) {
+        const imageName = `Furniture${i+1}_${j+1}`;
+        const imagePath = `../../assets/Furniture/${imageName}.svg`;
+      row.push({ image: imagePath });
     }
     furniture.push(row);
   }
-  
   export default furniture;
   

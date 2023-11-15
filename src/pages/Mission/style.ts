@@ -116,7 +116,7 @@ const GuestBookEntryGrid = styled.div`
   overflow-y: auto; // 세로 스크롤을 활성화하여 내용이 넘칠 경우 스크롤이 생김
   display: grid;
   grid-template-columns: repeat(2, 1fr); // 2개의 열
-  gap: 34.71px; // 그리드 간격
+  gap: 12.5px; // 그리드 간격
   margin-bottom: 16px; // 하단 여백
   
 `;
