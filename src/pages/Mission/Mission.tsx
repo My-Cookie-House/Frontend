@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from "../../components/Modal/Modal";
 import useModal from "../../hooks/useModal";
 import ModalCloseButton from "../../components/ModalCloseButton/ModalCloseButton";
@@ -25,10 +25,40 @@ function Mission({ isOpen, onClose }) {
     const content = useInput<HTMLTextAreaElement>(); // 편지 내용을 관리하는 상태
     const [uploadedImage, setUploadedImage] = useState<string | ArrayBuffer>(''); // 업로드 된 이미지 url 관리하는 상태
     const [imageFile, setImageFile] = useState(null); // 업로드할 이미지 파일을 관리하는 상태
+    const [missionDate, setMissionDate] = useState<string>("2020-12-20");
+    const [missionMessage, setMissionMessage] = useState<string>("오늘 먹은 점심");
+    const [furnitureData, setFurnitureData] = useState([]);
+
+    // 컴포넌트가 마운트되면 서버로부터 데이터를 가져옵니다.
+    const fetchData = async () => {
+      try {
+          const response = await axios.get('서버의 엔드포인트 URL');
+          if (response.status === 200 && response.data) {
+            // 데이터를 상태에 저장합니다.
+            setMissionDate(response.data.data.missionDate);
+            setMissionMessage(response.data.data.missionMessage)
+            setFurnitureData(response.data.data.todayFurnitures);
+          }
+        } catch (error) {
+          console.error('데이터를 가져오는데 실패했습니다.', error);
+          // 적절한 에러 처리를 수행합니다.
+        }
+      }
+
+      useEffect(() => {
+        fetchData();
+      }, []); // 의존성 배열 추가
 
   React.useEffect(() => {
     openMissionArriveModal(); // 컴포넌트 마운트 시 모달을 열기
   }, [openMissionArriveModal]);
+
+  // 날짜 형식을 "MM월 dd일"로 포매팅하는 함수
+  const formatDate = (missionDate) => {
+    const [year, month, day] = missionDate.split('-');
+    const formatedDate = `${month}월 ${day}일`
+    return formatedDate
+  };
 
   // 이미지 업로드 핸들링
   const handleFileInputChange = (event) => {
@@ -114,12 +144,12 @@ function Mission({ isOpen, onClose }) {
 
       {/* 사진과 메시지를 올리는 모달 */}
       <Modal
-        modalTitle={'여기에 서버에서 받은 날짜'}
+        modalTitle={formatDate(missionDate)}
         isOpen={isUploadImageMessageModal}
         onClose={closeUploadImageMessageModal}
         imageType={'LargeModal'}
       >
-        <S.ModalText>여기에 서버에서 받은 미션</S.ModalText>
+        <S.ModalText>{missionMessage}</S.ModalText>
         <ModalCloseButton onClick={closeUploadImageMessageModal} />
         <S.Form>
           
