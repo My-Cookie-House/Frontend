@@ -5,6 +5,7 @@ import Button from '../../../components/Buttons/Button';
 import useIsMyHouse from '../../../hooks/useIsMyHouse';
 import {useCallback, useState} from 'react';
 import ShareModal from '../../../components/Modal/ShareModal/ShareModal';
+import Overlap from '../../../components/Overlap/Overlap';
 
 export default function Inside() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -13,18 +14,11 @@ export default function Inside() {
 
   const closeModal = useCallback(() => setModalOpen(false), [setModalOpen]);
 
+  const handleFurnitureClick = () => {};
+
   return (
     <>
-      <img
-        alt="쿠키하우스 내부"
-        src=""
-        style={{
-          width: '295px',
-          height: '364px',
-          border: '1px solid black',
-          marginTop: '43px',
-        }}
-      />
+      <Overlap width={300} height={400} margin="40px 0 0 0" imgs={[]} />
       {isMyHouse && (
         <Button
           width={50}
