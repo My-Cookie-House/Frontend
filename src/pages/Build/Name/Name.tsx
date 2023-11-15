@@ -15,6 +15,7 @@ import {loginStateAtom} from '../../../atoms/loginStateAtom';
 import {useMemo} from 'react';
 import Overlap from '../../../components/Overlap/Overlap';
 import Cookies from '../../../assets/House/Outside/Cookies';
+import Icings from '../../../assets/House/Outside/Icings';
 
 const MAX_LENGTH = 10;
 
@@ -76,14 +77,14 @@ export default function Name() {
         spellCheck={false}
         placeholder={'이름을 입력해주세요'}
       />
-      {/**
-       * TODO: 미리보기 이미지 추가
-       */}
       <Overlap
         width={260}
         height={360}
         margin="30px 0 0 0"
-        imgs={[Cookies[`Cookie${num1}${num2}`], Cookies['Cookie26']]}
+        imgs={[
+          Cookies[`Cookie${num1}${num2}`],
+          Icings[`Icing${buildState.icingId}`],
+        ]}
       />
       <LongButton
         margin="38px 0 0 0"
