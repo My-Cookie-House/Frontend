@@ -40,6 +40,7 @@ export default function Inside() {
 
   /**
    * TODO: 가구 레이어 받으면, 아래 함수를 연결해 준다
+   * 만약 본인 쿠키하우스가 아니면, 가구를 클릭 못하게???
    */
   const handleFurnitureClick = () => {
     setMissionModalOpen(true);
