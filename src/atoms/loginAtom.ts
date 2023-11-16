@@ -11,8 +11,6 @@ type Data = {
   accessToken: string | null;
   isRegistered: boolean | null;
   userName: string | null;
-  isHouseBuilt: boolean | null;
-  todayMissionComplete: boolean | null;
 };
 
 export const userInfoAtom = atom<UserInfo>({
@@ -21,8 +19,6 @@ export const userInfoAtom = atom<UserInfo>({
     userId: null,
     isRegistered: false,
     userName: null,
-    isHouseBuilt: false,
-    todayMissionComplete: false,
   },
 });
 
