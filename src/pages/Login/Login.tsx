@@ -4,23 +4,14 @@ import LoginText from '../../assets/LoginAssets/LoginText.svg';
 import GoogleLogin from '../../assets/LoginAssets/GoogleLogin.svg';
 import KakaoLogin from '../../assets/LoginAssets/KakaoLogin.png';
 import whiteTree from '../../assets/LoginAssets/whiteTree.svg';
-import UseLogin from '../../hooks/useLogin';
-import {useState} from 'react';
 
 const queryClient = new QueryClient();
 
 const Login = () => {
-  const [kakaoLoginClicked, setKakaoLoginClicked] = useState(false);
-  const [googleLoginClicked, setGoogleLoginClicked] = useState(false);
-
+  const KAKAO_REST_API_KEY = import.meta.env.VITE_APP_KAKAO_REST_API_KEY;
+  const KAKAO_REDIRECT_URI = import.meta.env.VITE_APP_KAKAO_REDIRECT_URI;
   const handleKakaoLogin = () => {
-    setKakaoLoginClicked(true);
-    setGoogleLoginClicked(false);
-  };
-
-  const handleGoogleLogin = () => {
-    setKakaoLoginClicked(false);
-    setGoogleLoginClicked(true);
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}`;
   };
 
   return (
@@ -34,10 +25,7 @@ const Login = () => {
           style={{width: '240.845px', height: '53.239px'}}
           onClick={handleKakaoLogin}
         />
-        <img src={GoogleLogin} alt="GoogleLogin" onClick={handleGoogleLogin} />
-
-        {kakaoLoginClicked && <UseLogin provider="kakao" />}
-        {googleLoginClicked && <UseLogin provider="google" />}
+        <img src={GoogleLogin} alt="GoogleLogin" />
       </PageLayout>
     </QueryClientProvider>
   );
