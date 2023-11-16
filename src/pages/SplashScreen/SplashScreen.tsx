@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import {useRecoilValue} from 'recoil';
-import {UserInfo, userInfoAtom} from '../../atoms/loginStateAtom';
+import {UserInfo, userInfoAtom} from '../../atoms/loginAtom';
 
 export default function SplashScreen(): JSX.Element {
   const navigate = useNavigate();
