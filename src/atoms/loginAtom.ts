@@ -15,6 +15,17 @@ export type Data = {
   userName: string | null;
 };
 
+export const DataAtom = atom<Data>({
+  key: 'Data',
+  default: {
+    userId: null,
+    refreshToken: '',
+    accessToken: '',
+    isRegistered: false,
+    userName: '',
+  },
+});
+
 export const userInfoAtom = atom<UserInfo>({
   key: 'userInfo',
   default: {
@@ -28,11 +39,6 @@ export const userInfoAtom = atom<UserInfo>({
 export const loginStateAtom = atom<boolean>({
   key: 'loginState',
   default: false,
-});
-
-export const loginMethodAtom = atom<string>({
-  key: 'loginMethod',
-  default: 'kakao',
 });
 
 // export const loginStateAtom = selector<LoginState>({
