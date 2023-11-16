@@ -122,6 +122,10 @@ function Mission({ isOpen, onClose }) {
     setFurnitureId(id);
   };
 
+  const handleSelectFurnitureBook = () => {
+    onClose();
+  };
+  
     // 모달 내용을 결정하는 함수
     const renderModalContent = () => {
       switch (modalStep) {
@@ -212,7 +216,10 @@ function Mission({ isOpen, onClose }) {
               <>
                 <S.DecorationButtonContainer>
                 {furniture[missionId - 1].map((item, i) => (
-                  <DecorationButton key={i} size={90} image={item.image}
+                  <DecorationButton 
+                  key={i} 
+                  size={90} 
+                  image={item.image}
                   dark={item.id === funitureId}
                   onClick={(
                     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -222,9 +229,7 @@ function Mission({ isOpen, onClose }) {
                 <S.ModalOkButtonWrapper>
                   <ModalOKButton
                     buttonName="다 골랐어요!"
-                    onClick={() => {
-                      onClose();
-                    }}
+                    onClick={handleSelectFurnitureBook}
                   />
                 </S.ModalOkButtonWrapper>
   
