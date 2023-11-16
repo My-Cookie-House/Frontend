@@ -1,25 +1,37 @@
 import {atom, selector} from 'recoil';
 import auth from '../apis/auth';
 
-export type LoginState = {
-  loggedIn: boolean;
-  userId: number | null;
-  userName: string | null;
-  isHouseBuilt: boolean | null;
-  todayMissionComplete: boolean | null;
+export type UserInfo = {
+  code: number | null;
+  message: string | null;
+  data: {
+    userId: number | null;
+    refreshToken: string | null;
+    accessToken: string | null;
+    isRegistered: boolean | null;
+    userName: string | null;
+    isHouseBuilt: boolean | null;
+    todayMissionComplete: boolean | null;
+  };
 };
 
-export const initialLoginState: LoginState = {
-  loggedIn: false,
-  userId: null,
-  userName: null,
-  isHouseBuilt: null,
-  todayMissionComplete: null,
+export const initialUserInfo: UserInfo = {
+  code: null,
+  message: null,
+  data: {
+    userId: null,
+    refreshToken: null,
+    accessToken: null,
+    isRegistered: false,
+    userName: null,
+    isHouseBuilt: false,
+    todayMissionComplete: false,
+  },
 };
 
-export const loginStateAtom = atom<LoginState>({
+export const loginStateAtom = atom<boolean>({
   key: 'loginState',
-  default: initialLoginState,
+  default: false,
 });
 
 // export const loginStateAtom = selector<LoginState>({
