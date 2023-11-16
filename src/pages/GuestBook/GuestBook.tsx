@@ -79,9 +79,10 @@ function GuestBook() {
   // 사용자의 방명록 정보를 가져오는 함수
 
   const getUserInfoFromServer = async () => {
+    const {userId} = useParams();
     try {
       // 서버로부터 데이터 요청
-      const response = await axios.get(`http://ec2-13-209-26-255.ap-northeast-2.compute.amazonaws.com:8080/guest-book/${userId}`);
+      const response = await axios.get(`http://ec2-3-35-218-95.ap-northeast-2.compute.amazonaws.com:8080/guest-book/${userId}`);
 
       // 응답 데이터에서 guestBook 추출
       const guestBook = response.data.data.guestBook;
@@ -125,7 +126,7 @@ function GuestBook() {
     try {
       // 백엔드로 편지 데이터를 보냅니다.
       // 엔드포인트 맞춰야 함
-      const response = await axios.post(`http://ec2-13-209-26-255.ap-northeast-2.compute.amazonaws.com:8080/guest-book/${userId}`, letterData, {
+      const response = await axios.post(`http://ec2-3-35-218-95.ap-northeast-2.compute.amazonaws.com:8080/guest-book`, letterData, {
         headers: {
           authorization: ``,
         },

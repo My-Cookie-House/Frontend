@@ -9,10 +9,17 @@ import axios, { AxiosError } from 'axios';
 import {useParams} from 'react-router-dom';
 import DecorationButton from '../../components/Buttons/DecorationButton/DecorationButton';
 import Furnitures from '../../assets/Furniture';
+import { useRecoilValue } from 'recoil';
+import { userInfoAtom } from '../../atoms/loginAtom';
 
 
 function Mission({ isOpen, onClose }) {
-  const {userId} = useParams();
+  //const {userId} = useParams();
+
+  const userInfo = useRecoilValue(userInfoAtom);
+  const { todayMissionComplete } = userInfo; //이걸로 이미지와 메시지 post를 했냐 안했냐 판단
+
+
   // 모달 상태관리
   const {
     isOpen: isMissionArriveModalOpen,
