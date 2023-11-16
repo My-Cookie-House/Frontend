@@ -137,13 +137,23 @@ function Mission({ isOpen, onClose }) {
             <>
               <S.ModalText2>{missionMessage}</S.ModalText2>
               {/* 이미지 업로드 및 메시지 입력 폼 */}
-              <S.ImageUploadLabel htmlFor="image-upload">
+              <S.ImageUploadLabel htmlFor="image-upload"
+              onClick={(event) => event.stopPropagation()}
+              >
                 <S.ImageInput
                   id="image-upload"
                   type="file"
                   accept="image/*"
                   onChange={handleFileInputChange}
                 />
+                {uploadedImage ? (
+                <S.ImagePreview
+                src={uploadedImage as string}
+                />
+                ) : (
+                  <>
+                  </>
+                )}
               </S.ImageUploadLabel>
               <S.MessageArea 
                 placeholder="메시지를 입력하세요."
