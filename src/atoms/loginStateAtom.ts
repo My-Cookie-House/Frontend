@@ -1,25 +1,39 @@
-import {atom, selector} from 'recoil';
-import auth from '../apis/auth';
+import {atom} from 'recoil';
 
-export type LoginState = {
-  loggedIn: boolean;
-  userId: number | null;
-  userName: string | null;
-  isHouseBuilt: boolean | null;
-  todayMissionComplete: boolean | null;
+export type UserInfo = {
+  code: number | null;
+  message: string | unknown;
+  data: {
+    userId: number | null;
+    refreshToken: string | null;
+    accessToken: string | null;
+    isRegistered: boolean | null;
+    userName: string | null;
+    isHouseBuilt: boolean | null;
+    todayMissionComplete: boolean | null;
+  };
 };
 
-export const initialLoginState: LoginState = {
-  loggedIn: false,
-  userId: null,
-  userName: null,
-  isHouseBuilt: null,
-  todayMissionComplete: null,
-};
+export const userStateAtom = atom<UserInfo>({
+  key: 'userState', // 고유한 ID (전역적으로 유일해야 함)
+  default: {
+    code: null,
+    message: null,
+    data: {
+      userId: null,
+      refreshToken: null,
+      accessToken: null,
+      isRegistered: false,
+      userName: null,
+      isHouseBuilt: false,
+      todayMissionComplete: false,
+    },
+  },
+});
 
-export const loginStateAtom = atom<LoginState>({
+export const loginStateAtom = atom<boolean>({
   key: 'loginState',
-  default: initialLoginState,
+  default: false,
 });
 
 // export const loginStateAtom = selector<LoginState>({

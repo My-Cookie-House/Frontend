@@ -42,8 +42,8 @@ export default function House() {
       fetchAllMissionData();
     }, []); 
 
-   // Mission 모달을 여는 함수
-   const handleOpenMissionModal = () => {
+  // Mission 모달을 여는 함수
+  const handleOpenMissionModal = () => {
     // TODO: 이 쓸데없는 함수 없이 어떻게 깔끔하게 정리할 수 있을까..
   };
 
