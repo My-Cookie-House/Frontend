@@ -4,12 +4,14 @@ import {useEffect, useLayoutEffect} from 'react';
 import {useRecoilValue} from 'recoil';
 import {loginStateAtom} from '../../atoms/loginStateAtom';
 import {BuildStateAtom, buildStateAtom} from '../../atoms/buildAtom';
+import {userInfoAtom} from '../../atoms/loginAtom';
 
 const ICING_PATH = '/build/custom/icing';
 const PREVIEW_PATH = '/build/preview';
 
 export default function BuildLayout() {
-  const {isHouseBuilt, userId, loggedIn} = useRecoilValue(loginStateAtom);
+  const {isHouseBuilt, userId} = useRecoilValue(userInfoAtom);
+  const loggedIn = useRecoilValue(loginStateAtom);
   const {cookieIds, icingId, name} =
     useRecoilValue<BuildStateAtom>(buildStateAtom);
 

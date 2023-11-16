@@ -10,7 +10,7 @@ export async function getLoginUserInfo() {
         data: {
           userId: 1,
           userName: '황태환',
-          isHouseBuilt: true,
+          isHouseBuilt: false,
           todayMissionComplete: false,
         },
       });
