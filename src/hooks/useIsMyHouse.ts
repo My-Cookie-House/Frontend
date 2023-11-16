@@ -5,7 +5,7 @@ import {userInfoAtom} from '../atoms/loginAtom';
 export default function useIsMyHouse() {
   const {id} = useParams(); // 현재 접속한 쿠키하우스 주인의 아이디
   const user = useRecoilValue(userInfoAtom);
-  const userId = user.data.userId; // 로그인한 사람의 아이디
+  const userId = user.userId; // 로그인한 사람의 아이디
   const isMyHouse = Number(id) === userId; // 지금 위치가 나의 집인지?
 
   return {id, userId, isMyHouse};

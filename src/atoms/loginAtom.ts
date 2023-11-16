@@ -1,10 +1,6 @@
 import {atom} from 'recoil';
 
-export type UserInfo = {
-  code: number | null;
-  message: string | unknown;
-  data: Omit<Data, 'refreshToken' | 'accessToken'>;
-};
+export type UserInfo = Omit<Data, 'code' | 'message'>;
 
 type Data = {
   userId: number | null;
@@ -19,15 +15,13 @@ type Data = {
 export const userInfoAtom = atom<UserInfo>({
   key: 'userInfo',
   default: {
-    code: null,
-    message: null,
-    data: {
-      userId: null,
-      isRegistered: false,
-      userName: null,
-      isHouseBuilt: false,
-      todayMissionComplete: false,
-    },
+    userId: null,
+    refreshToken: null,
+    accessToken: null,
+    isRegistered: false,
+    userName: null,
+    isHouseBuilt: false,
+    todayMissionComplete: false,
   },
 });
 

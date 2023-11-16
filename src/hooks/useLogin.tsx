@@ -1,5 +1,6 @@
 import {useQuery, useQueryClient} from 'react-query';
 import {useNavigate} from 'react-router-dom';
+import {useEffect} from 'react';
 import getUserInfo from '../apis/auth';
 import useSetTokens from './useSetTokens';
 import {useRecoilState, useRecoilValue} from 'recoil';
@@ -28,26 +29,47 @@ export default function useLogin() {
     queryFn: () => getUserInfo(provider, code, state),
   });
 
+  useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+
+    if (isError) {
+      const errorMessage = error instanceof Error ? error.message : 'Error!';
+      console.error('Error:', errorMessage);
+      return;
+    }
+
+    setLoggedIn(true);
+    setUserInfo(data);
+
+    if (data.isRegistered) {
+      navigate(`/house/${data.userId}`);
+    }
+    if (!data.isRegistered) {
+      navigate('/onboarding');
+    }
+
+    queryClient.setQueryData([code], data);
+  }, [
+    isLoading,
+    isError,
+    data,
+    error,
+    setLoggedIn,
+    setUserInfo,
+    data?.isRegistered,
+    data?.userId,
+    navigate,
+    queryClient,
+    code,
+    provider,
+    state,
+  ]);
+
   if (isLoading) {
     return <span>Loading...</span>;
   }
-
-  if (isError) {
-    const errorMessage = error instanceof Error ? error.message : 'Error!';
-    return <span>Error: {errorMessage}</span>;
-  }
-
-  setLoggedIn(true);
-  setUserInfo(data);
-
-  if (data.data.isRegistered) {
-    navigate(`/house/${data.data.userId}`);
-  }
-  if (!data.data.isRegistered) {
-    navigate('/onboarding');
-  }
-
-  queryClient.setQueryData([code], data);
 
   return <></>;
 }
