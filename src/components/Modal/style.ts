@@ -1,4 +1,4 @@
-import styled, {keyframes} from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import SmallModalImg from '../../assets/Modal/SmallModal.svg';
 import MediumModalImg from '../../assets/Modal/Modal.svg';
 import LargeModalImg from '../../assets/Modal/BigModal.svg';
@@ -22,9 +22,9 @@ const ModalWrapper = styled.div<ModalWrapperProps>`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
   display: ${(props) => (props.show ? 'block' : 'none')};
   z-index: 999;
+  background-color: rgba(0, 0, 0, 0.15);
 `;
 
 const getModalBackgroundImage = (
