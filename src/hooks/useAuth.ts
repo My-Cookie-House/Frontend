@@ -5,17 +5,12 @@ import {initialLoginState, loginStateAtom} from '../atoms/loginStateAtom';
 
 export default function useAuth() {
   const setLoginState = useSetRecoilState(loginStateAtom);
-  const {data, isError, isSuccess} = useSuspenseQuery({
+  const {data, isSuccess} = useSuspenseQuery({
     queryKey: ['loginState'],
     queryFn: auth.getLoginUserInfo,
     gcTime: Infinity,
   });
+  if (isSuccess) setLoginState(data);
 
-  if (isError) {
-    setLoginState(initialLoginState);
-  }
-  if (isSuccess) {
-    setLoginState({loggedIn: true, ...data});
-  }
-  return;
+  return data;
 }
