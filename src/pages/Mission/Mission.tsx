@@ -120,10 +120,14 @@ function Mission({ isOpen, onClose }) {
           // 모달 닫기, 상태 초기화 등의 추가 작업
           setImageFile(null); // 이미지 파일 상태 초기화
           content.reset(); // 메시지 입력 상태 초기화
-          onClose();
+          setImageType('LargeModal');
+          setModalStep(5);
+          //onClose();
       } catch (error: unknown) {
         //에러 일 경우
           alert('업로드에 실패했어요.');
+          setImageType('LargeModal'); //TODO: 배포 시에 없애야 함. 테스트용
+          setModalStep(5); //TODO: 배포 시에 없애야 함. 테스트용
         //return null;
       }
     };
@@ -256,10 +260,50 @@ function Mission({ isOpen, onClose }) {
                     onClick={() => {
                       handleUploadImageMessageFurnitureId();
                     }}
-                    
                   />
                 </S.ModalOkButtonWrapper>
-  
+              </>
+            );
+          case 5:
+            return (
+              <>
+                <S.ModalText2>{missionMessage}</S.ModalText2>
+                {/* 이미지 업로드 및 메시지 입력 폼 */}
+                <S.ImageUploadLabel htmlFor="image-upload"
+                onClick={(event) => event.stopPropagation()}
+                >
+                  <S.ImageInput
+                    id="image-upload"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileInputChange}
+                  />
+                  {uploadedImage ? (
+                  <S.ImagePreview
+                  src={uploadedImage as string}
+                  />
+                  ) : (
+                    <>
+                    </>
+                  )}
+                </S.ImageUploadLabel>
+                <S.MessageArea 
+                  placeholder="메시지를 입력하세요."
+                  maxLength={200}
+                  value={content.value}
+                  onChange={content.handleChange}
+                />
+                <S.ModalOkButtonWrapper>
+                  <ModalOKButton
+                    buttonName="입력완료"
+                    onClick={() => {
+                      
+                      setModalTitle("오늘의 가구");
+                      handleCheckExistImageMessage();
+                    }}
+                  />
+                </S.ModalOkButtonWrapper>
+
               </>
             );
         default:
