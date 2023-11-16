@@ -129,7 +129,7 @@ const DecorationButtonContainer = styled.div`
   justify-content: space-between; // 버튼 사이의 간격을 균등하게 배치합니다.
   align-items: center; // 수직 가운데 정렬합니다.
   gap: 7.78px; // 그리드 간격  
-
+  margin-bottom: -30px;
 `;
 
 export const S = {

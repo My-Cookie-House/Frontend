@@ -50,7 +50,8 @@ export default function House() {
   return (
     <PageLayout
       guestBook={`/${id}/guests`}
-      mission={userId === +id ? handleOpenMissionModal : undefined} // 조건부로 함수 전달
+      //mission={userId === +id ? handleOpenMissionModal : undefined} // 조건부로 함수 전달 //TODO: 배포 때 이거 써야함
+      mission={handleOpenMissionModal} // 조건부로 함수 전달
       goBack={pathname === `/${id}/inside` && `/${id}`} // 하우스 내부에서만 뒤로가기 버튼 존재
     >
       <S.HouseName>{data?.houseName}</S.HouseName>
