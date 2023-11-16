@@ -1,5 +1,4 @@
 import {atom, selector} from 'recoil';
-import auth from '../apis/auth';
 
 export type UserInfo = {
   code: number | null;
