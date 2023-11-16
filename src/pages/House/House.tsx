@@ -6,7 +6,6 @@ import house from '../../apis/house';
 import {IHouseOutside} from '../../interfaces/house';
 import {Suspense, useEffect, useState} from 'react';
 import useIsMyHouse from '../../hooks/useIsMyHouse';
-import axios from 'axios';
 
 const STALE_MIN = 5;
 
@@ -20,24 +19,6 @@ export default function House() {
     staleTime: 1000 * 60 * STALE_MIN,
     gcTime: 1000 * 60 * STALE_MIN,
   });
-  const [furnitureData, setFurnitureData] = useState([]);
-  //missionCompleteContent, missionCompleteFurniture 여기서 꺼내쓰기
-  const [completeMissionDatesAndContents, setCompleteMissionDatesAndContents] =
-    useState<string[]>([]);
-
-  // const fetchAllMissionData = async () => {
-  //   try {
-  //     const response = await axios.get(`~/mission-complete/${userId}`); //TODO: 엔드포인트 변경
-  //     setCompleteMissionDatesAndContents(response.data.data.completedMissions);
-  //     setFurnitureData(response.data.data.completedMissions.furnitureId);
-  //   } catch (error) {
-  //     console.error('데이터를 가져오는데 실패했습니다.', error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchAllMissionData();
-  // }, []);
 
   // Mission 모달을 여는 함수
   const handleOpenMissionModal = () => {
@@ -48,7 +29,8 @@ export default function House() {
   return (
     <PageLayout
       guestBook={`/${id}/guests`}
-      mission={isMyHouse ? handleOpenMissionModal : undefined} // 조건부로 함수 전달
+      //mission={userId === +id ? handleOpenMissionModal : undefined} // 조건부로 함수 전달 //TODO: 배포 때 이거 써야함
+      mission={handleOpenMissionModal} // 조건부로 함수 전달
       goBack={pathname === `/${id}/inside` && `/${id}`} // 하우스 내부에서만 뒤로가기 버튼 존재
     >
       <S.HouseName>{data?.houseName}</S.HouseName>
