@@ -18,7 +18,6 @@ function Mission({ isOpen, onClose }) {
 
   const userInfo = useRecoilValue(userInfoAtom);
   const { todayMissionComplete } = userInfo; //이걸로 이미지와 메시지 post를 했냐 안했냐 판단
-  const [state, setState] = useState(null); //유저가 미션을 어디까지 수행했냐.
 
 
   // 모달 상태관리
@@ -38,7 +37,7 @@ function Mission({ isOpen, onClose }) {
     const [modalStep, setModalStep] = useState(1);
     const [imageType, setImageType] = useState<'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal'>('MediumModal');
     const [modalTitle, setModalTitle] = useState<string>("미션함")
-    const [funitureId, setFurnitureId] = useState<number>(1);
+    const [furnitureId, setFurnitureId] = useState(1);
 
     const fetchTodayMissionData = async () => {
       try {
@@ -62,7 +61,9 @@ function Mission({ isOpen, onClose }) {
     useEffect(() => {
       fetchTodayMissionData();
     }, []); 
-    
+
+
+  
 
     // 날짜 형식을 "MM월 dd일"로 포매팅하는 함수
     const formatDate = (missionDate) => {
@@ -101,6 +102,7 @@ function Mission({ isOpen, onClose }) {
       const formData = new FormData();
       formData.append('image', imageFile); // input의 name과 서버에서 요구하는 키를 맞추어야 함
       formData.append('message', content.value);
+      formData.append('furnitureId', furnitureId.toString());
 
       try {
         const response = await axios.post('~/mission-complete', formData, { //TODO: 엔드포인트 넣어야함
@@ -113,7 +115,6 @@ function Mission({ isOpen, onClose }) {
           // 모달 닫기, 상태 초기화 등의 추가 작업
           setImageFile(null); // 이미지 파일 상태 초기화
           content.reset(); // 메시지 입력 상태 초기화
-          setState(response.data.data.state);
       } catch (error: unknown) {
         //에러 일 경우
           alert('업로드에 실패했어요.');
