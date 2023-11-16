@@ -6,7 +6,6 @@ import house from '../../apis/house';
 import {IHouseOutside} from '../../interfaces/house';
 import {Suspense, useEffect, useState} from 'react';
 import useIsMyHouse from '../../hooks/useIsMyHouse';
-import axios from 'axios';
 
 const STALE_MIN = 5;
 

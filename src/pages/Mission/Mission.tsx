@@ -5,8 +5,7 @@ import ModalCloseButton from "../../components/ModalCloseButton/ModalCloseButton
 import ModalOKButton from "../../components/ModalOKButton/ModalOKButton";
 import { S } from "./style"
 import useInput from '../../hooks/useInput';
-import axios, { AxiosError } from 'axios';
-import {useParams} from 'react-router-dom';
+import axios from 'axios';
 import DecorationButton from '../../components/Buttons/DecorationButton/DecorationButton';
 import Furnitures from '../../assets/Furniture';
 import { useRecoilValue } from 'recoil';
@@ -17,11 +16,9 @@ import mission from '../../apis/mission';
 
 
 function Mission({ isOpen, onClose }) {
-  //const {userId} = useParams();
 
-  //const userInfo = useRecoilValue(userInfoAtom);
-  //const { todayMissionComplete } = userInfo; //이걸로 이미지와 메시지 post를 했냐 안했냐 판단
-
+  const userInfo = useRecoilValue(userInfoAtom);
+  const { todayMissionComplete } = userInfo; //이걸로 이미지와 메시지 post를 했냐 안했냐 판단
 
   // 모달 상태관리
   const {
@@ -29,7 +26,6 @@ function Mission({ isOpen, onClose }) {
     openModal: openMissionArriveModal,
     closeModal: closeMissionArriveModal,
   } = useModal();
-
 
     const content = useInput<HTMLTextAreaElement>(); // 편지 내용을 관리하는 상태
     const [uploadedImage, setUploadedImage] = useState<string | ArrayBuffer>(''); // 업로드 된 이미지 url 관리하는 상태
@@ -154,6 +150,24 @@ function Mission({ isOpen, onClose }) {
   
     // 모달 내용을 결정하는 함수
     const renderModalContent = () => {
+      // todayMissionComplete가 true일 때 case 5만 보여줌
+      if (todayMissionComplete) {
+        return (
+          <>
+            <S.ModalText2>{missionMessage}</S.ModalText2>
+            {/* 이미지 업로드 및 메시지 입력 폼 */}
+            <S.ImageWrapper>
+            <S.ImagePreview
+            src={data?.missionCompleteImage}
+            />
+            </S.ImageWrapper>
+            <S.TodayMessageLine/>
+            <S.ShowMessage>
+              {data?.missionCompleteContent}
+            </S.ShowMessage>
+          </>
+        );
+      }
       switch (modalStep) {
         case 1:
           return (
