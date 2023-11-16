@@ -30,6 +30,8 @@ function Mission({ isOpen, onClose }) {
     const [modalStep, setModalStep] = useState(1);
     const [imageType, setImageType] = useState<'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal'>('MediumModal');
     const [modalTitle, setModalTitle] = useState<string>("미션함")
+    const [funitureId, setFurnitureId] = useState<number>(1);
+
     const fetchTodayMissionData = async () => {
       try {
           const response = await axios.get('~/missions/today-mission'); //TODO: 엔드포인트 변경
@@ -110,6 +112,15 @@ function Mission({ isOpen, onClose }) {
         //return null;
       }
     };
+
+      // 버튼 클릭 이벤트 핸들러
+  const handleFurnitureClick = (
+    id: number,
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    event.preventDefault(); // 기본 동작 방지
+    setFurnitureId(id);
+  };
 
     // 모달 내용을 결정하는 함수
     const renderModalContent = () => {
@@ -201,7 +212,11 @@ function Mission({ isOpen, onClose }) {
               <>
                 <S.DecorationButtonContainer>
                 {furniture[missionId - 1].map((item, i) => (
-                  <DecorationButton key={i} size={90} image={item.image} />
+                  <DecorationButton key={i} size={90} image={item.image}
+                  dark={item.id === funitureId}
+                  onClick={(
+                    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                  ) => handleFurnitureClick(item.id, event)}/>
                 ))}
                 </S.DecorationButtonContainer>
                 <S.ModalOkButtonWrapper>
