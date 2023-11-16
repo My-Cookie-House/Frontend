@@ -4,24 +4,24 @@ import LoginText from '../../assets/LoginAssets/LoginText.svg';
 import GoogleLogin from '../../assets/LoginAssets/GoogleLogin.svg';
 import KakaoLogin from '../../assets/LoginAssets/KakaoLogin.png';
 import whiteTree from '../../assets/LoginAssets/whiteTree.svg';
-import useLogin from '../../hooks/useLogin';
-import {useRecoilState} from 'recoil';
-import {loginMethodAtom} from '../../atoms/loginAtom';
+import UseLogin from '../../hooks/useLogin';
+import {useState} from 'react';
 
 const queryClient = new QueryClient();
 
-export default function Login() {
-  const [loginMethod, setLoginMethod] = useRecoilState(loginMethodAtom);
+const Login = () => {
+  const [kakaoLoginClicked, setKakaoLoginClicked] = useState(false);
+  const [googleLoginClicked, setGoogleLoginClicked] = useState(false);
 
-  function handleKakaoLogin() {
-    setLoginMethod('kakao');
-    useLogin();
-  }
+  const handleKakaoLogin = () => {
+    setKakaoLoginClicked(true);
+    setGoogleLoginClicked(false);
+  };
 
-  function handleGoogleLogin() {
-    setLoginMethod('google');
-    useLogin();
-  }
+  const handleGoogleLogin = () => {
+    setKakaoLoginClicked(false);
+    setGoogleLoginClicked(true);
+  };
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -35,7 +35,12 @@ export default function Login() {
           onClick={handleKakaoLogin}
         />
         <img src={GoogleLogin} alt="GoogleLogin" onClick={handleGoogleLogin} />
+
+        {kakaoLoginClicked && <UseLogin provider="kakao" />}
+        {googleLoginClicked && <UseLogin provider="google" />}
       </PageLayout>
     </QueryClientProvider>
   );
-}
+};
+
+export default Login;

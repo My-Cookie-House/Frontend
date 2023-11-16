@@ -10,19 +10,18 @@ import {
   loginMethodAtom,
 } from '../atoms/loginAtom';
 
-export default function useLogin() {
+export default function useLogin(provider) {
   const [loggedIn, setLoggedIn] = useRecoilState(loginStateAtom);
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
-  const code = new URL(window.location.href).searchParams.get('code');
+  //const code = new URL(window.location.href).searchParams.get('code');
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-
+  const code = '1';
   if (!code) {
     throw new Error('Code is not found in the URL');
   }
 
   const state = '1';
-  const provider = useRecoilValue(loginMethodAtom);
 
   const {isLoading, isError, data, error} = useQuery({
     queryKey: [code],
