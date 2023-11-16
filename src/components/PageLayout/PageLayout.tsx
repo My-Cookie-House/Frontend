@@ -10,12 +10,12 @@ import Mission from '../../pages/Mission/Mission';
 type Props = {
   children: React.ReactNode;
   guestBook?: string; // 방문록 (경로)
-  mission?: () => void; // mission prop을 함수 타입으로 
+  mission?: () => void; // mission prop을 함수 타입으로
   goBack?: string; // 뒤로가기 (경로)
 };
 
 // 로고 안들어가는 경로들
-const NO_LOGO_PATHS = ['/build/custom/icing', '/build/preview'];
+const NO_LOGO_PATHS = ['/build/custom/icing', '/build/preview', '/'];
 
 export default function PageLayout({
   children,
@@ -37,6 +37,7 @@ export default function PageLayout({
     if (NO_LOGO_PATHS.includes(pathname)) setLogo(false);
     else setLogo(true);
   }, [pathname]);
+  
 
   return (
     <S.Layout>
@@ -56,8 +57,11 @@ export default function PageLayout({
             <S.Logo>로고...</S.Logo>
             <S.ButtonBox>
               {mission && (
-                <Button width={25} height={18} background={Envelope} 
-                onClick={handleMissionClick} // Mission 버튼 클릭 시 핸들러 호출
+                <Button
+                  width={25}
+                  height={18}
+                  background={Envelope}
+                  onClick={handleMissionClick} // Mission 버튼 클릭 시 핸들러 호출
                 />
               )}
               {guestBook && (

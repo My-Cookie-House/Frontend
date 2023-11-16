@@ -1,9 +1,8 @@
 import React, {useState, useRef} from 'react';
-import leftButton from '../../assets/OnboardingAssets/leftButton.svg';
-import rightButton from '../../assets/OnboardingAssets/rightButton.svg';
-import skipButton from '../../assets/OnboardingAssets/skipButton.svg';
-import NavigatableButton from '../BackButton/NavigatableButton';
 import LongButton from '../Buttons/LongButton/LongButton';
+import {S} from './style';
+import SkipButton from '../Buttons/SkipButton/SkipButton';
+import BuildStartButton from '../Buttons/BuildStartButton/BuildStartButton';
 
 interface SliderProps {
   images: string[];
@@ -43,12 +42,6 @@ const Slider: React.FC<SliderProps> = ({
     }
   };
 
-  const handleLeftClick = () => {
-    if (index > 0) {
-      setIndex(index - 1);
-    }
-  };
-
   const handleRightClick = () => {
     if (index < images.length - 1) {
       setIndex(index + 1);
@@ -61,49 +54,55 @@ const Slider: React.FC<SliderProps> = ({
       onTouchStart={(e) => handleStart(e.touches[0].clientX)}
       onTouchEnd={(e) => handleEnd(e.changedTouches[0].clientX)}
     >
-      {index !== 0 && <img src={leftButton} onClick={handleLeftClick} />}
-
-      <p>{topTexts[index]}</p>
+      <S.Title>{topTexts[index]}</S.Title>
       {index === 0 ? (
         <img
           src={images[index]}
           style={{
-            width: '354px',
-            height: '472px',
+            width: '280px',
+            height: '374px',
           }}
         />
       ) : (
         <img
           src={images[index]}
           style={{
-            width: '36px',
-            height: '38px',
+            width: '282px',
+            height: '302px',
           }}
         />
       )}
 
-      {bottomTexts[index]}
-      {extraTexts[index]}
-      {index !== 0 && (
-        <img
-          src={progresses[index]}
-          style={{
-            width: '56px',
-            height: '12px',
-          }}
-        />
-      )}
+      <S.BottomText>{bottomTexts[index]}</S.BottomText>
+      <S.ExtraText>{extraTexts[index]}</S.ExtraText>
 
       {index === 0 && (
-        <LongButton onClick={handleRightClick}>Start!</LongButton>
+        <S.Centering>
+          <LongButton onClick={handleRightClick}>Start!</LongButton>
+        </S.Centering>
+      )}
+      {index === images.length - 1 && (
+        <S.Centering>
+          <BuildStartButton />
+        </S.Centering>
       )}
 
-      {index !== 0 && (
-        <NavigatableButton route={'/build'}>
-          <img src={skipButton} />
-        </NavigatableButton>
+      {index !== 0 && index !== images.length - 1 && (
+        <>
+          <S.Centering>
+            <img
+              src={progresses[index]}
+              style={{
+                width: '56px',
+                height: '12px',
+              }}
+            />
+          </S.Centering>
+          <S.Centering>
+            <SkipButton />
+          </S.Centering>
+        </>
       )}
-      {index !== 0 && <img src={rightButton} onClick={handleRightClick} />}
     </div>
   );
 };

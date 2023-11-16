@@ -16,5 +16,8 @@ export default {
         });
       }, 1000);
       //   rej();
-    }).then((res: any) => res.data),
+    }).then((res: any) => ({
+      ...res.data,
+      cookieIds: res.data.cookieIds.sort((a, b) => a - b),
+    })),
 };

@@ -13,5 +13,5 @@ export default function useInput<
     setValue(e.currentTarget.value);
   };
 
-  return {value, handleChange, reset};
+  return {value, handleChange, reset, setValue};
 }

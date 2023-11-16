@@ -1,9 +1,13 @@
 import * as S from './style';
 import BuildTypeButton from '../../components/Buttons/BuildTypeButton/BuildTypeButton';
 import LongButton from '../../components/Buttons/LongButton/LongButton';
-import {useCallback} from 'react';
+import {useCallback, useEffect} from 'react';
 import {useRecoilState} from 'recoil';
-import {BuildStateAtom, buildStateAtom} from '../../atoms/buildAtom';
+import {
+  BuildStateAtom,
+  buildStateAtom,
+  initalBuildState,
+} from '../../atoms/buildAtom';
 
 export default function Build() {
   const [buildState, setBuildState] =
@@ -27,6 +31,11 @@ export default function Build() {
       ),
     [buildState.type],
   );
+
+  // 뒤로가기 했을 때, 이전에 선택했던 것들이 남지 않게 초기화 시켜준다
+  useEffect(() => {
+    setBuildState(initalBuildState);
+  }, []);
 
   return (
     <>

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {S} from './style';
 import TitleContainerBox from '../../components/TitleContainerBox/TitleContainerBox';
-import BackButton from '../../components/BackButton/BackButton';
+import BackButton from '../../components/Buttons/BackButton/BackButton';
 import Modal from '../../components/Modal/Modal';
 import axios, {AxiosError} from 'axios';
 import PageLayout from '../../components/PageLayout/PageLayout';
@@ -12,10 +12,10 @@ import DecorationButton from '../../components/Buttons/DecorationButton/Decorati
 import ornaments from '../../components/ImportOrnaments/ImportOrnaments';
 import {useParams} from 'react-router-dom';
 import useInput from '../../hooks/useInput';
+import useIsMyHouse from '../../hooks/useIsMyHouse';
 
 function GuestBook() {
-  const {userId} = useParams();
-
+  const {id, userId, isMyHouse} = useIsMyHouse();
   const author = useInput<HTMLInputElement>(); // 보내는 사람 이름을 관리하는 상태
   const content = useInput<HTMLTextAreaElement>(); // 편지 내용을 관리하는 상태
   const [ornamentId, setOrnamentId] = useState<number>(1);
@@ -56,7 +56,7 @@ function GuestBook() {
     useState<string>('김민성 왔다감');
 
   const [guestBook, setGuestBook] = useState([
-    //더미데이터. 나중에 지워야함 //////////////////////////////////////////////////
+    //TODO: 더미데이터. 나중에 지워야함
     {
       author: '홍길동',
       content: 'adsfkjalksj~',
@@ -72,94 +72,33 @@ function GuestBook() {
       content: 'adsfkjalksj~',
       ornamentId: '4',
     },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '5',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '6',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '7',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '2',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '3',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '4',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '5',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '6',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '7',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '2',
-    },
+    
   ]);
   const [houseName, setHouseName] = useState<string>('코알라하우스');
 
   // 사용자의 방명록 정보를 가져오는 함수
 
-  const getUserInfoFromServer = async (userId: string) => {
+  const getUserInfoFromServer = async () => {
+    const {userId} = useParams();
     try {
       // 서버로부터 데이터 요청
-      const response = await axios.get(`~/guest-book/${userId}`);
+      const response = await axios.get(`http://ec2-3-35-218-95.ap-northeast-2.compute.amazonaws.com:8080/guest-book/${userId}`);
 
       // 응답 데이터에서 guestBook 추출
-      const guestBook = response.data?.guestBook;
+      const guestBook = response.data.data.guestBook;
       if (guestBook) {
         setGuestBook(guestBook); // 상태 업데이트
       }
 
       // 응답 데이터에서 houseName 추출
-      const houseName = response.data?.houseName;
+      const houseName = response.data.data.houseName;
       if (houseName) {
         setHouseName(houseName); // 상태 업데이트
       }
       // guestBook 데이터 반환
       return guestBook;
     } catch (error) {
-      // 에러 처리
-      if (axios.isAxiosError(error)) {
-        const status = error.response?.status;
         alert('유저의 정보를 불러오지 못했어요.');
-        if (status === 404) {
-          // 리소스를 찾을 수 없음
-        } else if (status === 500) {
-          // 서버 내부 오류
-        } else {
-          // 기타 상태 코드 처리
-        }
-      } else {
-        console.error('An unexpected error occurred:', error);
-      }
       return null;
     }
   };
@@ -167,10 +106,8 @@ function GuestBook() {
   // 컴포넌트가 마운트될 때 사용자 정보를 가져옵니다.
   useEffect(() => {
     const fetchUserInfo = async () => {
-      if (userId) {
-        // const userInfo = await getUserInfoFromServer(userId);
-        //setGuestBookContent(userInfo?.guestBook);
-      }
+      getUserInfoFromServer();
+      
     };
     fetchUserInfo();
   }, [reloadUserInfo]);
@@ -187,9 +124,7 @@ function GuestBook() {
     };
 
     try {
-      // 백엔드로 편지 데이터를 보냅니다.
-      // 엔드포인트 맞춰야 함
-      const response = await axios.post(`~/guest-book/${userId}`, letterData, {
+      const response = await axios.post(`http://ec2-3-35-218-95.ap-northeast-2.compute.amazonaws.com:8080/guest-book`, letterData, { //TODO: 엔드포인트 맞춰야 함
         headers: {
           authorization: ``,
         },
@@ -237,7 +172,7 @@ function GuestBook() {
     } else {
       openOrnamentModal();
     }
-    openOrnamentModal(); //테스트용 나중에 지워야 함//////////////////////////////////
+    openOrnamentModal(); //TODO: 테스트용 나중에 지워야 함//////////////////////////////////
   };
 
   // 방명록 조회 함수, userId로 판별해 주인만 볼 수 있게 로직 추가해야 함.
@@ -254,7 +189,6 @@ function GuestBook() {
 
   return (
     <>
-      <BackButton route="/" />
       <S.ButtonWrapper>
         <TitleContainerBox title={houseName} />
         <S.WirteGuestBookButton onClick={openMediumModal} />
@@ -269,7 +203,8 @@ function GuestBook() {
                     ornaments[entry.ornamentId - 1].image
                   })`,
                 }}
-                onClick={() =>
+                onClick={() => 
+                  isMyHouse &&
                   handleShowGuestBookContent(
                     entry.ornamentId - 1,
                     entry.author,

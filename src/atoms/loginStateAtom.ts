@@ -1,35 +1,46 @@
-import {atom, selector} from 'recoil';
-import auth from '../apis/auth';
+import {atom} from 'recoil';
 
-export type LoginState = {
-  loggedIn: boolean;
+export type UserInfo = {
   userId: number | null;
   userName: string | null;
   isHouseBuilt: boolean | null;
   todayMissionComplete: boolean | null;
 };
 
-export const initialLoginState: LoginState = {
-  loggedIn: false,
-  userId: null,
-  userName: null,
-  isHouseBuilt: null,
-  todayMissionComplete: null,
+export type Data = {
+  userId: number | null;
+  refreshToken: string | null;
+  accessToken: string | null;
+  isRegistered: boolean | null;
+  userName: string | null;
 };
 
-export const loginStateAtom = atom<LoginState>({
-  key: 'loginState',
-  default: initialLoginState,
+export const DataAtom = atom<Data>({
+  key: 'Data',
+  default: {
+    userId: null,
+    refreshToken: '',
+    accessToken: '',
+    isRegistered: false,
+    userName: '',
+  },
 });
 
-// export const loginStateAtom = selector<LoginState>({
-//   key: 'loginState',
-//   get: async () => {
-//     try {
-//       const data = await auth.getLoginUserInfo();
-//       return {loggedIn: true, ...data};
-//     } catch (err) {
-//       return initialLoginState; // 로그인 안된 상태
-//     }
-//   },
-// });
+// 로그인 한 유저 정보
+export const initialUserInfoState = {
+  userId: null,
+  userName: null,
+  isHouseBuilt: false,
+  todayMissionComplete: false,
+};
+
+export const userInfoAtom = atom<UserInfo>({
+  key: 'userInfo',
+  default: initialUserInfoState,
+});
+
+// 로그인 여부
+export const loginStateAtom = atom<boolean>({
+  key: 'loginState',
+  default: false,
+});
