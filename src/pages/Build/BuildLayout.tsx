@@ -2,7 +2,7 @@ import {Outlet, useNavigate} from 'react-router-dom';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import {useEffect} from 'react';
 import {useRecoilValue} from 'recoil';
-import {loginStateAtom} from '../../atoms/loginStateAtom';
+import {loginStateAtom} from '../../atoms/loginAtom';
 
 export default function BuildLayout() {
   const {isHouseBuilt, userId} = useRecoilValue(loginStateAtom);

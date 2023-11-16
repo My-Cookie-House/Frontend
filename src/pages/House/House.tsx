@@ -1,7 +1,7 @@
 import * as S from './style';
 import {Outlet, useLocation, useParams} from 'react-router-dom';
 import PageLayout from '../../components/PageLayout/PageLayout';
-import {loginStateAtom} from '../../atoms/loginStateAtom';
+import {loginStateAtom} from '../../atoms/loginAtom';
 import {useRecoilValue} from 'recoil';
 import {useQuery} from '@tanstack/react-query';
 import house from '../../apis/house';
@@ -24,23 +24,22 @@ export default function House() {
   });
   const [furnitureData, setFurnitureData] = useState([]);
   //missionCompleteContent, missionCompleteFurniture 여기서 꺼내쓰기
-  const [completeMissionDatesAndContents, setCompleteMissionDatesAndContents] = useState<string[]>([]);
-  
-  
+  const [completeMissionDatesAndContents, setCompleteMissionDatesAndContents] =
+    useState<string[]>([]);
+
   const fetchAllMissionData = async () => {
     try {
-        const response = await axios.get(`~/mission-complete/${userId}`); //TODO: 엔드포인트 변경
-        setCompleteMissionDatesAndContents(response.data.data.completedMissions);
-        setFurnitureData(response.data.data.completedMissions.furnitureId);
-        
-      } catch (error) {
-        console.error('데이터를 가져오는데 실패했습니다.', error);
-      }
+      const response = await axios.get(`~/mission-complete/${userId}`); //TODO: 엔드포인트 변경
+      setCompleteMissionDatesAndContents(response.data.data.completedMissions);
+      setFurnitureData(response.data.data.completedMissions.furnitureId);
+    } catch (error) {
+      console.error('데이터를 가져오는데 실패했습니다.', error);
     }
+  };
 
-    useEffect(() => {
-      fetchAllMissionData();
-    }, []); 
+  useEffect(() => {
+    fetchAllMissionData();
+  }, []);
 
   // Mission 모달을 여는 함수
   const handleOpenMissionModal = () => {
