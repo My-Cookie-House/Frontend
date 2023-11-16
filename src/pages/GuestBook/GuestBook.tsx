@@ -12,10 +12,10 @@ import DecorationButton from '../../components/Buttons/DecorationButton/Decorati
 import ornaments from '../../components/ImportOrnaments/ImportOrnaments';
 import {useParams} from 'react-router-dom';
 import useInput from '../../hooks/useInput';
+import useIsMyHouse from '../../hooks/useIsMyHouse';
 
 function GuestBook() {
-  const {userId} = useParams();
-
+  const {id, userId, isMyHouse} = useIsMyHouse();
   const author = useInput<HTMLInputElement>(); // 보내는 사람 이름을 관리하는 상태
   const content = useInput<HTMLTextAreaElement>(); // 편지 내용을 관리하는 상태
   const [ornamentId, setOrnamentId] = useState<number>(1);
@@ -203,7 +203,8 @@ function GuestBook() {
                     ornaments[entry.ornamentId - 1].image
                   })`,
                 }}
-                onClick={() =>
+                onClick={() => 
+                  isMyHouse &&
                   handleShowGuestBookContent(
                     entry.ornamentId - 1,
                     entry.author,
