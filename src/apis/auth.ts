@@ -1,7 +1,5 @@
 // 아래는 모킹 함수
 
-import {initialLoginState} from '../atoms/loginStateAtom';
-
 // TODO: 실제 api로 함수 바꿔야 함
 export async function getLoginUserInfo() {
   try {
@@ -18,9 +16,9 @@ export async function getLoginUserInfo() {
       });
       // rej(new Error());
     });
-    return {loggedIn: true, ...response.data};
+    return response.data;
   } catch (err) {
-    return initialLoginState;
+    return new Error();
   }
 }
 
