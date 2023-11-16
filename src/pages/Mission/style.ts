@@ -22,6 +22,17 @@ const ModalText = styled.div`
     margin-bottom: 29px;
 `;
 
+const ModalOkButtonWrapper = styled.div`
+margin-top: 45px;
+
+`;
+
+
+
+const ModalText2 = styled(ModalText)`
+  margin-top: -8px; // 여기에서 원하는 margin-top 값으로 변경
+`;
+
 const swapAnimation = keyframes`
     0%, 50% { background-image: url(${ClosedEnvelopeImg}); }
     50.01%, 100% { background-image: url(${OpenedEnvelopeImg}); }
@@ -33,6 +44,7 @@ const SwappingEnvelope = styled.div`
     background-image: url(${ClosedEnvelopeImg}); 
     background-size: 148px 145px;
     animation: ${swapAnimation} 1.5s infinite;
+    margin-bottom: -45px;
 `;
 
 const MessageArea = styled.textarea`
@@ -107,6 +119,14 @@ const ImagePreview = styled.div<ImagePreviewProps>`
   margin-left: 2.5px;
 `;
 
+const GuestBookEntryGrid = styled.div`
+  max-height: 550px; // 최대 높이
+  overflow-y: auto; // 세로 스크롤을 활성화하여 내용이 넘칠 경우 스크롤이 생김
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); // 2개의 열
+  gap: 12.5px; // 그리드 간격  
+`;
+
 
 export const S = {
     ModalInnerWrapper,
@@ -117,5 +137,8 @@ export const S = {
     CheckTextLength,
     ImageInput,
     ImageUploadLabel,
-    ImagePreview
+    ImagePreview,
+    GuestBookEntryGrid,
+    ModalText2,
+    ModalOkButtonWrapper
 }
