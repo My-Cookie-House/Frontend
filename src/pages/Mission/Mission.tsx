@@ -89,15 +89,20 @@ function Mission({ isOpen, onClose }) {
         setImageFile(file); // 나중에 업로드할 이미지 파일을 상태에 저장
       }
     };
-  
     // 이미지와 메시지를 서버에 업로드하는 함수
-    const handleUploadImageMessage = async () => {
+    const handleCheckExistImageMessage = async () => {
       if (!imageFile || !content.value.trim()) {
         alert('이미지와 메시지를 모두 입력해야 합니다.');
         //return; //TODO: 실제 환경에서 주석 해제하기
-
+        setModalStep(3); //TODO: 실제 환경에서 제거하기
+      } else {
+        setModalStep(3);
       }
+      
+    };
 
+    // 이미지와 메시지를 서버에 업로드하는 함수
+    const handleUploadImageMessageFurnitureId = async () => {
       // FormData 객체 생성
       const formData = new FormData();
       formData.append('image', imageFile); // input의 name과 서버에서 요구하는 키를 맞추어야 함
@@ -105,7 +110,7 @@ function Mission({ isOpen, onClose }) {
       formData.append('furnitureId', furnitureId.toString());
 
       try {
-        const response = await axios.post('~/mission-complete', formData, { //TODO: 엔드포인트 넣어야함
+       await axios.post('~/mission-complete', formData, { //TODO: 엔드포인트 넣어야함
           headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': '' //TODO: 엑세스 토큰 여기에 넣어야함
@@ -115,6 +120,7 @@ function Mission({ isOpen, onClose }) {
           // 모달 닫기, 상태 초기화 등의 추가 작업
           setImageFile(null); // 이미지 파일 상태 초기화
           content.reset(); // 메시지 입력 상태 초기화
+          onClose();
       } catch (error: unknown) {
         //에러 일 경우
           alert('업로드에 실패했어요.');
@@ -129,10 +135,6 @@ function Mission({ isOpen, onClose }) {
   ) => {
     event.preventDefault(); // 기본 동작 방지
     setFurnitureId(id); // 서버로 보낼 furnitureId
-  };
-
-  const handleSelectFurnitureBook = () => {
-    onClose();
   };
   
     // 모달 내용을 결정하는 함수
@@ -189,10 +191,9 @@ function Mission({ isOpen, onClose }) {
                 <ModalOKButton
                   buttonName="입력완료"
                   onClick={() => {
-                    setModalStep(3);
                     setImageType('MediumModal');
                     setModalTitle("오늘의 가구");
-                    handleUploadImageMessage();
+                    handleCheckExistImageMessage();
                   }}
                 />
               </S.ModalOkButtonWrapper>
@@ -249,7 +250,9 @@ function Mission({ isOpen, onClose }) {
                 <S.ModalOkButtonWrapper>
                   <ModalOKButton
                     buttonName="다 골랐어요!"
-                    onClick={handleSelectFurnitureBook}
+                    onClick={() => {
+                      handleUploadImageMessageFurnitureId();
+                    }}
                   />
                 </S.ModalOkButtonWrapper>
   
