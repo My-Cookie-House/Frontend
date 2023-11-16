@@ -61,9 +61,7 @@ function Mission({ isOpen, onClose }) {
     useEffect(() => {
       fetchTodayMissionData();
     }, []); 
-
-
-  
+    
 
     // 날짜 형식을 "MM월 dd일"로 포매팅하는 함수
     const formatDate = (missionDate) => {
@@ -121,12 +119,14 @@ function Mission({ isOpen, onClose }) {
           setImageFile(null); // 이미지 파일 상태 초기화
           content.reset(); // 메시지 입력 상태 초기화
           setImageType('LargeModal');
+          setModalTitle(formatDate(missionDate))
           setModalStep(5);
           //onClose();
       } catch (error: unknown) {
         //에러 일 경우
           alert('업로드에 실패했어요.');
           setImageType('LargeModal'); //TODO: 배포 시에 없애야 함. 테스트용
+          setModalTitle(formatDate(missionDate)) //TODO: 배포 시에 없애야 함. 테스트용
           setModalStep(5); //TODO: 배포 시에 없애야 함. 테스트용
         //return null;
       }
@@ -272,38 +272,20 @@ function Mission({ isOpen, onClose }) {
                 <S.ImageUploadLabel htmlFor="image-upload"
                 onClick={(event) => event.stopPropagation()}
                 >
-                  <S.ImageInput
-                    id="image-upload"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileInputChange}
-                  />
+                  
                   {uploadedImage ? (
                   <S.ImagePreview
-                  src={uploadedImage as string}
+                  src={uploadedImage as string} //서버로부터 받은 이미지 url 넣어야함
                   />
                   ) : (
                     <>
                     </>
                   )}
                 </S.ImageUploadLabel>
-                <S.MessageArea 
-                  placeholder="메시지를 입력하세요."
-                  maxLength={200}
-                  value={content.value}
-                  onChange={content.handleChange}
-                />
-                <S.ModalOkButtonWrapper>
-                  <ModalOKButton
-                    buttonName="입력완료"
-                    onClick={() => {
-                      
-                      setModalTitle("오늘의 가구");
-                      handleCheckExistImageMessage();
-                    }}
-                  />
-                </S.ModalOkButtonWrapper>
-
+                <S.TodayMessageLine/>
+                <S.ShowMessage>
+                  {/* 서버로부터 받은 메시지 넣어야 함 */}
+                </S.ShowMessage>
               </>
             );
         default:

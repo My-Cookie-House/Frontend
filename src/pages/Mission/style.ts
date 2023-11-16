@@ -3,6 +3,8 @@ import ClosedEnvelopeImg from "../../assets/Envelope/ClosedEnvelope.svg"
 import OpenedEnvelopeImg from "../../assets/Envelope/OpenedEnvelope.svg"
 import ImageUploadModalImg from "../../assets/Button/ImageUploadButton.svg"
 import {ImagePreviewProps} from "../../type/type"
+import TodayMessageLineImg from "../../assets/Icons/TodayMessageLine.svg"
+
 const ModalInnerWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -27,7 +29,7 @@ margin-top: 45px;
 `;
 
 const ModalText2 = styled(ModalText)`
-  margin-top: -8px; // 여기에서 원하는 margin-top 값으로 변경
+  margin-top: -8px; 
 `;
 
 const swapAnimation = keyframes`
@@ -132,6 +134,29 @@ const DecorationButtonContainer = styled.div`
   margin-bottom: -30px;
 `;
 
+const TodayMessageLine = styled.div`
+  background-image: url(${TodayMessageLineImg});
+  background-size: 237px 26.8px;
+  width: 237px;
+  height: 26.8px;
+  margin-bottom: 20px;
+`;
+
+const ShowMessage = styled.div`
+    position: relative;
+    width: 220px;
+    height: 140px;
+    border: none;
+    border-radius: 10px;
+    color: ${props => props.theme.colors.textBrown};
+    overflow: auto;
+    padding: 13px;
+    resize: none;
+    background-color: rgba(87, 46, 22, 0.15);
+    font-size: 16px;
+    margin-bottom: -22px;
+`;
+
 export const S = {
     ModalInnerWrapper,
     ModalText,
@@ -145,5 +170,7 @@ export const S = {
     GuestBookEntryGrid,
     ModalText2,
     ModalOkButtonWrapper,
-    DecorationButtonContainer
+    DecorationButtonContainer,
+    TodayMessageLine,
+    ShowMessage
 }
