@@ -12,6 +12,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.8.1",
     "@types/react-router-dom": "^5.3.3",
+    "@types/styled-components": "^5.1.30",
     "@vitejs/plugin-react-swc": "^3.4.1",
     "axios": "^1.6.2",
     "install": "^0.13.0",
