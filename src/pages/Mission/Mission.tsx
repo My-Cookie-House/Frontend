@@ -16,8 +16,8 @@ import { userInfoAtom } from '../../atoms/loginAtom';
 function Mission({ isOpen, onClose }) {
   //const {userId} = useParams();
 
-  const userInfo = useRecoilValue(userInfoAtom);
-  const { todayMissionComplete } = userInfo; //이걸로 이미지와 메시지 post를 했냐 안했냐 판단
+  //const userInfo = useRecoilValue(userInfoAtom);
+  //const { todayMissionComplete } = userInfo; //이걸로 이미지와 메시지 post를 했냐 안했냐 판단
 
 
   // 모달 상태관리
@@ -105,8 +105,8 @@ function Mission({ isOpen, onClose }) {
     const handleUploadImageMessageFurnitureId = async () => {
       // FormData 객체 생성
       const formData = new FormData();
-      formData.append('image', imageFile); // input의 name과 서버에서 요구하는 키를 맞추어야 함
-      formData.append('message', content.value);
+      formData.append('missionCompleteImage', imageFile); // input의 name과 서버에서 요구하는 키를 맞추어야 함
+      formData.append('missionCompleteContent', content.value);
       formData.append('furnitureId', furnitureId.toString());
 
       try {
