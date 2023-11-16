@@ -1,16 +1,18 @@
 import {useQuery, useQueryClient} from 'react-query';
-import useSetTokens from './useSetTokens';
-import {useRecoilState, useSetRecoilState} from 'recoil';
 import {useNavigate} from 'react-router-dom';
 import getUserInfo from '../apis/auth';
-import {loginStateAtom} from '../atoms/loginAtom';
-import {userInfoAtom} from '../atoms/loginAtom';
+import useSetTokens from './useSetTokens';
+import {useRecoilState, useRecoilValue} from 'recoil';
+import {
+  loginStateAtom,
+  userInfoAtom,
+  loginMethodAtom,
+} from '../atoms/loginAtom';
 
 export default function useLogin() {
   const [loggedIn, setLoggedIn] = useRecoilState(loginStateAtom);
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
-  const code = '1';
-  //const code = new URL(window.location.href).searchParams.get('code');
+  const code = new URL(window.location.href).searchParams.get('code');
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -19,7 +21,7 @@ export default function useLogin() {
   }
 
   const state = '1';
-  const provider = 'kakao';
+  const provider = useRecoilValue(loginMethodAtom);
 
   const {isLoading, isError, data, error} = useQuery({
     queryKey: [code],
@@ -35,7 +37,6 @@ export default function useLogin() {
     return <span>Error: {errorMessage}</span>;
   }
 
-  useSetTokens(data.data.accessToken, data.data.refreshToken);
   setLoggedIn(true);
   setUserInfo(data);
 

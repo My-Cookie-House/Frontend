@@ -3,26 +3,26 @@ import {atom} from 'recoil';
 export type UserInfo = {
   code: number | null;
   message: string | unknown;
-  data: {
-    userId: number | null;
-    refreshToken: string | null;
-    accessToken: string | null;
-    isRegistered: boolean | null;
-    userName: string | null;
-    isHouseBuilt: boolean | null;
-    todayMissionComplete: boolean | null;
-  };
+  data: Omit<Data, 'refreshToken' | 'accessToken'>;
+};
+
+type Data = {
+  userId: number | null;
+  refreshToken: string | null;
+  accessToken: string | null;
+  isRegistered: boolean | null;
+  userName: string | null;
+  isHouseBuilt: boolean | null;
+  todayMissionComplete: boolean | null;
 };
 
 export const userInfoAtom = atom<UserInfo>({
-  key: 'userId',
+  key: 'userInfo',
   default: {
     code: null,
     message: null,
     data: {
       userId: null,
-      refreshToken: null,
-      accessToken: null,
       isRegistered: false,
       userName: null,
       isHouseBuilt: false,
@@ -34,6 +34,11 @@ export const userInfoAtom = atom<UserInfo>({
 export const loginStateAtom = atom<boolean>({
   key: 'loginState',
   default: false,
+});
+
+export const loginMethodAtom = atom<string>({
+  key: 'loginMethod',
+  default: 'kakao',
 });
 
 // export const loginStateAtom = selector<LoginState>({
