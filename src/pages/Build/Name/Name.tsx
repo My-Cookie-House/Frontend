@@ -11,7 +11,7 @@ import {
 } from '../../../atoms/buildAtom';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {useNavigate} from 'react-router-dom';
-import {loginStateAtom} from '../../../atoms/loginAtom';
+import {userInfoAtom} from '../../../atoms/loginAtom';
 import {useMemo} from 'react';
 import Overlap from '../../../components/Overlap/Overlap';
 import Cookies from '../../../assets/House/Outside/Cookies';
@@ -29,7 +29,7 @@ const mutateHouse = (data: Omit<BuildStateAtom, 'type'>) =>
   });
 
 export default function Name() {
-  const {userId} = useRecoilValue(loginStateAtom);
+  const {userId} = useRecoilValue(userInfoAtom);
   const [buildState, setBuildState] =
     useRecoilState<BuildStateAtom>(buildStateAtom);
   const [num1, num2] = useRecoilValue(sortedCookieIdsSelector);
