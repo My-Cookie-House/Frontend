@@ -37,6 +37,7 @@ export default function PageLayout({
     if (NO_LOGO_PATHS.includes(pathname)) setLogo(false);
     else setLogo(true);
   }, [pathname]);
+  
 
   return (
     <S.Layout>

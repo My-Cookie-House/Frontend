@@ -8,10 +8,15 @@ export interface BackButtonNavigateProps {
 
 export interface ModalProps {
   isOpen: boolean;
-  onClose: () => void;
+  onClose: (event?: React.MouseEvent) => void;
   children: React.ReactNode;
   modalTitle: string;
-  imageType?: 'SmallModal' | 'MediumModal' | 'LargeModal';
+  imageType?: 'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal';
+}
+
+export interface SelectFurnitureModalProps {
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export interface ModalOKButtonProps {
@@ -24,7 +29,7 @@ export interface ModalButtonProps {
 
 // imageType을 위한 인터페이스 정의
 export interface ModalContentProps {
-  imageType?: 'SmallModal' | 'MediumModal' | 'LargeModal';
+  imageType?: 'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal';
 }
 
 // show 프로퍼티를 갖는 ModalWrapperProps 인터페이스를 정의

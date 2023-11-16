@@ -22,6 +22,13 @@ const ModalText = styled.div`
     margin-bottom: 29px;
 `;
 
+const ModalOkButtonWrapper = styled.div`
+margin-top: 45px;
+
+`;
+
+
+
 const ModalText2 = styled(ModalText)`
   margin-top: -8px; // 여기에서 원하는 margin-top 값으로 변경
 `;
@@ -37,6 +44,7 @@ const SwappingEnvelope = styled.div`
     background-image: url(${ClosedEnvelopeImg}); 
     background-size: 148px 145px;
     animation: ${swapAnimation} 1.5s infinite;
+    margin-bottom: -45px;
 `;
 
 const MessageArea = styled.textarea`
@@ -116,9 +124,7 @@ const GuestBookEntryGrid = styled.div`
   overflow-y: auto; // 세로 스크롤을 활성화하여 내용이 넘칠 경우 스크롤이 생김
   display: grid;
   grid-template-columns: repeat(2, 1fr); // 2개의 열
-  gap: 12.5px; // 그리드 간격
-  margin-bottom: 16px; // 하단 여백
-  
+  gap: 12.5px; // 그리드 간격  
 `;
 
 
@@ -133,5 +139,6 @@ export const S = {
     ImageUploadLabel,
     ImagePreview,
     GuestBookEntryGrid,
-    ModalText2
+    ModalText2,
+    ModalOkButtonWrapper
 }
