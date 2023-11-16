@@ -1,12 +1,18 @@
 import {atom, selector} from 'recoil';
 import auth from '../apis/auth';
 
-export type LoginState = {
-  loggedIn: boolean;
-  userId: number | null;
-  userName: string | null;
-  isHouseBuilt: boolean | null;
-  todayMissionComplete: boolean | null;
+export type UserInfo = {
+  code: number | null;
+  message: string | null;
+  data: {
+    userId: number | null;
+    refreshToken: string | null;
+    accessToken: string | null;
+    isRegistered: boolean | null;
+    userName: string | null;
+    isHouseBuilt: boolean | null;
+    todayMissionComplete: boolean | null;
+  };
 };
 
 export const initialLoginState: LoginState = {
