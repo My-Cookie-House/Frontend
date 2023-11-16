@@ -96,6 +96,17 @@ const ImageUploadLabel = styled.label`
   margin-bottom: 15px;
 `;
 
+const ImageWrapper = styled.div`
+  cursor: pointer;
+  width: 236.538px;
+  height: 236.538px;
+  background-image: url(${ImageUploadModalImg});
+  background-size: cover;
+  display: inline-block;
+  position: relative;
+  margin-bottom: 15px;
+`;
+
 const ImageInput = styled.input`
   opacity: 0; // 투명하게 설정
   position: absolute; // 절대적 위치 설정
@@ -172,5 +183,6 @@ export const S = {
     ModalOkButtonWrapper,
     DecorationButtonContainer,
     TodayMessageLine,
-    ShowMessage
+    ShowMessage,
+    ImageWrapper
 }

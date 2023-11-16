@@ -21,7 +21,7 @@ export default function House() {
     gcTime: 1000 * 60 * STALE_MIN,
   });
   const [furnitureData, setFurnitureData] = useState([]);
-  //missionCompleteContent, missionCompleteFurniture 여기서 꺼내쓰기
+  //missionCompleteId, missionCompleteImage, missionCompleteContent, missionCompleteDate, missionCompleteFurnitureId 여기서 꺼내쓰기
   const [completeMissionDatesAndContents, setCompleteMissionDatesAndContents] =
     useState<string[]>([]);
 
@@ -37,6 +37,7 @@ const fetchAllMissionData = async () => {
 useEffect(() => {
   fetchAllMissionData();
 }, []);
+
 
   // Mission 모달을 여는 함수
   const handleOpenMissionModal = () => {

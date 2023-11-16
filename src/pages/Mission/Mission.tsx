@@ -11,6 +11,9 @@ import DecorationButton from '../../components/Buttons/DecorationButton/Decorati
 import Furnitures from '../../assets/Furniture';
 import { useRecoilValue } from 'recoil';
 import { userInfoAtom } from '../../atoms/loginAtom';
+import {useQuery} from '@tanstack/react-query';
+import {ICompletedMission} from '../../interfaces/mission';
+import mission from '../../apis/mission';
 
 
 function Mission({ isOpen, onClose }) {
@@ -39,6 +42,12 @@ function Mission({ isOpen, onClose }) {
     const [modalTitle, setModalTitle] = useState<string>("미션함")
     const [furnitureId, setFurnitureId] = useState(1);
 
+    const {data} = useQuery<ICompletedMission>({
+      queryKey: ['mission', missionDate],
+      queryFn: () => mission.getCompletedMissionByDate(missionDate),
+      staleTime: 10000,
+    });
+
     const fetchTodayMissionData = async () => {
       try {
           const response = await axios.get('http://ec2-13-209-26-255.ap-northeast-2.compute.amazonaws.com:8080/missions/today-mission'); //TODO: 엔드포인트 변경
@@ -61,7 +70,9 @@ function Mission({ isOpen, onClose }) {
     useEffect(() => {
       fetchTodayMissionData();
     }, []); 
-    
+
+
+  
 
     // 날짜 형식을 "MM월 dd일"로 포매팅하는 함수
     const formatDate = (missionDate) => {
@@ -269,22 +280,14 @@ function Mission({ isOpen, onClose }) {
               <>
                 <S.ModalText2>{missionMessage}</S.ModalText2>
                 {/* 이미지 업로드 및 메시지 입력 폼 */}
-                <S.ImageUploadLabel htmlFor="image-upload"
-                onClick={(event) => event.stopPropagation()}
-                >
-                  
-                  {uploadedImage ? (
+                <S.ImageWrapper>
                   <S.ImagePreview
-                  src={uploadedImage as string} //서버로부터 받은 이미지 url 넣어야함
+                  src={data?.missionCompleteImage}
                   />
-                  ) : (
-                    <>
-                    </>
-                  )}
-                </S.ImageUploadLabel>
+                </S.ImageWrapper>
                 <S.TodayMessageLine/>
                 <S.ShowMessage>
-                  {/* 서버로부터 받은 메시지 넣어야 함 */}
+                  {data?.missionCompleteContent}
                 </S.ShowMessage>
               </>
             );
