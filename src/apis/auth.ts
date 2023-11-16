@@ -1,8 +1,8 @@
 // 아래는 모킹 함수
 // TODO: 실제 api로 함수 바꿔야 함
 export default {
-  getLoginUserInfo: () =>
-    new Promise((res, rej) => {
+  getLoginUserInfo: async () =>
+    await new Promise((res, rej) => {
       res({
         code: 200,
         message: '유저 조회에 성공했습니다.',

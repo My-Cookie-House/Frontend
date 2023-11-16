@@ -11,14 +11,12 @@ import {RecoilRoot} from 'recoil';
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <RecoilRoot>
-          <GlobalStyle />
-          <App />
-        </RecoilRoot>
-      </ThemeProvider>
-    </QueryClientProvider>
-  </React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <ThemeProvider theme={theme}>
+      <RecoilRoot>
+        <GlobalStyle />
+        <App />
+      </RecoilRoot>
+    </ThemeProvider>
+  </QueryClientProvider>,
 );
