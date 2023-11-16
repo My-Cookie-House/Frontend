@@ -5,7 +5,7 @@ export type UserInfo = Omit<
   'code' | 'message' | 'refreshToken' | 'accessToken'
 >;
 
-type Data = {
+export type Data = {
   userId: number | null;
   refreshToken: string | null;
   accessToken: string | null;

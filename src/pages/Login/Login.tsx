@@ -8,23 +8,23 @@ import whiteTree from '../../assets/LoginAssets/whiteTree.svg';
 const queryClient = new QueryClient();
 
 const Login = () => {
-  const KAKAO_REST_API_KEY = import.meta.env.VITE_APP_KAKAO_REST_API_KEY;
-  const KAKAO_REDIRECT_URI = import.meta.env.VITE_APP_KAKAO_REDIRECT_URI;
-  const handleKakaoLogin = () => {
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}`;
-  };
+  const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
+  const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
 
   return (
     <QueryClientProvider client={queryClient}>
       <PageLayout>
         <img src={LoginText} alt="Login" />
         <img src={whiteTree} alt="White Tree" />
-        <img
-          src={KakaoLogin}
-          alt="KakaoLogin"
-          style={{width: '240.845px', height: '53.239px'}}
-          onClick={handleKakaoLogin}
-        />
+        <p>{KAKAO_REDIRECT_URI}</p>
+        <a href={KAKAO_AUTH_URL}>
+          <img
+            src={KakaoLogin}
+            alt="KakaoLogin"
+            style={{width: '240.845px', height: '53.239px'}}
+          />
+        </a>
         <img src={GoogleLogin} alt="GoogleLogin" />
       </PageLayout>
     </QueryClientProvider>
