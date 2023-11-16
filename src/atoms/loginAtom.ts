@@ -1,9 +1,11 @@
 import {atom} from 'recoil';
 
-export type UserInfo = Omit<
-  Data,
-  'code' | 'message' | 'refreshToken' | 'accessToken'
->;
+export type UserInfo = {
+  userId: number | null;
+  userName: string | null;
+  isHouseBuilt: boolean | null;
+  todayMissionComplete: boolean | null;
+};
 
 export type Data = {
   userId: number | null;
@@ -13,23 +15,30 @@ export type Data = {
   userName: string | null;
 };
 
+export const DataAtom = atom<Data>({
+  key: 'Data',
+  default: {
+    userId: null,
+    refreshToken: '',
+    accessToken: '',
+    isRegistered: false,
+    userName: '',
+  },
+});
+
 export const userInfoAtom = atom<UserInfo>({
   key: 'userInfo',
   default: {
     userId: null,
-    isRegistered: false,
     userName: null,
+    isHouseBuilt: false,
+    todayMissionComplete: false,
   },
 });
 
 export const loginStateAtom = atom<boolean>({
   key: 'loginState',
   default: false,
-});
-
-export const loginMethodAtom = atom<string>({
-  key: 'loginMethod',
-  default: 'kakao',
 });
 
 // export const loginStateAtom = selector<LoginState>({
