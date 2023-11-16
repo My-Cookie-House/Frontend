@@ -33,6 +33,11 @@ export const loginStateAtom = atom<boolean>({
   default: false,
 });
 
+export const userIdAtom = atom<string>({
+  key: 'userId',
+  default: '',
+});
+
 // export const loginStateAtom = selector<LoginState>({
 //   key: 'loginState',
 //   get: async () => {
