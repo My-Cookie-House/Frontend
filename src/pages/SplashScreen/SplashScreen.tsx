@@ -9,8 +9,8 @@ export default function SplashScreen(): JSX.Element {
   const user = useRecoilValue<UserInfo>(userInfoAtom);
 
   // 로그인 상태 가져오기
-  const userId = user.data.userId;
-  const isHouseBuilt = user.data.isHouseBuilt;
+  const userId = user?.userId;
+  const isHouseBuilt = user?.isHouseBuilt;
 
   const loggedIn = useRecoilValue(userInfoAtom);
 
