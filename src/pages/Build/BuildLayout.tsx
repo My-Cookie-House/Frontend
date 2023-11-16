@@ -26,7 +26,7 @@ export default function BuildLayout() {
      * 유저 정보 확인해서, 빌드를 한 적 있으면 접속 못하게 막기!
      * (집을 다시 만드는 것을 방지)
      */
-    if (isHouseBuilt) {
+    if (isHouseBuilt || !loggedIn) {
       alert('이미 쿠키하우스 빌딩이 완료되었습니다!');
       navigate(`/${userId}`);
     }
