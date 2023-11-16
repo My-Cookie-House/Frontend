@@ -24,10 +24,7 @@ const ModalText = styled.div`
 
 const ModalOkButtonWrapper = styled.div`
 margin-top: 45px;
-
 `;
-
-
 
 const ModalText2 = styled(ModalText)`
   margin-top: -8px; // 여기에서 원하는 margin-top 값으로 변경
@@ -127,6 +124,13 @@ const GuestBookEntryGrid = styled.div`
   gap: 12.5px; // 그리드 간격  
 `;
 
+const DecorationButtonContainer = styled.div`
+  display: flex; // 가로로 나열하기 위해 Flexbox를 사용합니다.
+  justify-content: space-between; // 버튼 사이의 간격을 균등하게 배치합니다.
+  align-items: center; // 수직 가운데 정렬합니다.
+  gap: 7.78px; // 그리드 간격  
+
+`;
 
 export const S = {
     ModalInnerWrapper,
@@ -140,5 +144,6 @@ export const S = {
     ImagePreview,
     GuestBookEntryGrid,
     ModalText2,
-    ModalOkButtonWrapper
+    ModalOkButtonWrapper,
+    DecorationButtonContainer
 }

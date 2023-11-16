@@ -138,7 +138,6 @@ function Mission({ isOpen, onClose }) {
               <S.ModalText2>{missionMessage}</S.ModalText2>
               {/* 이미지 업로드 및 메시지 입력 폼 */}
               <S.ImageUploadLabel htmlFor="image-upload">
-                
                 <S.ImageInput
                   id="image-upload"
                   type="file"
@@ -187,6 +186,25 @@ function Mission({ isOpen, onClose }) {
 
             </>
           );
+          case 4:
+            return (
+              <>
+                <S.DecorationButtonContainer>
+                {furniture[missionId - 1].map((item, i) => (
+                  <DecorationButton key={i} size={90} image={item.image} />
+                ))}
+                </S.DecorationButtonContainer>
+                <S.ModalOkButtonWrapper>
+                  <ModalOKButton
+                    buttonName="다 골랐어요!"
+                    onClick={() => {
+                      onClose();
+                    }}
+                  />
+                </S.ModalOkButtonWrapper>
+  
+              </>
+            );
         default:
           return null;
       }

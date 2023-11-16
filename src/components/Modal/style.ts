@@ -76,6 +76,8 @@ const ModalContent = styled.div<ModalContentProps>`
     return `
       width: ${width};
       height: ${height};
+      bottom: ${imageType === 'FurnitureSelectModal' ? '0' : '50%'};
+      transform: ${imageType === 'FurnitureSelectModal' ? 'translate(-50%, 35%)' : 'translate(-50%, -50%)'};
     `;
   }}
   color: #572E16;
@@ -99,6 +101,8 @@ const ModalTitle = styled.div`
   white-space: pre;
   overflow: hidden;
 `;
+
+
 
 export const S = {
   fadeIn,
