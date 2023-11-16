@@ -1,4 +1,4 @@
-import {atom, selector} from 'recoil';
+import {atom} from 'recoil';
 
 export type UserInfo = {
   code: number | null;
@@ -14,28 +14,26 @@ export type UserInfo = {
   };
 };
 
-export const initialUserInfo: UserInfo = {
-  code: null,
-  message: null,
-  data: {
-    userId: null,
-    refreshToken: null,
-    accessToken: null,
-    isRegistered: false,
-    userName: null,
-    isHouseBuilt: false,
-    todayMissionComplete: false,
+export const userStateAtom = atom<UserInfo>({
+  key: 'userState', // 고유한 ID (전역적으로 유일해야 함)
+  default: {
+    code: null,
+    message: null,
+    data: {
+      userId: null,
+      refreshToken: null,
+      accessToken: null,
+      isRegistered: false,
+      userName: null,
+      isHouseBuilt: false,
+      todayMissionComplete: false,
+    },
   },
-};
+});
 
 export const loginStateAtom = atom<boolean>({
   key: 'loginState',
   default: false,
-});
-
-export const userIdAtom = atom<string>({
-  key: 'userId',
-  default: '',
 });
 
 // export const loginStateAtom = selector<LoginState>({
