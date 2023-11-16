@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import getUserInfo from '../apis/auth';
 import {loginStateAtom} from '../atoms/loginStateAtom';
 import {useRecoilValue} from 'recoil';
-import {userStateAtom} from '../atoms/loginStateAtom';
+import {userInfoAtom} from '../atoms/loginStateAtom';
 
 export default function useLogin() {
   const [loggedIn, setLoggedIn] = useRecoilState(loginStateAtom);
@@ -34,7 +34,6 @@ export default function useLogin() {
 
   useSetTokens(data.data.accessToken, data.data.refreshToken);
   setLoggedIn(true);
-  const user = useRecoilValue(userStateAtom);
 
   if (data.data.isRegistered) {
     navigate(`/house/${data.data.userId}`);

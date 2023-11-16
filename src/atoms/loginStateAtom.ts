@@ -14,8 +14,8 @@ export type UserInfo = {
   };
 };
 
-export const userStateAtom = atom<UserInfo>({
-  key: 'userState', // 고유한 ID (전역적으로 유일해야 함)
+export const userInfoAtom = atom<UserInfo>({
+  key: 'userId',
   default: {
     code: null,
     message: null,
