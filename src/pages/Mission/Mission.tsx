@@ -231,6 +231,7 @@ function Mission({ isOpen, onClose }) {
                   onClick={(
                       event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
                     ) => handleFurnitureClick((missionId-1)*3+1, event)}
+                  dark={furnitureId === (missionId-1)*3+1}
                   />
                   <DecorationButton 
                   size={90} 
@@ -238,6 +239,7 @@ function Mission({ isOpen, onClose }) {
                   onClick={(
                     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
                   ) => handleFurnitureClick((missionId-1)*3+2, event)}
+                  dark={furnitureId === (missionId-1)*3+2}
                   />
                   <DecorationButton 
                   size={90} 
@@ -245,6 +247,7 @@ function Mission({ isOpen, onClose }) {
                   onClick={(
                     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
                   ) => handleFurnitureClick((missionId-1)*3+3, event)}
+                  dark={furnitureId === (missionId-1)*3+3}
                   />
                 </S.DecorationButtonContainer>
                 <S.ModalOkButtonWrapper>
@@ -253,6 +256,7 @@ function Mission({ isOpen, onClose }) {
                     onClick={() => {
                       handleUploadImageMessageFurnitureId();
                     }}
+                    
                   />
                 </S.ModalOkButtonWrapper>
   
