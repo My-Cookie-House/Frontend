@@ -61,33 +61,26 @@ const Slider: React.FC<SliderProps> = ({
           style={{
             width: '280px',
             height: '374px',
-            marginBottom: '58.32px',
           }}
         />
       ) : (
         <img
           src={images[index]}
           style={{
-            width: '282.253px',
-            height: '301.443px',
-            marginBottom: '50.85px',
+            width: '282px',
+            height: '302px',
           }}
         />
       )}
-      <div
-        style={{
-          height: '149.05px',
-        }}
-      >
-        {index === 0 && (
-          <S.Centering>
-            <LongButton onClick={handleRightClick}>Start!</LongButton>
-          </S.Centering>
-        )}
-        <S.BottomText>{bottomTexts[index]}</S.BottomText>
-        <S.ExtraText>{extraTexts[index]}</S.ExtraText>
-      </div>
 
+      <S.BottomText>{bottomTexts[index]}</S.BottomText>
+      <S.ExtraText>{extraTexts[index]}</S.ExtraText>
+
+      {index === 0 && (
+        <S.Centering>
+          <LongButton onClick={handleRightClick}>Start!</LongButton>
+        </S.Centering>
+      )}
       {index === images.length - 1 && (
         <S.Centering>
           <BuildStartButton />
@@ -102,7 +95,6 @@ const Slider: React.FC<SliderProps> = ({
               style={{
                 width: '56px',
                 height: '12px',
-                marginBottom: '13.71px',
               }}
             />
           </S.Centering>

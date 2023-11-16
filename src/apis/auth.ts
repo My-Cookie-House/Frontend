@@ -1,9 +1,22 @@
-import axios from 'axios';
-import {UserInfo} from '../atoms/loginStateAtom';
-
-export default async function getUserInfo(code: string): Promise<UserInfo> {
-  const response = await axios.post<UserInfo>(
-    `/api/auth/kakao/signin/callback?code=${code}`,
-  );
-  return response.data;
-}
+// 아래는 모킹 함수
+// TODO: 실제 api로 함수 바꿔야 함
+export default {
+  getLoginUserInfo: () =>
+    new Promise((res, rej) => {
+      res({
+        code: 200,
+        message: '유저 조회에 성공했습니다.',
+        data: {
+          userId: 1,
+          userName: '황태환',
+          isHouseBuilt: false,
+          todayMissionComplete: false,
+        },
+      });
+      // rej();
+    })
+      .then((res: any) => res.data)
+      .catch((err) => {
+        throw new Error();
+      }),
+};

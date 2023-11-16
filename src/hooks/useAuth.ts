@@ -1,32 +1,21 @@
-import {useMutation} from '@tanstack/react-query';
-import useSetTokens from '../hooks/useSetTokens';
-import {useRecoilState} from 'recoil';
-import {useNavigate} from 'react-router-dom';
-import getUserInfo from '../apis/auth';
-import {loginStateAtom, UserInfo} from '../atoms/loginStateAtom';
+import {useQuery} from '@tanstack/react-query';
+import auth from '../apis/auth';
+import {useSetRecoilState} from 'recoil';
+import {initialLoginState, loginStateAtom} from '../atoms/loginStateAtom';
 
-export default function useLoginMutation() {
-  const [loggedin, setLoggedIn] = useRecoilState(loginStateAtom);
-  const code = '1';
-  const navigate = useNavigate();
-
-  if (!code) {
-    throw new Error('Code is not found in the URL');
-  }
-
-  return useMutation({
-    mutationFn: () => getUserInfo(code),
-    onSuccess: (response: UserInfo) => {
-      useSetTokens(response.data.accessToken, response.data.refreshToken);
-      setLoggedIn(true);
-      if (response.data.isRegistered) {
-        navigate(`/house/${response.data.userId}`);
-      }
-      if (!response.data.isRegistered) {
-        navigate('/onboarding');
-      }
-    },
-    onError: (error: any) => {},
-    onSettled: (data, error) => {},
+export default function useAuth() {
+  const setLoginState = useSetRecoilState(loginStateAtom);
+  const {data, isError, isSuccess} = useQuery({
+    queryKey: ['loginState'],
+    queryFn: auth.getLoginUserInfo,
+    gcTime: Infinity,
   });
+
+  if (isError) {
+    setLoginState(initialLoginState);
+  }
+  if (isSuccess) {
+    setLoginState({loggedIn: true, ...data});
+  }
+  return;
 }
