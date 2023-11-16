@@ -72,65 +72,17 @@ function GuestBook() {
       content: 'adsfkjalksj~',
       ornamentId: '4',
     },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '5',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '6',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '7',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '2',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '3',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '4',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '5',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '6',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '7',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '2',
-    },
+    
   ]);
   const [houseName, setHouseName] = useState<string>('코알라하우스');
 
   // 사용자의 방명록 정보를 가져오는 함수
 
   const getUserInfoFromServer = async () => {
+    const {userId} = useParams();
     try {
       // 서버로부터 데이터 요청
-      const response = await axios.get(`~/guest-book/${userId}`);
+      const response = await axios.get(`http://ec2-3-35-218-95.ap-northeast-2.compute.amazonaws.com:8080/guest-book/${userId}`);
 
       // 응답 데이터에서 guestBook 추출
       const guestBook = response.data.data.guestBook;
@@ -174,7 +126,7 @@ function GuestBook() {
     try {
       // 백엔드로 편지 데이터를 보냅니다.
       // 엔드포인트 맞춰야 함
-      const response = await axios.post(`~/guest-book/${userId}`, letterData, {
+      const response = await axios.post(`http://ec2-3-35-218-95.ap-northeast-2.compute.amazonaws.com:8080/guest-book`, letterData, {
         headers: {
           authorization: ``,
         },
@@ -222,7 +174,7 @@ function GuestBook() {
     } else {
       openOrnamentModal();
     }
-    openOrnamentModal(); //테스트용 나중에 지워야 함//////////////////////////////////
+    openOrnamentModal(); //TODO: 테스트용 나중에 지워야 함//////////////////////////////////
   };
 
   // 방명록 조회 함수, userId로 판별해 주인만 볼 수 있게 로직 추가해야 함.
@@ -239,7 +191,6 @@ function GuestBook() {
 
   return (
     <>
-      <BackButton route="/" />
       <S.ButtonWrapper>
         <TitleContainerBox title={houseName} />
         <S.WirteGuestBookButton onClick={openMediumModal} />
