@@ -2,7 +2,7 @@ import {atom, selector} from 'recoil';
 
 export type UserInfo = {
   code: number | null;
-  message: string | null;
+  message: string | unknown;
   data: {
     userId: number | null;
     refreshToken: string | null;
@@ -14,17 +14,23 @@ export type UserInfo = {
   };
 };
 
-export const initialLoginState: LoginState = {
-  loggedIn: false,
-  userId: null,
-  userName: null,
-  isHouseBuilt: null,
-  todayMissionComplete: null,
+export const initialUserInfo: UserInfo = {
+  code: null,
+  message: null,
+  data: {
+    userId: null,
+    refreshToken: null,
+    accessToken: null,
+    isRegistered: false,
+    userName: null,
+    isHouseBuilt: false,
+    todayMissionComplete: false,
+  },
 };
 
-export const loginStateAtom = atom<LoginState>({
+export const loginStateAtom = atom<boolean>({
   key: 'loginState',
-  default: initialLoginState,
+  default: false,
 });
 
 // export const loginStateAtom = selector<LoginState>({
