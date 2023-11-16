@@ -1,13 +1,14 @@
 import * as S from './style';
 import {Outlet, useLocation, useParams} from 'react-router-dom';
 import PageLayout from '../../components/PageLayout/PageLayout';
-import {loginStateAtom} from '../../atoms/loginStateAtom';
+import {loginStateAtom} from '../../atoms/loginAtom';
 import {useRecoilValue} from 'recoil';
 import {useQuery} from '@tanstack/react-query';
 import house from '../../apis/house';
 import {IHouseOutside} from '../../interfaces/house';
-import {Suspense} from 'react';
+import {Suspense, useEffect, useState} from 'react';
 import useIsMyHouse from '../../hooks/useIsMyHouse';
+import axios from 'axios';
 
 const STALE_MIN = 5;
 
@@ -21,9 +22,27 @@ export default function House() {
     staleTime: 1000 * 60 * STALE_MIN,
     gcTime: 1000 * 60 * STALE_MIN,
   });
+  const [furnitureData, setFurnitureData] = useState([]);
+  //missionCompleteContent, missionCompleteFurniture 여기서 꺼내쓰기
+  const [completeMissionDatesAndContents, setCompleteMissionDatesAndContents] =
+    useState<string[]>([]);
 
-   // Mission 모달을 여는 함수
-   const handleOpenMissionModal = () => {
+  const fetchAllMissionData = async () => {
+    try {
+      const response = await axios.get(`~/mission-complete/${userId}`); //TODO: 엔드포인트 변경
+      setCompleteMissionDatesAndContents(response.data.data.completedMissions);
+      setFurnitureData(response.data.data.completedMissions.furnitureId);
+    } catch (error) {
+      console.error('데이터를 가져오는데 실패했습니다.', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllMissionData();
+  }, []);
+
+  // Mission 모달을 여는 함수
+  const handleOpenMissionModal = () => {
     // TODO: 이 쓸데없는 함수 없이 어떻게 깔끔하게 정리할 수 있을까..
   };
 

@@ -11,7 +11,7 @@ import {
 } from '../../../atoms/buildAtom';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {useNavigate} from 'react-router-dom';
-import {loginStateAtom} from '../../../atoms/loginStateAtom';
+import {loginStateAtom} from '../../../atoms/loginAtom';
 import {useMemo} from 'react';
 import Overlap from '../../../components/Overlap/Overlap';
 import Cookies from '../../../assets/House/Outside/Cookies';
