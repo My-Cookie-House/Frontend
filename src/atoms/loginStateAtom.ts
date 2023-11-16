@@ -3,7 +3,7 @@ import auth from '../apis/auth';
 
 export type UserInfo = {
   code: number | null;
-  message: string | null;
+  message: string | unknown;
   data: {
     userId: number | null;
     refreshToken: string | null;
