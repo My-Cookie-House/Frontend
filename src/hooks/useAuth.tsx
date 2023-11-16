@@ -3,7 +3,7 @@ import useSetTokens from './useSetTokens';
 import {useRecoilState} from 'recoil';
 import {useNavigate} from 'react-router-dom';
 import getUserInfo from '../apis/auth';
-import {loginStateAtom, UserInfo} from '../atoms/loginStateAtom';
+import {loginStateAtom} from '../atoms/loginStateAtom';
 
 export default function useLogin() {
   const [loggedIn, setLoggedIn] = useRecoilState(loginStateAtom);
