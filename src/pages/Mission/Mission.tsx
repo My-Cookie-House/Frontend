@@ -135,8 +135,10 @@ function Mission({ isOpen, onClose }) {
         case 2:
           return (
             <>
+              <S.ModalText2>{missionMessage}</S.ModalText2>
               {/* 이미지 업로드 및 메시지 입력 폼 */}
               <S.ImageUploadLabel htmlFor="image-upload">
+                
                 <S.ImageInput
                   id="image-upload"
                   type="file"
