@@ -72,56 +72,7 @@ function GuestBook() {
       content: 'adsfkjalksj~',
       ornamentId: '4',
     },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '5',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '6',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '7',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '2',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '3',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '4',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '5',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '6',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '7',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '2',
-    },
+    
   ]);
   const [houseName, setHouseName] = useState<string>('코알라하우스');
 

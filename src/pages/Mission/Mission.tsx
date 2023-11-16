@@ -113,13 +113,13 @@ function Mission({ isOpen, onClose }) {
       }
     };
 
-      // 버튼 클릭 이벤트 핸들러
+      // 가구 고르기 버튼 클릭
   const handleFurnitureClick = (
     id: number,
     event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     event.preventDefault(); // 기본 동작 방지
-    setFurnitureId(id);
+    setFurnitureId(id); // 서버로 보낼 furnitureId
   };
 
   const handleSelectFurnitureBook = () => {
@@ -215,9 +215,27 @@ function Mission({ isOpen, onClose }) {
             return (
               <>
                 <S.DecorationButtonContainer>
-                  <DecorationButton size={90} image={ Furnitures[`Furniture${missionId}1`]}/>
-                  <DecorationButton size={90} image={Furnitures[`Furniture${missionId}2`]} />
-                  <DecorationButton size={90} image={Furnitures[`Furniture${missionId}3`]} />
+                  <DecorationButton 
+                  size={90} 
+                  image={ Furnitures[`Furniture${missionId}1`]}
+                  onClick={(
+                      event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                    ) => handleFurnitureClick((missionId-1)*3+1, event)}
+                  />
+                  <DecorationButton 
+                  size={90} 
+                  image={Furnitures[`Furniture${missionId}2`]} 
+                  onClick={(
+                    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                  ) => handleFurnitureClick((missionId-1)*3+2, event)}
+                  />
+                  <DecorationButton 
+                  size={90} 
+                  image={Furnitures[`Furniture${missionId}3`]} 
+                  onClick={(
+                    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                  ) => handleFurnitureClick((missionId-1)*3+3, event)}
+                  />
                 </S.DecorationButtonContainer>
                 <S.ModalOkButtonWrapper>
                   <ModalOKButton
