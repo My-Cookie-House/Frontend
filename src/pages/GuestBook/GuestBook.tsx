@@ -222,7 +222,7 @@ function GuestBook() {
     } else {
       openOrnamentModal();
     }
-    openOrnamentModal(); //테스트용 나중에 지워야 함//////////////////////////////////
+    openOrnamentModal(); //TODO: 테스트용 나중에 지워야 함//////////////////////////////////
   };
 
   // 방명록 조회 함수, userId로 판별해 주인만 볼 수 있게 로직 추가해야 함.

@@ -8,7 +8,7 @@ import useInput from '../../hooks/useInput';
 import axios, { AxiosError } from 'axios';
 import {useParams} from 'react-router-dom';
 import DecorationButton from '../../components/Buttons/DecorationButton/DecorationButton';
-import furniture from '../../components/ImportFurniture/ImportFurniture';
+import Furnitures from '../../assets/Furniture';
 
 
 function Mission({ isOpen, onClose }) {
@@ -26,7 +26,7 @@ function Mission({ isOpen, onClose }) {
     const [imageFile, setImageFile] = useState(null); // 업로드할 이미지 파일을 관리하는 상태
     const [missionDate, setMissionDate] = useState<string>("2020-12-20");
     const [missionMessage, setMissionMessage] = useState<string>("오늘 먹은 점심");
-    const [missionId, setMissionId] = useState(1);
+    const [missionId, setMissionId] = useState<number>(1);
     const [modalStep, setModalStep] = useState(1);
     const [imageType, setImageType] = useState<'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal'>('MediumModal');
     const [modalTitle, setModalTitle] = useState<string>("미션함")
@@ -194,9 +194,9 @@ function Mission({ isOpen, onClose }) {
           return (
             <>
               <S.GuestBookEntryGrid>
-              {furniture[missionId - 1].map((item, i) => (
-                <DecorationButton key={i} size={90} image={item.image} />
-              ))}
+                  <DecorationButton size={90} image={Furnitures[`Furniture${missionId}1`]}/>
+                  <DecorationButton size={90} image={Furnitures[`Furniture${missionId}2`]} />
+                  <DecorationButton size={90} image={Furnitures[`Furniture${missionId}3`]} />
               </S.GuestBookEntryGrid>
               <S.ModalOkButtonWrapper>
                 <ModalOKButton
@@ -215,16 +215,9 @@ function Mission({ isOpen, onClose }) {
             return (
               <>
                 <S.DecorationButtonContainer>
-                {furniture[missionId - 1].map((item, i) => (
-                  <DecorationButton 
-                  key={i} 
-                  size={90} 
-                  image={item.image}
-                  dark={item.id === funitureId}
-                  onClick={(
-                    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                  ) => handleFurnitureClick(item.id, event)}/>
-                ))}
+                  <DecorationButton size={90} image={ Furnitures[`Furniture${missionId}1`]}/>
+                  <DecorationButton size={90} image={Furnitures[`Furniture${missionId}2`]} />
+                  <DecorationButton size={90} image={Furnitures[`Furniture${missionId}3`]} />
                 </S.DecorationButtonContainer>
                 <S.ModalOkButtonWrapper>
                   <ModalOKButton
