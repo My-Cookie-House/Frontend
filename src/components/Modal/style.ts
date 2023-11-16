@@ -2,6 +2,7 @@ import styled, {keyframes} from 'styled-components';
 import SmallModalImg from '../../assets/Modal/SmallModal.svg';
 import MediumModalImg from '../../assets/Modal/Modal.svg';
 import LargeModalImg from '../../assets/Modal/BigModal.svg';
+import FurnitureSelectModalImg from '../../assets/Modal/SelectFurnitureModal.svg'
 import {ModalContentProps, ModalWrapperProps} from '../../type/type';
 
 const fadeIn = keyframes`
@@ -27,7 +28,7 @@ const ModalWrapper = styled.div<ModalWrapperProps>`
 `;
 
 const getModalBackgroundImage = (
-  imageType?: 'SmallModal' | 'MediumModal' | 'LargeModal',
+  imageType?: 'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal',
 ) => {
   switch (imageType) {
     case 'SmallModal':
@@ -36,13 +37,15 @@ const getModalBackgroundImage = (
       return MediumModalImg;
     case 'LargeModal':
       return LargeModalImg;
+    case 'FurnitureSelectModal':
+      return FurnitureSelectModalImg;
     default:
       return LargeModalImg;
   }
 };
 
 const getModalSize = (
-  imageType?: 'SmallModal' | 'MediumModal' | 'LargeModal',
+  imageType?: 'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal',
 ) => {
   switch (imageType) {
     case 'SmallModal':
@@ -51,6 +54,8 @@ const getModalSize = (
       return {width: '311px', height: '418px'};
     case 'LargeModal':
       return {width: '311px', height: '617px'};
+    case 'FurnitureSelectModal':
+      return {width: '624px', height: '350px'};
     default:
       return {width: '311px', height: '418px'}; // 기본값
   }
