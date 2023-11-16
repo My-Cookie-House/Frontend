@@ -2,15 +2,15 @@ import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import {useRecoilValue} from 'recoil';
-import {UserInfo, userInfoAtom} from '../../atoms/loginStateAtom';
+import {UserInfo, userInfoAtom} from '../../atoms/loginAtom';
 
 export default function SplashScreen(): JSX.Element {
   const navigate = useNavigate();
   const user = useRecoilValue<UserInfo>(userInfoAtom);
 
   // 로그인 상태 가져오기
-  const userId = user.data.userId;
-  const isHouseBuilt = user.data.isHouseBuilt;
+  const userId = user?.userId;
+  const isHouseBuilt = user?.isHouseBuilt;
 
   const loggedIn = useRecoilValue(userInfoAtom);
 

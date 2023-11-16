@@ -5,6 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React + TS</title>
+    <script
+      src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js"
+      integrity="sha384-kYPsUbBPlktXsY6/oNHSUDZoTX6+YI51f63jCPEIPFP09ttByAdxd2mEjKuhdqn4"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      Kakao.init('fcc995a0337c57e1d3d9ee85e02cf64b');
+      console.log(Kakao.isInitialized());
+    </script>
   </head>
   <body>
     <div id="root"></div>
