@@ -1,9 +1,13 @@
 import axios from 'axios';
-import {UserInfo} from '../atoms/loginStateAtom';
+import {UserInfo} from '../atoms/loginAtom';
 
-export default async function getUserInfo(code: string): Promise<UserInfo> {
+export default async function getUserInfo(
+  code: string,
+  provider: string,
+  state: string,
+): Promise<UserInfo> {
   const response = await axios.post<UserInfo>(
-    `/api/auth/kakao/signin/callback?code=${code}`,
+    `http://127.0.0.1:5173/auth/${provider}?code=${code}&state=${state}`,
   );
   return response.data;
 }

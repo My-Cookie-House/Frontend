@@ -1,6 +1,6 @@
 import {useParams} from 'react-router-dom';
 import {useRecoilValue} from 'recoil';
-import {userStateAtom} from '../atoms/loginStateAtom';
+import {userStateAtom} from '../atoms/loginAtom';
 
 export default function useIsMyHouse() {
   const {id} = useParams(); // 현재 접속한 쿠키하우스 주인의 아이디
