@@ -124,9 +124,7 @@ function GuestBook() {
     };
 
     try {
-      // 백엔드로 편지 데이터를 보냅니다.
-      // 엔드포인트 맞춰야 함
-      const response = await axios.post(`http://ec2-3-35-218-95.ap-northeast-2.compute.amazonaws.com:8080/guest-book`, letterData, {
+      const response = await axios.post(`http://ec2-3-35-218-95.ap-northeast-2.compute.amazonaws.com:8080/guest-book`, letterData, { //TODO: 엔드포인트 맞춰야 함
         headers: {
           authorization: ``,
         },
