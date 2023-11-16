@@ -1,7 +1,7 @@
 import {useQuery, useQueryClient} from 'react-query';
 import {useNavigate} from 'react-router-dom';
 import {useEffect} from 'react';
-import getUserInfo from '../apis/auth';
+import tryLogin from '../apis/auth';
 import useSetTokens from './useSetTokens';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {
@@ -10,23 +10,21 @@ import {
   loginMethodAtom,
 } from '../atoms/loginAtom';
 
-export default function useLogin() {
+export default function useLogin(provider) {
   const [loggedIn, setLoggedIn] = useRecoilState(loginStateAtom);
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const code = new URL(window.location.href).searchParams.get('code');
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-
   if (!code) {
     throw new Error('Code is not found in the URL');
   }
 
   const state = '1';
-  const provider = useRecoilValue(loginMethodAtom);
 
   const {isLoading, isError, data, error} = useQuery({
     queryKey: [code],
-    queryFn: () => getUserInfo(provider, code, state),
+    queryFn: () => tryLogin(provider, code, state),
   });
 
   useEffect(() => {
@@ -42,6 +40,7 @@ export default function useLogin() {
 
     setLoggedIn(true);
     setUserInfo(data);
+    useSetTokens(data.accessToken, data.refreshToken);
 
     if (data.isRegistered) {
       navigate(`/house/${data.userId}`);

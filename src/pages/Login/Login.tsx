@@ -1,36 +1,34 @@
+import {QueryClientProvider, QueryClient} from 'react-query';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import LoginText from '../../assets/LoginAssets/LoginText.svg';
 import GoogleLogin from '../../assets/LoginAssets/GoogleLogin.svg';
 import KakaoLogin from '../../assets/LoginAssets/KakaoLogin.png';
 import whiteTree from '../../assets/LoginAssets/whiteTree.svg';
-import useLogin from '../../hooks/useLogin';
-import {useRecoilState} from 'recoil';
-import {loginMethodAtom} from '../../atoms/loginAtom';
 
-export default function Login() {
-  const [loginMethod, setLoginMethod] = useRecoilState(loginMethodAtom);
+const queryClient = new QueryClient();
 
-  const handleKakaoLogin = () => {
-    setLoginMethod('kakao');
-    useLogin();
-  };
-
-  const handleGoogleLogin = () => {
-    setLoginMethod('google');
-    useLogin();
-  };
+const Login = () => {
+  const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
+  const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
 
   return (
-    <PageLayout>
-      <img src={LoginText} />
-      <img src={whiteTree} />
-      <img
-        src={KakaoLogin}
-        alt="KakaoLogin"
-        style={{width: '240.845px', height: '53.239px'}}
-        onClick={handleKakaoLogin}
-      />
-      <img src={GoogleLogin} onClick={handleGoogleLogin} />
-    </PageLayout>
+    <QueryClientProvider client={queryClient}>
+      <PageLayout>
+        <img src={LoginText} alt="Login" />
+        <img src={whiteTree} alt="White Tree" />
+        <p>{KAKAO_REDIRECT_URI}</p>
+        <a href={KAKAO_AUTH_URL}>
+          <img
+            src={KakaoLogin}
+            alt="KakaoLogin"
+            style={{width: '240.845px', height: '53.239px'}}
+          />
+        </a>
+        <img src={GoogleLogin} alt="GoogleLogin" />
+      </PageLayout>
+    </QueryClientProvider>
   );
-}
+};
+
+export default Login;
