@@ -34,7 +34,7 @@ function Mission({ isOpen, onClose }) {
 
     const fetchTodayMissionData = async () => {
       try {
-          const response = await axios.get('~/missions/today-mission'); //TODO: 엔드포인트 변경
+          const response = await axios.get('http://ec2-13-209-26-255.ap-northeast-2.compute.amazonaws.com:8080/missions/today-mission'); //TODO: 엔드포인트 변경
           if (response.status === 200 && response.data) {
             // 데이터를 상태에 저장합니다.
             setMissionDate(response.data.data.missionDate);
