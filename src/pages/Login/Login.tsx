@@ -17,8 +17,6 @@ const Login = () => {
       <PageLayout>
         <img src={LoginText} alt="Login" />
         <img src={whiteTree} alt="White Tree" />
-        <p>{KAKAO_REST_API_KEY}</p>
-        <p>{KAKAO_REDIRECT_URI}</p>
         <a href={KAKAO_AUTH_URL}>
           <img
             src={KakaoLogin}
