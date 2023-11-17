@@ -2,17 +2,18 @@ import * as S from './style';
 import BuildTypeButton from '../../components/Buttons/BuildTypeButton/BuildTypeButton';
 import LongButton from '../../components/Buttons/LongButton/LongButton';
 import {useCallback, useEffect} from 'react';
-import {useRecoilState} from 'recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
 import {
   BuildStateAtom,
   buildStateAtom,
   initalBuildState,
 } from '../../atoms/buildAtom';
+import {userInfoAtom} from '../../atoms/loginStateAtom';
 
 export default function Build() {
   const [buildState, setBuildState] =
     useRecoilState<BuildStateAtom>(buildStateAtom);
-
+  const user = useRecoilValue(userInfoAtom);
   const handleRandomSelect = useCallback(
     () =>
       setBuildState((prev) =>
