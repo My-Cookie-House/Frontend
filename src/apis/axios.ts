@@ -18,7 +18,7 @@ instance.interceptors.response.use(
       const refreshToken = Cookies.get('refreshToken');
 
       if (!refreshToken) {
-        throw new Error('Refresh token not found');
+        throw new Error('토큰 없음');
       }
 
       try {
