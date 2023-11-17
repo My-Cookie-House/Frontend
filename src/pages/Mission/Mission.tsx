@@ -55,6 +55,7 @@ function Mission({ isOpen, onClose }) {
     fetchData();
   }, []);
 
+
     const { data } = useQuery<ICompletedMission>({
       queryKey: ['mission', missionDate],
       queryFn: () => getCompletedMissionByDate(missionDate),

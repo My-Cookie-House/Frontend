@@ -49,11 +49,15 @@ function GuestBook() {
     const fetchUserInfo = async () => {
 
       const guestBookData = await getUserInfoFromServer(id);
-      if (guestBookData && Array.isArray(guestBookData.guestBook)) {
-        setGuestBook(guestBookData.guestBook);
+      if (guestBookData && Array.isArray(guestBookData.guestBookResponseDtos)) {
+        setGuestBook(guestBookData.guestBookResponseDtos);
+        console.log(guestBookData.guestBook)
       }
+      console.log(guestBookData.guestBookResponseDtos)
+
       setHouseName(guestBookData.houseName);
-      
+      console.log(guestBookData.houseName)
+
     };
     fetchUserInfo();
   }, [reloadUserInfo, id]);
@@ -64,8 +68,6 @@ function GuestBook() {
     try {
       await sendGuestBook(id, author.value, ornamentId, content.value);
       // 성공 후 처리
-      author.reset();
-      content.reset();
       setReloadUserInfo(prev => !prev);
       setModalStep(3);
       setImageType('MediumModal');
@@ -80,6 +82,8 @@ function GuestBook() {
   };
 
   const handleModalClose = () => {
+    author.reset();
+    content.reset();
     closeModal();
     setModalStep(1);
     setImageType('MediumModal');
@@ -130,7 +134,7 @@ function GuestBook() {
               <>
                 <S.Form onSubmit={handleSendGuestBook}>
                   <S.NameInput
-                    maxLength={10}
+                    maxLength={4}
                     type="text"
                     name="guestName" // 상태와 일치하는 name 속성
                     placeholder="이름을 남겨주세요."
@@ -139,7 +143,7 @@ function GuestBook() {
                   />
                   <S.LetterArea
                     placeholder="방명록을 남겨주세요."
-                    maxLength={200}
+                    maxLength={500}
                     value={content.value}
                     onChange={content.handleChange}
                   />
@@ -193,7 +197,7 @@ function GuestBook() {
               <S.ModalInnerWrapper>
               {ornaments[ornamentId] && (
                 <S.OrnamentImg
-                  style={{backgroundImage: `url(${ornaments[ornamentId].image})`}}
+                  style={{backgroundImage: `url(${ornaments[ornamentId-1].image})`}}
                 />
               )}
                 <S.AuthorName>{author.value}</S.AuthorName>
@@ -229,7 +233,7 @@ function GuestBook() {
                 onClick={() => 
                   isMyHouse &&
                   handleShowGuestBookContent(
-                    entry.ornamentId - 1,
+                    entry.ornamentId,
                     entry.author,
                     entry.content,
                   )
@@ -262,7 +266,7 @@ function GuestBook() {
         <S.ModalInnerWrapper>
           <S.OrnamentImg
             style={{
-              backgroundImage: `url(${ornaments[readingGuestBookId].image})`,
+              backgroundImage: `url(${ornaments[readingGuestBookId-1].image})`,
             }}
           />
           <S.AuthorName>{readingGuestBookAuthor}</S.AuthorName>

@@ -16,7 +16,7 @@ export default async function tryLogin(
   state: string,
 ): Promise<Data> {
   const response = await axios.post<Data>(
-    `http://15.165.156.94/auth/kakao?code=${code}&state=${state}`,
+    `https://15.165.156.94/auth/kakao?code=${code}&state=${state}`,
   );
   return response.data;
 }
