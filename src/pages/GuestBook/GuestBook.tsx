@@ -43,42 +43,26 @@ function GuestBook() {
   const [readingGuestBookContent, setReadingGuestBookContent] =
     useState<string>('김민성 왔다감');
 
-  const [guestBook, setGuestBook] = useState([
-    //TODO: 더미데이터. 나중에 지워야함
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '2',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '3',
-    },
-    {
-      author: '홍길동',
-      content: 'adsfkjalksj~',
-      ornamentId: '4',
-    },
-    
-  ]);
+  const [guestBook, setGuestBook] = useState([]);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
-      const guestBookData = await getUserInfoFromServer(userId);
-      if (guestBookData) {
+
+      const guestBookData = await getUserInfoFromServer(id);
+      if (guestBookData && Array.isArray(guestBookData.guestBook)) {
         setGuestBook(guestBookData.guestBook);
-        setHouseName(guestBookData.houseName);
       }
+      setHouseName(guestBookData.houseName);
+      
     };
     fetchUserInfo();
-  }, [reloadUserInfo]);
+  }, [reloadUserInfo, id]);
 
   // 편지를 보내는 함수입니다.
   const handleSendGuestBook = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      await sendGuestBook(userId, author.value, ornamentId, content.value);
+      await sendGuestBook(id, author.value, ornamentId, content.value);
       // 성공 후 처리
       author.reset();
       content.reset();
