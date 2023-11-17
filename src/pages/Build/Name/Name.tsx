@@ -16,6 +16,8 @@ import {useMemo} from 'react';
 import Overlap from '../../../components/Overlap/Overlap';
 import Cookies from '../../../assets/House/Outside/Cookies';
 import Icings from '../../../assets/House/Outside/Icings';
+import {instance} from '../../../apis/axios';
+import {mutateHouse} from '../../../apis/build';
 
 const MAX_LENGTH = 10;
 
@@ -23,10 +25,6 @@ const MAX_LENGTH = 10;
  * 아래는 예제 코드
  * TODO: 실제 api 호출함수로 변경해야함
  */
-const mutateHouse = (data: Omit<BuildStateAtom, 'type'>) =>
-  new Promise((res) => {
-    res('success');
-  });
 
 export default function Name() {
   const {userId} = useRecoilValue(userInfoAtom);
@@ -43,7 +41,7 @@ export default function Name() {
       mutateHouse({
         icingId: buildState.icingId,
         cookieIds: buildState.cookieIds,
-        name: name.value,
+        houseName: name.value,
       }),
     onSuccess: () => {
       navigate(`/${userId}`);
