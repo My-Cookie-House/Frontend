@@ -15,16 +15,44 @@ const Login = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <PageLayout>
-        <img src={LoginText} alt="Login" />
-        <img src={whiteTree} alt="White Tree" />
+        <img
+          src={LoginText}
+          alt="Login"
+          style={{
+            width: '80px',
+            height: '19px',
+            marginTop: '40.06px',
+            marginBottom: '41.92px',
+          }}
+        />
+        <img
+          src={whiteTree}
+          alt="White Tree"
+          style={{
+            width: '306px',
+            height: '390px',
+          }}
+        />
         <a href={KAKAO_AUTH_URL}>
           <img
             src={KakaoLogin}
             alt="KakaoLogin"
-            style={{width: '240.845px', height: '53.239px'}}
+            style={{
+              width: '190px',
+              height: '42px',
+              marginTop: '31.27px',
+              marginBottom: '8px',
+            }}
           />
         </a>
-        <img src={GoogleLogin} alt="GoogleLogin" />
+        <img
+          src={GoogleLogin}
+          alt="GoogleLogin"
+          style={{
+            width: '190px',
+            height: '42px',
+          }}
+        />
       </PageLayout>
     </QueryClientProvider>
   );
