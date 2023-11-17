@@ -21,11 +21,6 @@ import {mutateHouse} from '../../../apis/build';
 
 const MAX_LENGTH = 10;
 
-/**
- * 아래는 예제 코드
- * TODO: 실제 api 호출함수로 변경해야함
- */
-
 export default function Name() {
   const {userId} = useRecoilValue(userInfoAtom);
   const [buildState, setBuildState] =

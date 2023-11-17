@@ -10,11 +10,7 @@ type Props = {
   isOpen: boolean;
 };
 
-/**
- * 아래는 예시 URL
- * TODO: 정식 배포 후 실제 URL로 바꾸기
- */
-const BASE_URL = 'https://cookiehouse.com';
+const BASE_URL = 'https://www.cookiehouse.site';
 
 function ShareModal({closeModal, isOpen}: Props) {
   const {pathname} = useLocation();
