@@ -7,7 +7,7 @@ import {useCallback, useState} from 'react';
 import ShareModal from '../../../components/Modal/ShareModal/ShareModal';
 import Overlap from '../../../components/Overlap/Overlap';
 import {useSuspenseQuery} from '@tanstack/react-query';
-import mission from '../../../apis/mission';
+import {getAllCompletedMissions} from '../../../apis/mission';
 import {IAllCompletedMissions} from '../../../interfaces/mission';
 import CompletedMissionModal from '../../../components/Modal/CompletedMissionModal/CompletedMissionModal';
 
@@ -28,7 +28,7 @@ export default function Inside() {
 
   const {data} = useSuspenseQuery<IAllCompletedMissions>({
     queryKey: ['house', 'inside', id],
-    queryFn: () => mission.getAllCompletedMissions(id),
+    queryFn: () => getAllCompletedMissions(id),
   });
 
   /**

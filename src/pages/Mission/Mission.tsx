@@ -5,18 +5,15 @@ import ModalCloseButton from "../../components/ModalCloseButton/ModalCloseButton
 import ModalOKButton from "../../components/ModalOKButton/ModalOKButton";
 import { S } from "./style"
 import useInput from '../../hooks/useInput';
-import axios from 'axios';
 import DecorationButton from '../../components/Buttons/DecorationButton/DecorationButton';
 import Furnitures from '../../assets/Furniture';
 import { useRecoilValue } from 'recoil';
 import { userInfoAtom } from '../../atoms/loginAtom';
 import {useQuery} from '@tanstack/react-query';
 import {ICompletedMission} from '../../interfaces/mission';
-import mission from '../../apis/mission';
-
+import { fetchTodayMissionData, uploadImageMessageFurnitureId, getCompletedMissionByDate } from '../../apis/mission';
 
 function Mission({ isOpen, onClose }) {
-
   const userInfo = useRecoilValue(userInfoAtom);
   const { todayMissionComplete } = userInfo; //이걸로 이미지와 메시지 post를 했냐 안했냐 판단
 
@@ -37,37 +34,51 @@ function Mission({ isOpen, onClose }) {
     const [imageType, setImageType] = useState<'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal'>('MediumModal');
     const [modalTitle, setModalTitle] = useState<string>("미션함")
     const [furnitureId, setFurnitureId] = useState(1);
+    // ChangeButton을 보여줄지 말지 결정하는 상태 변수
+    const [showChangeButton, setShowChangeButton] = useState(false);
 
-    const {data} = useQuery<ICompletedMission>({
+    const { data } = useQuery<ICompletedMission>({
       queryKey: ['mission', missionDate],
-      queryFn: () => mission.getCompletedMissionByDate(missionDate),
+      queryFn: () => getCompletedMissionByDate(missionDate),
       staleTime: 10000,
     });
-
-    const fetchTodayMissionData = async () => {
-      try {
-          const response = await axios.get('http://ec2-13-209-26-255.ap-northeast-2.compute.amazonaws.com:8080/missions/today-mission'); //TODO: 엔드포인트 변경
-          if (response.status === 200 && response.data) {
-            // 데이터를 상태에 저장합니다.
-            setMissionDate(response.data.data.missionDate);
-            setMissionMessage(response.data.data.missionMessage)
-            setMissionId(response.data.data.missionId)
-          }
-        } catch (error) {
-          console.error('데이터를 가져오는데 실패했습니다.', error);
-          // 적절한 에러 처리를 수행합니다.
-        }
-      }
 
     useEffect(() => {
       openMissionArriveModal(); // 모달을 열어야 할 때마다 호출
     }, [openMissionArriveModal]);
 
-    useEffect(() => {
-      fetchTodayMissionData();
-    }, []); 
+  // useEffect 내에서 fetchTodayMissionData 함수 사용
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchTodayMissionData();
+      if (data) {
+        setMissionDate(data.missionDate);
+        setMissionMessage(data.missionMessage);
+        setMissionId(data.missionId);
+      }
+    };
 
+    fetchData();
+  }, []);
 
+  //TODO: post로 할지 put으로 할지에 대한 분기처리 필요.
+  const handleUploadImageMessageFurnitureIdWrapper = async () => {
+    try {
+      await uploadImageMessageFurnitureId(imageFile, content.value, furnitureId, 'post');
+      // 업로드 성공 후 처리
+      setImageFile(null);
+      content.reset();
+      setImageType('LargeModal');
+      setModalTitle(formatDate(missionDate));
+      setModalStep(5);
+    } catch (error) {
+      // 업로드 실패 시 처리
+      alert('업로드에 실패했어요.');
+      setImageType('LargeModal'); //TODO: 배포 시에 없애야 함. 테스트용
+      setModalTitle(formatDate(missionDate)) //TODO: 배포 시에 없애야 함. 테스트용
+      setModalStep(5); //TODO: 배포 시에 없애야 함. 테스트용
+    }
+  };
   
 
     // 날짜 형식을 "MM월 dd일"로 포매팅하는 함수
@@ -106,39 +117,6 @@ function Mission({ isOpen, onClose }) {
       
     };
 
-    // 이미지와 메시지를 서버에 업로드하는 함수
-    const handleUploadImageMessageFurnitureId = async () => {
-      // FormData 객체 생성
-      const formData = new FormData();
-      formData.append('missionCompleteImage', imageFile); // input의 name과 서버에서 요구하는 키를 맞추어야 함
-      formData.append('missionCompleteContent', content.value);
-      formData.append('furnitureId', furnitureId.toString());
-
-      try {
-       await axios.post('~/mission-complete', formData, { //TODO: 엔드포인트 넣어야함
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': '' //TODO: 엑세스 토큰 여기에 넣어야함
-          },
-        });
-          alert('업로드에 성공했습니다.');
-          // 모달 닫기, 상태 초기화 등의 추가 작업
-          setImageFile(null); // 이미지 파일 상태 초기화
-          content.reset(); // 메시지 입력 상태 초기화
-          setImageType('LargeModal');
-          setModalTitle(formatDate(missionDate))
-          setModalStep(5);
-          //onClose();
-      } catch (error: unknown) {
-        //에러 일 경우
-          alert('업로드에 실패했어요.');
-          setImageType('LargeModal'); //TODO: 배포 시에 없애야 함. 테스트용
-          setModalTitle(formatDate(missionDate)) //TODO: 배포 시에 없애야 함. 테스트용
-          setModalStep(5); //TODO: 배포 시에 없애야 함. 테스트용
-        //return null;
-      }
-    };
-
       // 가구 고르기 버튼 클릭
   const handleFurnitureClick = (
     id: number,
@@ -147,15 +125,21 @@ function Mission({ isOpen, onClose }) {
     event.preventDefault(); // 기본 동작 방지
     setFurnitureId(id); // 서버로 보낼 furnitureId
   };
+
+  // ShowMoreMenuButton 클릭 핸들러
+  const handleOpenShowMoreMenu = () => {
+    setShowChangeButton(!showChangeButton); // 상태를 반전시킵니다.
+  };
   
     // 모달 내용을 결정하는 함수
     const renderModalContent = () => {
       // todayMissionComplete가 true일 때 case 5만 보여줌
+      //TODO: 수정하기 기능 추가
       if (todayMissionComplete) {
         return (
           <>
             <S.ModalText2>{missionMessage}</S.ModalText2>
-            {/* 이미지 업로드 및 메시지 입력 폼 */}
+            <S.ShowMoreMenuButton />
             <S.ImageWrapper>
             <S.ImagePreview
             src={data?.missionCompleteImage}
@@ -247,7 +231,6 @@ function Mission({ isOpen, onClose }) {
                   }}
                 />
               </S.ModalOkButtonWrapper>
-
             </>
           );
           case 4:
@@ -283,7 +266,7 @@ function Mission({ isOpen, onClose }) {
                   <ModalOKButton
                     buttonName="다 골랐어요!"
                     onClick={() => {
-                      handleUploadImageMessageFurnitureId();
+                      handleUploadImageMessageFurnitureIdWrapper();
                     }}
                   />
                 </S.ModalOkButtonWrapper>
@@ -292,8 +275,16 @@ function Mission({ isOpen, onClose }) {
           case 5:
             return (
               <>
-                <S.ModalText2>{missionMessage}</S.ModalText2>
-                {/* 이미지 업로드 및 메시지 입력 폼 */}
+                <S.TextAndButtonWrapper>
+                  <S.ModalText2>{missionMessage}</S.ModalText2>
+                  <S.ShowMoreMenuButton onClick={handleOpenShowMoreMenu}/>
+                  {showChangeButton &&
+                    <S.ChangeButton>
+                      이미지/메시지 수정
+                    </S.ChangeButton>
+                  }
+                </S.TextAndButtonWrapper>
+                  
                 <S.ImageWrapper>
                   <S.ImagePreview
                   src={data?.missionCompleteImage}

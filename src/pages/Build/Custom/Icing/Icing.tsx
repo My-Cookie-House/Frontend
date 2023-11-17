@@ -39,9 +39,6 @@ export default function Icing() {
       <SBuild.Title marginTop="40px">
         {'쿠키하우스가 완성되었어요!\n이제 하우스를 꾸며볼까요?'}
       </SBuild.Title>
-      {/**
-       * TODO: 미리보기 이미지 넣기!
-       */}
 
       <Overlap
         width={260}

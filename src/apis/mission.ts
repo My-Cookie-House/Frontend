@@ -1,78 +1,56 @@
-// TODO: 실제 api로 바꾸기
-export default {
-  // 수행한 특정 미션 조회
-  getCompletedMissionByDate: async (date: string) => {
-    const res: any = await new Promise((res, rej) => {
-      setTimeout(() => {
-        res({
-          code: 200,
-          message: '미션 내역 조회를 완료하였습니다.',
-          data: {
-            missionCompleteId: 3,
-            missionCompleteImage: 'https://~',
-            missionCompleteContent: '오늘은 어쩌구~',
-            missionCompleteDate: '2023-12-20',
-            missionCompleteFurniture: {
-              furnitureId: 3,
-              furnitureName: '흔들의자',
-              furnitureImage: 'https://~',
-            },
-          },
-        });
-      }, 500);
-      //   rej();
-    });
-    return res.data;
-  },
+// mission.ts
+import {instance} from './axios';
 
-  // 수행한 모든 미션 조회
-  getAllCompletedMissions: async (userId: string) => {
-    const res: any = await new Promise((res, rej) => {
-      setTimeout(() => {
-        res({
-          code: 200,
-          message: '미션 내역 조회를 완료하였습니다.',
-          data: {
-            completedMissions: [
-              {
-                missionCompleteId: 1,
-                missionCompleteImage: 'https://~',
-                missionCompleteContent: '오늘은 어쩌구~',
-                missionCompleteDate: '2023-12-20',
-                missionCompleteFurniture: {
-                  furnitureId: 1,
-                  furnitureName: '흔들의자',
-                  furnitureImage: 'https://~',
-                },
-              },
-              {
-                missionCompleteId: 2,
-                missionCompleteImage: 'https://~',
-                missionCompleteContent: '오늘은 어쩌구~',
-                missionCompleteDate: '2023-12-21',
-                missionCompleteFurniture: {
-                  furnitureId: 2,
-                  furnitureName: '거울',
-                  furnitureImage: 'https://~',
-                },
-              },
-              {
-                missionCompleteId: 3,
-                missionCompleteImage: 'https://~',
-                missionCompleteContent: '오늘은 어쩌구~',
-                missionCompleteDate: '2023-12-22',
-                missionCompleteFurniture: {
-                  furnitureId: 3,
-                  furnitureName: '탁자',
-                  furnitureImage: 'https://~',
-                },
-              },
-            ],
-          },
-        });
-      }, 500);
-      //   rej();
-    });
-    return res.data;
-  },
+// 특정 날짜의 완료된 미션 데이터를 가져오는 함수
+export const getCompletedMissionByDate = async (missionDate) => {
+  try {
+    const response = await instance.get(`/missions/completed?date=${missionDate}`);
+    return response.data.data;
+  } catch (error) {
+    console.error('미션 데이터를 가져오는데 실패했습니다.', error);
+    throw error;
+  }
 };
+
+// 오늘의 미션 데이터를 가져오는 함수
+export const fetchTodayMissionData = async () => {
+  try {
+    const response = await instance.get('/missions/today-mission');
+    return response.data.data; // 데이터 반환
+  } catch (error) {
+    console.error('데이터를 가져오는데 실패했습니다.', error);
+    throw error;
+  }
+};
+
+// 이미지와 메시지를 서버에 업로드하는 함수
+export const uploadImageMessageFurnitureId = async (imageFile, content, furnitureId, method) => {
+  const formData = new FormData();
+  formData.append('missionCompleteImage', imageFile);
+  formData.append('missionCompleteContent', content);
+  formData.append('furnitureId', furnitureId.toString());
+  
+  const requestConfig = {
+    method: method,
+    url: `/mission-complete`, 
+    data: formData,
+  };
+  
+  try {
+    await instance(requestConfig);
+    // 성공 처리 로직
+  } catch (error) {
+    console.error('업로드에 실패했습니다.', error);
+    throw error;
+  }
+};
+
+export const getAllCompletedMissions = async (id) => {
+  try {
+    const response = await instance.get(`~/mission-complete/${id}`);
+    return response.data.data;
+  } catch (error) {
+    console.error('데이터를 가져오는데 실패했습니다.', error);
+    throw error;
+  }
+}

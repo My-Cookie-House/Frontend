@@ -18,10 +18,14 @@ export default function Redirect() {
       const response = await instance.get(
         `/auth/kakao?code=${code}&state=${state}`,
       );
-      console.log(response.data);
+
+      console.log(response.data.data.accessToken);
       console.log('로그인 성공');
       navigate('/build');
-      useSetTokens(response.data.accessToken, response.data.refreshToken);
+      useSetTokens(
+        response.data.data.accessToken,
+        response.data.data.refreshToken,
+      );
     } catch (e) {
       console.log('로그인 불가');
     }

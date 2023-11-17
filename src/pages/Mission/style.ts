@@ -4,6 +4,8 @@ import OpenedEnvelopeImg from "../../assets/Envelope/OpenedEnvelope.svg"
 import ImageUploadModalImg from "../../assets/Button/ImageUploadButton.svg"
 import {ImagePreviewProps} from "../../type/type"
 import TodayMessageLineImg from "../../assets/Icons/TodayMessageLine.svg"
+import ShowMoreMenuButtonImg from "../../assets/Button/ShowMoreMenuButton.svg"
+import ChangeButtonImg from "../../assets/Button/ChangeButton.svg"
 
 const ModalInnerWrapper = styled.div`
     display: flex;
@@ -168,6 +170,44 @@ const ShowMessage = styled.div`
     margin-bottom: -22px;
 `;
 
+const ShowMoreMenuButton = styled.button`
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: none;
+    background-image: url(${ShowMoreMenuButtonImg});
+    background-color: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 28.5px;
+    right: 85px;
+`;
+
+const TextAndButtonWrapper = styled.div`
+  display: flex;
+  grid-template-columns: repeat(2, 1fr); // 2개의 열
+  gap: 5px; // 그리드 간격  
+  justify-content: space-between; // 버튼 사이의 간격을 균등하게 배치합니다.
+  align-items: center; // 수직 가운데 정렬합니다.
+`;
+
+const ChangeButton = styled.button`
+    position: absolute;
+    width: 108px;
+    height: 78px;
+    border: none;
+    background-image: url(${ChangeButtonImg});
+    background-color: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 45px;
+    right: 85px;
+    color: #572E16;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+`;
+
 export const S = {
     ModalInnerWrapper,
     ModalText,
@@ -184,5 +224,8 @@ export const S = {
     DecorationButtonContainer,
     TodayMessageLine,
     ShowMessage,
-    ImageWrapper
+    ImageWrapper,
+    ShowMoreMenuButton,
+    TextAndButtonWrapper,
+    ChangeButton
 }
