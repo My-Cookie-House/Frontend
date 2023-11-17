@@ -6,12 +6,12 @@ import useSetTokens from './useSetTokens';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {loginStateAtom, DataAtom} from '../atoms/loginAtom';
 
-export default function useLogin(provider) {
+export default function useLogin(code) {
   const [loggedIn, setLoggedIn] = useRecoilState(loginStateAtom);
   const [userData, setUserData] = useRecoilState(DataAtom);
-  const code = new URL(window.location.href).searchParams.get('code');
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+
   if (!code) {
     throw new Error('Code is not found in the URL');
   }
@@ -20,7 +20,7 @@ export default function useLogin(provider) {
 
   const {isLoading, isError, data, error} = useQuery({
     queryKey: [code],
-    queryFn: () => tryLogin(provider, code, state),
+    queryFn: () => tryLogin(code, state),
   });
 
   useEffect(() => {
@@ -33,10 +33,9 @@ export default function useLogin(provider) {
       console.error('Error:', errorMessage);
       return;
     }
-
     setLoggedIn(true);
     setUserData(data);
-    useSetTokens(data.accessToken, data.refreshToken);
+    useSetTokens(data.accessToken, data.refreshToken); // useSetTokens 함수를 직접 호출
 
     if (data.isRegistered) {
       navigate(`/house/${data.userId}`);
@@ -58,7 +57,6 @@ export default function useLogin(provider) {
     navigate,
     queryClient,
     code,
-    provider,
     state,
   ]);
 
