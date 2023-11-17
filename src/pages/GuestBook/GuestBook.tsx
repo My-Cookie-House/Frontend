@@ -21,7 +21,7 @@ function GuestBook() {
   const author = useInput<HTMLInputElement>(); // 보내는 사람 이름을 관리하는 상태
   const content = useInput<HTMLTextAreaElement>(); // 편지 내용을 관리하는 상태
   const [ornamentId, setOrnamentId] = useState<number>(1);
-  const [modalStep, setModalStep] = useState('1');
+  const [modalStep, setModalStep] = useState(1);
   const [modalTitle, setModalTitle] = useState<string>("방명록 남기기")
   const [imageType, setImageType] = useState<'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal'>('MediumModal');
 
@@ -115,23 +115,47 @@ function GuestBook() {
 
     try {
       console.log("3")
-      const response = await axios.post(`http://ec2-3-35-218-95.ap-northeast-2.compute.amazonaws.com:8080/guest-book`, letterData,  //TODO: 엔드포인트 맞춰야 
+      await axios.post(`http://ec2-3-35-218-95.ap-northeast-2.compute.amazonaws.com:8080/guest-book`, letterData,  //TODO: 엔드포인트 맞춰야 
       );
-      if (response.status === 200) {
-        // 입력 필드를 초기화합니다.
-        author.reset();
-        content.reset();
-      }
+
+      author.reset();
+      content.reset();
       setReloadUserInfo((prevState) => !prevState); // 상태를 반대로 토글합니다.
-      closeModal();
+      setModalStep(3);
+      setImageType('MediumModal');
+      setModalTitle("방명록")
       console.log("4")
 
     } catch (error) {
       console.log("5")
       console.error('Request failed:', error);
-
+      setModalStep(3); //TODO: 실제 환경에서는 제겇
+      setImageType('MediumModal'); //TODO: 실제 환경에서는 제겇
+      setModalTitle("방명록") //TODO: 실제 환경에서는 제겇
       alert('유저의 정보를 불러오지 못했어요.');
       return;
+    }
+  };
+
+  const handleModalClose = () => {
+    closeModal();
+    setModalStep(1);
+    setImageType('MediumModal');
+    setModalTitle("방명록")
+  }
+
+  const handleCheckBlank = () => {
+    // 입력값을 검사합니다.
+    if (!author.value.trim() || !content.value.trim()) {
+      alert('이름과 방명록 내용을 작성해주세요!');
+      setModalStep(2); //TODO: 실제 환경에서는 제겇
+      setImageType('LargeModal');  //TODO: 실제 환경에서는 제겇
+      setModalTitle("오너먼트 고르기")  //TODO: 실제 환경에서는 제겇
+      return;
+    } else {
+      setModalStep(2);
+      setImageType('LargeModal');
+      setModalTitle("오너먼트 고르기")
     }
   };
 
@@ -158,7 +182,7 @@ function GuestBook() {
 
   const renderModalContent = () => {
     switch (modalStep) {
-      case '1':
+      case 1:
         return (
           // 방명록 작성 관련 내용
               <>
@@ -181,16 +205,14 @@ function GuestBook() {
                   <ModalOKButton
                     buttonName="오너먼트 고르기"
                     onClick={() => {
-                        setModalStep("2");
-                        setImageType('LargeModal');
-                        setModalTitle("오너먼트 고르기")
+                      handleCheckBlank();
                       }
                     }
                   />
                 </S.Form>
               </>
         );
-      case '2':
+      case 2:
         return (
           // 오너먼트 선택 관련 내용
           <>
@@ -220,12 +242,12 @@ function GuestBook() {
               </S.Form>
           </>
         );
-      case '3':
+      case 3:
         return (
           // 방명록 전송 성공 관련 내용
           <>
           {/* 방명록 남겼다고 알림 모달 */}
-              <ModalCloseButton onClick={closeModal} />
+              <ModalCloseButton onClick={handleModalClose} />
               <S.ModalInnerWrapper>
               {ornaments[ornamentId] && (
                 <S.OrnamentImg
@@ -236,7 +258,7 @@ function GuestBook() {
                 <S.ModalText>방명록을 남겼어요!</S.ModalText>
                 <ModalOKButton
                   buttonName="확인하기"
-                  onClick={closeModal}
+                  onClick={handleModalClose}
                 />
               </S.ModalInnerWrapper>
           </>
@@ -280,10 +302,10 @@ function GuestBook() {
       <Modal
         modalTitle={modalTitle} // modalState에 따른 타이틀
         isOpen={isModalOpen}
-        onClose={closeModal}
+        onClose={handleModalClose}
         imageType={imageType} // modalState에 따른 이미지 타입
       >
-        <ModalCloseButton onClick={closeModal} />
+        <ModalCloseButton onClick={handleModalClose} />
         {renderModalContent()}
       </Modal>
 
