@@ -131,6 +131,12 @@ function Mission({ isOpen, onClose }) {
     setShowChangeButton(!showChangeButton); // 상태를 반전시킵니다.
   };
   
+
+  useEffect(() => {
+    if (todayMissionComplete) {
+      setImageType('LargeModal');
+    }
+  }, [todayMissionComplete]);
     // 모달 내용을 결정하는 함수
     const renderModalContent = () => {
       // todayMissionComplete가 true일 때 case 5만 보여줌
