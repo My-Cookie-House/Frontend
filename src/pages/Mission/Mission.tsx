@@ -27,7 +27,7 @@ function Mission({ isOpen, onClose }) {
     const content = useInput<HTMLTextAreaElement>(); // 편지 내용을 관리하는 상태
     const [uploadedImage, setUploadedImage] = useState<string | ArrayBuffer>(''); // 업로드 된 이미지 url 관리하는 상태
     const [imageFile, setImageFile] = useState(null); // 업로드할 이미지 파일을 관리하는 상태
-    const [missionDate, setMissionDate] = useState<string>("2020-12-20");
+    const [missionDate, setMissionDate] = useState<string>("");
     const [missionMessage, setMissionMessage] = useState<string>("오늘 먹은 점심");
     const [missionId, setMissionId] = useState<number>(1);
     const [modalStep, setModalStep] = useState(1);
@@ -37,17 +37,11 @@ function Mission({ isOpen, onClose }) {
     // ChangeButton을 보여줄지 말지 결정하는 상태 변수
     const [showChangeButton, setShowChangeButton] = useState(false);
 
-    const { data } = useQuery<ICompletedMission>({
-      queryKey: ['mission', missionDate],
-      queryFn: () => getCompletedMissionByDate(missionDate),
-      staleTime: 10000,
-    });
-
     useEffect(() => {
       openMissionArriveModal(); // 모달을 열어야 할 때마다 호출
     }, [openMissionArriveModal]);
 
-  // useEffect 내에서 fetchTodayMissionData 함수 사용
+      // useEffect 내에서 fetchTodayMissionData 함수 사용
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchTodayMissionData();
@@ -60,6 +54,14 @@ function Mission({ isOpen, onClose }) {
 
     fetchData();
   }, []);
+
+
+    const { data } = useQuery<ICompletedMission>({
+      queryKey: ['mission', missionDate],
+      queryFn: () => getCompletedMissionByDate(missionDate),
+      staleTime: 10000,
+    });
+
 
   //TODO: post로 할지 put으로 할지에 대한 분기처리 필요.
   const handleUploadImageMessageFurnitureIdWrapper = async () => {
@@ -131,6 +133,12 @@ function Mission({ isOpen, onClose }) {
     setShowChangeButton(!showChangeButton); // 상태를 반전시킵니다.
   };
   
+
+  useEffect(() => {
+    if (todayMissionComplete) {
+      setImageType('LargeModal');
+    }
+  }, [todayMissionComplete]);
     // 모달 내용을 결정하는 함수
     const renderModalContent = () => {
       // todayMissionComplete가 true일 때 case 5만 보여줌
@@ -202,7 +210,7 @@ function Mission({ isOpen, onClose }) {
               />
               <S.ModalOkButtonWrapper>
                 <ModalOKButton
-                  buttonName="입력완료"
+                  buttonName="오늘의 가구"
                   onClick={() => {
                     setImageType('MediumModal');
                     setModalTitle("오늘의 가구");

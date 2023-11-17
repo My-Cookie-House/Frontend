@@ -34,7 +34,7 @@ export default function Inside() {
   /**
    * TODO: furnitures 배열로 부터 가구들의 이미지를 가져와서 imgs 배열에 넣어주기!
    */
-  const furnitures = data.completedMissions.map(
+  const furnitures = data?.completedMissions?.map(
     (mission) => mission.missionCompleteFurniture,
   );
 
@@ -64,11 +64,11 @@ export default function Inside() {
       {/* 공유하기 모달 */}
       <ShareModal closeModal={closeShareModal} isOpen={shareModalOpen} />
       {/* 미션 조회 모달 */}
-      <CompletedMissionModal
+      {/* <CompletedMissionModal
         closeModal={closeMissionModal}
         isOpen={missionModalOpen}
         date={'2023-12-25'} // TODO: 실제 가구에 해당하는 미션 날짜를 담아줘야함
-      />
+      /> */}
     </>
   );
 }

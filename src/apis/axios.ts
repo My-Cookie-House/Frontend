@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import useSetTokens from '../hooks/useSetTokens';
 
 export const instance = axios.create({
-  baseURL: 'http://15.165.156.94',
+  baseURL: 'https://cookie-house-api.site',
   headers: {
     Authorization: Cookies.get('accessToken'),
   },
