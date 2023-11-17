@@ -43,6 +43,8 @@ function Mission({ isOpen, onClose }) {
     const [imageType, setImageType] = useState<'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal'>('MediumModal');
     const [modalTitle, setModalTitle] = useState<string>("미션함")
     const [furnitureId, setFurnitureId] = useState(1);
+    // ChangeButton을 보여줄지 말지 결정하는 상태 변수
+    const [showChangeButton, setShowChangeButton] = useState(false);
 
     const {data} = useQuery<ICompletedMission>({
       queryKey: ['mission', missionDate],
@@ -162,6 +164,11 @@ function Mission({ isOpen, onClose }) {
     event.preventDefault(); // 기본 동작 방지
     setFurnitureId(id); // 서버로 보낼 furnitureId
   };
+
+  // ShowMoreMenuButton 클릭 핸들러
+  const handleOpenShowMoreMenu = () => {
+    setShowChangeButton(!showChangeButton); // 상태를 반전시킵니다.
+  };
   
     // 모달 내용을 결정하는 함수
     const renderModalContent = () => {
@@ -171,6 +178,7 @@ function Mission({ isOpen, onClose }) {
         return (
           <>
             <S.ModalText2>{missionMessage}</S.ModalText2>
+            <S.ShowMoreMenuButton />
             <S.ImageWrapper>
             <S.ImagePreview
             src={data?.missionCompleteImage}
@@ -307,7 +315,16 @@ function Mission({ isOpen, onClose }) {
           case 5:
             return (
               <>
-                <S.ModalText2>{missionMessage}</S.ModalText2>
+                <S.TextAndButtonWrapper>
+                  <S.ModalText2>{missionMessage}</S.ModalText2>
+                  <S.ShowMoreMenuButton onClick={handleOpenShowMoreMenu}/>
+                  {showChangeButton &&
+                    <S.ChangeButton>
+                      이미지/메시지 수정
+                    </S.ChangeButton>
+                  }
+                </S.TextAndButtonWrapper>
+                  
                 <S.ImageWrapper>
                   <S.ImagePreview
                   src={data?.missionCompleteImage}
