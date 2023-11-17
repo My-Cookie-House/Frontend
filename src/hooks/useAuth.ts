@@ -6,6 +6,7 @@ import {
   userInfoAtom,
   initialUserInfoState,
 } from '../atoms/loginStateAtom';
+import {useEffect} from 'react';
 
 export default function useAuth() {
   const setLoginState = useSetRecoilState(loginStateAtom);
@@ -15,14 +16,15 @@ export default function useAuth() {
     queryFn: getLoginUserInfo,
     gcTime: Infinity,
   });
-  if (isSuccess) {
-    setLoginState(true);
-    setUserInfoState(data);
-  }
-  if (isError) {
-    setLoginState(false);
-    setUserInfoState(initialUserInfoState);
-  }
+  useEffect(() => {
+    if (data !== null) {
+      setLoginState(true);
+      setUserInfoState(data);
+    } else {
+      setLoginState(false);
+      setUserInfoState(initialUserInfoState);
+    }
+  }, [isSuccess, isError]);
 
   return;
 }
