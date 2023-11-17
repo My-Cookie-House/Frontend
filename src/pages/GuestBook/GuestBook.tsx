@@ -70,7 +70,7 @@ function GuestBook() {
   const getUserInfoFromServer = async () => {
     try {
       // 서버로부터 데이터 요청
-      const response = await axios.get(`http://ec2-3-35-218-95.ap-northeast-2.compute.amazonaws.com:8080/guest-book/${userId}`);
+      const response = await axios.get(`http://15.165.156.94/guest-book/${userId}`);
 
       // 응답 데이터에서 guestBook 추출
       const guestBook = response.data.data.guestBook;
@@ -115,7 +115,7 @@ function GuestBook() {
 
     try {
       console.log("3")
-      await axios.post(`http://ec2-3-35-218-95.ap-northeast-2.compute.amazonaws.com:8080/guest-book`, letterData,  //TODO: 엔드포인트 맞춰야 
+      await axios.post(`http://15.165.156.94/guest-book`, letterData,  //TODO: 엔드포인트 맞춰야 
       );
 
       author.reset();
