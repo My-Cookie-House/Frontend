@@ -1,19 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import {S} from './style';
 import TitleContainerBox from '../../components/TitleContainerBox/TitleContainerBox';
-import BackButton from '../../components/Buttons/BackButton/BackButton';
 import Modal from '../../components/Modal/Modal';
-import axios, {AxiosError} from 'axios';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import ModalOKButton from '../../components/ModalOKButton/ModalOKButton';
 import ModalCloseButton from '../../components/ModalCloseButton/ModalCloseButton';
 import useModal from '../../hooks/useModal';
 import DecorationButton from '../../components/Buttons/DecorationButton/DecorationButton';
 import ornaments from '../../components/ImportOrnaments/ImportOrnaments';
-import {useParams} from 'react-router-dom';
 import useInput from '../../hooks/useInput';
 import useIsMyHouse from '../../hooks/useIsMyHouse';
-import Cookies from 'js-cookie';
+import { getUserInfoFromServer, sendGuestBook } from '../../apis/guestBook';
 
 function GuestBook() {
   const {id, userId, isMyHouse} = useIsMyHouse();
@@ -66,36 +63,13 @@ function GuestBook() {
     
   ]);
 
-  // 사용자의 방명록 정보를 가져오는 함수
-  const getUserInfoFromServer = async () => {
-    try {
-      // 서버로부터 데이터 요청
-      const response = await axios.get(`http://15.165.156.94/guest-book/${userId}`);
-
-      // 응답 데이터에서 guestBook 추출
-      const guestBook = response.data.data.guestBook;
-      if (guestBook) {
-        setGuestBook(guestBook); // 상태 업데이트
-      }
-
-      // 응답 데이터에서 houseName 추출
-      const houseName = response.data.data.houseName;
-      if (houseName) {
-        setHouseName(houseName); // 상태 업데이트
-      }
-      // guestBook 데이터 반환
-      return guestBook;
-    } catch (error) {
-        alert('유저의 정보를 불러오지 못했어요.');
-      return null;
-    }
-  };
-
-  // 컴포넌트가 마운트될 때 사용자 정보를 가져옵니다.
   useEffect(() => {
     const fetchUserInfo = async () => {
-      getUserInfoFromServer();
-      
+      const guestBookData = await getUserInfoFromServer(userId);
+      if (guestBookData) {
+        setGuestBook(guestBookData.guestBook);
+        setHouseName(guestBookData.houseName);
+      }
     };
     fetchUserInfo();
   }, [reloadUserInfo]);
@@ -103,37 +77,21 @@ function GuestBook() {
   // 편지를 보내는 함수입니다.
   const handleSendGuestBook = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log("1")
-    // 백엔드로 보낼 데이터를 정의합니다.
-    const letterData = {
-      "userId": userId,
-      "author": author.value,
-      "ornamentId": ornamentId,
-      "content": content.value,
-    };
-    console.log("2")
-
     try {
-      console.log("3")
-      await axios.post(`http://15.165.156.94/guest-book`, letterData,  //TODO: 엔드포인트 맞춰야 
-      );
-
+      await sendGuestBook(userId, author.value, ornamentId, content.value);
+      // 성공 후 처리
       author.reset();
       content.reset();
-      setReloadUserInfo((prevState) => !prevState); // 상태를 반대로 토글합니다.
+      setReloadUserInfo(prev => !prev);
       setModalStep(3);
       setImageType('MediumModal');
       setModalTitle("방명록")
-      console.log("4")
-
     } catch (error) {
-      console.log("5")
-      console.error('Request failed:', error);
+      // 실패 시 처리
+      alert('유저의 정보를 불러오지 못했어요.');
       setModalStep(3); //TODO: 실제 환경에서는 제겇
       setImageType('MediumModal'); //TODO: 실제 환경에서는 제겇
       setModalTitle("방명록") //TODO: 실제 환경에서는 제겇
-      alert('유저의 정보를 불러오지 못했어요.');
-      return;
     }
   };
 

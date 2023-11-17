@@ -2,7 +2,7 @@ import * as S from './style';
 import Modal from '../Modal';
 import ModalCloseButton from '../../ModalCloseButton/ModalCloseButton';
 import {useQuery} from '@tanstack/react-query';
-import mission from '../../../apis/mission';
+import {getCompletedMissionByDate} from '../../../apis/mission';
 import {ICompletedMission} from '../../../interfaces/mission';
 
 type Props = {
@@ -18,7 +18,7 @@ export default function CompletedMissionModal({
 }: Props) {
   const {data} = useQuery<ICompletedMission>({
     queryKey: ['mission', date],
-    queryFn: () => mission.getCompletedMissionByDate(date),
+    queryFn: () => getCompletedMissionByDate(date),
     staleTime: 10000,
   });
 
