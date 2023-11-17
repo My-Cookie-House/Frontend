@@ -40,3 +40,22 @@ export const loginStateAtom = atom<boolean>({
   key: 'loginState',
   default: false,
 });
+
+export const loginMethodAtom = atom<string>({
+  key: 'loginMethod',
+  default: 'kakao',
+});
+
+// export const loginStateAtom = selector<LoginState>({
+//   key: 'loginState',
+//   get: async () => {
+//     try {
+//       const data = await auth.getLoginUserInfo();
+//       return {loggedIn: true, ...data};
+//     } catch (err) {
+//       return initialLoginState; // 로그인 안된 상태
+//     }
+//   },
+// });
+
+

@@ -5,18 +5,21 @@ import {useEffect} from 'react';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import CookieHouse from '../../assets/OnboardingAssets/CookieHouse.svg';
 import {Description, Wrapper} from './RedirectStyle';
+import {useRecoilState} from 'recoil';
+import {loginMethodAtom} from '../../atoms/loginAtom';
 
 export default function Redirect() {
   let url = new URL(window.location.href);
   let code = url.searchParams.get('code');
   const navigate = useNavigate();
+  const loginMethod = useRecoilState(loginMethodAtom);
 
   const state = Math.floor(Math.random() * 100);
 
   const kakaologin = async () => {
     try {
       const response = await instance.get(
-        `/auth/kakao?code=${code}&state=${state}`,
+        `/auth/${loginMethod}?code=${code}&state=${state}`,
       );
 
       console.log(response.data.data.accessToken);
