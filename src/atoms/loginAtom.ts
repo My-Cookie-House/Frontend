@@ -41,6 +41,11 @@ export const loginStateAtom = atom<boolean>({
   default: false,
 });
 
+export const loginMethodAtom = atom<string>({
+  key: 'loginMethod',
+  default: 'kakao',
+});
+
 // export const loginStateAtom = selector<LoginState>({
 //   key: 'loginState',
 //   get: async () => {

@@ -9,6 +9,7 @@ import {loginStateAtom, DataAtom} from '../atoms/loginAtom';
 export default function useLogin(code) {
   const [loggedIn, setLoggedIn] = useRecoilState(loginStateAtom);
   const [userData, setUserData] = useRecoilState(DataAtom);
+
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
