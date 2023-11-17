@@ -5,7 +5,6 @@ import ModalCloseButton from "../../components/ModalCloseButton/ModalCloseButton
 import ModalOKButton from "../../components/ModalOKButton/ModalOKButton";
 import { S } from "./style"
 import useInput from '../../hooks/useInput';
-import axios from 'axios';
 import DecorationButton from '../../components/Buttons/DecorationButton/DecorationButton';
 import Furnitures from '../../assets/Furniture';
 import { useRecoilValue } from 'recoil';
@@ -13,7 +12,6 @@ import { userInfoAtom } from '../../atoms/loginAtom';
 import {useQuery} from '@tanstack/react-query';
 import {ICompletedMission} from '../../interfaces/mission';
 import { fetchTodayMissionData, uploadImageMessageFurnitureId, getCompletedMissionByDate } from '../../apis/mission';
-import Cookies from 'js-cookie';
 
 function Mission({ isOpen, onClose }) {
   const userInfo = useRecoilValue(userInfoAtom);
@@ -54,15 +52,16 @@ function Mission({ isOpen, onClose }) {
     const fetchData = async () => {
       const data = await fetchTodayMissionData();
       if (data) {
-        setMissionDate(data.data.missionDate);
-        setMissionMessage(data.data.missionMessage);
-        setMissionId(data.data.missionId);
+        setMissionDate(data.missionDate);
+        setMissionMessage(data.missionMessage);
+        setMissionId(data.missionId);
       }
     };
 
     fetchData();
   }, []);
 
+  //TODO: post로 할지 put으로 할지에 대한 분기처리 필요.
   const handleUploadImageMessageFurnitureIdWrapper = async () => {
     try {
       await uploadImageMessageFurnitureId(imageFile, content.value, furnitureId, 'post');
