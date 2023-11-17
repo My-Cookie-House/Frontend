@@ -17,7 +17,7 @@ export async function getLoginUserInfo() {
     // rej(new Error());
     // });
     const response: any = await instance.get('/user');
-    return response.data;
+    return response.data.data;
   } catch (err) {
     return new Error();
   }
