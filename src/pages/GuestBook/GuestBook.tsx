@@ -13,6 +13,7 @@ import ornaments from '../../components/ImportOrnaments/ImportOrnaments';
 import {useParams} from 'react-router-dom';
 import useInput from '../../hooks/useInput';
 import useIsMyHouse from '../../hooks/useIsMyHouse';
+import Cookies from 'js-cookie';
 
 function GuestBook() {
   const {id, userId, isMyHouse} = useIsMyHouse();

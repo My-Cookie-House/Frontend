@@ -13,10 +13,16 @@ import { userInfoAtom } from '../../atoms/loginAtom';
 import {useQuery} from '@tanstack/react-query';
 import {ICompletedMission} from '../../interfaces/mission';
 import mission from '../../apis/mission';
+import Cookies from 'js-cookie';
 
 
 function Mission({ isOpen, onClose }) {
+  const getAccessToken = () => {
+    return Cookies.get('accessToken');
+  };
+  const accessToken = getAccessToken();
 
+  
   const userInfo = useRecoilValue(userInfoAtom);
   const { todayMissionComplete } = userInfo; //이걸로 이미지와 메시지 post를 했냐 안했냐 판단
 
@@ -45,8 +51,14 @@ function Mission({ isOpen, onClose }) {
     });
 
     const fetchTodayMissionData = async () => {
+      const config = {
+        headers: {
+          'Authorization': `${accessToken}`
+        }
+      }
+
       try {
-          const response = await axios.get('http://ec2-13-209-26-255.ap-northeast-2.compute.amazonaws.com:8080/missions/today-mission'); //TODO: 엔드포인트 변경
+          const response = await axios.get('http://ec2-13-209-26-255.ap-northeast-2.compute.amazonaws.com:8080/missions/today-mission', config); //TODO: 엔드포인트 변경
           if (response.status === 200 && response.data) {
             // 데이터를 상태에 저장합니다.
             setMissionDate(response.data.data.missionDate);
@@ -118,7 +130,7 @@ function Mission({ isOpen, onClose }) {
        await axios.post('~/mission-complete', formData, { //TODO: 엔드포인트 넣어야함
           headers: {
             'Content-Type': 'multipart/form-data',
-            'Authorization': '' //TODO: 엑세스 토큰 여기에 넣어야함
+            'Authorization': `${accessToken}`
           },
         });
           alert('업로드에 성공했습니다.');
