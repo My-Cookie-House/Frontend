@@ -26,4 +26,6 @@ export default function Redirect() {
   useEffect(() => {
     kakaologin();
   }, []);
+
+  return <>로그인 중</>;
 }
