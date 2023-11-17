@@ -2,6 +2,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
+
 const API_BASE_URL = 'http://15.165.156.94'; // API 기본 URL
 
 // accessToken을 가져오는 함수

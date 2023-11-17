@@ -29,7 +29,6 @@ export default function Outside() {
         width={300}
         height={400}
         margin="40px 0 0 0"
-        // TODO: 배열 두 번째 값 실제 아이싱 데이터 반영해야함
         imgs={[
           Cookies[`LgCookie${num1}${num2}`],
           Icings[`LgIcing${data.icingId}`],
