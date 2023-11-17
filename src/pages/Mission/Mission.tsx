@@ -5,7 +5,6 @@ import ModalCloseButton from "../../components/ModalCloseButton/ModalCloseButton
 import ModalOKButton from "../../components/ModalOKButton/ModalOKButton";
 import { S } from "./style"
 import useInput from '../../hooks/useInput';
-import axios from 'axios';
 import DecorationButton from '../../components/Buttons/DecorationButton/DecorationButton';
 import Furnitures from '../../assets/Furniture';
 import { useRecoilValue } from 'recoil';
