@@ -3,6 +3,10 @@ import ClosedEnvelopeImg from "../../assets/Envelope/ClosedEnvelope.svg"
 import OpenedEnvelopeImg from "../../assets/Envelope/OpenedEnvelope.svg"
 import ImageUploadModalImg from "../../assets/Button/ImageUploadButton.svg"
 import {ImagePreviewProps} from "../../type/type"
+import TodayMessageLineImg from "../../assets/Icons/TodayMessageLine.svg"
+import ShowMoreMenuButtonImg from "../../assets/Button/ShowMoreMenuButton.svg"
+import ChangeButtonImg from "../../assets/Button/ChangeButton.svg"
+
 const ModalInnerWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -24,13 +28,10 @@ const ModalText = styled.div`
 
 const ModalOkButtonWrapper = styled.div`
 margin-top: 45px;
-
 `;
 
-
-
 const ModalText2 = styled(ModalText)`
-  margin-top: -8px; // 여기에서 원하는 margin-top 값으로 변경
+  margin-top: -8px; 
 `;
 
 const swapAnimation = keyframes`
@@ -97,6 +98,17 @@ const ImageUploadLabel = styled.label`
   margin-bottom: 15px;
 `;
 
+const ImageWrapper = styled.div`
+  cursor: pointer;
+  width: 236.538px;
+  height: 236.538px;
+  background-image: url(${ImageUploadModalImg});
+  background-size: cover;
+  display: inline-block;
+  position: relative;
+  margin-bottom: 15px;
+`;
+
 const ImageInput = styled.input`
   opacity: 0; // 투명하게 설정
   position: absolute; // 절대적 위치 설정
@@ -127,6 +139,74 @@ const GuestBookEntryGrid = styled.div`
   gap: 12.5px; // 그리드 간격  
 `;
 
+const DecorationButtonContainer = styled.div`
+  display: flex; // 가로로 나열하기 위해 Flexbox를 사용합니다.
+  justify-content: space-between; // 버튼 사이의 간격을 균등하게 배치합니다.
+  align-items: center; // 수직 가운데 정렬합니다.
+  gap: 7.78px; // 그리드 간격  
+  margin-bottom: -30px;
+`;
+
+const TodayMessageLine = styled.div`
+  background-image: url(${TodayMessageLineImg});
+  background-size: 237px 26.8px;
+  width: 237px;
+  height: 26.8px;
+  margin-bottom: 20px;
+`;
+
+const ShowMessage = styled.div`
+    position: relative;
+    width: 220px;
+    height: 140px;
+    border: none;
+    border-radius: 10px;
+    color: ${props => props.theme.colors.textBrown};
+    overflow: auto;
+    padding: 13px;
+    resize: none;
+    background-color: rgba(87, 46, 22, 0.15);
+    font-size: 16px;
+    margin-bottom: -22px;
+`;
+
+const ShowMoreMenuButton = styled.button`
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: none;
+    background-image: url(${ShowMoreMenuButtonImg});
+    background-color: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 28.5px;
+    right: 85px;
+`;
+
+const TextAndButtonWrapper = styled.div`
+  display: flex;
+  grid-template-columns: repeat(2, 1fr); // 2개의 열
+  gap: 5px; // 그리드 간격  
+  justify-content: space-between; // 버튼 사이의 간격을 균등하게 배치합니다.
+  align-items: center; // 수직 가운데 정렬합니다.
+`;
+
+const ChangeButton = styled.button`
+    position: absolute;
+    width: 108px;
+    height: 78px;
+    border: none;
+    background-image: url(${ChangeButtonImg});
+    background-color: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 45px;
+    right: 85px;
+    color: #572E16;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+`;
 
 export const S = {
     ModalInnerWrapper,
@@ -140,5 +220,12 @@ export const S = {
     ImagePreview,
     GuestBookEntryGrid,
     ModalText2,
-    ModalOkButtonWrapper
+    ModalOkButtonWrapper,
+    DecorationButtonContainer,
+    TodayMessageLine,
+    ShowMessage,
+    ImageWrapper,
+    ShowMoreMenuButton,
+    TextAndButtonWrapper,
+    ChangeButton
 }

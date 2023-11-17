@@ -34,7 +34,6 @@ export default function useLogin(code) {
       console.error('Error:', errorMessage);
       return;
     }
-
     setLoggedIn(true);
     setUserData(data);
     useSetTokens(data.accessToken, data.refreshToken); // useSetTokens 함수를 직접 호출

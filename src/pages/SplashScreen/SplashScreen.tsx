@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import {useRecoilValue} from 'recoil';
-import {UserInfo, userInfoAtom} from '../../atoms/loginAtom';
+import {UserInfo, loginStateAtom, userInfoAtom} from '../../atoms/loginAtom';
 
 export default function SplashScreen(): JSX.Element {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ export default function SplashScreen(): JSX.Element {
   const userId = user?.userId;
   const isHouseBuilt = user?.isHouseBuilt;
 
-  const loggedIn = useRecoilValue(userInfoAtom);
+  const loggedIn = useRecoilValue(loginStateAtom);
 
   useEffect(() => {
     console.log(loggedIn, isHouseBuilt);

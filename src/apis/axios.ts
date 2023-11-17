@@ -4,6 +4,9 @@ import useSetTokens from '../hooks/useSetTokens';
 
 export const instance = axios.create({
   baseURL: 'http://15.165.156.94',
+  headers: {
+    Authorization: Cookies.get('accessToken'),
+  },
 });
 
 instance.interceptors.response.use(
@@ -16,7 +19,6 @@ instance.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       const refreshToken = Cookies.get('refreshToken');
-
       if (!refreshToken) {
         throw new Error('토큰 없음');
       }
