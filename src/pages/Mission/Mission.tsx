@@ -119,20 +119,23 @@ function Mission({ isOpen, onClose }) {
     };
 
     // 이미지와 메시지를 서버에 업로드하는 함수
-    const handleUploadImageMessageFurnitureId = async () => {
+    const handleUploadImageMessageFurnitureId = async (method) => {
       // FormData 객체 생성
       const formData = new FormData();
       formData.append('missionCompleteImage', imageFile); // input의 name과 서버에서 요구하는 키를 맞추어야 함
       formData.append('missionCompleteContent', content.value);
       formData.append('furnitureId', furnitureId.toString());
-
+      const requestConfig = {
+        method: method,
+        url: '~/mission-complete', // TODO: 실제 엔드포인트로 변경
+        data: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `${accessToken}`
+        },
+      };
       try {
-       await axios.post('~/mission-complete', formData, { //TODO: 엔드포인트 넣어야함
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': `${accessToken}`
-          },
-        });
+        await axios(requestConfig);
           alert('업로드에 성공했습니다.');
           // 모달 닫기, 상태 초기화 등의 추가 작업
           setImageFile(null); // 이미지 파일 상태 초기화
@@ -163,11 +166,11 @@ function Mission({ isOpen, onClose }) {
     // 모달 내용을 결정하는 함수
     const renderModalContent = () => {
       // todayMissionComplete가 true일 때 case 5만 보여줌
+      //TODO: 수정하기 기능 추가
       if (todayMissionComplete) {
         return (
           <>
             <S.ModalText2>{missionMessage}</S.ModalText2>
-            {/* 이미지 업로드 및 메시지 입력 폼 */}
             <S.ImageWrapper>
             <S.ImagePreview
             src={data?.missionCompleteImage}
@@ -295,7 +298,7 @@ function Mission({ isOpen, onClose }) {
                   <ModalOKButton
                     buttonName="다 골랐어요!"
                     onClick={() => {
-                      handleUploadImageMessageFurnitureId();
+                      handleUploadImageMessageFurnitureId("post");
                     }}
                   />
                 </S.ModalOkButtonWrapper>
@@ -305,7 +308,6 @@ function Mission({ isOpen, onClose }) {
             return (
               <>
                 <S.ModalText2>{missionMessage}</S.ModalText2>
-                {/* 이미지 업로드 및 메시지 입력 폼 */}
                 <S.ImageWrapper>
                   <S.ImagePreview
                   src={data?.missionCompleteImage}
