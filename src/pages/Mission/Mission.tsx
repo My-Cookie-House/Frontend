@@ -52,9 +52,9 @@ function Mission({ isOpen, onClose }) {
     const fetchData = async () => {
       const data = await fetchTodayMissionData();
       if (data) {
-        setMissionDate(data.data.missionDate);
-        setMissionMessage(data.data.missionMessage);
-        setMissionId(data.data.missionId);
+        setMissionDate(data.missionDate);
+        setMissionMessage(data.missionMessage);
+        setMissionId(data.missionId);
       }
     };
 

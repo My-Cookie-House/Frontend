@@ -16,7 +16,7 @@ export const getCompletedMissionByDate = async (missionDate) => {
 export const fetchTodayMissionData = async () => {
   try {
     const response = await instance.get('/missions/today-mission');
-    return response.data; // 데이터 반환
+    return response.data.data; // 데이터 반환
   } catch (error) {
     console.error('데이터를 가져오는데 실패했습니다.', error);
     throw error;
@@ -32,7 +32,7 @@ export const uploadImageMessageFurnitureId = async (imageFile, content, furnitur
   
   const requestConfig = {
     method: method,
-    url: `/mission-complete`, // 실제 엔드포인트로 변경
+    url: `/mission-complete`, 
     data: formData,
   };
   
@@ -44,3 +44,13 @@ export const uploadImageMessageFurnitureId = async (imageFile, content, furnitur
     throw error;
   }
 };
+
+export const getAllCompletedMissions = async (id) => {
+  try {
+    const response = await instance.get(`~/mission-complete/${id}`);
+    return response.data.data;
+  } catch (error) {
+    console.error('데이터를 가져오는데 실패했습니다.', error);
+    throw error;
+  }
+}
