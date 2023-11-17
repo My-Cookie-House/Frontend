@@ -18,6 +18,7 @@ export default function Redirect() {
       const response = await instance.get(
         `/auth/kakao?code=${code}&state=${state}`,
       );
+
       console.log(response.data.data.accessToken);
       console.log('로그인 성공');
       navigate('/build');
