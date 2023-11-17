@@ -16,6 +16,6 @@
 
     /* Linting */
   },
-  "include": ["src", "src/assets"],
+  "include": ["src", "src/assets", "src/pages/Login/.tsx"],
   "references": [{"path": "./tsconfig.node.json"}]
 }

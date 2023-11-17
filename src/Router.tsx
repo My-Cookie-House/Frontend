@@ -15,6 +15,7 @@ import Name from './pages/Build/Name/Name';
 import House from './pages/House/House';
 import Outside from './pages/House/Outside/Outside';
 import Inside from './pages/House/Inside/Inside';
+import Redirect from './pages/Login/Redirect';
 
 export default function Router() {
   return (
@@ -25,6 +26,7 @@ export default function Router() {
         <Route path="/login" element={<Login />} />
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/:id/guests" element={<GuestBook />} />
+        <Route path="/redirect" element={<Redirect />} />
 
         {/* 쿠키하우스 하위 경로 */}
         <Route path="/:id" element={<House />}>
