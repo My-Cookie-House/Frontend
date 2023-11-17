@@ -6,7 +6,7 @@ import {useSetRecoilState} from 'recoil';
 import {buildStateAtom} from '../../../atoms/buildAtom';
 
 const COOKIE_COUNT = 6;
-const ICING_COUNT = 5;
+const ICING_COUNT = 4;
 
 export default function Random() {
   const setBuildState = useSetRecoilState(buildStateAtom);

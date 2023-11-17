@@ -4,15 +4,11 @@ import {useEffect} from 'react';
 import tryLogin from '../apis/auth';
 import useSetTokens from './useSetTokens';
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {
-  loginStateAtom,
-  userInfoAtom,
-  loginMethodAtom,
-} from '../atoms/loginAtom';
+import {loginStateAtom, DataAtom} from '../atoms/loginAtom';
 
 export default function useLogin(provider) {
   const [loggedIn, setLoggedIn] = useRecoilState(loginStateAtom);
-  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+  const [userData, setUserData] = useRecoilState(DataAtom);
   const code = new URL(window.location.href).searchParams.get('code');
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -39,7 +35,7 @@ export default function useLogin(provider) {
     }
 
     setLoggedIn(true);
-    setUserInfo(data);
+    setUserData(data);
     useSetTokens(data.accessToken, data.refreshToken);
 
     if (data.isRegistered) {
@@ -56,7 +52,7 @@ export default function useLogin(provider) {
     data,
     error,
     setLoggedIn,
-    setUserInfo,
+    setUserData,
     data?.isRegistered,
     data?.userId,
     navigate,
