@@ -24,7 +24,6 @@ export default {
     });
     return res.data;
   },
-  
 
   // 수행한 모든 미션 조회
   getAllCompletedMissions: async (userId: string) => {

@@ -7,6 +7,8 @@ export const mutateHouse = (data: {
   houseName: string;
 }) => {
   return instance.post('/house', {
-    data,
+    icingId: data.icingId,
+    cookieIds: data.cookieIds,
+    houseName: data.houseName,
   });
 };

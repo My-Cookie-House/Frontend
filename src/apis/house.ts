@@ -1,23 +1,14 @@
 // 아래는 모킹 함수
+
+import {instance} from './axios';
+
 // TODO: 실제 api로 함수 바꿔야 함
 export default {
-  getHouseOutside: (userId: number) =>
-    // 아이디 쿼리 파라미터로 넘김
-    new Promise((res, rej) => {
-      setTimeout(() => {
-        res({
-          code: 200,
-          message: '하우스 조회를 완료했습니다.',
-          data: {
-            icingId: 3,
-            cookieIds: [1, 4],
-            houseName: '오동재의 집',
-          },
-        });
-      }, 1000);
-      //   rej();
-    }).then((res: any) => ({
-      ...res.data,
-      cookieIds: res.data.cookieIds.sort((a, b) => a - b),
-    })),
+  getHouseOutside: async (userId: number) => {
+    const response = await instance.get(`/house/${userId}`);
+    return {
+      ...response.data.data,
+      cookieIds: response.data.data.cookieIds.sort((a, b) => a - b),
+    };
+  },
 };
