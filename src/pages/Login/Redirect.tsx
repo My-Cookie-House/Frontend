@@ -15,7 +15,7 @@ export default function Redirect() {
 
   const kakaologin = async () => {
     try {
-      const response = await instance.post(
+      const response = await instance.get(
         `/auth/kakao?code=${code}&state=${state}`,
       );
       console.log(response.data);
