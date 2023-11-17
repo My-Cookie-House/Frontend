@@ -27,7 +27,7 @@ function Mission({ isOpen, onClose }) {
     const content = useInput<HTMLTextAreaElement>(); // 편지 내용을 관리하는 상태
     const [uploadedImage, setUploadedImage] = useState<string | ArrayBuffer>(''); // 업로드 된 이미지 url 관리하는 상태
     const [imageFile, setImageFile] = useState(null); // 업로드할 이미지 파일을 관리하는 상태
-    const [missionDate, setMissionDate] = useState<string>("2020-12-20");
+    const [missionDate, setMissionDate] = useState<string>("");
     const [missionMessage, setMissionMessage] = useState<string>("오늘 먹은 점심");
     const [missionId, setMissionId] = useState<number>(1);
     const [modalStep, setModalStep] = useState(1);
@@ -210,7 +210,7 @@ function Mission({ isOpen, onClose }) {
               />
               <S.ModalOkButtonWrapper>
                 <ModalOKButton
-                  buttonName="입력완료"
+                  buttonName="오늘의 가구"
                   onClick={() => {
                     setImageType('MediumModal');
                     setModalTitle("오늘의 가구");

@@ -64,11 +64,11 @@ export default function Inside() {
       {/* 공유하기 모달 */}
       <ShareModal closeModal={closeShareModal} isOpen={shareModalOpen} />
       {/* 미션 조회 모달 */}
-      <CompletedMissionModal
+      {/* <CompletedMissionModal
         closeModal={closeMissionModal}
         isOpen={missionModalOpen}
         date={'2023-12-25'} // TODO: 실제 가구에 해당하는 미션 날짜를 담아줘야함
-      />
+      /> */}
     </>
   );
 }
