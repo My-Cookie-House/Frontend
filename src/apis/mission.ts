@@ -4,7 +4,7 @@ import {instance} from './axios';
 // 특정 날짜의 완료된 미션 데이터를 가져오는 함수
 export const getCompletedMissionByDate = async (missionDate) => {
   try {
-    const response = await instance.get(`/mission/complete?date=${missionDate}`);
+    const response = await instance.get(`/mission-complete?date=${missionDate}`);
     return response.data.data;
   } catch (error) {
     console.error('미션 데이터를 가져오는데 실패했습니다.', error);
@@ -15,7 +15,7 @@ export const getCompletedMissionByDate = async (missionDate) => {
 // 오늘의 미션 데이터를 가져오는 함수
 export const fetchTodayMissionData = async () => {
   try {
-    const response = await instance.get('/mission/today-mission');
+    const response = await instance.get('/missions/today-mission');
     return response.data.data; // 데이터 반환
   } catch (error) {
     console.error('데이터를 가져오는데 실패했습니다.', error);

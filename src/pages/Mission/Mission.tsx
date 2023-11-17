@@ -37,17 +37,11 @@ function Mission({ isOpen, onClose }) {
     // ChangeButton을 보여줄지 말지 결정하는 상태 변수
     const [showChangeButton, setShowChangeButton] = useState(false);
 
-    const { data } = useQuery<ICompletedMission>({
-      queryKey: ['mission', missionDate],
-      queryFn: () => getCompletedMissionByDate(missionDate),
-      staleTime: 10000,
-    });
-
     useEffect(() => {
       openMissionArriveModal(); // 모달을 열어야 할 때마다 호출
     }, [openMissionArriveModal]);
 
-  // useEffect 내에서 fetchTodayMissionData 함수 사용
+      // useEffect 내에서 fetchTodayMissionData 함수 사용
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchTodayMissionData();
@@ -60,6 +54,13 @@ function Mission({ isOpen, onClose }) {
 
     fetchData();
   }, []);
+
+    const { data } = useQuery<ICompletedMission>({
+      queryKey: ['mission', missionDate],
+      queryFn: () => getCompletedMissionByDate(missionDate),
+      staleTime: 10000,
+    });
+
 
   //TODO: post로 할지 put으로 할지에 대한 분기처리 필요.
   const handleUploadImageMessageFurnitureIdWrapper = async () => {
