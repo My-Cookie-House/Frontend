@@ -11,7 +11,7 @@ export default function Redirect() {
   let code = url.searchParams.get('code');
   const navigate = useNavigate();
 
-  const state = '1';
+  const state = Math.floor(Math.random() * 100);
 
   const kakaologin = async () => {
     try {
