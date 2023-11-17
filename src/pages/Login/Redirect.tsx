@@ -2,6 +2,9 @@ import {instance} from '../../apis/axios';
 import {useNavigate} from 'react-router-dom';
 import useSetTokens from '../../hooks/useSetTokens';
 import {useEffect} from 'react';
+import PageLayout from '../../components/PageLayout/PageLayout';
+import CookieHouse from '../../assets/OnboardingAssets/CookieHouse.svg';
+import {Description, Wrapper} from './RedirectStyle';
 
 export default function Redirect() {
   let url = new URL(window.location.href);
@@ -17,6 +20,7 @@ export default function Redirect() {
       );
       console.log(response.data);
       console.log('로그인 성공');
+      navigate('/build');
       useSetTokens(response.data.accessToken, response.data.refreshToken);
     } catch (e) {
       console.log('로그인 불가');
@@ -27,5 +31,12 @@ export default function Redirect() {
     kakaologin();
   }, []);
 
-  return <>로그인 중</>;
+  return (
+    <PageLayout>
+      <Wrapper>
+        <img src={CookieHouse}></img>
+        <Description>1년의 기억들을 쿠키하우스에 담아봐요!</Description>
+      </Wrapper>
+    </PageLayout>
+  );
 }
