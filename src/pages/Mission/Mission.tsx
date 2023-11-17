@@ -13,7 +13,6 @@ import { userInfoAtom } from '../../atoms/loginAtom';
 import {useQuery} from '@tanstack/react-query';
 import {ICompletedMission} from '../../interfaces/mission';
 import { fetchTodayMissionData, uploadImageMessageFurnitureId, getCompletedMissionByDate } from '../../apis/mission';
-import Cookies from 'js-cookie';
 
 function Mission({ isOpen, onClose }) {
   const userInfo = useRecoilValue(userInfoAtom);
