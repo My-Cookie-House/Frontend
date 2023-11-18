@@ -10,12 +10,9 @@ export default function Redirect() {
   let url = new URL(window.location.href);
   let code = url.searchParams.get('code');
   const navigate = useNavigate();
-  let loginMethod = localStorage.getItem('loginMethod');
-  loginMethod = loginMethod.replace(/"/g, ''); // 따옴표 제거
-  localStorage.setItem('loginMethod', loginMethod); // 수정된 값으로 다시 로컬스토리지에 저장
 
   const state = Math.floor(Math.random() * 100);
-  const loginUrl = `/auth/${loginMethod}?code=${code}&state=${state}`;
+  const loginUrl = `/auth/kakao?code=${code}&state=${state}`;
   console.log(loginUrl);
 
   const kakaologin = async () => {
