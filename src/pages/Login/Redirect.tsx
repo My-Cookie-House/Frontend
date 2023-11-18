@@ -6,13 +6,14 @@ import PageLayout from '../../components/PageLayout/PageLayout';
 import CookieHouse from '../../assets/OnboardingAssets/CookieHouse.svg';
 import {Description, Wrapper} from './RedirectStyle';
 import {useRecoilState, useSetRecoilState} from 'recoil';
-import {loginStateAtom} from '../../atoms/loginStateAtom';
+import {loginStateAtom, userInfoAtom} from '../../atoms/loginStateAtom';
 
 export default function Redirect() {
   let url = new URL(window.location.href);
   let code = url.searchParams.get('code');
   const navigate = useNavigate();
   const [loginState, setLoginState] = useRecoilState(loginStateAtom);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const state = Math.floor(Math.random() * 100);
   const loginUrl = `/auth/kakao?code=${code}&state=${state}`;
   console.log(loginUrl);
@@ -30,6 +31,7 @@ export default function Redirect() {
         response.data.data.refreshToken,
       );
       setLoginState(true);
+      setUserInfo(response.data);
       navigate('/');
     } catch (e) {
       console.log('로그인 불가');
