@@ -43,6 +43,7 @@ export default function MissionFurniturePreview() {
     const [missionMessage, setMissionMessage] = useState<string>("오늘 먹은 점심");
     const [modalStep, setModalStep] = useState(1);
     const navigate = useNavigate();
+    const [furnitureId, setFurnitureId] = useState(0);
     const handleFurnitureSelected = () => {
   
       const furnitureImage = FurnitureLayer[`FurnitureLayer${missionId}${furnitureNum}`];
@@ -64,13 +65,14 @@ export default function MissionFurniturePreview() {
 
       // 가구 고르기 버튼 클릭
   const handleFurnitureClick = (
-    id: number,
+    furntureId: number,
     event: React.MouseEvent<HTMLButtonElement>,
     furnitureNum: number
   ) => {
     event.preventDefault();    
     // missionId와 furnitureNum 값을 Recoil atoms에 설정
     setFurnitureNum(furnitureNum);
+    setFurnitureId(furntureId); // 서버로 보내는 값은 다름
   };
 
   // 날짜 형식을 "MM월 dd일"로 포매팅하는 함수
@@ -97,7 +99,7 @@ export default function MissionFurniturePreview() {
     //TODO: post로 할지 put으로 할지에 대한 분기처리 필요.
     const handleUploadImageMessageFurnitureIdWrapper = async () => {
       try {
-        await uploadImageMessageFurnitureId(imageFile, content.value, furnitureNum, 'post');
+        await uploadImageMessageFurnitureId(imageFile, content.value, furnitureId, 'post');
         // 업로드 성공 후 처리
         setImageFile(null);
         content.reset();
@@ -130,7 +132,7 @@ export default function MissionFurniturePreview() {
                   image={ Furnitures[`Furniture${missionId}1`]}
                   onClick={(
                       event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                    ) => handleFurnitureClick((missionId-1)*3+1, event, 1)}
+                    ) => handleFurnitureClick(missionId*3+furnitureNum, event, 1)}
                   dark={furnitureNum === 1}
                   />
                   <DecorationButton 
@@ -138,7 +140,7 @@ export default function MissionFurniturePreview() {
                   image={Furnitures[`Furniture${missionId}2`]} 
                   onClick={(
                     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                  ) => handleFurnitureClick((missionId-1)*3+2, event, 2)}
+                  ) => handleFurnitureClick(missionId*3+furnitureNum, event, 2)}
                   dark={furnitureNum === 2}
                   />
                   <DecorationButton 
@@ -146,7 +148,7 @@ export default function MissionFurniturePreview() {
                   image={Furnitures[`Furniture${missionId}3`]} 
                   onClick={(
                     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                  ) => handleFurnitureClick((missionId-1)*3+3, event, 3)}
+                  ) => handleFurnitureClick(missionId*3+furnitureNum, event, 3)}
                   dark={furnitureNum === 3}
                   />
                 </S.DecorationButtonContainer>
