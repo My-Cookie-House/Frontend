@@ -1,12 +1,5 @@
 import {atom} from 'recoil';
 
-export type UserInfo = {
-  userId: number | null;
-  userName: string | null;
-  isHouseBuilt: boolean | null;
-  todayMissionComplete: boolean | null;
-};
-
 export type Data = {
   userId: number | null;
   refreshToken: string | null;
