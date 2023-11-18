@@ -15,7 +15,9 @@ import Furnitures from '../../assets/Furniture';
 import ModalOKButton from '../../components/ModalOKButton/ModalOKButton';
 import useInput from '../../hooks/useInput';
 import useModal from '../../hooks/useModal';
-
+import ModalCloseButton from '../../components/ModalCloseButton/ModalCloseButton';
+import { Navigate, useNavigate } from 'react-router';
+import InsideBg from "../../assets/House/Inside/InsideBg.png"
 
 export default function MissionFurniturePreview() {
     // 모달 상태관리
@@ -33,7 +35,6 @@ export default function MissionFurniturePreview() {
     const [furnitureNum, setFurnitureNum] = useRecoilState(furnitureNumAtom);
     const [imageType, setImageType] = useState<'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal'>('FurnitureSelectModal');
     const [modalTitle, setModalTitle] = useState<string>("하나를 선택해주세요!")
-    const [furnitureId, setFurnitureId] = useState(1);
     const [missionId, setMissionId] = useRecoilState(missionIdAtom);
     const [furnitureButtonClicked, setFurnitureButtonClicked] = useRecoilState(furnitureButtonClickedAtom);
     const [imageFile, setImageFile] = useState(null); // 업로드할 이미지 파일을 관리하는 상태
@@ -41,10 +42,10 @@ export default function MissionFurniturePreview() {
     const [missionDate, setMissionDate] = useState<string>("");
     const [missionMessage, setMissionMessage] = useState<string>("오늘 먹은 점심");
     const [modalStep, setModalStep] = useState(1);
-
+    const navigate = useNavigate();
     const handleFurnitureSelected = () => {
   
-      const furnitureImage = FurnitureLayer[`FurnitureLayer${1}${1}`];
+      const furnitureImage = FurnitureLayer[`FurnitureLayer${missionId}${furnitureNum}`];
       setSelectedFurnitureImage(furnitureImage);
   };
   
@@ -60,18 +61,6 @@ export default function MissionFurniturePreview() {
       queryKey: ['house', 'inside', id],
       queryFn: () => getAllCompletedMissions(id),
     });
-  
-    
-     // TODO: furnitures 배열로 부터 가구들의 이미지를 가져와서 imgs 배열에 넣어주기!
-    
-    const furnitures = data?.completedMissions?.map(
-      (mission) => mission.missionCompleteFurniture,
-    );
-  
-    /**
-     * TODO: 가구 레이어 받으면, 아래 함수를 연결해 준다
-     * 만약 본인 쿠키하우스가 아니면, 가구를 클릭 못하게???
-     */
 
       // 가구 고르기 버튼 클릭
   const handleFurnitureClick = (
@@ -79,13 +68,9 @@ export default function MissionFurniturePreview() {
     event: React.MouseEvent<HTMLButtonElement>,
     furnitureNum: number
   ) => {
-    event.preventDefault();
-    setFurnitureId(id);
-    
+    event.preventDefault();    
     // missionId와 furnitureNum 값을 Recoil atoms에 설정
-    setMissionId(id);
     setFurnitureNum(furnitureNum);
-    setFurnitureButtonClicked(true);
   };
 
   // 날짜 형식을 "MM월 dd일"로 포매팅하는 함수
@@ -112,28 +97,24 @@ export default function MissionFurniturePreview() {
     //TODO: post로 할지 put으로 할지에 대한 분기처리 필요.
     const handleUploadImageMessageFurnitureIdWrapper = async () => {
       try {
-        await uploadImageMessageFurnitureId(imageFile, content.value, furnitureId, 'post');
+        await uploadImageMessageFurnitureId(imageFile, content.value, furnitureNum, 'post');
         // 업로드 성공 후 처리
         setImageFile(null);
         content.reset();
-        setImageType('LargeModal');
-        setModalTitle(formatDate(missionDate));
-        setModalStep(5);
+        navigate(`/${id}/inside`);
+
       } catch (error) {
         // 업로드 실패 시 처리
         alert('업로드에 실패했어요.');
-        setImageType('LargeModal'); //TODO: 배포 시에 없애야 함. 테스트용
-        setModalTitle(formatDate(missionDate)) //TODO: 배포 시에 없애야 함. 테스트용
-        setModalStep(5); //TODO: 배포 시에 없애야 함. 테스트용
       }
     };
 
     return (
         <>
-            <S.FurnitureLayerWrapper>
-                <Overlap width={300} height={400} margin="40px 0 0 0" imgs={selectedFurnitureImage} /> {/*TODO: inside.tsx 에서 코드 복붙하면 됨 */}
-                <S.FurnitureLayerPreview src={selectedFurnitureImage} />
-            </S.FurnitureLayerWrapper>
+          <S.FurnitureLayerWrapper>
+              <Overlap width={300} height={400} margin="40px 0 0 0" imgs={[InsideBg]} /> {/*TODO: inside.tsx 에서 코드 복붙하면 됨 */}
+              <S.FurnitureLayerPreview src={selectedFurnitureImage} />
+          </S.FurnitureLayerWrapper>
             
           <Modal
             modalTitle={modalTitle}
@@ -141,42 +122,43 @@ export default function MissionFurniturePreview() {
             onClose={closeMissionArriveModal}
             imageType={imageType}
           >
-              <>
-              <S.DecorationButtonContainer>
-                <DecorationButton 
-                size={90} 
-                image={ Furnitures[`Furniture${missionId}1`]}
-                onClick={(
+            <ModalCloseButton onClick={closeMissionArriveModal} />
+              <S.ModalInnerWrapper>
+                <S.DecorationButtonContainer>
+                  <DecorationButton 
+                  size={90}
+                  image={ Furnitures[`Furniture${missionId}1`]}
+                  onClick={(
+                      event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                    ) => handleFurnitureClick((missionId-1)*3+1, event, 1)}
+                  dark={furnitureNum === 1}
+                  />
+                  <DecorationButton 
+                  size={90} 
+                  image={Furnitures[`Furniture${missionId}2`]} 
+                  onClick={(
                     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                  ) => handleFurnitureClick((missionId-1)*3+1, event, 1)}
-                dark={furnitureId === (missionId-1)*3+1}
-                />
-                <DecorationButton 
-                size={90} 
-                image={Furnitures[`Furniture${missionId}2`]} 
-                onClick={(
-                  event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                ) => handleFurnitureClick((missionId-1)*3+2, event, 2)}
-                dark={furnitureId === (missionId-1)*3+2}
-                />
-                <DecorationButton 
-                size={90} 
-                image={Furnitures[`Furniture${missionId}3`]} 
-                onClick={(
-                  event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                ) => handleFurnitureClick((missionId-1)*3+3, event, 3)}
-                dark={furnitureId === (missionId-1)*3+3}
-                />
-              </S.DecorationButtonContainer>
-              <S.ModalOkButtonWrapper>
-                <ModalOKButton
-                  buttonName="다 골랐어요!"
-                  onClick={() => {
-                    handleUploadImageMessageFurnitureIdWrapper();
-                  }}
-                />
-              </S.ModalOkButtonWrapper>
-            </>
+                  ) => handleFurnitureClick((missionId-1)*3+2, event, 2)}
+                  dark={furnitureNum === 2}
+                  />
+                  <DecorationButton 
+                  size={90} 
+                  image={Furnitures[`Furniture${missionId}3`]} 
+                  onClick={(
+                    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                  ) => handleFurnitureClick((missionId-1)*3+3, event, 3)}
+                  dark={furnitureNum === 3}
+                  />
+                </S.DecorationButtonContainer>
+                <S.ModalOkButtonWrapper>
+                  <ModalOKButton
+                    buttonName="다 골랐어요!"
+                    onClick={() => {
+                      handleUploadImageMessageFurnitureIdWrapper();
+                    }}
+                  />
+                </S.ModalOkButtonWrapper>
+              </S.ModalInnerWrapper>
           </Modal>
         </>
       );

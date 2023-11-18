@@ -30,14 +30,10 @@ export const uploadImageMessageFurnitureId = async (imageFile, content, furnitur
   formData.append('missionCompleteContent', content);
   formData.append('furnitureId', furnitureId.toString());
   
-  const requestConfig = {
-    method: method,
-    url: `/mission-complete`, 
-    data: formData,
-  };
   
   try {
-    await instance(requestConfig);
+    await instance.post('/mission-complete', formData)
+
     // 성공 처리 로직
   } catch (error) {
     console.error('업로드에 실패했습니다.', error);

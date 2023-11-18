@@ -14,6 +14,8 @@ const Login = () => {
     localStorage.setItem('loginMethod', JSON.stringify('kakao'));
   };
 
+  
+
   return (
     <PageLayout>
       <img
