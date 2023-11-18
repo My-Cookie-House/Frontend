@@ -9,7 +9,7 @@ import Overlap from '../../../components/Overlap/Overlap';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {getAllCompletedMissions} from '../../../apis/mission';
 import {IAllCompletedMissions} from '../../../interfaces/mission';
-import CompletedMissionModal from '../../../components/Modal/CompletedMissionModal/CompletedMissionModal';
+import InsideBg from '../../../assets/House/Inside/InsideBg.png';
 
 export default function Inside() {
   const [shareModalOpen, setShareModalOpen] = useState(false);
@@ -48,7 +48,7 @@ export default function Inside() {
 
   return (
     <>
-      <Overlap width={300} height={400} margin="40px 0 0 0" imgs={[]} />
+      <Overlap width={300} height={400} margin="40px 0 0 0" imgs={[InsideBg]} />
       {isMyHouse && (
         <Button
           width={50}
