@@ -45,7 +45,7 @@ export default function MissionFurniturePreview() {
 
     const handleFurnitureSelected = () => {
   
-      const furnitureImage = FurnitureLayer[`FurnitureLayer${1}${1}`];
+      const furnitureImage = FurnitureLayer[`FurnitureLayer${missionId}${furnitureNum}`];
       setSelectedFurnitureImage(furnitureImage);
   };
   
@@ -131,10 +131,10 @@ export default function MissionFurniturePreview() {
 
     return (
         <>
-            <S.FurnitureLayerWrapper>
-                <Overlap width={300} height={400} margin="40px 0 0 0" imgs={selectedFurnitureImage} /> {/*TODO: inside.tsx 에서 코드 복붙하면 됨 */}
-                <S.FurnitureLayerPreview src={selectedFurnitureImage} />
-            </S.FurnitureLayerWrapper>
+          <S.FurnitureLayerWrapper>
+              <Overlap width={300} height={400} margin="40px 0 0 0" imgs={selectedFurnitureImage} /> {/*TODO: inside.tsx 에서 코드 복붙하면 됨 */}
+              <S.FurnitureLayerPreview src={selectedFurnitureImage} />
+          </S.FurnitureLayerWrapper>
             
           <Modal
             modalTitle={modalTitle}
