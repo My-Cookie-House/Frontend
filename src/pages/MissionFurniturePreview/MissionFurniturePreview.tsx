@@ -56,7 +56,7 @@ export default function MissionFurniturePreview() {
   useEffect(() => {
     openMissionArriveModal();
   })
-  /*
+  
     const {data} = useSuspenseQuery<IAllCompletedMissions>({
       queryKey: ['house', 'inside', id],
       queryFn: () => getAllCompletedMissions(id),
@@ -68,7 +68,7 @@ export default function MissionFurniturePreview() {
     const furnitures = data?.completedMissions?.map(
       (mission) => mission.missionCompleteFurniture,
     );
-   */
+   
     /**
      * TODO: 가구 레이어 받으면, 아래 함수를 연결해 준다
      * 만약 본인 쿠키하우스가 아니면, 가구를 클릭 못하게???
@@ -95,7 +95,7 @@ export default function MissionFurniturePreview() {
     const formatedDate = `${month}월 ${day}일`
     return formatedDate
   };
-/*
+
         // useEffect 내에서 fetchTodayMissionData 함수 사용
         useEffect(() => {
           const fetchData = async () => {
@@ -109,7 +109,7 @@ export default function MissionFurniturePreview() {
       
           fetchData();
         }, []);
-*/
+
     //TODO: post로 할지 put으로 할지에 대한 분기처리 필요.
     const handleUploadImageMessageFurnitureIdWrapper = async () => {
       try {

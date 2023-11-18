@@ -1,3 +1,4 @@
+
 import FurnitureLayer11 from './1-1.png';
 import FurnitureLayer12 from './1-2.png';
 import FurnitureLayer13 from './1-3.png';
@@ -75,6 +76,7 @@ import FurnitureLayer252 from './25-2.png';
 import FurnitureLayer253 from './25-3.png';
 
 export default {
+  
   FurnitureLayer11,
   FurnitureLayer12,
   FurnitureLayer13,
@@ -150,4 +152,5 @@ export default {
   FurnitureLayer251,
   FurnitureLayer252,
   FurnitureLayer253
+  
 };
