@@ -30,7 +30,7 @@ export default function Redirect() {
         response.data.data.refreshToken,
       );
       setLoginState(true);
-      navigate(`/${response.data.data.userId}`);
+      navigate('/');
     } catch (e) {
       console.log('로그인 불가');
     }
