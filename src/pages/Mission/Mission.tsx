@@ -13,7 +13,7 @@ import {useQuery} from '@tanstack/react-query';
 import {ICompletedMission} from '../../interfaces/mission';
 import { fetchTodayMissionData, uploadImageMessageFurnitureId, getCompletedMissionByDate } from '../../apis/mission';
 
-function Mission({ isOpen, onClose }) {
+function Mission({ isOpen, onClose, onFurnitureSelected }) {
   const userInfo = useRecoilValue(userInfoAtom);
   const { todayMissionComplete } = userInfo; //이걸로 이미지와 메시지 post를 했냐 안했냐 판단
 
@@ -123,9 +123,11 @@ function Mission({ isOpen, onClose }) {
   const handleFurnitureClick = (
     id: number,
     event: React.MouseEvent<HTMLButtonElement>,
+    furnitureNum: number
   ) => {
     event.preventDefault(); // 기본 동작 방지
     setFurnitureId(id); // 서버로 보낼 furnitureId
+    onFurnitureSelected(furnitureNum, missionId); // 이 부분 추가
   };
 
   // ShowMoreMenuButton 클릭 핸들러
@@ -250,7 +252,7 @@ function Mission({ isOpen, onClose }) {
                   image={ Furnitures[`Furniture${missionId}1`]}
                   onClick={(
                       event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                    ) => handleFurnitureClick((missionId-1)*3+1, event)}
+                    ) => handleFurnitureClick((missionId-1)*3+1, event, 1)}
                   dark={furnitureId === (missionId-1)*3+1}
                   />
                   <DecorationButton 
@@ -258,7 +260,7 @@ function Mission({ isOpen, onClose }) {
                   image={Furnitures[`Furniture${missionId}2`]} 
                   onClick={(
                     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                  ) => handleFurnitureClick((missionId-1)*3+2, event)}
+                  ) => handleFurnitureClick((missionId-1)*3+2, event, 2)}
                   dark={furnitureId === (missionId-1)*3+2}
                   />
                   <DecorationButton 
@@ -266,7 +268,7 @@ function Mission({ isOpen, onClose }) {
                   image={Furnitures[`Furniture${missionId}3`]} 
                   onClick={(
                     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                  ) => handleFurnitureClick((missionId-1)*3+3, event)}
+                  ) => handleFurnitureClick((missionId-1)*3+3, event, 3)}
                   dark={furnitureId === (missionId-1)*3+3}
                   />
                 </S.DecorationButtonContainer>

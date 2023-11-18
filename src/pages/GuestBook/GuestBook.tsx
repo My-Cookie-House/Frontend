@@ -195,7 +195,7 @@ function GuestBook() {
           {/* 방명록 남겼다고 알림 모달 */}
               <ModalCloseButton onClick={handleModalClose} />
               <S.ModalInnerWrapper>
-              {ornaments[ornamentId] && (
+              {ornaments[ornamentId-1] && (
                 <S.OrnamentImg
                   style={{backgroundImage: `url(${ornaments[ornamentId-1].image})`}}
                 />
