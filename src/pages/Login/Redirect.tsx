@@ -17,8 +17,6 @@ export default function Redirect() {
   const state = Math.floor(Math.random() * 100);
   const loginUrl = `/auth/${loginMethod[0]}?code=${code}&state=${state}`;
 
-  const queryClient = useQueryClient();
-
   const kakaologin = async () => {
     try {
       const response = await instance.get(loginUrl);
@@ -28,7 +26,6 @@ export default function Redirect() {
       }
       navigate('/build');
       useSetTokens(response.data.accessToken, response.data.refreshToken);
-      await queryClient.invalidateQueries(['loginState']);
     } catch (e) {
       console.log('로그인 불가');
     }
