@@ -34,7 +34,7 @@ export default function SplashScreen(): JSX.Element {
 
   return (
     <PageLayout>
-      <div>splash</div>
+      <></>
     </PageLayout>
   );
 }
