@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import Modal from "../../components/Modal/Modal";
+import { useState, useEffect } from 'react';
+import Modal from "../Modal/Modal";
 import useModal from "../../hooks/useModal";
-import ModalCloseButton from "../../components/ModalCloseButton/ModalCloseButton";
-import ModalOKButton from "../../components/ModalOKButton/ModalOKButton";
+import ModalCloseButton from "../ModalCloseButton/ModalCloseButton";
+import ModalOKButton from "../ModalOKButton/ModalOKButton";
 import { S } from "./style"
 import useInput from '../../hooks/useInput';
-import DecorationButton from '../../components/Buttons/DecorationButton/DecorationButton';
+import DecorationButton from '../Buttons/DecorationButton/DecorationButton';
 import Furnitures from '../../assets/Furniture';
 import { useRecoilValue } from 'recoil';
 import { userInfoAtom } from '../../atoms/loginAtom';
 import {useQuery} from '@tanstack/react-query';
 import {ICompletedMission} from '../../interfaces/mission';
-import { fetchTodayMissionData, uploadImageMessageFurnitureId, getCompletedMissionByDate } from '../../apis/mission';
+import { fetchTodayMissionData, getCompletedMissionByDate } from '../../apis/mission';
 import { useRecoilState } from 'recoil';
-import { missionIdAtom, furnitureNumAtom } from '../../atoms/missionAtomState'; // atoms 파일 경로에 따라 수정
+import { missionIdAtom } from '../../atoms/missionAtomState'; // atoms 파일 경로에 따라 수정
+import { useNavigate } from 'react-router';
 
 function Mission({ isOpen, onClose }) {
   const userInfo = useRecoilValue(userInfoAtom);
@@ -25,7 +26,7 @@ function Mission({ isOpen, onClose }) {
     openModal: openMissionArriveModal,
     closeModal: closeMissionArriveModal,
   } = useModal();
-
+    const navigate = useNavigate();
     const content = useInput<HTMLTextAreaElement>(); // 편지 내용을 관리하는 상태
     const [uploadedImage, setUploadedImage] = useState<string | ArrayBuffer>(''); // 업로드 된 이미지 url 관리하는 상태
     const [imageFile, setImageFile] = useState(null); // 업로드할 이미지 파일을 관리하는 상태
@@ -35,13 +36,11 @@ function Mission({ isOpen, onClose }) {
     const [modalStep, setModalStep] = useState(1);
     const [imageType, setImageType] = useState<'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal'>('MediumModal');
     const [modalTitle, setModalTitle] = useState<string>("미션함")
-    const [furnitureId, setFurnitureId] = useState(1);
     // ChangeButton을 보여줄지 말지 결정하는 상태 변수
     const [showChangeButton, setShowChangeButton] = useState(false);
 
      // Recoil을 사용하여 missionId와 furnitureNum 상태를 가져옴
     const [missionId, setMissionId] = useRecoilState(missionIdAtom);
-    const [furnitureNum, setFurnitureNum] = useRecoilState(furnitureNumAtom);
 
     useEffect(() => {
       openMissionArriveModal(); // 모달을 열어야 할 때마다 호출
@@ -67,27 +66,6 @@ function Mission({ isOpen, onClose }) {
       queryFn: () => getCompletedMissionByDate(missionDate),
       staleTime: 10000,
     });
-
-
-  //TODO: post로 할지 put으로 할지에 대한 분기처리 필요.
-  const handleUploadImageMessageFurnitureIdWrapper = async () => {
-    try {
-      await uploadImageMessageFurnitureId(imageFile, content.value, furnitureId, 'post');
-      // 업로드 성공 후 처리
-      setImageFile(null);
-      content.reset();
-      setImageType('LargeModal');
-      setModalTitle(formatDate(missionDate));
-      setModalStep(5);
-    } catch (error) {
-      // 업로드 실패 시 처리
-      alert('업로드에 실패했어요.');
-      setImageType('LargeModal'); //TODO: 배포 시에 없애야 함. 테스트용
-      setModalTitle(formatDate(missionDate)) //TODO: 배포 시에 없애야 함. 테스트용
-      setModalStep(5); //TODO: 배포 시에 없애야 함. 테스트용
-    }
-  };
-  
 
     // 날짜 형식을 "MM월 dd일"로 포매팅하는 함수
     const formatDate = (missionDate) => {
@@ -124,20 +102,6 @@ function Mission({ isOpen, onClose }) {
       }
       
     };
-
-      // 가구 고르기 버튼 클릭
-  const handleFurnitureClick = (
-    id: number,
-    event: React.MouseEvent<HTMLButtonElement>,
-    furnitureNum: number
-  ) => {
-    event.preventDefault();
-    setFurnitureId(id);
-    
-    // missionId와 furnitureNum 값을 Recoil atoms에 설정
-    setMissionId(id);
-    setFurnitureNum(furnitureNum);
-  };
 
   // ShowMoreMenuButton 클릭 핸들러
   const handleOpenShowMoreMenu = () => {
@@ -244,53 +208,13 @@ function Mission({ isOpen, onClose }) {
                 <ModalOKButton
                   buttonName="보러가기"
                   onClick={() => {
-                    setModalStep(4);
-                    setImageType('FurnitureSelectModal');
-                    setModalTitle("하나를 선택해주세요!");
+                    navigate(`custom/furniture`)
+                    onClose();
                   }}
                 />
               </S.ModalOkButtonWrapper>
             </>
           );
-          case 4:
-            return (
-              <>
-                <S.DecorationButtonContainer>
-                  <DecorationButton 
-                  size={90} 
-                  image={ Furnitures[`Furniture${missionId}1`]}
-                  onClick={(
-                      event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                    ) => handleFurnitureClick((missionId-1)*3+1, event, 1)}
-                  dark={furnitureId === (missionId-1)*3+1}
-                  />
-                  <DecorationButton 
-                  size={90} 
-                  image={Furnitures[`Furniture${missionId}2`]} 
-                  onClick={(
-                    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                  ) => handleFurnitureClick((missionId-1)*3+2, event, 2)}
-                  dark={furnitureId === (missionId-1)*3+2}
-                  />
-                  <DecorationButton 
-                  size={90} 
-                  image={Furnitures[`Furniture${missionId}3`]} 
-                  onClick={(
-                    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                  ) => handleFurnitureClick((missionId-1)*3+3, event, 3)}
-                  dark={furnitureId === (missionId-1)*3+3}
-                  />
-                </S.DecorationButtonContainer>
-                <S.ModalOkButtonWrapper>
-                  <ModalOKButton
-                    buttonName="다 골랐어요!"
-                    onClick={() => {
-                      handleUploadImageMessageFurnitureIdWrapper();
-                    }}
-                  />
-                </S.ModalOkButtonWrapper>
-              </>
-            );
           case 5:
             return (
               <>
