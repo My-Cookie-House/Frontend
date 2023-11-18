@@ -26,12 +26,6 @@ export default function House() {
     gcTime: 1000 * 60 * STALE_MIN,
   });
 
-  useEffect(() => {
-    if (!isHouseBuilt) {
-      navigate('/build');
-    }
-  }, [isHouseBuilt]);
-
   // Mission 모달을 여는 함수
   const handleOpenMissionModal = () => {
     // TODO: 이 쓸데없는 함수 없이 어떻게 깔끔하게 정리할 수 있을까..
