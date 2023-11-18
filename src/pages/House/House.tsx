@@ -1,17 +1,23 @@
 import * as S from './style';
-import {Outlet, useLocation, useParams} from 'react-router-dom';
+import {Outlet, useLocation, useNavigate, useParams} from 'react-router-dom';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import {useQuery} from '@tanstack/react-query';
 import house from '../../apis/house';
 import {IHouseOutside} from '../../interfaces/house';
 import {Suspense, useEffect, useState} from 'react';
 import useIsMyHouse from '../../hooks/useIsMyHouse';
+import {useRecoilValue} from 'recoil';
+import {userInfo} from 'os';
+import {userInfoAtom} from '../../atoms/loginStateAtom';
 
 const STALE_MIN = 5;
 
 export default function House() {
   const {id, userId, isMyHouse} = useIsMyHouse();
+  const {isHouseBuilt} = useRecoilValue(userInfoAtom);
   const {pathname} = useLocation();
+
+  const navigate = useNavigate();
 
   const {data} = useQuery<IHouseOutside>({
     queryKey: ['house', 'outside', id],
@@ -19,6 +25,12 @@ export default function House() {
     staleTime: 1000 * 60 * STALE_MIN,
     gcTime: 1000 * 60 * STALE_MIN,
   });
+
+  useEffect(() => {
+    if (!isHouseBuilt) {
+      navigate('/build');
+    }
+  }, [isHouseBuilt]);
 
   // Mission 모달을 여는 함수
   const handleOpenMissionModal = () => {
