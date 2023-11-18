@@ -15,6 +15,8 @@ const ShareImg = styled.img`
 const FurnitureLayerWrapper = styled.div`
   position: relative;
   margin-top: 40px;
+  border: none;
+
 `;
 
 const FurnitureLayerPreview = styled.img`
@@ -22,6 +24,7 @@ const FurnitureLayerPreview = styled.img`
     width: 300px;
     height: 400px;
     top:40px;
+    border: none;
 `;
 
 
@@ -32,6 +35,8 @@ const ModalInnerWrapper = styled.div`
     align-items: center; 
     justify-content: center;
     margin-top: 68px;
+    border: none;
+
 `;
 
 const ModalText = styled.div`
