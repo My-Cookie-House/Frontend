@@ -55,10 +55,10 @@ export default function PageLayout({
     else setLogo(true);
   }, [pathname]);
 
-  useLayoutEffect(() => {
-    if (SIDE_BUTTON_PATHS.includes(pathname)) setButton(true);
-    else setLogo(false);
-  }, [pathname]);
+  // useLayoutEffect(() => {
+  //   if (SIDE_BUTTON_PATHS.includes(pathname)) setButton(true);
+  //   else setLogo(false);
+  // }, [pathname]);
 
   return (
     <S.Layout>
