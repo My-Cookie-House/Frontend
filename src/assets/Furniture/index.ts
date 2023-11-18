@@ -1,7 +1,6 @@
 import Furniture11 from './1-1.png';
 import Furniture12 from './1-2.png';
 import Furniture13 from './1-3.png';
-/*
 import Furniture21 from '../../assets/Furniture/2-1.png';
 import Furniture22 from '../../assets/Furniture/2-2.png';
 import Furniture23 from '../../assets/Furniture/2-3.png';
@@ -74,14 +73,13 @@ import Furniture243 from '../../assets/Furniture/24-3.png';
 import Furniture251 from '../../assets/Furniture/25-1.png';
 import Furniture252 from '../../assets/Furniture/25-2.png';
 import Furniture253 from '../../assets/Furniture/25-3.png';
-*/
+
 
 //TODO: 이미지가 모두 만들어지면 주석 해제 하기
 export default {
   Furniture11,
   Furniture12,
   Furniture13,
-  /*
     Furniture21,
     Furniture22,
     Furniture23,
@@ -154,5 +152,5 @@ export default {
     Furniture251,
     Furniture252,
     Furniture253
-    */
+    
 };
