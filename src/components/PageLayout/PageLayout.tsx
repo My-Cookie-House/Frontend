@@ -5,7 +5,7 @@ import BackButton from '../../assets/Button/BackButton.svg';
 import * as S from './style';
 import {useLocation} from 'react-router-dom';
 import Button from '../Buttons/Button';
-import Mission from '../../pages/Mission/Mission';
+import Mission from '../Mission/Mission';
 
 type Props = {
   children: React.ReactNode;

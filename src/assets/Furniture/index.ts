@@ -77,7 +77,7 @@ import Furniture253 from '../../assets/Furniture/25-3.png';
 */
 
 //TODO: 이미지가 모두 만들어지면 주석 해제 하기
-export default [
+export default {
   Furniture11,
   Furniture12,
   Furniture13,
@@ -155,4 +155,4 @@ export default [
     Furniture252,
     Furniture253
     */
-];
+};

@@ -28,6 +28,7 @@ const ornaments: Ornament[] = [
   { id: 9, image: Ornament9 },
   { id: 10, image: Ornament10 },
   { id: 11, image: Ornament11 },
+
 ];
 
 export default ornaments;

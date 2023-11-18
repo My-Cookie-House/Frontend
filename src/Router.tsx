@@ -15,6 +15,7 @@ import House from './pages/House/House';
 import Outside from './pages/House/Outside/Outside';
 import Inside from './pages/House/Inside/Inside';
 import Redirect from './pages/Login/Redirect';
+import MissionFurniturePreview from './pages/MissionFurniturePreview/MissionFurniturePreview'
 
 export default function Router() {
   return (
@@ -31,6 +32,7 @@ export default function Router() {
         <Route path="/:id" element={<House />}>
           <Route path="" element={<Outside />} />
           <Route path="inside" element={<Inside />} />
+          <Route path="custom/furniture" element={<MissionFurniturePreview />} />
         </Route>
 
         {/* 쿠키하우스 빌딩 하위 경로 */}
