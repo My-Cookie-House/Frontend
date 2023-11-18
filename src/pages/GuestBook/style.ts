@@ -187,6 +187,27 @@ const GuestBookContent = styled.div`
     overflow: auto;
 `;
 
+const GuestBookNoneWrapper = styled.div`
+  position:relative;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    overflow: auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 100vh; 
+    width: 100vw; 
+`;
+
+
+
+
+const GuestBookNone = styled.span`
+  color: rgba(87, 46, 22, 1);
+
+`;
+
 export const S = {
     Container,
     WirteGuestBookButton,
@@ -203,5 +224,7 @@ export const S = {
     OrnamentButton,
     OrnamentImg,
     ModalInnerWrapper,
-    GuestBookContent
+    GuestBookContent,
+    GuestBookNone,
+    GuestBookNoneWrapper
 }
