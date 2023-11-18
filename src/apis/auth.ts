@@ -3,7 +3,7 @@ export async function getLoginUserInfo() {
     const response: any = await instance.get('/user');
     return response.data.data;
   } catch (err) {
-    return new Error();
+    return null;
   }
 }
 

@@ -5,27 +5,27 @@ import {useEffect} from 'react';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import CookieHouse from '../../assets/OnboardingAssets/CookieHouse.svg';
 import {Description, Wrapper} from './RedirectStyle';
+import {useRecoilState} from 'recoil';
+import {loginMethodAtom} from '../../atoms/loginAtom';
 
 export default function Redirect() {
   let url = new URL(window.location.href);
   let code = url.searchParams.get('code');
   const navigate = useNavigate();
-
+  const loginMethod = useRecoilState(loginMethodAtom);
   const state = Math.floor(Math.random() * 100);
+  const loginUrl = `/auth/${loginMethod[0]}?code=${code}&state=${state}`;
 
   const kakaologin = async () => {
     try {
-      const response = await instance.get(
-        `/auth/kakao?code=${code}&state=${state}`,
-      );
-
-      console.log(response.data.data.accessToken);
+      const response = await instance.get(loginUrl);
+      console.log(response.data.accessToken);
+      if (response.data.accessToken === undefined) {
+        console.log('엑세스 토큰을 못 받았어요');
+      }
       console.log('로그인 성공');
       navigate('/build');
-      useSetTokens(
-        response.data.data.accessToken,
-        response.data.data.refreshToken,
-      );
+      useSetTokens(response.data.accessToken, response.data.refreshToken);
     } catch (e) {
       console.log('로그인 불가');
     }
