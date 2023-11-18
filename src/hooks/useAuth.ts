@@ -14,7 +14,6 @@ export default function useAuth() {
   const {data, isSuccess, isError} = useSuspenseQuery({
     queryKey: ['loginState'],
     queryFn: getLoginUserInfo,
-    gcTime: Infinity,
   });
   useEffect(() => {
     if (data !== null) {
