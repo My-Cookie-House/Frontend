@@ -4,7 +4,6 @@ import ModalCloseButton from '../../ModalCloseButton/ModalCloseButton';
 import {useQuery} from '@tanstack/react-query';
 import {getCompletedMissionByDate} from '../../../apis/mission';
 import {ICompletedMission} from '../../../interfaces/mission';
-import useIsMyHouse from '../../../hooks/useIsMyHouse';
 
 type Props = {
   closeModal: () => void;
@@ -17,9 +16,8 @@ export default function CompletedMissionModal({
   closeModal,
   date,
 }: Props) {
-  const {id} = useIsMyHouse();
   const {data} = useQuery<ICompletedMission>({
-    queryKey: ['mission', date, id],
+    queryKey: ['mission', date],
     queryFn: () => getCompletedMissionByDate(date),
     staleTime: 10000,
   });

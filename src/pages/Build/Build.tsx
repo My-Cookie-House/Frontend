@@ -9,8 +9,6 @@ import {
   initalBuildState,
 } from '../../atoms/buildAtom';
 import {userInfoAtom} from '../../atoms/loginStateAtom';
-import Building from '../../assets/House/Build/Building.png';
-import BuildComplete from '../../assets/House/Build/BuildComplete.png';
 
 export default function Build() {
   const [buildState, setBuildState] =
@@ -38,11 +36,6 @@ export default function Build() {
   // 뒤로가기 했을 때, 이전에 선택했던 것들이 남지 않게 초기화 시켜준다
   useEffect(() => {
     setBuildState(initalBuildState);
-
-    const img = new Image();
-    img.src = Building;
-    const img2 = new Image();
-    img2.src = BuildComplete;
   }, []);
 
   return (

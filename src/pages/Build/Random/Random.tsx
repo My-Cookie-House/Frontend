@@ -4,8 +4,6 @@ import LongButton from '../../../components/Buttons/LongButton/LongButton';
 import {useEffect, useState} from 'react';
 import {useSetRecoilState} from 'recoil';
 import {buildStateAtom} from '../../../atoms/buildAtom';
-import Building from '../../../assets/House/Build/Building.png';
-import BuildComplete from '../../../assets/House/Build/BuildComplete.png';
 
 const COOKIE_COUNT = 6;
 const ICING_COUNT = 4;
@@ -48,9 +46,12 @@ export default function Random() {
           ? '공사중이니 조금만 기다려주세요!'
           : '쿠키하우스가 완성되었어요!'}
       </SBuild.Description>
+      {/**
+       * TODO: 공사 중, 공사 완료 일러스트 이미지 추가
+       */}
       <S.Image
         alt={isConstructing ? '공사중 일러스트' : '공사완료 일러스트'}
-        src={isConstructing ? Building : BuildComplete}
+        src=""
       />
       <LongButton dark={isConstructing} route="/build/preview">
         <SBuild.NextStepText>

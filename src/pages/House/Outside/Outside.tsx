@@ -7,8 +7,6 @@ import useIsMyHouse from '../../../hooks/useIsMyHouse';
 import Overlap from '../../../components/Overlap/Overlap';
 import Cookies from '../../../assets/House/Outside/Cookies';
 import Icings from '../../../assets/House/Outside/Icings';
-import {useEffect} from 'react';
-import InsideBg from '../../../assets/House/Inside/InsideBg.png';
 
 const STALE_MIN = 5;
 const GC_MIN = 5;
@@ -24,12 +22,6 @@ export default function Outside() {
   });
 
   const [num1, num2] = data.cookieIds;
-
-  useEffect(() => {
-    // 하우스 내부 배경 이미지 preload
-    const img = new Image();
-    img.src = InsideBg;
-  }, []);
 
   return (
     <>
