@@ -14,7 +14,6 @@ export default function Redirect() {
   loginMethod = loginMethod.replace(/"/g, ''); // 따옴표 제거
   localStorage.setItem('loginMethod', loginMethod); // 수정된 값으로 다시 로컬스토리지에 저장
 
-  console.log(loginMethod);
   const state = Math.floor(Math.random() * 100);
   const loginUrl = `/auth/${loginMethod}?code=${code}&state=${state}`;
   console.log(loginUrl);
