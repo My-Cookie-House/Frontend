@@ -15,6 +15,7 @@ import Furnitures from '../../assets/Furniture';
 import ModalOKButton from '../../components/ModalOKButton/ModalOKButton';
 import useInput from '../../hooks/useInput';
 import useModal from '../../hooks/useModal';
+import ModalCloseButton from '../../components/ModalCloseButton/ModalCloseButton';
 
 
 export default function MissionFurniturePreview() {
@@ -44,7 +45,7 @@ export default function MissionFurniturePreview() {
 
     const handleFurnitureSelected = () => {
   
-      const furnitureImage = FurnitureLayer[`FurnitureLayer${1}${1}`];
+      const furnitureImage = FurnitureLayer[`FurnitureLayer${missionId}${furnitureNum}`];
       setSelectedFurnitureImage(furnitureImage);
   };
   
@@ -60,14 +61,14 @@ export default function MissionFurniturePreview() {
       queryKey: ['house', 'inside', id],
       queryFn: () => getAllCompletedMissions(id),
     });
-  
+ 
     
      // TODO: furnitures 배열로 부터 가구들의 이미지를 가져와서 imgs 배열에 넣어주기!
     
     const furnitures = data?.completedMissions?.map(
       (mission) => mission.missionCompleteFurniture,
     );
-  
+   
     /**
      * TODO: 가구 레이어 받으면, 아래 함수를 연결해 준다
      * 만약 본인 쿠키하우스가 아니면, 가구를 클릭 못하게???
@@ -130,10 +131,10 @@ export default function MissionFurniturePreview() {
 
     return (
         <>
-            <S.FurnitureLayerWrapper>
-                <Overlap width={300} height={400} margin="40px 0 0 0" imgs={selectedFurnitureImage} /> {/*TODO: inside.tsx 에서 코드 복붙하면 됨 */}
-                <S.FurnitureLayerPreview src={selectedFurnitureImage} />
-            </S.FurnitureLayerWrapper>
+          <S.FurnitureLayerWrapper>
+              <Overlap width={300} height={400} margin="40px 0 0 0" imgs={selectedFurnitureImage} /> {/*TODO: inside.tsx 에서 코드 복붙하면 됨 */}
+              <S.FurnitureLayerPreview src={selectedFurnitureImage} />
+          </S.FurnitureLayerWrapper>
             
           <Modal
             modalTitle={modalTitle}
@@ -141,42 +142,43 @@ export default function MissionFurniturePreview() {
             onClose={closeMissionArriveModal}
             imageType={imageType}
           >
-              <>
-              <S.DecorationButtonContainer>
-                <DecorationButton 
-                size={90} 
-                image={ Furnitures[`Furniture${missionId}1`]}
-                onClick={(
+            <ModalCloseButton onClick={closeMissionArriveModal} />
+              <S.ModalInnerWrapper>
+                <S.DecorationButtonContainer>
+                  <DecorationButton 
+                  size={90}
+                  image={ Furnitures[`Furniture${missionId}1`]}
+                  onClick={(
+                      event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                    ) => handleFurnitureClick((missionId-1)*3+1, event, 1)}
+                  dark={furnitureId === (missionId-1)*3+1}
+                  />
+                  <DecorationButton 
+                  size={90} 
+                  image={Furnitures[`Furniture${missionId}2`]} 
+                  onClick={(
                     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                  ) => handleFurnitureClick((missionId-1)*3+1, event, 1)}
-                dark={furnitureId === (missionId-1)*3+1}
-                />
-                <DecorationButton 
-                size={90} 
-                image={Furnitures[`Furniture${missionId}2`]} 
-                onClick={(
-                  event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                ) => handleFurnitureClick((missionId-1)*3+2, event, 2)}
-                dark={furnitureId === (missionId-1)*3+2}
-                />
-                <DecorationButton 
-                size={90} 
-                image={Furnitures[`Furniture${missionId}3`]} 
-                onClick={(
-                  event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                ) => handleFurnitureClick((missionId-1)*3+3, event, 3)}
-                dark={furnitureId === (missionId-1)*3+3}
-                />
-              </S.DecorationButtonContainer>
-              <S.ModalOkButtonWrapper>
-                <ModalOKButton
-                  buttonName="다 골랐어요!"
-                  onClick={() => {
-                    handleUploadImageMessageFurnitureIdWrapper();
-                  }}
-                />
-              </S.ModalOkButtonWrapper>
-            </>
+                  ) => handleFurnitureClick((missionId-1)*3+2, event, 2)}
+                  dark={furnitureId === (missionId-1)*3+2}
+                  />
+                  <DecorationButton 
+                  size={90} 
+                  image={Furnitures[`Furniture${missionId}3`]} 
+                  onClick={(
+                    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+                  ) => handleFurnitureClick((missionId-1)*3+3, event, 3)}
+                  dark={furnitureId === (missionId-1)*3+3}
+                  />
+                </S.DecorationButtonContainer>
+                <S.ModalOkButtonWrapper>
+                  <ModalOKButton
+                    buttonName="다 골랐어요!"
+                    onClick={() => {
+                      handleUploadImageMessageFurnitureIdWrapper();
+                    }}
+                  />
+                </S.ModalOkButtonWrapper>
+              </S.ModalInnerWrapper>
           </Modal>
         </>
       );
