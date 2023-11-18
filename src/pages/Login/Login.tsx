@@ -15,14 +15,13 @@ const Login = () => {
   const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&scope=profile_nickname`;
   const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=profile`;
-  const [loginMethod, setLoginMethod] = useRecoilState(loginMethodAtom);
 
   const handleKakaoClick = (event) => {
-    setLoginMethod('kakao');
+    localStorage.setItem('loginMethod', JSON.stringify('kakao'));
   };
 
   const handleGoogleClick = (event) => {
-    setLoginMethod('google');
+    localStorage.setItem('loginMethod', JSON.stringify('google'));
   };
 
   return (

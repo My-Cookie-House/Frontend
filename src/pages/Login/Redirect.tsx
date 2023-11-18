@@ -5,16 +5,19 @@ import {useEffect} from 'react';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import CookieHouse from '../../assets/OnboardingAssets/CookieHouse.svg';
 import {Description, Wrapper} from './RedirectStyle';
-import {useRecoilState} from 'recoil';
-import {loginMethodAtom} from '../../atoms/loginAtom';
 
 export default function Redirect() {
   let url = new URL(window.location.href);
   let code = url.searchParams.get('code');
   const navigate = useNavigate();
-  const loginMethod = useRecoilState(loginMethodAtom);
+  let loginMethod = localStorage.getItem('loginMethod');
+  loginMethod = loginMethod.replace(/"/g, ''); // 따옴표 제거
+  localStorage.setItem('loginMethod', loginMethod); // 수정된 값으로 다시 로컬스토리지에 저장
+
+  console.log(loginMethod);
   const state = Math.floor(Math.random() * 100);
-  const loginUrl = `/auth/${loginMethod[0]}?code=${code}&state=${state}`;
+  const loginUrl = `/auth/${loginMethod}?code=${code}&state=${state}`;
+  console.log(loginUrl);
 
   const kakaologin = async () => {
     try {
