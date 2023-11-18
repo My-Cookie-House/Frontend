@@ -82,7 +82,7 @@ export default function MissionFurniturePreview() {
 
   // 가구 고르기 버튼 클릭
   const handleFurnitureClick = (
-    id: number,
+    furntureId: number,
     event: React.MouseEvent<HTMLButtonElement>,
     furnitureNum: number,
   ) => {
