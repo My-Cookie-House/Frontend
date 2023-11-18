@@ -31,7 +31,7 @@ export default function Redirect() {
         response.data.data.refreshToken,
       );
       setLoginState(true);
-      setUserInfo(response.data);
+      //setUserInfo(response.data);
       navigate('/');
     } catch (e) {
       console.log('로그인 불가');
