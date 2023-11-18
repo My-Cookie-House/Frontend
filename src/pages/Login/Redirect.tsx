@@ -10,12 +10,9 @@ export default function Redirect() {
   let url = new URL(window.location.href);
   let code = url.searchParams.get('code');
   const navigate = useNavigate();
-  let loginMethod = localStorage.getItem('loginMethod');
-  loginMethod = loginMethod.replace(/"/g, ''); // 따옴표 제거
-  localStorage.setItem('loginMethod', loginMethod); // 수정된 값으로 다시 로컬스토리지에 저장
 
   const state = Math.floor(Math.random() * 100);
-  const loginUrl = `/auth/${loginMethod}?code=${code}&state=${state}`;
+  const loginUrl = `/auth/kakao?code=${code}&state=${state}`;
   console.log(loginUrl);
 
   const kakaologin = async () => {
@@ -26,12 +23,11 @@ export default function Redirect() {
       if (response.data.data.accessToken === undefined) {
         console.log('엑세스 토큰을 못 받았어요');
       }
-      console.log('로그인 성공');
-      navigate('/build');
       useSetTokens(
         response.data.data.accessToken,
         response.data.data.refreshToken,
       );
+      navigate('/');
     } catch (e) {
       console.log('로그인 불가');
     }

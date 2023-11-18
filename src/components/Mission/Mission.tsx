@@ -8,7 +8,7 @@ import useInput from '../../hooks/useInput';
 import DecorationButton from '../Buttons/DecorationButton/DecorationButton';
 import Furnitures from '../../assets/Furniture';
 import { useRecoilValue } from 'recoil';
-import { userInfoAtom } from '../../atoms/loginAtom';
+import { userInfoAtom } from '../../atoms/loginStateAtom';
 import {useQuery} from '@tanstack/react-query';
 import {ICompletedMission} from '../../interfaces/mission';
 import { fetchTodayMissionData, getCompletedMissionByDate } from '../../apis/mission';
