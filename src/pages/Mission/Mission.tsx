@@ -12,8 +12,10 @@ import { userInfoAtom } from '../../atoms/loginAtom';
 import {useQuery} from '@tanstack/react-query';
 import {ICompletedMission} from '../../interfaces/mission';
 import { fetchTodayMissionData, uploadImageMessageFurnitureId, getCompletedMissionByDate } from '../../apis/mission';
+import { useRecoilState } from 'recoil';
+import { missionIdAtom, furnitureNumAtom } from '../../atoms/missionAtomState'; // atoms 파일 경로에 따라 수정
 
-function Mission({ isOpen, onClose, onFurnitureSelected }) {
+function Mission({ isOpen, onClose }) {
   const userInfo = useRecoilValue(userInfoAtom);
   const { todayMissionComplete } = userInfo; //이걸로 이미지와 메시지 post를 했냐 안했냐 판단
 
@@ -29,13 +31,17 @@ function Mission({ isOpen, onClose, onFurnitureSelected }) {
     const [imageFile, setImageFile] = useState(null); // 업로드할 이미지 파일을 관리하는 상태
     const [missionDate, setMissionDate] = useState<string>("");
     const [missionMessage, setMissionMessage] = useState<string>("오늘 먹은 점심");
-    const [missionId, setMissionId] = useState<number>(1);
+    //const [missionId, setMissionId] = useState<number>(1);
     const [modalStep, setModalStep] = useState(1);
     const [imageType, setImageType] = useState<'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal'>('MediumModal');
     const [modalTitle, setModalTitle] = useState<string>("미션함")
     const [furnitureId, setFurnitureId] = useState(1);
     // ChangeButton을 보여줄지 말지 결정하는 상태 변수
     const [showChangeButton, setShowChangeButton] = useState(false);
+
+     // Recoil을 사용하여 missionId와 furnitureNum 상태를 가져옴
+    const [missionId, setMissionId] = useRecoilState(missionIdAtom);
+    const [furnitureNum, setFurnitureNum] = useRecoilState(furnitureNumAtom);
 
     useEffect(() => {
       openMissionArriveModal(); // 모달을 열어야 할 때마다 호출
@@ -125,9 +131,12 @@ function Mission({ isOpen, onClose, onFurnitureSelected }) {
     event: React.MouseEvent<HTMLButtonElement>,
     furnitureNum: number
   ) => {
-    event.preventDefault(); // 기본 동작 방지
-    setFurnitureId(id); // 서버로 보낼 furnitureId
-    onFurnitureSelected(furnitureNum, missionId); // 이 부분 추가
+    event.preventDefault();
+    setFurnitureId(id);
+    
+    // missionId와 furnitureNum 값을 Recoil atoms에 설정
+    setMissionId(id);
+    setFurnitureNum(furnitureNum);
   };
 
   // ShowMoreMenuButton 클릭 핸들러

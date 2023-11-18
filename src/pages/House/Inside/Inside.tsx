@@ -11,7 +11,8 @@ import {getAllCompletedMissions} from '../../../apis/mission';
 import {IAllCompletedMissions} from '../../../interfaces/mission';
 import CompletedMissionModal from '../../../components/Modal/CompletedMissionModal/CompletedMissionModal';
 import FurnitureLayer from '../../../assets/FurnitureLayer';
-import Mission from '../../Mission/Mission';
+import { useRecoilValue } from 'recoil';
+import { missionIdAtom, furnitureNumAtom } from '../../../atoms/missionAtomState'; // atoms 파일 경로에 따라 수정
 
 export default function Inside() {
   const [shareModalOpen, setShareModalOpen] = useState(false);
@@ -19,6 +20,8 @@ export default function Inside() {
   const {isMyHouse, id} = useIsMyHouse();
   const handleShare = () => setShareModalOpen(true);
   const [selectedFurnitureImage, setSelectedFurnitureImage] = useState(null);
+  const missionId = useRecoilValue(missionIdAtom);
+  const furnitureNum = useRecoilValue(furnitureNumAtom);
 
   const handleFurnitureSelected = (furnitureNum, missionId) => {
     const furnitureImage = FurnitureLayer[`FurnitureLayer${missionId}${furnitureNum}`];
@@ -56,9 +59,7 @@ export default function Inside() {
 
   return (
     <>
-      <Mission onFurnitureSelected={handleFurnitureSelected} isOpen={undefined} onClose={undefined} />
-
-      <Overlap width={300} height={400} margin="40px 0 0 0" imgs={[selectedFurnitureImage]} />
+      <Overlap width={300} height={400} margin="40px 0 0 0" imgs={FurnitureLayer[`FurnitureLayer${missionId}${furnitureNum}`]} />
       {isMyHouse && (
         <Button
           width={50}

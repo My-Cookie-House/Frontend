@@ -10,7 +10,12 @@ type Props = {
 export default function Overlap({width, height, imgs, margin}: Props) {
   return (
     <S.Frame width={width} height={height} margin={margin}>
-      {imgs.map((img, idx) => img && <S.Img key={idx} src={img} />)}
+      {imgs && imgs.length > 0 ? (
+        imgs.map((img, idx) => img && <S.Img key={idx} src={img} />)
+      ) : (
+        // 예외 처리: imgs 배열이 비어있을 때
+        <></>
+      )}
     </S.Frame>
   );
 }
