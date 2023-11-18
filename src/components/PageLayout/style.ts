@@ -58,3 +58,17 @@ export const GoBackContainer = styled.div`
   top: 0;
   left: 0;
 `;
+
+export const LeftButtonImage = styled.img`
+  margin-right: 10px;
+  @media (max-width: 768px) {
+    display: none; /* 모바일 화면일 때 숨김 */
+  }
+`;
+
+export const RightButtonImage = styled.img`
+  margin-left: 10px;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;

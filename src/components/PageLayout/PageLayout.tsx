@@ -7,6 +7,18 @@ import {useLocation} from 'react-router-dom';
 import Button from '../Buttons/Button';
 import Mission from '../Mission/Mission';
 import Logo from '../../assets/Background/Logo.svg';
+import LeftButton from '../../assets/Button/LeftButton.svg';
+import RightButton from '../../assets/Button/RightButton.svg';
+import {
+  handleLeftClick,
+  handleRightClick,
+} from '../../components/OnboardingComponents/Slider';
+import Image1 from '../../assets/OnboardingAssets/onboarding1.svg';
+import Image2 from '../../assets/OnboardingAssets/onboarding2.svg';
+import Image3 from '../../assets/OnboardingAssets/onboarding3.svg';
+import CookieHouse from '../../assets/OnboardingAssets/CookieHouse.svg';
+import {indexAtom} from '../../atoms/sideButtonAtom';
+import {useRecoilState} from 'recoil';
 
 type Props = {
   children: React.ReactNode;
@@ -17,6 +29,8 @@ type Props = {
 
 // 로고 안들어가는 경로들
 const NO_LOGO_PATHS = ['/build/custom/icing', '/build/preview', '/'];
+const SIDE_BUTTON_PATHS = ['/onboarding'];
+const images = [CookieHouse, Image1, Image2, Image3];
 
 export default function PageLayout({
   children,
@@ -25,9 +39,11 @@ export default function PageLayout({
   goBack,
 }: Props) {
   const [logo, setLogo] = useState(true);
+  const [button, setButton] = useState(false);
   const location = useLocation();
   const {pathname} = useLocation();
   const [isMissionOpen, setIsMissionOpen] = useState(false);
+  const [index, setIndex] = useRecoilState<number>(indexAtom);
 
   // Mission 버튼 클릭 핸들러
   const handleMissionClick = () => {
@@ -39,8 +55,19 @@ export default function PageLayout({
     else setLogo(true);
   }, [pathname]);
 
+  useLayoutEffect(() => {
+    if (SIDE_BUTTON_PATHS.includes(pathname)) setButton(true);
+    else setLogo(false);
+  }, [pathname]);
+
   return (
     <S.Layout>
+      {button && (
+        <S.LeftButtonImage
+          src={LeftButton}
+          onClick={() => handleLeftClick(index, setIndex, images)}
+        />
+      )}
       <S.Wrapper isSplashScreen={location.pathname === '/'}>
         {logo && (
           <S.Nav>
@@ -77,7 +104,12 @@ export default function PageLayout({
         )}
         {children}
       </S.Wrapper>
-
+      {button && (
+        <S.RightButtonImage
+          src={RightButton}
+          onClick={() => handleRightClick(index, setIndex, images)}
+        />
+      )}
       {/* Mission 모달 상태에 따라 Mission 컴포넌트 렌더링 */}
       {isMissionOpen && (
         <Mission

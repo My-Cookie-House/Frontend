@@ -3,6 +3,8 @@ import LongButton from '../Buttons/LongButton/LongButton';
 import {S} from './style';
 import SkipButton from '../Buttons/SkipButton/SkipButton';
 import BuildStartButton from '../Buttons/BuildStartButton/BuildStartButton';
+import {useRecoilState} from 'recoil';
+import {indexAtom} from '../../atoms/sideButtonAtom';
 
 interface SliderProps {
   images: string[];
@@ -12,6 +14,18 @@ interface SliderProps {
   progresses: string[];
 }
 
+export const handleRightClick = (index, setIndex, images) => {
+  if (index < images.length - 1) {
+    setIndex(index + 1);
+  }
+};
+
+export const handleLeftClick = (index, setIndex, images) => {
+  if (0 < index) {
+    setIndex(index - 1);
+  }
+};
+
 const Slider: React.FC<SliderProps> = ({
   images,
   topTexts,
@@ -19,7 +33,7 @@ const Slider: React.FC<SliderProps> = ({
   extraTexts,
   progresses,
 }) => {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useRecoilState<number>(indexAtom);
   const [startX, setStartX] = useState(0);
   const [dragging, setDragging] = useState(false);
   const touchRef = useRef(null);
