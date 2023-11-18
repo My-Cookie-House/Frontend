@@ -24,11 +24,9 @@ export const Wrapper = styled.div<{isSplashScreen?: boolean}>`
   align-items: center;
 `;
 // TODO: 로고 추가 필요
-export const Logo = styled.div`
+export const LogoImg = styled.img`
   width: 110px;
   height: 49.7px;
-  background-color: gray;
-  text-align: center;
 `;
 
 export const Nav = styled.nav`
@@ -59,4 +57,18 @@ export const GoBackContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+`;
+
+export const LeftButtonImage = styled.img`
+  margin-right: 10px;
+  @media (max-width: 768px) {
+    display: none; /* 모바일 화면일 때 숨김 */
+  }
+`;
+
+export const RightButtonImage = styled.img`
+  margin-left: 10px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
