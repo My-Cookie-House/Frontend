@@ -5,7 +5,7 @@ export interface ICompletedMission {
   missionCompleteImage: string;
   missionCompleteContent: string;
   missionCompleteDate: string;
-  missionCompleteFurniture: IFurniture;
+  missionCompleteFurnitureId: number;
 }
 
 export interface IAllCompletedMissions {
