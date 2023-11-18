@@ -75,7 +75,7 @@ export default function Inside() {
               ],
           ]}
         />
-        {data.map((v: ICompletedMission) => (
+        {data?.map((v: ICompletedMission) => (
           <S.ButtonLayer
             key={v.missionCompleteId}
             {...dates.get(v.missionCompleteDate)}
