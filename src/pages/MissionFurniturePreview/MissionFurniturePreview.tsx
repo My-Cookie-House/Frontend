@@ -89,7 +89,10 @@ export default function MissionFurniturePreview() {
     event.preventDefault();
     // missionId와 furnitureNum 값을 Recoil atoms에 설정
     setFurnitureNum(furnitureNum);
-    setMissionState((prev) => ({...prev, missionCompleteFurnitureId: id}));
+    setMissionState((prev) => ({
+      ...prev,
+      missionCompleteFurnitureId: furntureId,
+    }));
   };
 
   // 날짜 형식을 "MM월 dd일"로 포매팅하는 함수
