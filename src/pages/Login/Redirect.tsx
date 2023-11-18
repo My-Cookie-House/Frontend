@@ -23,11 +23,11 @@ export default function Redirect() {
       if (response.data.data.accessToken === undefined) {
         console.log('엑세스 토큰을 못 받았어요');
       }
-      navigate('/build');
       useSetTokens(
         response.data.data.accessToken,
         response.data.data.refreshToken,
       );
+      navigate('/');
     } catch (e) {
       console.log('로그인 불가');
     }
