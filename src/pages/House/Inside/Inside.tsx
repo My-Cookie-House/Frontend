@@ -10,16 +10,22 @@ import InsideBg from '../../../assets/House/Inside/InsideBg.png';
 import FurnitureLayer from '../../../assets/FurnitureLayer';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {getAllCompletedMissions} from '../../../apis/mission';
-import {IAllCompletedMissions} from '../../../interfaces/mission';
+import {
+  IAllCompletedMissions,
+  ICompletedMission,
+} from '../../../interfaces/mission';
 import {dates} from '../../../coordinates/coordinates';
 import CompletedMissionModal from '../../../components/Modal/CompletedMissionModal/CompletedMissionModal';
+
+// const getFurnitureNum = (furnitureId: number) => {
+//   return furnitureId - 3 * (missionId - 1);
+// };
 
 export default function Inside() {
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [missionModalOpen, setMissionModalOpen] = useState<null | string>(null);
   const {isMyHouse, id} = useIsMyHouse();
   const handleShare = () => setShareModalOpen(true);
-  const [selectedFurnitureImage, setSelectedFurnitureImage] = useState(null);
 
   const closeShareModal = useCallback(
     () => setShareModalOpen(false),
@@ -29,14 +35,15 @@ export default function Inside() {
     () => setMissionModalOpen(null),
     [setMissionModalOpen],
   );
-  const {data} = useSuspenseQuery<IAllCompletedMissions>({
+  const {data} = useSuspenseQuery<ICompletedMission[]>({
     queryKey: ['house', 'inside', id],
     queryFn: () => getAllCompletedMissions(id),
   });
+  console.log(data);
 
-  const furnitures = data?.completedMissions?.map(
-    (mission) => mission.missionCompleteFurniture,
-  );
+  // const furnitures = data?.completedMissions?.map(
+  //   (mission) => mission.missionCompleteFurniture,
+  // );
   /**
    * TODO: furnitures 배열로 부터 가구들의 이미지를 가져와서 imgs 배열에 넣어주기!
   
@@ -49,9 +56,10 @@ export default function Inside() {
    * 만약 본인 쿠키하우스가 아니면, 가구를 클릭 못하게???
    */
   const handleFurnitureClick = (date: string) => {
+    console.log(date);
     setMissionModalOpen(date);
   };
-
+  console.log(missionModalOpen);
   return (
     <>
       <S.Frame>
@@ -59,22 +67,21 @@ export default function Inside() {
           width={300}
           height={400}
           margin="40px 0 0 0"
-          imgs={[InsideBg, FurnitureLayer['FurnitureLayer11']]}
+          imgs={[
+            InsideBg,
+            data?.length &&
+              FurnitureLayer[
+                `FurnitureLayer2${data?.[0]?.missionCompleteFurnitureId - 3}`
+              ],
+          ]}
         />
-        {Array(1)
-          .fill({
-            missionCompleteId: 1,
-            missionCompleteImage: 'https://~',
-            missionCompleteContent: '오늘은 어쩌구~',
-            missionCompleteDate: '2023-12-20',
-            missionCompleteFurnitureId: 1,
-          })
-          .map((v: any) => (
-            <S.ButtonLayer
-              {...dates.get(v.missionCompleteDate)}
-              onClick={() => handleFurnitureClick(v.missionCompleteDate)}
-            />
-          ))}
+        {data.map((v: ICompletedMission) => (
+          <S.ButtonLayer
+            key={v.missionCompleteId}
+            {...dates.get(v.missionCompleteDate)}
+            onClick={() => handleFurnitureClick(v.missionCompleteDate)}
+          />
+        ))}
       </S.Frame>
       {isMyHouse && (
         <Button

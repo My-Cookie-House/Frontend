@@ -11,8 +11,11 @@ import ornaments from '../../components/ImportOrnaments/ImportOrnaments';
 import useInput from '../../hooks/useInput';
 import useIsMyHouse from '../../hooks/useIsMyHouse';
 import { getUserInfoFromServer, sendGuestBook } from '../../apis/guestBook';
+import { useRecoilValue } from 'recoil';
+import { userInfoAtom } from '../../atoms/loginStateAtom';
 
 function GuestBook() {
+  const {isHouseBuilt} = useRecoilValue(userInfoAtom);
   const {id, userId, isMyHouse} = useIsMyHouse();
   const [houseName, setHouseName] = useState<string>('코알라하우스');
   const author = useInput<HTMLInputElement>(); // 보내는 사람 이름을 관리하는 상태
@@ -218,31 +221,44 @@ function GuestBook() {
     <>
       <S.ButtonWrapper>
         <TitleContainerBox title={houseName} />
-        <S.WirteGuestBookButton onClick={openModal} />
+        {
+          isHouseBuilt && !isMyHouse && (
+            <S.WirteGuestBookButton onClick={openModal} />
+          )
+        }
       </S.ButtonWrapper>
       <PageLayout goBack={`/${id}/inside`}>
-        <S.GuestBookEntryGrid>
-          {guestBook.map((entry: any) => (
-            <S.GuestBookEntry key={entry.ornamentId}>
-              <S.OrnamentButton
-                style={{
-                  backgroundImage: `url(${
-                    ornaments[entry.ornamentId - 1].image
-                  })`,
-                }}
-                onClick={() => 
-                  isMyHouse &&
-                  handleShowGuestBookContent(
-                    entry.ornamentId,
-                    entry.author,
-                    entry.content,
-                  )
-                }
-              />
-              <S.AuthorName>{entry.author}</S.AuthorName>
-            </S.GuestBookEntry>
-          ))}
-        </S.GuestBookEntryGrid>
+
+        
+  {
+    guestBook.length === 0 ? (
+      <S.GuestBookNoneWrapper>
+        <S.GuestBookNone>방명록이 없어요.</S.GuestBookNone>
+      </S.GuestBookNoneWrapper>
+        ) : (
+          <S.GuestBookEntryGrid>
+            {guestBook.map((entry: any) => (
+              <S.GuestBookEntry key={entry.ornamentId}>
+                <S.OrnamentButton
+                  style={{
+                    backgroundImage: `url(${ornaments[entry.ornamentId - 1].image})`,
+                  }}
+                  onClick={() => 
+                    isMyHouse &&
+                    handleShowGuestBookContent(
+                      entry.ornamentId,
+                      entry.author,
+                      entry.content,
+                    )
+                  }
+                />
+                <S.AuthorName>{entry.author}</S.AuthorName>
+              </S.GuestBookEntry>
+            ))}
+          </S.GuestBookEntryGrid>
+        )
+      }
+  
       </PageLayout>
 
       <Modal

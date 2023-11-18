@@ -25,4 +25,6 @@ export const ButtonLayer = styled.button<{
   top: ${(props) => props.top};
   left: ${(props) => props.left};
   opacity: 0;
+  cursor: pointer;
+  z-index: 100;
 `;
