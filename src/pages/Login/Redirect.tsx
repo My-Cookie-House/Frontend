@@ -21,13 +21,17 @@ export default function Redirect() {
   const kakaologin = async () => {
     try {
       const response = await instance.get(loginUrl);
-      console.log(response.data.accessToken);
-      if (response.data.accessToken === undefined) {
+      console.log(response);
+      console.log(response.data.data.accessToken);
+      if (response.data.data.accessToken === undefined) {
         console.log('엑세스 토큰을 못 받았어요');
       }
       console.log('로그인 성공');
       navigate('/build');
-      useSetTokens(response.data.accessToken, response.data.refreshToken);
+      useSetTokens(
+        response.data.data.accessToken,
+        response.data.data.refreshToken,
+      );
     } catch (e) {
       console.log('로그인 불가');
     }
