@@ -8,6 +8,7 @@ import {userInfoAtom, loginStateAtom} from '../../atoms/loginStateAtom';
 export default function SplashScreen(): JSX.Element {
   const navigate = useNavigate();
   const user = useRecoilValue(userInfoAtom);
+  console.log(user);
 
   // 로그인 상태 가져오기
   const userId = user?.userId;
