@@ -220,7 +220,7 @@ function GuestBook() {
         <TitleContainerBox title={houseName} />
         <S.WirteGuestBookButton onClick={openModal} />
       </S.ButtonWrapper>
-      <PageLayout>
+      <PageLayout goBack={`/${id}/inside`}>
         <S.GuestBookEntryGrid>
           {guestBook.map((entry: any) => (
             <S.GuestBookEntry key={entry.ornamentId}>
