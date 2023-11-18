@@ -1,6 +1,5 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import GuestBook from './pages/GuestBook/GuestBook';
-import Mission from './pages/Mission/Mission';
 import Onboarding from './pages/Onboarding/Onboarding';
 import Login from './pages/Login/Login';
 import Build from './pages/Build/Build';

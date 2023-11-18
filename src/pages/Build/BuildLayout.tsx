@@ -2,9 +2,8 @@ import {Outlet, useLocation, useNavigate, useParams} from 'react-router-dom';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import {useEffect, useLayoutEffect} from 'react';
 import {useRecoilValue} from 'recoil';
-import {loginStateAtom} from '../../atoms/loginStateAtom';
+import {loginStateAtom, userInfoAtom} from '../../atoms/loginStateAtom';
 import {BuildStateAtom, buildStateAtom} from '../../atoms/buildAtom';
-import {userInfoAtom} from '../../atoms/loginAtom';
 
 const ICING_PATH = '/build/custom/icing';
 const PREVIEW_PATH = '/build/preview';

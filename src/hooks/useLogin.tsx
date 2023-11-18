@@ -4,7 +4,8 @@ import {useEffect} from 'react';
 import tryLogin from '../apis/auth';
 import useSetTokens from './useSetTokens';
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {loginStateAtom, DataAtom} from '../atoms/loginAtom';
+import {DataAtom} from '../atoms/loginAtom';
+import {loginStateAtom} from '../atoms/loginStateAtom';
 
 export default function useLogin(code) {
   const [loggedIn, setLoggedIn] = useRecoilState(loginStateAtom);

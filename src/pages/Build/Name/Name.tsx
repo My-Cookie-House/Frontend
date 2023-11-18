@@ -11,13 +11,13 @@ import {
 } from '../../../atoms/buildAtom';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {useNavigate} from 'react-router-dom';
-import {userInfoAtom} from '../../../atoms/loginAtom';
 import {useMemo} from 'react';
 import Overlap from '../../../components/Overlap/Overlap';
 import Cookies from '../../../assets/House/Outside/Cookies';
 import Icings from '../../../assets/House/Outside/Icings';
 import {instance} from '../../../apis/axios';
 import {mutateHouse} from '../../../apis/build';
+import {userInfoAtom} from '../../../atoms/loginStateAtom';
 
 const MAX_LENGTH = 10;
 
