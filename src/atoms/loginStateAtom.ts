@@ -15,17 +15,6 @@ export type Data = {
   userName: string | null;
 };
 
-export const DataAtom = atom<Data>({
-  key: 'Data',
-  default: {
-    userId: null,
-    refreshToken: '',
-    accessToken: '',
-    isRegistered: false,
-    userName: '',
-  },
-});
-
 // 로그인 한 유저 정보
 export const initialUserInfoState = {
   userId: null,
