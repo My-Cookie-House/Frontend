@@ -6,6 +6,7 @@ import * as S from './style';
 import {useLocation} from 'react-router-dom';
 import Button from '../Buttons/Button';
 import Mission from '../Mission/Mission';
+import Logo from '../../assets/Background/Logo.svg';
 
 type Props = {
   children: React.ReactNode;
@@ -37,7 +38,6 @@ export default function PageLayout({
     if (NO_LOGO_PATHS.includes(pathname)) setLogo(false);
     else setLogo(true);
   }, [pathname]);
-  
 
   return (
     <S.Layout>
@@ -54,7 +54,7 @@ export default function PageLayout({
                 />
               </S.GoBackContainer>
             )}
-            <S.Logo>로고...</S.Logo>
+            <S.LogoImg src={Logo} />
             <S.ButtonBox>
               {mission && (
                 <Button

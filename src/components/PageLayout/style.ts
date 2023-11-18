@@ -24,11 +24,9 @@ export const Wrapper = styled.div<{isSplashScreen?: boolean}>`
   align-items: center;
 `;
 // TODO: 로고 추가 필요
-export const Logo = styled.div`
+export const LogoImg = styled.img`
   width: 110px;
   height: 49.7px;
-  background-color: gray;
-  text-align: center;
 `;
 
 export const Nav = styled.nav`
