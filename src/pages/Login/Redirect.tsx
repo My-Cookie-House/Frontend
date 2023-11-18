@@ -27,7 +27,7 @@ export default function Redirect() {
         response.data.data.accessToken,
         response.data.data.refreshToken,
       );
-      navigate('/');
+      navigate(`/${response.data.data.userId}`);
     } catch (e) {
       console.log('로그인 불가');
     }
