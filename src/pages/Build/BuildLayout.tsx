@@ -35,7 +35,7 @@ export default function BuildLayout() {
       alert('이미 입주하신 쿠키하우스가 존재합니다!');
       navigate(`/${userId}`);
     }
-  }, [navigate, isHouseBuilt, loggedIn]);
+  }, []);
 
   useEffect(() => {
     /**
