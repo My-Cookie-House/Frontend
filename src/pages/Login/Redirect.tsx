@@ -8,6 +8,8 @@ import {Description, Wrapper} from './RedirectStyle';
 import {useRecoilState, useSetRecoilState} from 'recoil';
 import {loginStateAtom, userInfoAtom} from '../../atoms/loginStateAtom';
 import {flushSync} from 'react-dom';
+import Cookies from 'js-cookie';
+import axios from 'axios';
 
 export default function Redirect() {
   let url = new URL(window.location.href);
@@ -27,10 +29,8 @@ export default function Redirect() {
         console.log('엑세스 토큰을 못 받았어요');
       }
       flushSync(() => {
-        useSetTokens(
-          response.data.data.accessToken,
-          response.data.data.refreshToken,
-        );
+        Cookies.set('accessToken', response.data.data.accessToken);
+        Cookies.set('refreshToken', response.data.data.refreshToken);
       });
       setLoginState(true);
       navigate('/');
