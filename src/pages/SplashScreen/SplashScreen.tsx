@@ -1,8 +1,10 @@
 import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import PageLayout from '@/components/PageLayout/PageLayout';
-import {UserInfo} from '@/atoms/loginStateAtom';
+import {UserInfo, loginStateAtom} from '@/atoms/loginStateAtom';
 import {useQueryClient} from '@tanstack/react-query';
+import {useRecoilValue} from 'recoil';
+import useAuth from '@/hooks/useAuth';
 
 export default function SplashScreen(): JSX.Element {
   const navigate = useNavigate();
@@ -12,7 +14,7 @@ export default function SplashScreen(): JSX.Element {
   // 로그인 상태 가져오기
   const userId = user?.userId;
   const isHouseBuilt = user?.isHouseBuilt;
-  const loggedIn = user !== null;
+  const loggedIn = useRecoilValue(loginStateAtom);
 
   useEffect(() => {
     console.log(loggedIn, isHouseBuilt);

@@ -10,6 +10,7 @@ import {loginStateAtom, userInfoAtom} from '../../atoms/loginStateAtom';
 import {flushSync} from 'react-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import {useQueryClient} from '@tanstack/react-query';
 
 export default function Redirect() {
   let url = new URL(window.location.href);
@@ -19,7 +20,8 @@ export default function Redirect() {
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const state = Math.floor(Math.random() * 100);
   const loginUrl = `/auth/kakao?code=${code}&state=${state}`;
-  console.log(loginUrl);
+  const queryClient = useQueryClient();
+
   const kakaologin = async () => {
     try {
       const response = await instance.get(loginUrl);
@@ -33,7 +35,7 @@ export default function Redirect() {
         config.headers.Authorization = `${response.data.data.accessToken}`;
         return config;
       });
-
+      await queryClient.invalidateQueries({queryKey: ['loginState']});
       Cookies.set('accessToken', response.data.data.accessToken);
       Cookies.set('refreshToken', response.data.data.refreshToken);
       setLoginState(true);
