@@ -5,7 +5,7 @@ import useSetTokens from '../hooks/useSetTokens';
 export const instance = axios.create({
   baseURL: 'https://cookie-house-api.site',
   headers: {
-    Authorization: Cookies.get('accessToken'),
+    Authorization: `${Cookies.get('accessToken')}`,
   },
 });
 

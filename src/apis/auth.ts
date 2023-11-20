@@ -3,7 +3,7 @@ export async function getLoginUserInfo() {
   try {
     const response: any = await instance.get('/user', {
       headers: {
-        Authorization: Cookies.get('accessToken'),
+        Authorization: `${Cookies.get('accessToken')}`,
       },
     });
     return response.data.data;
