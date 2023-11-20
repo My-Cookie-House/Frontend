@@ -1,4 +1,8 @@
 import Cookies from 'js-cookie';
+import axios from 'axios';
+import {Data} from '../atoms/loginAtom';
+import {instance} from './axios';
+
 export async function getLoginUserInfo() {
   try {
     const response: any = await instance.get('/user', {
@@ -11,10 +15,6 @@ export async function getLoginUserInfo() {
     return null;
   }
 }
-
-import axios from 'axios';
-import {Data} from '../atoms/loginAtom';
-import {instance} from './axios';
 
 export default async function tryLogin(
   code: string,
