@@ -2,19 +2,22 @@ import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import {useRecoilValue} from 'recoil';
-import useAuth from '../../hooks/useAuth';
-import {userInfoAtom, loginStateAtom} from '../../atoms/loginStateAtom';
+import {
+  userInfoAtom,
+  loginStateAtom,
+  UserInfo,
+} from '../../atoms/loginStateAtom';
+import {useQueryClient} from '@tanstack/react-query';
 
 export default function SplashScreen(): JSX.Element {
   const navigate = useNavigate();
-  const user = useRecoilValue(userInfoAtom);
-  console.log(user);
+  const queryClient = useQueryClient();
+  const user = queryClient.getQueryData<null | UserInfo>(['loginState']);
 
   // 로그인 상태 가져오기
   const userId = user?.userId;
   const isHouseBuilt = user?.isHouseBuilt;
-
-  const loggedIn = useRecoilValue(loginStateAtom);
+  const loggedIn = user !== null;
 
   useEffect(() => {
     console.log(loggedIn, isHouseBuilt);

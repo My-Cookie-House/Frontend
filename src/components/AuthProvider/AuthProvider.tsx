@@ -1,22 +1,30 @@
 import {useSuspenseQuery} from '@tanstack/react-query';
-import {getLoginUserInfo} from '@/apis/auth';
+import {Suspense, useLayoutEffect} from 'react';
 import {useSetRecoilState} from 'recoil';
+import {getLoginUserInfo} from '@/apis/auth';
 import {
+  initialUserInfoState,
   loginStateAtom,
   userInfoAtom,
-  initialUserInfoState,
-  UserInfo,
 } from '@/atoms/loginStateAtom';
-import {useEffect} from 'react';
 
-export default function useAuth() {
+type Props = {
+  children: React.ReactNode;
+};
+
+type LoginState={
+    userId:number;
+    username:
+}
+
+export default function AuthProvider({children}: Props) {
   const setLoginState = useSetRecoilState(loginStateAtom);
   const setUserInfoState = useSetRecoilState(userInfoAtom);
-  const {data, isSuccess, isError} = useSuspenseQuery<null | UserInfo>({
+  const {data, isSuccess} = useSuspenseQuery<null|{({
     queryKey: ['loginState'],
     queryFn: getLoginUserInfo,
   });
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (data !== null) {
       setLoginState(true);
       setUserInfoState(data);
@@ -24,7 +32,7 @@ export default function useAuth() {
       setLoginState(false);
       setUserInfoState(initialUserInfoState);
     }
-  }, [isSuccess, isError]);
+  }, [isSuccess]);
 
-  return;
+  return <Suspense>{isSuccess && children}</Suspense>;
 }

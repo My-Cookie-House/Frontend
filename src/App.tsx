@@ -1,15 +1,14 @@
 import {Suspense} from 'react';
 import Router from './Router';
 import useAuth from './hooks/useAuth';
+import AuthProvider from './components/AuthProvider/AuthProvider';
 
 const App = () => {
-  useAuth();
   return (
     <>
-      {/* Suspense 반드시 적용해야 */}
-      <Suspense>
+      <AuthProvider>
         <Router />
-      </Suspense>
+      </AuthProvider>
     </>
   );
 };
