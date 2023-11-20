@@ -7,20 +7,16 @@ import {
   loginStateAtom,
   userInfoAtom,
 } from '@/atoms/loginStateAtom';
+import {UserInfo} from '@/atoms/loginStateAtom';
 
 type Props = {
   children: React.ReactNode;
 };
 
-type LoginState={
-    userId:number;
-    username:
-}
-
 export default function AuthProvider({children}: Props) {
   const setLoginState = useSetRecoilState(loginStateAtom);
   const setUserInfoState = useSetRecoilState(userInfoAtom);
-  const {data, isSuccess} = useSuspenseQuery<null|{({
+  const {data, isSuccess} = useSuspenseQuery<null | UserInfo>({
     queryKey: ['loginState'],
     queryFn: getLoginUserInfo,
   });
