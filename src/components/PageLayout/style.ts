@@ -12,8 +12,10 @@ export const Layout = styled.div`
 export const Wrapper = styled.div<{isSplashScreen?: boolean}>`
   width: 393px;
   height: 852px;
-  background: url(${(props) =>
-    props.isSplashScreen ? SplashScreenBackground : Background});
+  background: ${(props) =>
+    props.isSplashScreen
+      ? `url(${SplashScreenBackground})`
+      : `url(${Background})`};
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
