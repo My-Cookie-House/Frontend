@@ -11,16 +11,17 @@ import {flushSync} from 'react-dom';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import {useQueryClient} from '@tanstack/react-query';
+import useAuth from '@/hooks/useAuth';
 
 export default function Redirect() {
   let url = new URL(window.location.href);
   let code = url.searchParams.get('code');
   const navigate = useNavigate();
   const [loginState, setLoginState] = useRecoilState(loginStateAtom);
-  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const state = Math.floor(Math.random() * 100);
   const loginUrl = `/auth/kakao?code=${code}&state=${state}`;
   const queryClient = useQueryClient();
+  useAuth();
 
   const kakaologin = async () => {
     try {
