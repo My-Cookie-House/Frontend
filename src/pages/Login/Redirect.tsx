@@ -7,6 +7,7 @@ import CookieHouse from '../../assets/OnboardingAssets/CookieHouse.svg';
 import {Description, Wrapper} from './RedirectStyle';
 import {useRecoilState, useSetRecoilState} from 'recoil';
 import {loginStateAtom, userInfoAtom} from '../../atoms/loginStateAtom';
+import {flushSync} from 'react-dom';
 
 export default function Redirect() {
   let url = new URL(window.location.href);
@@ -17,7 +18,6 @@ export default function Redirect() {
   const state = Math.floor(Math.random() * 100);
   const loginUrl = `/auth/kakao?code=${code}&state=${state}`;
   console.log(loginUrl);
-
   const kakaologin = async () => {
     try {
       const response = await instance.get(loginUrl);
@@ -26,10 +26,12 @@ export default function Redirect() {
       if (response.data.data.accessToken === undefined) {
         console.log('엑세스 토큰을 못 받았어요');
       }
-      useSetTokens(
-        response.data.data.accessToken,
-        response.data.data.refreshToken,
-      );
+      flushSync(() => {
+        useSetTokens(
+          response.data.data.accessToken,
+          response.data.data.refreshToken,
+        );
+      });
       setLoginState(true);
       navigate('/');
     } catch (e) {
