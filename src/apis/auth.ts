@@ -1,9 +1,9 @@
-import Cookie from 'js-cookie';
+import Cookies from 'js-cookie';
 export async function getLoginUserInfo() {
   try {
     const response: any = await instance.get('/user', {
       headers: {
-        Authorization: Cookie.get('accessToken'),
+        Authorization: Cookies.get('accessToken'),
       },
     });
     return response.data.data;
@@ -15,7 +15,6 @@ export async function getLoginUserInfo() {
 import axios from 'axios';
 import {Data} from '../atoms/loginAtom';
 import {instance} from './axios';
-import Cookies from '@/pages/Build/Custom/Cookies/Cookies';
 
 export default async function tryLogin(
   code: string,
