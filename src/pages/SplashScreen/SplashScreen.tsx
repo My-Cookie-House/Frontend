@@ -1,12 +1,7 @@
 import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
-import PageLayout from '../../components/PageLayout/PageLayout';
-import {useRecoilValue} from 'recoil';
-import {
-  userInfoAtom,
-  loginStateAtom,
-  UserInfo,
-} from '../../atoms/loginStateAtom';
+import PageLayout from '@/components/PageLayout/PageLayout';
+import {UserInfo} from '@/atoms/loginStateAtom';
 import {useQueryClient} from '@tanstack/react-query';
 
 export default function SplashScreen(): JSX.Element {
