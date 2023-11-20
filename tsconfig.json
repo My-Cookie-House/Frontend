@@ -12,10 +12,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
-
-    /* Linting */
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["src", "src/assets", "src/pages/Login/.tsx"],
-  "references": [{"path": "./tsconfig.node.json"}]
+  "include": ["./src/*", "src/assets", "src/pages/Login/.tsx"]
 }

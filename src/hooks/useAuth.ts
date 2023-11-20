@@ -5,7 +5,7 @@ import {
   loginStateAtom,
   userInfoAtom,
   initialUserInfoState,
-} from '../atoms/loginStateAtom';
+} from '@/atoms/loginStateAtom';
 import {useEffect} from 'react';
 
 export default function useAuth() {
