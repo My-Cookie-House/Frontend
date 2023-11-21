@@ -10,6 +10,7 @@ import Ornament8 from '../../assets/Ornament/Ornament8.svg';
 import Ornament9 from '../../assets/Ornament/Ornament9.svg';
 import Ornament10 from '../../assets/Ornament/Ornament10.svg';
 import Ornament11 from '../../assets/Ornament/Ornament11.svg';
+import Ornament12 from '../../assets/Ornament/Ornament12.svg';
 
 interface Ornament {
   id: number;
@@ -28,7 +29,7 @@ const ornaments: Ornament[] = [
   { id: 9, image: Ornament9 },
   { id: 10, image: Ornament10 },
   { id: 11, image: Ornament11 },
-
+  { id: 12, image: Ornament12 },
 ];
 
 export default ornaments;

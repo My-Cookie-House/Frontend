@@ -9,6 +9,8 @@ import Ornament8 from './Ornament8.svg';
 import Ornament9 from './Ornament9.svg';
 import Ornament10 from './Ornament10.svg';
 import Ornament11 from './Ornament11.svg';
+import Ornament12 from './Ornament12.svg';
+
 
 export default [
     Ornament1,
@@ -21,5 +23,6 @@ export default [
     Ornament8,
     Ornament9,
     Ornament10,
-    Ornament11
+    Ornament11,
+    Ornament12,
 ];
