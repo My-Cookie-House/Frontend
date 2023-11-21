@@ -69,20 +69,19 @@ export default function Inside() {
           margin="40px 0 0 0"
           imgs={[
             InsideBg,
-            data?.length &&
+            data &&
               FurnitureLayer[
                 `FurnitureLayer2${data?.[0]?.missionCompleteFurnitureId - 3}`
               ],
           ]}
         />
-        {data.length &&
-          data.map((v: ICompletedMission) => (
-            <S.ButtonLayer
-              key={v.missionCompleteId}
-              {...dates.get(v.missionCompleteDate)}
-              onClick={() => handleFurnitureClick(v.missionCompleteDate)}
-            />
-          ))}
+        {data?.map((v: ICompletedMission) => (
+          <S.ButtonLayer
+            key={v.missionCompleteId}
+            {...dates.get(v.missionCompleteDate)}
+            onClick={() => handleFurnitureClick(v.missionCompleteDate)}
+          />
+        ))}
       </S.Frame>
       {isMyHouse && (
         <Button
