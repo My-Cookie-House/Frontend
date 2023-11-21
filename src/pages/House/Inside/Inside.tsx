@@ -15,6 +15,7 @@ import {
 } from '../../../interfaces/mission';
 import {dates} from '../../../coordinates/coordinates';
 import CompletedMissionModal from '../../../components/Modal/CompletedMissionModal/CompletedMissionModal';
+import InsideBg from '@/assets/House/Inside/InsideBg.png';
 
 // const getFurnitureNum = (furnitureId: number) => {
 //   return furnitureId - 3 * (missionId - 1);
@@ -67,7 +68,7 @@ export default function Inside() {
           height={400}
           margin="40px 0 0 0"
           imgs={[
-            '/InsideBg.png',
+            InsideBg,
             data &&
               FurnitureLayer[
                 `FurnitureLayer2${data?.[0]?.missionCompleteFurnitureId - 3}`

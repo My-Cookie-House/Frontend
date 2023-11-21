@@ -26,6 +26,7 @@ import useModal from '../../hooks/useModal';
 import ModalCloseButton from '../../components/ModalCloseButton/ModalCloseButton';
 import {Navigate, useNavigate} from 'react-router';
 import {missionStateAtom} from '../../atoms/missionState';
+import InsideBg from '@/assets/House/Inside/InsideBg.png';
 
 export default function MissionFurniturePreview() {
   // 모달 상태관리
@@ -63,9 +64,6 @@ export default function MissionFurniturePreview() {
   };
   const [missionState, setMissionState] = useRecoilState(missionStateAtom);
 
-  console.log(imageFile);
-  console.log(content.value);
-  console.log(furnitureNum);
   useEffect(() => {
     handleFurnitureSelected();
   });
@@ -141,7 +139,7 @@ export default function MissionFurniturePreview() {
           width={300}
           height={400}
           margin="40px 0 0 0"
-          imgs={['/InsideBg.png']}
+          imgs={[InsideBg]}
         />{' '}
         {/*TODO: inside.tsx 에서 코드 복붙하면 됨 */}
         <S.FurnitureLayerPreview src={selectedFurnitureImage} />
