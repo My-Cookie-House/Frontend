@@ -32,8 +32,8 @@ const Login = () => {
         src={WhiteTree}
         alt="White Tree"
         style={{
-          width: '512px',
-          height: '512px',
+          width: '311px',
+          height: '395.5px',
         }}
       />
       <a href={KAKAO_AUTH_URL}>
@@ -43,7 +43,7 @@ const Login = () => {
           style={{
             width: '190px',
             height: '42px',
-            marginTop: '-100px',
+            marginTop: '10px',
             marginBottom: '8px',
           }}
           onClick={handleKakaoClick}
