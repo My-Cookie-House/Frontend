@@ -222,7 +222,7 @@ function GuestBook() {
       <S.ButtonWrapper>
         <TitleContainerBox title={houseName} />
         {
-          //isHouseBuilt && !isMyHouse && 
+          isHouseBuilt && !isMyHouse && 
           (
             <S.WirteGuestBookButton onClick={openModal} />
           )
