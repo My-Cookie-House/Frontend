@@ -2,7 +2,7 @@ import PageLayout from '../../components/PageLayout/PageLayout';
 import LoginText from '../../assets/LoginAssets/LoginText.svg';
 import GoogleLogin from '../../assets/LoginAssets/GoogleLogin.svg';
 import KakaoLogin from '../../assets/LoginAssets/KakaoLogin.png';
-import whiteTree from '../../assets/LoginAssets/whiteTree.svg';
+import whiteTree from '../../assets/LoginAssets/whiteTree.png';
 
 const Login = () => {
   const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
