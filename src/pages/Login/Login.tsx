@@ -2,7 +2,7 @@ import PageLayout from '../../components/PageLayout/PageLayout';
 import LoginText from '../../assets/LoginAssets/LoginText.svg';
 import GoogleLogin from '../../assets/LoginAssets/GoogleLogin.svg';
 import KakaoLogin from '../../assets/LoginAssets/KakaoLogin.png';
-import whiteTree from '../../assets/LoginAssets/whiteTree.png';
+import WhiteTree from '@/assets/LoginAssets/WhiteTree.png';
 
 const Login = () => {
   const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
@@ -29,11 +29,11 @@ const Login = () => {
         }}
       />
       <img
-        src={whiteTree}
+        src={WhiteTree}
         alt="White Tree"
         style={{
-          width: '306px',
-          height: '390px',
+          width: '512px',
+          height: '512px',
         }}
       />
       <a href={KAKAO_AUTH_URL}>
@@ -43,7 +43,7 @@ const Login = () => {
           style={{
             width: '190px',
             height: '42px',
-            marginTop: '31.27px',
+            marginTop: '-100px',
             marginBottom: '8px',
           }}
           onClick={handleKakaoClick}
