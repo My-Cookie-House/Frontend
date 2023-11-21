@@ -8,7 +8,6 @@ export const Layout = styled.div`
   display: flex;
   justify-content: center;
   background-color: #8a6149;
-  overflow-y: hidden;
 `;
 export const Wrapper = styled.div<{isSplashScreen?: boolean}>`
   width: 393px;
@@ -25,6 +24,7 @@ export const Wrapper = styled.div<{isSplashScreen?: boolean}>`
   display: flex;
   flex-direction: column;
   align-items: center;
+
 `;
 // TODO: 로고 추가 필요
 export const LogoImg = styled.img`
