@@ -1,6 +1,6 @@
 import * as S from './style';
 import * as SBuild from '../../style';
-import Icings from '../../../../assets/Icings';
+import Icings from '../../../../../public/assets/Icings';
 import DecorationButton from '../../../../components/Buttons/DecorationButton/DecorationButton';
 import LongButton from '../../../../components/Buttons/LongButton/LongButton';
 import {useRecoilState, useRecoilValue} from 'recoil';
@@ -9,9 +9,9 @@ import {
   buildStateAtom,
   sortedCookieIdsSelector,
 } from '../../../../atoms/buildAtom';
-import Cookies from '../../../../assets/House/Outside/Cookies';
+import Cookies from '../../../../../public/assets/House/Outside/Cookies';
 import Overlap from '../../../../components/Overlap/Overlap';
-import IcingLayers from '../../../../assets/House/Outside/Icings/index';
+import IcingLayers from '../../../../../public/assets/House/Outside/Icings/index';
 
 export default function Icing() {
   const [buildState, setBuildState] =

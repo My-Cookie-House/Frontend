@@ -10,7 +10,7 @@ import {
   uploadImageMessageFurnitureId,
 } from '../../apis/mission';
 import {IAllCompletedMissions} from '../../interfaces/mission';
-import FurnitureLayer from '../../assets/FurnitureLayer';
+import FurnitureLayer from '../../../public/assets/FurnitureLayer';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {
   missionIdAtom,
@@ -19,7 +19,7 @@ import {
 } from '../../atoms/missionAtomState'; // atoms 파일 경로에 따라 수정
 import Modal from '../../components/Modal/Modal';
 import DecorationButton from '../../components/Buttons/DecorationButton/DecorationButton';
-import Furnitures from '../../assets/Furniture';
+import Furnitures from '../../../public/assets/Furniture';
 import ModalOKButton from '../../components/ModalOKButton/ModalOKButton';
 import useInput from '../../hooks/useInput';
 import useModal from '../../hooks/useModal';

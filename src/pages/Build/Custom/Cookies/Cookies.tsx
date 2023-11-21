@@ -1,12 +1,12 @@
 import * as S from './style';
 import * as SBuild from '../../style';
-import CookiesImgs from '../../../../assets/Cookies';
+import CookiesImgs from '../../../../../public/assets/Cookies';
 import DecorationButton from '../../../../components/Buttons/DecorationButton/DecorationButton';
 import LongButton from '../../../../components/Buttons/LongButton/LongButton';
 import {useRecoilState} from 'recoil';
 import {BuildStateAtom, buildStateAtom} from '../../../../atoms/buildAtom';
-import CookieLayers from '../../../../assets/House/Outside/Cookies';
-import IcingLayers from '../../../../assets/House/Outside/Icings';
+import CookieLayers from '../../../../../public/assets/House/Outside/Cookies';
+import IcingLayers from '../../../../../public/assets/House/Outside/Icings';
 import {useEffect} from 'react';
 
 export default function Cookies() {
@@ -31,10 +31,10 @@ export default function Cookies() {
       return cookie1 === id
         ? {...prev, cookieIds: [null, cookie2]}
         : cookie2 === id
-          ? {...prev, cookieIds: [cookie1, null]}
-          : cookie1 === null
-            ? {...prev, cookieIds: [id, cookie2]}
-            : {...prev, cookieIds: [cookie1, id]};
+        ? {...prev, cookieIds: [cookie1, null]}
+        : cookie1 === null
+        ? {...prev, cookieIds: [id, cookie2]}
+        : {...prev, cookieIds: [cookie1, id]};
     });
   };
 

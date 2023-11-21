@@ -7,7 +7,7 @@ import {useCallback, useState} from 'react';
 import ShareModal from '../../../components/Modal/ShareModal/ShareModal';
 import Overlap from '../../../components/Overlap/Overlap';
 import InsideBg from '../../../assets/House/Inside/InsideBg.png';
-import FurnitureLayer from '../../../assets/FurnitureLayer';
+import FurnitureLayer from '../../../../public/assets/FurnitureLayer';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {getAllCompletedMissions} from '../../../apis/mission';
 import {

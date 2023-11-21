@@ -9,8 +9,8 @@ import {
 import LongButton from '../../../components/Buttons/LongButton/LongButton';
 import Overlap from '../../../components/Overlap/Overlap';
 import {useNavigate} from 'react-router-dom';
-import Cookies from '../../../assets/House/Outside/Cookies';
-import Icings from '../../../assets/House/Outside/Icings';
+import Cookies from '../../../../public/assets/House/Outside/Cookies';
+import Icings from '../../../../public/assets/House/Outside/Icings';
 
 export default function Preview() {
   const [buildState, setBuildState] =
