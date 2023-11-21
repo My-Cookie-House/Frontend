@@ -75,13 +75,14 @@ export default function Inside() {
               ],
           ]}
         />
-        {data?.map((v: ICompletedMission) => (
-          <S.ButtonLayer
-            key={v.missionCompleteId}
-            {...dates.get(v.missionCompleteDate)}
-            onClick={() => handleFurnitureClick(v.missionCompleteDate)}
-          />
-        ))}
+        {data.length &&
+          data.map((v: ICompletedMission) => (
+            <S.ButtonLayer
+              key={v.missionCompleteId}
+              {...dates.get(v.missionCompleteDate)}
+              onClick={() => handleFurnitureClick(v.missionCompleteDate)}
+            />
+          ))}
       </S.Frame>
       {isMyHouse && (
         <Button
