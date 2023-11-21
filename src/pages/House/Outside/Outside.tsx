@@ -5,10 +5,9 @@ import LongButton from '../../../components/Buttons/LongButton/LongButton';
 import {NextStepText} from '../../Build/style';
 import useIsMyHouse from '../../../hooks/useIsMyHouse';
 import Overlap from '../../../components/Overlap/Overlap';
-import Cookies from '../../../../public/assets/House/Outside/Cookies';
-import Icings from '../../../../public/assets/House/Outside/Icings';
+import Cookies from '../../../assets/House/Outside/Cookies';
+import Icings from '../../../assets/House/Outside/Icings';
 import {useEffect} from 'react';
-import InsideBg from '../../../assets/House/Inside/InsideBg.png';
 
 const STALE_MIN = 5;
 const GC_MIN = 5;
@@ -23,12 +22,23 @@ export default function Outside() {
     gcTime: 1000 * 60 * GC_MIN,
   });
 
+  const loadImage = async (src: string) =>
+    await new Promise<string>((resolve, reject) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        resolve(src);
+      };
+      img.onerror = (e) => {
+        reject(e);
+      };
+    });
+
   const [num1, num2] = data.cookieIds;
 
   useEffect(() => {
     // 하우스 내부 배경 이미지 preload
-    const img = new Image();
-    img.src = InsideBg;
+    loadImage('/InsideBg.png');
   }, []);
 
   return (

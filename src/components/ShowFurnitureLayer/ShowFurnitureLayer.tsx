@@ -1,5 +1,5 @@
 import React from 'react';
-import FurnitureLayer from '../../../public/assets/FurnitureLayer';
+import FurnitureLayer from '../../assets/FurnitureLayer';
 import Overlap from '../Overlap/Overlap';
 
 interface ShowFurnitureLayerProps {

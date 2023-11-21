@@ -6,8 +6,7 @@ import useIsMyHouse from '../../../hooks/useIsMyHouse';
 import {useCallback, useState} from 'react';
 import ShareModal from '../../../components/Modal/ShareModal/ShareModal';
 import Overlap from '../../../components/Overlap/Overlap';
-import InsideBg from '../../../assets/House/Inside/InsideBg.png';
-import FurnitureLayer from '../../../../public/assets/FurnitureLayer';
+import FurnitureLayer from '../../../assets/FurnitureLayer';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {getAllCompletedMissions} from '../../../apis/mission';
 import {
@@ -68,7 +67,7 @@ export default function Inside() {
           height={400}
           margin="40px 0 0 0"
           imgs={[
-            InsideBg,
+            '/InsideBg.png',
             data &&
               FurnitureLayer[
                 `FurnitureLayer2${data?.[0]?.missionCompleteFurnitureId - 3}`

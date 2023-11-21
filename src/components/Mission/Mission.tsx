@@ -6,7 +6,7 @@ import ModalOKButton from '../ModalOKButton/ModalOKButton';
 import {S} from './style';
 import useInput from '../../hooks/useInput';
 import DecorationButton from '../Buttons/DecorationButton/DecorationButton';
-import Furnitures from '../../../public/assets/Furniture';
+import Furnitures from '../../assets/Furniture';
 import {useRecoilValue} from 'recoil';
 import {userInfoAtom} from '../../atoms/loginStateAtom';
 import {useQuery} from '@tanstack/react-query';

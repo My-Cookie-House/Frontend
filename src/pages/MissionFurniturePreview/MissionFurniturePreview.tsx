@@ -10,7 +10,7 @@ import {
   uploadImageMessageFurnitureId,
 } from '../../apis/mission';
 import {IAllCompletedMissions} from '../../interfaces/mission';
-import FurnitureLayer from '../../../public/assets/FurnitureLayer';
+import FurnitureLayer from '../../assets/FurnitureLayer';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {
   missionIdAtom,
@@ -19,13 +19,12 @@ import {
 } from '../../atoms/missionAtomState'; // atoms 파일 경로에 따라 수정
 import Modal from '../../components/Modal/Modal';
 import DecorationButton from '../../components/Buttons/DecorationButton/DecorationButton';
-import Furnitures from '../../../public/assets/Furniture';
+import Furnitures from '../../assets/Furniture';
 import ModalOKButton from '../../components/ModalOKButton/ModalOKButton';
 import useInput from '../../hooks/useInput';
 import useModal from '../../hooks/useModal';
 import ModalCloseButton from '../../components/ModalCloseButton/ModalCloseButton';
 import {Navigate, useNavigate} from 'react-router';
-import InsideBg from '../../assets/House/Inside/InsideBg.png';
 import {missionStateAtom} from '../../atoms/missionState';
 
 export default function MissionFurniturePreview() {
@@ -142,7 +141,7 @@ export default function MissionFurniturePreview() {
           width={300}
           height={400}
           margin="40px 0 0 0"
-          imgs={[InsideBg]}
+          imgs={['/InsideBg.png']}
         />{' '}
         {/*TODO: inside.tsx 에서 코드 복붙하면 됨 */}
         <S.FurnitureLayerPreview src={selectedFurnitureImage} />
