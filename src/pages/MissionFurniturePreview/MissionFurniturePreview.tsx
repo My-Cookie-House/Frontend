@@ -71,12 +71,12 @@ export default function MissionFurniturePreview() {
   useEffect(() => {
     openMissionArriveModal();
   });
-/*
+
   const {data} = useSuspenseQuery<IAllCompletedMissions>({
     queryKey: ['house', 'inside', id],
     queryFn: () => getAllCompletedMissions(id),
   });
-*/
+
   // 가구 고르기 버튼 클릭
   const handleFurnitureClick = (
     furntureId: number,
@@ -98,7 +98,7 @@ export default function MissionFurniturePreview() {
     const formatedDate = `${month}월 ${day}일`;
     return formatedDate;
   };
-/*
+
   // useEffect 내에서 fetchTodayMissionData 함수 사용
   useEffect(() => {
     const fetchData = async () => {
@@ -112,7 +112,7 @@ export default function MissionFurniturePreview() {
 
     fetchData();
   }, []);
-  */
+  
 
   //TODO: post로 할지 put으로 할지에 대한 분기처리 필요.
   const handleUploadImageMessageFurnitureIdWrapper = async () => {
