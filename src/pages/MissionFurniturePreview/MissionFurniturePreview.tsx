@@ -79,16 +79,15 @@ export default function MissionFurniturePreview() {
 
   // 가구 고르기 버튼 클릭
   const handleFurnitureClick = (
-    furntureId: number,
     event: React.MouseEvent<HTMLButtonElement>,
-    furnitureNum: number,
+    furnitureNum: number, // 해당 미션에서 가구의 순서를 나타내는 번호
   ) => {
     event.preventDefault();
     // missionId와 furnitureNum 값을 Recoil atoms에 설정
     setFurnitureNum(furnitureNum);
     setMissionState((prev) => ({
       ...prev,
-      missionCompleteFurnitureId: furntureId,
+      missionCompleteFurnitureId: +`${missionId}${furnitureNum}`,
     }));
   };
 
@@ -157,7 +156,7 @@ export default function MissionFurniturePreview() {
               image={Furnitures[`Furniture${missionId}1`]}
               onClick={(
                 event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-              ) => handleFurnitureClick((missionId - 1) * 3 + 1, event, 1)}
+              ) => handleFurnitureClick(event, 1)}
               dark={furnitureNum === 1}
             />
             <DecorationButton
@@ -165,7 +164,7 @@ export default function MissionFurniturePreview() {
               image={Furnitures[`Furniture${missionId}2`]}
               onClick={(
                 event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-              ) => handleFurnitureClick((missionId - 1) * 3 + 2, event, 2)}
+              ) => handleFurnitureClick(event, 2)}
               dark={furnitureNum === 2}
             />
             <DecorationButton
@@ -173,7 +172,7 @@ export default function MissionFurniturePreview() {
               image={Furnitures[`Furniture${missionId}3`]}
               onClick={(
                 event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-              ) => handleFurnitureClick((missionId - 1) * 3 + 3, event, 3)}
+              ) => handleFurnitureClick(event, 3)}
               dark={furnitureNum === 3}
             />
           </S.DecorationButtonContainer>
