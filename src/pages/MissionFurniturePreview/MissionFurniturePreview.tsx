@@ -111,6 +111,7 @@ export default function MissionFurniturePreview() {
 
     fetchData();
   }, []);
+  
 
   //TODO: post로 할지 put으로 할지에 대한 분기처리 필요.
   const handleUploadImageMessageFurnitureIdWrapper = async () => {
@@ -141,7 +142,6 @@ export default function MissionFurniturePreview() {
           imgs={[InsideBg, selectedFurnitureImage && selectedFurnitureImage]}
         />
       </S.FurnitureLayerWrapper>
-
       <Modal
         modalTitle={modalTitle}
         isOpen={isMissionArriveModalOpen}
