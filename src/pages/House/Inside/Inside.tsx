@@ -64,8 +64,8 @@ export default function Inside() {
     <>
       <S.Frame>
         <Overlap
-          width={300}
-          height={400}
+          width={355}
+          height={533}
           margin="40px 0 0 0"
           imgs={[
             InsideBg,
