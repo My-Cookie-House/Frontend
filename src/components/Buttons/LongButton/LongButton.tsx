@@ -6,7 +6,7 @@ type LongButtonProps = Partial<ButtonProps>;
 
 export default function LongButton(props: LongButtonProps) {
   return (
-    <Button width={237.5} height={50} background={LongButtonImg} {...props}>
+    <Button width={237.5} height={52} background={LongButtonImg} {...props}>
       {props.children}
     </Button>
   );
