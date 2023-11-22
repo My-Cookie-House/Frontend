@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Background from '../../assets/Background/Background.svg';
+import Background from '../../assets/Background/Background.png';
 import SplashScreenBackground from '@/assets/SplashScreenAssets/SplashScreen.png';
 
 export const Layout = styled.div`
@@ -10,8 +10,8 @@ export const Layout = styled.div`
   background-color: #8a6149;
 `;
 export const Wrapper = styled.div<{isSplashScreen?: boolean}>`
-  width: 393px;
-  height: 852px;
+  width: 575px;
+  height: 1024px;
   background: ${(props) =>
     props.isSplashScreen
       ? `url(${SplashScreenBackground})`
@@ -24,7 +24,6 @@ export const Wrapper = styled.div<{isSplashScreen?: boolean}>`
   display: flex;
   flex-direction: column;
   align-items: center;
-
 `;
 // TODO: 로고 추가 필요
 export const LogoImg = styled.img`
