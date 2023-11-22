@@ -1,6 +1,6 @@
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {Suspense, useLayoutEffect} from 'react';
-import {useSetRecoilState} from 'recoil';
+import {useSetRecoilState, useRecoilValue} from 'recoil';
 import {getLoginUserInfo} from '@/apis/auth';
 import {
   initialUserInfoState,
@@ -8,16 +8,14 @@ import {
   userInfoAtom,
 } from '@/atoms/loginStateAtom';
 import {UserInfo} from '@/atoms/loginStateAtom';
-import useSetTokens from '@/hooks/useSetTokens';
-import {instance} from '../../apis/axios';
 type Props = {
   children: React.ReactNode;
 };
-import Cookies from 'js-cookie';
 
 export default function AuthProvider({children}: Props) {
   const setLoginState = useSetRecoilState(loginStateAtom);
   const setUserInfoState = useSetRecoilState(userInfoAtom);
+  const userInfo = useRecoilValue(userInfoAtom);
   const {data, isSuccess} = useSuspenseQuery<null | UserInfo>({
     queryKey: ['loginState'],
     queryFn: getLoginUserInfo,
@@ -30,7 +28,8 @@ export default function AuthProvider({children}: Props) {
       setLoginState(false);
       setUserInfoState(initialUserInfoState);
     }
-  }, [isSuccess]);
+    console.log(userInfo.userId);
+  }, [data]);
 
   return <Suspense>{isSuccess && children}</Suspense>;
 }
