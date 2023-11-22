@@ -15,5 +15,5 @@ export const HouseName = styled.p`
   font-weight: 700;
   line-height: normal;
   letter-spacing: 0.8px;
-  margin-top: 44px;
+  margin-top: 31px;
 `;
