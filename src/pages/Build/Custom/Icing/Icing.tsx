@@ -25,7 +25,7 @@ export default function Icing() {
     // 하나 선택하면 더 이상 선택 불가
     // 취소하려면 선택 된 아이싱 타시 클릭해야 한다
     if (
-      (buildState.icingId !== null && buildState.icingId === id) ||
+      (buildState.icingId !== null) ||
       buildState.icingId === null
     ) {
       setBuildState((prev) => ({
