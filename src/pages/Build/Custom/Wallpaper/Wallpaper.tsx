@@ -4,15 +4,12 @@ import Icings from '../../../../assets/Icings';
 import WallpaperColor from '@/assets/WallpaperColor';
 import DecorationButton from '../../../../components/Buttons/DecorationButton/DecorationButton';
 import LongButton from '../../../../components/Buttons/LongButton/LongButton';
-import {useRecoilState, useRecoilValue} from 'recoil';
+import {useRecoilState} from 'recoil';
 import {
   BuildStateAtom,
   buildStateAtom,
-  sortedCookieIdsSelector,
 } from '../../../../atoms/buildAtom';
-import Cookies from '../../../../assets/House/Outside/Cookies';
 import Overlap from '../../../../components/Overlap/Overlap';
-import IcingLayers from '../../../../assets/House/Outside/Icings/index';
 import WallpaperPreview from '@/assets/WallpaperPreview';
 import InsideNone from '@/assets/House/Build/InsideNone.png'
 export default function Wallpaper() {
@@ -20,15 +17,7 @@ export default function Wallpaper() {
     useRecoilState<BuildStateAtom>(buildStateAtom);
 
   const handleSelect = (id: number) => {
-    if (
-      (buildState.wallpaperId !== null ) ||
-      buildState.wallpaperId === null
-    ) {
-      setBuildState((prev) => ({
-        ...prev,
-        wallpaperId: prev.wallpaperId === id ? null : id,
-      }));
-    }
+      setBuildState(prev => ({...prev, wallpaperId : id}));
   };
   return (
     <>
