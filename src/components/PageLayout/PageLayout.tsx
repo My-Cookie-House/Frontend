@@ -27,9 +27,6 @@ type Props = {
   goBack?: string; // 뒤로가기 (경로)
 };
 
-// 네비바 안들어가는 경록들
-const NO_NAV_PATHS = ['/build/custom/icing', '/build/preview', '/'];
-const SIDE_BUTTON_PATHS = ['/onboarding'];
 const images = [CookieHouse, Image1, Image2, Image3];
 
 export default function PageLayout({
@@ -51,7 +48,7 @@ export default function PageLayout({
   };
 
   useLayoutEffect(() => {
-    if (NO_NAV_PATHS.includes(pathname)) setNav(false);
+    if (pathname.includes('/custom/furniture')) setNav(false);
     else setNav(true);
   }, [pathname]);
 
@@ -64,32 +61,32 @@ export default function PageLayout({
         />
       )}
       <S.BgWrapper isSplashScreen={location.pathname === '/'}>
-        <S.IcingImg src={IcingBackground} />
+        {nav && <S.IcingImg src={IcingBackground} />}
 
         <S.Wrapper>
           {nav && (
             <>
               <S.Nav>
-                {/* {goBack && ( */}
-                <S.GoBackContainer>
-                  <Button
-                    width={12}
-                    height={23}
-                    background={BackButton}
-                    route={goBack}
-                  />
-                </S.GoBackContainer>
-                {/* )} */}
+                {goBack && (
+                  <S.GoBackContainer>
+                    <Button
+                      width={12}
+                      height={23}
+                      background={BackButton}
+                      route={goBack}
+                    />
+                  </S.GoBackContainer>
+                )}
                 <S.LogoImg src={Logo} />
                 <S.ButtonBox>
-                  {/* {mission && ( */}
-                  <Button
-                    width={25}
-                    height={19}
-                    background={Envelope}
-                    onClick={handleMissionClick} // Mission 버튼 클릭 시 핸들러 호출
-                  />
-                  {/* )} */}
+                  {mission && (
+                    <Button
+                      width={25}
+                      height={19}
+                      background={Envelope}
+                      onClick={handleMissionClick} // Mission 버튼 클릭 시 핸들러 호출
+                    />
+                  )}
                   {/** TODO: 방명록 접근 방법 수정될 예정  */}
                   {/* {guestBook && (
                   <Button
