@@ -18,7 +18,7 @@ export type Data = {
 };
 
 // 로그인 한 유저 정보
-export const initialUserInfoState = {
+export const initialUserInfoState: UserInfo = {
   userId: null,
   userName: null,
   isHouseBuilt: false,
