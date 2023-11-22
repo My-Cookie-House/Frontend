@@ -63,7 +63,7 @@ const Slider: React.FC<SliderProps> = ({
   };
 
   return (
-    <div style={{paddingTop: '48.3px'}}>
+    <div style={{paddingTop: '43px'}}>
       <S.Title>{topTexts[index]}</S.Title>
       <div
         ref={touchRef}
@@ -74,10 +74,10 @@ const Slider: React.FC<SliderProps> = ({
           <img
             src={images[index]}
             style={{
-              width: '280px',
-              height: '374px',
-              marginBottom: '58.32px',
-              marginTop: '39px',
+              width: '330px',
+              height: '440px',
+              marginBottom: '70px',
+              marginTop: '26px',
             }}
           />
         ) : (
@@ -99,7 +99,9 @@ const Slider: React.FC<SliderProps> = ({
       >
         {index === 0 && (
           <S.Centering>
-            <LongButton onClick={handleRightClick}>Start!</LongButton>
+            <LongButton onClick={handleRightClick}>
+              <S.StartText>START!</S.StartText>
+            </LongButton>
           </S.Centering>
         )}
         <S.BottomText>{bottomTexts[index]}</S.BottomText>

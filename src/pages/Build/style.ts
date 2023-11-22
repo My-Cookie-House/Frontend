@@ -9,7 +9,7 @@ export const Title = styled.h1<{marginTop?: string}>`
   font-weight: 700;
   line-height: normal;
   letter-spacing: 1px;
-  margin-top: ${(props) => (props.marginTop ? props.marginTop : '55.62px')};
+  margin-top: ${(props) => (props.marginTop ? props.marginTop : '43px')};
   white-space: pre-wrap;
 `;
 

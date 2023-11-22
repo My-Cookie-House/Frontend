@@ -136,13 +136,11 @@ export default function MissionFurniturePreview() {
     <>
       <S.FurnitureLayerWrapper>
         <Overlap
-          width={300}
-          height={400}
-          margin="40px 0 0 0"
-          imgs={[InsideBg]}
-        />{' '}
-        {/*TODO: inside.tsx 에서 코드 복붙하면 됨 */}
-        <S.FurnitureLayerPreview src={selectedFurnitureImage} />
+          width={355}
+          height={533}
+          margin="23px 0 0 0"
+          imgs={[InsideBg, selectedFurnitureImage && selectedFurnitureImage]}
+        />
       </S.FurnitureLayerWrapper>
 
       <Modal
