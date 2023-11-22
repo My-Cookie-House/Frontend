@@ -4,12 +4,15 @@ import SplashScreenBackground from '@/assets/SplashScreenAssets/SplashScreen.png
 
 export const Layout = styled.div`
   width: 100vw;
-  height: auto;
+  height: 100vh;
   display: flex;
   justify-content: center;
   background-color: #8a6149;
+  min-height: 852px;
+  overflow-y: hidden;
+  overflow-x: hidden;
 `;
-export const Wrapper = styled.div<{isSplashScreen?: boolean}>`
+export const BgWrapper = styled.div<{isSplashScreen?: boolean}>`
   width: 575px;
   height: 1024px;
   background: ${(props) =>
@@ -20,15 +23,22 @@ export const Wrapper = styled.div<{isSplashScreen?: boolean}>`
   background-size: cover;
   background-position: center;
   background-attachment: scroll;
-  padding-top: 76px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
+export const Wrapper = styled.div`
+  width: 393px;
+  height: 852px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 19px;
+`;
 // TODO: 로고 추가 필요
 export const LogoImg = styled.img`
   width: 110px;
-  height: 49.7px;
+  height: 64px;
 `;
 
 export const Nav = styled.nav`
@@ -38,6 +48,13 @@ export const Nav = styled.nav`
   justify-content: center;
   align-items: center;
   position: relative;
+  margin-top: 20px;
+  margin-bottom: 15px;
+`;
+
+export const IcingImg = styled.img`
+  width: 100%;
+  height: 15px;
 `;
 
 export const ButtonBox = styled.div`
@@ -45,7 +62,6 @@ export const ButtonBox = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  gap: 16px;
   position: absolute;
   top: 0;
   right: 0;
