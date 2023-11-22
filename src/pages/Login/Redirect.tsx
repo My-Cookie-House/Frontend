@@ -1,17 +1,13 @@
 import {instance} from '../../apis/axios';
 import {useNavigate} from 'react-router-dom';
-import useSetTokens from '../../hooks/useSetTokens';
 import {useEffect} from 'react';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import CookieHouse from '../../assets/OnboardingAssets/CookieHouse.svg';
 import {Description, Wrapper} from './RedirectStyle';
-import {useRecoilState, useSetRecoilState} from 'recoil';
-import {loginStateAtom, userInfoAtom} from '../../atoms/loginStateAtom';
-import {flushSync} from 'react-dom';
+import {useRecoilState} from 'recoil';
+import {loginStateAtom} from '../../atoms/loginStateAtom';
 import Cookies from 'js-cookie';
-import axios from 'axios';
 import {useQueryClient} from '@tanstack/react-query';
-import useAuth from '@/hooks/useAuth';
 
 export default function Redirect() {
   let url = new URL(window.location.href);
@@ -21,7 +17,6 @@ export default function Redirect() {
   const state = Math.floor(Math.random() * 100);
   const loginUrl = `/auth/kakao?code=${code}&state=${state}`;
   const queryClient = useQueryClient();
-  useAuth();
 
   const kakaologin = async () => {
     try {

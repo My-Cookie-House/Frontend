@@ -4,7 +4,6 @@ import PageLayout from '@/components/PageLayout/PageLayout';
 import {UserInfo, loginStateAtom} from '@/atoms/loginStateAtom';
 import {useQueryClient} from '@tanstack/react-query';
 import {useRecoilValue} from 'recoil';
-import useAuth from '@/hooks/useAuth';
 
 export default function SplashScreen(): JSX.Element {
   const navigate = useNavigate();
