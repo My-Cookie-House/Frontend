@@ -11,7 +11,7 @@ import {
 } from '../../apis/mission';
 import {IAllCompletedMissions} from '../../interfaces/mission';
 import FurnitureLayer from '../../assets/FurnitureLayer';
-import {useRecoilState, useRecoilValue} from 'recoil';
+import {useRecoilState} from 'recoil';
 import {
   missionIdAtom,
   furnitureNumAtom,

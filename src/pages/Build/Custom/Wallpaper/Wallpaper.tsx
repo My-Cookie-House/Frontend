@@ -5,19 +5,16 @@ import WallpaperColor from '@/assets/WallpaperColor';
 import DecorationButton from '../../../../components/Buttons/DecorationButton/DecorationButton';
 import LongButton from '../../../../components/Buttons/LongButton/LongButton';
 import {useRecoilState} from 'recoil';
-import {
-  BuildStateAtom,
-  buildStateAtom,
-} from '../../../../atoms/buildAtom';
+import {BuildStateAtom, buildStateAtom} from '../../../../atoms/buildAtom';
 import Overlap from '../../../../components/Overlap/Overlap';
 import WallpaperPreview from '@/assets/WallpaperPreview';
-import InsideNone from '@/assets/House/Build/InsideNone.png'
+import InsideNone from '@/assets/House/Build/InsideNone.png';
 export default function Wallpaper() {
   const [buildState, setBuildState] =
     useRecoilState<BuildStateAtom>(buildStateAtom);
 
   const handleSelect = (id: number) => {
-      setBuildState(prev => ({...prev, wallpaperId : id}));
+    setBuildState((prev) => ({...prev, wallpaperId: id}));
   };
   return (
     <>
@@ -26,8 +23,8 @@ export default function Wallpaper() {
       </SBuild.Title>
 
       <Overlap
-        width={260}
-        height={360}
+        width={300}
+        height={414}
         margin="30px 0 0 0"
         imgs={[
           InsideNone,
@@ -35,7 +32,9 @@ export default function Wallpaper() {
         ]}
       />
 
-      <SBuild.Description>{'벽지 1개를 선택해주세요!\n어울리는 가구들도 미리 보여드릴게요'}</SBuild.Description>
+      <SBuild.Description>
+        {'벽지 1개를 선택해주세요!\n어울리는 가구들도 미리 보여드릴게요'}
+      </SBuild.Description>
       <S.Box>
         {WallpaperColor.map((wallpaper, idx) => (
           <DecorationButton

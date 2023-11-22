@@ -71,8 +71,8 @@ export default function Name() {
         placeholder={'이름을 입력해주세요'}
       />
       <Overlap
-        width={260}
-        height={360}
+        width={300}
+        height={414}
         margin="30px 0 0 0"
         imgs={[
           Cookies[`Cookie${num1}${num2}`],

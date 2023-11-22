@@ -20,7 +20,7 @@ export default function Icing() {
   const [num1, num2] = useRecoilValue(sortedCookieIdsSelector);
 
   const handleSelect = (id: number) => {
-      setBuildState(prev => ({...prev, icingId: id}));
+    setBuildState((prev) => ({...prev, icingId: id}));
   };
   return (
     <>
@@ -29,8 +29,8 @@ export default function Icing() {
       </SBuild.Title>
 
       <Overlap
-        width={260}
-        height={360}
+        width={300}
+        height={414}
         margin="30px 0 0 0"
         imgs={[
           Cookies[`Cookie${num1}${num2}`],

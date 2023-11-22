@@ -45,8 +45,8 @@ export default function Outside() {
   return (
     <>
       <Overlap
-        width={300}
-        height={400}
+        width={330}
+        height={455}
         margin="40px 0 0 0"
         imgs={[
           Cookies[`LgCookie${num1}${num2}`],

@@ -31,8 +31,8 @@ export default function Preview() {
         {'나만의 쿠키하우스가 완성되었어요!\n입주하시겠어요?'}
       </SBuild.Title>
       <Overlap
-        width={260}
-        height={360}
+        width={300}
+        height={414}
         margin="30px 0 0 0"
         imgs={[
           Cookies[`Cookie${num1}${num2}`],
