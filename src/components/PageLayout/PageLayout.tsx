@@ -64,31 +64,34 @@ export default function PageLayout({
         />
       )}
       <S.BgWrapper isSplashScreen={location.pathname === '/'}>
-        {nav && (
-          <>
-            <S.Nav>
-              {/* {goBack && ( */}
-              <S.GoBackContainer>
-                <Button
-                  width={17}
-                  height={29}
-                  background={BackButton}
-                  route={goBack}
-                />
-              </S.GoBackContainer>
-              {/* )} */}
-              <S.LogoImg src={Logo} />
-              <S.ButtonBox>
-                {/* {mission && ( */}
-                <Button
-                  width={32}
-                  height={25}
-                  background={Envelope}
-                  onClick={handleMissionClick} // Mission 버튼 클릭 시 핸들러 호출
-                />
+        <S.IcingImg src={IcingBackground} />
+
+        <S.Wrapper>
+          {nav && (
+            <>
+              <S.Nav>
+                {/* {goBack && ( */}
+                <S.GoBackContainer>
+                  <Button
+                    width={12}
+                    height={23}
+                    background={BackButton}
+                    route={goBack}
+                  />
+                </S.GoBackContainer>
                 {/* )} */}
-                {/** TODO: 방명록 접근 방법 수정될 예정  */}
-                {/* {guestBook && (
+                <S.LogoImg src={Logo} />
+                <S.ButtonBox>
+                  {/* {mission && ( */}
+                  <Button
+                    width={25}
+                    height={19}
+                    background={Envelope}
+                    onClick={handleMissionClick} // Mission 버튼 클릭 시 핸들러 호출
+                  />
+                  {/* )} */}
+                  {/** TODO: 방명록 접근 방법 수정될 예정  */}
+                  {/* {guestBook && (
                   <Button
                     width={22}
                     height={19}
@@ -96,12 +99,12 @@ export default function PageLayout({
                     route={guestBook} 
                   />
                 )} */}
-              </S.ButtonBox>
-            </S.Nav>
-            <S.IcingImg src={IcingBackground} />
-          </>
-        )}
-        {children}
+                </S.ButtonBox>
+              </S.Nav>
+            </>
+          )}
+          {children}
+        </S.Wrapper>
       </S.BgWrapper>
       {button && (
         <S.RightButtonImage

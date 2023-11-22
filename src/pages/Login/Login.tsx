@@ -1,6 +1,6 @@
+import * as S from './style';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import LoginText from '../../assets/LoginAssets/LoginText.svg';
-import GoogleLogin from '../../assets/LoginAssets/GoogleLogin.svg';
 import KakaoLogin from '../../assets/LoginAssets/KakaoLogin.png';
 import WhiteTree from '@/assets/LoginAssets/WhiteTree.png';
 
@@ -47,6 +47,12 @@ const Login = () => {
           onClick={handleKakaoClick}
         />
       </a>
+      <S.LoginTerms
+        href="https://www.notion.so/aeb021139728445598bef71160a07222"
+        target="_blank"
+      >
+        서비스 이용약관
+      </S.LoginTerms>
     </PageLayout>
   );
 };

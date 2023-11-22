@@ -26,6 +26,7 @@ export const BgWrapper = styled.div<{isSplashScreen?: boolean}>`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 `;
 export const Wrapper = styled.div`
   width: 393px;
@@ -33,28 +34,31 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 19px;
 `;
 // TODO: 로고 추가 필요
 export const LogoImg = styled.img`
-  width: 110px;
-  height: 64px;
+  width: 80px;
+  height: 46px;
 `;
 
 export const Nav = styled.nav`
-  width: 340px;
+  width: 100%;
   height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-top: 20px;
-  margin-bottom: 15px;
+  margin-top: 6px;
+  margin-bottom: 3px;
+  padding: 0 17px;
 `;
 
 export const IcingImg = styled.img`
   width: 100%;
   height: 15px;
+  position: absolute;
+  left: 0;
+  top: 55px;
 `;
 
 export const ButtonBox = styled.div`
@@ -64,7 +68,7 @@ export const ButtonBox = styled.div`
   align-items: center;
   position: absolute;
   top: 0;
-  right: 0;
+  right: 42px;
 `;
 
 export const GoBackContainer = styled.div`
@@ -74,7 +78,7 @@ export const GoBackContainer = styled.div`
   align-items: center;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 42px;
 `;
 
 export const LeftButtonImage = styled.img`
