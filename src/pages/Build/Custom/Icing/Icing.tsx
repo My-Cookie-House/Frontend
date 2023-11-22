@@ -64,7 +64,7 @@ export default function Icing() {
       </S.Box>
       <LongButton
         margin="35px 0 0 0"
-        route="/build/preview"
+        route="/build/custom/wallpaper"
         disabled={buildState.icingId === null}
       >
         <SBuild.NextStepText>{'다 골랐어요!'}</SBuild.NextStepText>
