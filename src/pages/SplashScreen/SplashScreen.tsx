@@ -23,7 +23,7 @@ export default function SplashScreen(): JSX.Element {
         if (isHouseBuilt) {
           navigate(`/${userId}`); // 로그인하였고 쿠키하우스를 지은 경우
         } else {
-          navigate('/build'); // 로그인은 했지만 쿠키하우스를 지은 적이 없는 경우
+          navigate('/onboarding'); // 로그인은 했지만 쿠키하우스를 지은 적이 없는 경우(온보딩->빌딩)
         }
       } else {
         navigate('/login'); // 로그인하지 않은 경우
