@@ -7,7 +7,7 @@ import WallpaperPreview6 from './1.png';
 import WallpaperPreview7 from './1.png';
 import WallpaperPreview8 from './1.png';
 //TODO: 2~8까지 이미지 만들어지면 추가하고 경로수정
-export default [
+export default {
     WallpaperPreview1, 
     WallpaperPreview2, 
     WallpaperPreview3, 
@@ -16,4 +16,4 @@ export default [
     WallpaperPreview6,
     WallpaperPreview7,
     WallpaperPreview8
-];
+};
