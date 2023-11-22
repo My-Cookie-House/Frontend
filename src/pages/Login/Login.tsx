@@ -1,6 +1,5 @@
 import PageLayout from '../../components/PageLayout/PageLayout';
 import LoginText from '../../assets/LoginAssets/LoginText.svg';
-import GoogleLogin from '../../assets/LoginAssets/GoogleLogin.svg';
 import KakaoLogin from '../../assets/LoginAssets/KakaoLogin.png';
 import WhiteTree from '@/assets/LoginAssets/WhiteTree.png';
 
@@ -13,8 +12,6 @@ const Login = () => {
   const handleKakaoClick = () => {
     localStorage.setItem('loginMethod', JSON.stringify('kakao'));
   };
-
-  
 
   return (
     <PageLayout>
