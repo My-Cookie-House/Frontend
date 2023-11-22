@@ -21,6 +21,7 @@ export const Description = styled.h3`
   font-weight: 600;
   line-height: normal;
   margin-top: 33px;
+  white-space: pre;
 `;
 
 export const NextStepText = styled.span`

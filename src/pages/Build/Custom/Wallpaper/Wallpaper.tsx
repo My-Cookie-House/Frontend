@@ -1,43 +1,28 @@
 import * as S from './style';
 import * as SBuild from '../../style';
 import Icings from '../../../../assets/Icings';
+import WallpaperColor from '@/assets/WallpaperColor';
 import DecorationButton from '../../../../components/Buttons/DecorationButton/DecorationButton';
 import LongButton from '../../../../components/Buttons/LongButton/LongButton';
-import {useRecoilState, useRecoilValue} from 'recoil';
+import {useRecoilState} from 'recoil';
 import {
   BuildStateAtom,
   buildStateAtom,
-  sortedCookieIdsSelector,
 } from '../../../../atoms/buildAtom';
-import Cookies from '../../../../assets/House/Outside/Cookies';
 import Overlap from '../../../../components/Overlap/Overlap';
-import IcingLayers from '../../../../assets/House/Outside/Icings/index';
-
+import WallpaperPreview from '@/assets/WallpaperPreview';
+import InsideNone from '@/assets/House/Build/InsideNone.png'
 export default function Wallpaper() {
   const [buildState, setBuildState] =
     useRecoilState<BuildStateAtom>(buildStateAtom);
 
-  const [num1, num2] = useRecoilValue(sortedCookieIdsSelector);
-
   const handleSelect = (id: number) => {
-    // icingId는 인덱스+1
-
-    // 하나 선택하면 더 이상 선택 불가
-    // 취소하려면 선택 된 아이싱 타시 클릭해야 한다
-    if (
-      (buildState.icingId !== null && buildState.icingId === id) ||
-      buildState.icingId === null
-    ) {
-      setBuildState((prev) => ({
-        ...prev,
-        icingId: prev.icingId === id ? null : id,
-      }));
-    }
+      setBuildState(prev => ({...prev, wallpaperId : id}));
   };
   return (
     <>
       <SBuild.Title marginTop="40px">
-        {'쿠키하우스가 완성되었어요!\n이제 하우스를 꾸며볼까요?'}
+        {'내부 벽지도 선택할 수 있어요!'}
       </SBuild.Title>
 
       <Overlap
@@ -45,27 +30,27 @@ export default function Wallpaper() {
         height={360}
         margin="30px 0 0 0"
         imgs={[
-          Cookies[`Cookie${num1}${num2}`],
-          IcingLayers[`Icing${buildState.icingId}`],
+          InsideNone,
+          WallpaperPreview[`WallpaperPreview${buildState.wallpaperId}`],
         ]}
       />
 
-      <SBuild.Description>{'아이싱 1개를 선택해주세요!'}</SBuild.Description>
+      <SBuild.Description>{'벽지 1개를 선택해주세요!\n어울리는 가구들도 미리 보여드릴게요'}</SBuild.Description>
       <S.Box>
-        {Icings.map((icing, idx) => (
+        {WallpaperColor.map((wallpaper, idx) => (
           <DecorationButton
             key={idx}
-            image={icing}
+            image={wallpaper}
             size={79}
             onClick={() => handleSelect(idx + 1)}
-            dark={buildState.icingId === idx + 1}
+            dark={buildState.wallpaperId === idx + 1}
           />
         ))}
       </S.Box>
       <LongButton
         margin="35px 0 0 0"
         route="/build/preview"
-        disabled={buildState.icingId === null}
+        disabled={buildState.wallpaperId === null}
       >
         <SBuild.NextStepText>{'다 골랐어요!'}</SBuild.NextStepText>
       </LongButton>

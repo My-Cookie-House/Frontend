@@ -20,19 +20,7 @@ export default function Icing() {
   const [num1, num2] = useRecoilValue(sortedCookieIdsSelector);
 
   const handleSelect = (id: number) => {
-    // icingId는 인덱스+1
-
-    // 하나 선택하면 더 이상 선택 불가
-    // 취소하려면 선택 된 아이싱 타시 클릭해야 한다
-    if (
-      (buildState.icingId !== null && buildState.icingId === id) ||
-      buildState.icingId === null
-    ) {
-      setBuildState((prev) => ({
-        ...prev,
-        icingId: prev.icingId === id ? null : id,
-      }));
-    }
+      setBuildState(prev => ({...prev, icingId: id}));
   };
   return (
     <>
@@ -64,7 +52,7 @@ export default function Icing() {
       </S.Box>
       <LongButton
         margin="35px 0 0 0"
-        route="/build/preview"
+        route="/build/custom/wallpaper"
         disabled={buildState.icingId === null}
       >
         <SBuild.NextStepText>{'다 골랐어요!'}</SBuild.NextStepText>

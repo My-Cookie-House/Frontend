@@ -4,6 +4,7 @@ export type BuildStateAtom = {
   type: 'unselected' | 'random' | 'custom';
   cookieIds: (number | null)[];
   icingId: number | null;
+  wallpaperId: number | null;
   name: string;
 };
 
@@ -11,6 +12,7 @@ export const initalBuildState: BuildStateAtom = {
   type: 'unselected',
   cookieIds: [null, null],
   icingId: null,
+  wallpaperId: null,
   name: '',
 };
 
