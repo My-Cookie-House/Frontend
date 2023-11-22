@@ -6,8 +6,8 @@ export const ShareImg = styled.img`
 `;
 
 export const Frame = styled.div`
-  width: 300px;
-  height: 400px;
+  width: 355px;
+  height: 533px;
   position: relative;
   display: flex;
   justify-content: center;
