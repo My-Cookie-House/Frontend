@@ -7,6 +7,8 @@ import useIsMyHouse from '../../../hooks/useIsMyHouse';
 import Overlap from '../../../components/Overlap/Overlap';
 import Cookies from '../../../assets/House/Outside/Cookies';
 import Icings from '../../../assets/House/Outside/Icings';
+import {useEffect} from 'react';
+import InsideBg from '@/assets/House/Inside/InsideBg.png';
 
 const STALE_MIN = 5;
 const GC_MIN = 5;
@@ -21,7 +23,24 @@ export default function Outside() {
     gcTime: 1000 * 60 * GC_MIN,
   });
 
+  const loadImage = async (src: string) =>
+    await new Promise<string>((resolve, reject) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        resolve(src);
+      };
+      img.onerror = (e) => {
+        reject(e);
+      };
+    });
+
   const [num1, num2] = data.cookieIds;
+
+  useEffect(() => {
+    // 하우스 내부 배경 이미지 preload
+    loadImage(InsideBg);
+  }, []);
 
   return (
     <>
@@ -29,7 +48,6 @@ export default function Outside() {
         width={300}
         height={400}
         margin="40px 0 0 0"
-        // TODO: 배열 두 번째 값 실제 아이싱 데이터 반영해야함
         imgs={[
           Cookies[`LgCookie${num1}${num2}`],
           Icings[`LgIcing${data.icingId}`],

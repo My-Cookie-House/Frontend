@@ -1,11 +1,12 @@
 import Router from './Router';
-import useAuth from './hooks/useAuth';
+import AuthProvider from './components/AuthProvider/AuthProvider';
 
 const App = () => {
-  useAuth();
   return (
     <>
-      <Router />
+      <AuthProvider>
+        <Router />
+      </AuthProvider>
     </>
   );
 };

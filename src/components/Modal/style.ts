@@ -1,7 +1,8 @@
-import styled, {keyframes} from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import SmallModalImg from '../../assets/Modal/SmallModal.svg';
 import MediumModalImg from '../../assets/Modal/Modal.svg';
 import LargeModalImg from '../../assets/Modal/BigModal.svg';
+import FurnitureSelectModalImg from '../../assets/Modal/SelectFurnitureModal.svg'
 import {ModalContentProps, ModalWrapperProps} from '../../type/type';
 
 const fadeIn = keyframes`
@@ -21,13 +22,13 @@ const ModalWrapper = styled.div<ModalWrapperProps>`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
   display: ${(props) => (props.show ? 'block' : 'none')};
   z-index: 999;
+  background-color: rgba(0, 0, 0, 0.15);
 `;
 
 const getModalBackgroundImage = (
-  imageType?: 'SmallModal' | 'MediumModal' | 'LargeModal',
+  imageType?: 'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal',
 ) => {
   switch (imageType) {
     case 'SmallModal':
@@ -36,13 +37,15 @@ const getModalBackgroundImage = (
       return MediumModalImg;
     case 'LargeModal':
       return LargeModalImg;
+    case 'FurnitureSelectModal':
+      return FurnitureSelectModalImg;
     default:
       return LargeModalImg;
   }
 };
 
 const getModalSize = (
-  imageType?: 'SmallModal' | 'MediumModal' | 'LargeModal',
+  imageType?: 'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal',
 ) => {
   switch (imageType) {
     case 'SmallModal':
@@ -51,6 +54,8 @@ const getModalSize = (
       return {width: '311px', height: '418px'};
     case 'LargeModal':
       return {width: '311px', height: '617px'};
+    case 'FurnitureSelectModal':
+      return {width: '624px', height: '350px'};
     default:
       return {width: '311px', height: '418px'}; // 기본값
   }
@@ -71,6 +76,8 @@ const ModalContent = styled.div<ModalContentProps>`
     return `
       width: ${width};
       height: ${height};
+      bottom: ${imageType === 'FurnitureSelectModal' ? '0' : '50%'};
+      transform: ${imageType === 'FurnitureSelectModal' ? 'translate(-50%, 35%)' : 'translate(-50%, -50%)'};
     `;
   }}
   color: #572E16;
@@ -94,6 +101,8 @@ const ModalTitle = styled.div`
   white-space: pre;
   overflow: hidden;
 `;
+
+
 
 export const S = {
   fadeIn,

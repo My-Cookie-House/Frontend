@@ -3,6 +3,8 @@ import LongButton from '../Buttons/LongButton/LongButton';
 import {S} from './style';
 import SkipButton from '../Buttons/SkipButton/SkipButton';
 import BuildStartButton from '../Buttons/BuildStartButton/BuildStartButton';
+import {useRecoilState} from 'recoil';
+import {indexAtom} from '../../atoms/sideButtonAtom';
 
 interface SliderProps {
   images: string[];
@@ -12,6 +14,18 @@ interface SliderProps {
   progresses: string[];
 }
 
+export const handleRightClick = (index, setIndex, images) => {
+  if (index < images.length - 1) {
+    setIndex(index + 1);
+  }
+};
+
+export const handleLeftClick = (index, setIndex, images) => {
+  if (0 < index) {
+    setIndex(index - 1);
+  }
+};
+
 const Slider: React.FC<SliderProps> = ({
   images,
   topTexts,
@@ -19,7 +33,7 @@ const Slider: React.FC<SliderProps> = ({
   extraTexts,
   progresses,
 }) => {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useRecoilState<number>(indexAtom);
   const [startX, setStartX] = useState(0);
   const [dragging, setDragging] = useState(false);
   const touchRef = useRef(null);
@@ -49,38 +63,49 @@ const Slider: React.FC<SliderProps> = ({
   };
 
   return (
-    <div
-      ref={touchRef}
-      onTouchStart={(e) => handleStart(e.touches[0].clientX)}
-      onTouchEnd={(e) => handleEnd(e.changedTouches[0].clientX)}
-    >
+    <div style={{paddingTop: '48.3px'}}>
       <S.Title>{topTexts[index]}</S.Title>
-      {index === 0 ? (
-        <img
-          src={images[index]}
-          style={{
-            width: '280px',
-            height: '374px',
-          }}
-        />
-      ) : (
-        <img
-          src={images[index]}
-          style={{
-            width: '282px',
-            height: '302px',
-          }}
-        />
-      )}
+      <div
+        ref={touchRef}
+        onTouchStart={(e) => handleStart(e.touches[0].clientX)}
+        onTouchEnd={(e) => handleEnd(e.changedTouches[0].clientX)}
+      >
+        {index === 0 ? (
+          <img
+            src={images[index]}
+            style={{
+              width: '280px',
+              height: '374px',
+              marginBottom: '58.32px',
+              marginTop: '39px',
+            }}
+          />
+        ) : (
+          <img
+            src={images[index]}
+            style={{
+              width: '282.253px',
+              height: '301.443px',
+              marginTop: '39px',
+              marginBottom: '50.85px',
+            }}
+          />
+        )}
+      </div>
+      <div
+        style={{
+          height: '149.05px',
+        }}
+      >
+        {index === 0 && (
+          <S.Centering>
+            <LongButton onClick={handleRightClick}>Start!</LongButton>
+          </S.Centering>
+        )}
+        <S.BottomText>{bottomTexts[index]}</S.BottomText>
+        <S.ExtraText>{extraTexts[index]}</S.ExtraText>
+      </div>
 
-      <S.BottomText>{bottomTexts[index]}</S.BottomText>
-      <S.ExtraText>{extraTexts[index]}</S.ExtraText>
-
-      {index === 0 && (
-        <S.Centering>
-          <LongButton onClick={handleRightClick}>Start!</LongButton>
-        </S.Centering>
-      )}
       {index === images.length - 1 && (
         <S.Centering>
           <BuildStartButton />
@@ -95,6 +120,7 @@ const Slider: React.FC<SliderProps> = ({
               style={{
                 width: '56px',
                 height: '12px',
+                marginBottom: '13.71px',
               }}
             />
           </S.Centering>

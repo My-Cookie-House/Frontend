@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Background from '../../assets/Background/Background.svg';
-import SplashScreenBackground from '../../assets/SplashScreenAssets/SplashScreenBackground.svg';
+import SplashScreenBackground from '@/assets/SplashScreenAssets/SplashScreen.png';
 
 export const Layout = styled.div`
   width: 100vw;
@@ -12,8 +12,10 @@ export const Layout = styled.div`
 export const Wrapper = styled.div<{isSplashScreen?: boolean}>`
   width: 393px;
   height: 852px;
-  background: url(${(props) =>
-    props.isSplashScreen ? SplashScreenBackground : Background});
+  background: ${(props) =>
+    props.isSplashScreen
+      ? `url(${SplashScreenBackground})`
+      : `url(${Background})`};
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -22,13 +24,12 @@ export const Wrapper = styled.div<{isSplashScreen?: boolean}>`
   display: flex;
   flex-direction: column;
   align-items: center;
+
 `;
 // TODO: 로고 추가 필요
-export const Logo = styled.div`
+export const LogoImg = styled.img`
   width: 110px;
   height: 49.7px;
-  background-color: gray;
-  text-align: center;
 `;
 
 export const Nav = styled.nav`
@@ -59,4 +60,18 @@ export const GoBackContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+`;
+
+export const LeftButtonImage = styled.img`
+  margin-right: 10px;
+  @media (max-width: 768px) {
+    display: none; /* 모바일 화면일 때 숨김 */
+  }
+`;
+
+export const RightButtonImage = styled.img`
+  margin-left: 10px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;

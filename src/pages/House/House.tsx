@@ -1,19 +1,23 @@
 import * as S from './style';
-import {Outlet, useLocation, useParams} from 'react-router-dom';
+import {Outlet, useLocation, useNavigate, useParams} from 'react-router-dom';
 import PageLayout from '../../components/PageLayout/PageLayout';
-import {loginStateAtom} from '../../atoms/loginStateAtom';
-import {useRecoilValue} from 'recoil';
 import {useQuery} from '@tanstack/react-query';
 import house from '../../apis/house';
 import {IHouseOutside} from '../../interfaces/house';
-import {Suspense} from 'react';
+import {Suspense, useEffect, useState} from 'react';
 import useIsMyHouse from '../../hooks/useIsMyHouse';
+import {useRecoilValue} from 'recoil';
+import {userInfo} from 'os';
+import {userInfoAtom} from '../../atoms/loginStateAtom';
 
 const STALE_MIN = 5;
 
 export default function House() {
-  const {id, userId} = useIsMyHouse();
+  const {id, userId, isMyHouse} = useIsMyHouse();
+  const {isHouseBuilt} = useRecoilValue(userInfoAtom);
   const {pathname} = useLocation();
+
+  const navigate = useNavigate();
 
   const {data} = useQuery<IHouseOutside>({
     queryKey: ['house', 'outside', id],
@@ -22,8 +26,8 @@ export default function House() {
     gcTime: 1000 * 60 * STALE_MIN,
   });
 
-   // Mission 모달을 여는 함수
-   const handleOpenMissionModal = () => {
+  // Mission 모달을 여는 함수
+  const handleOpenMissionModal = () => {
     // TODO: 이 쓸데없는 함수 없이 어떻게 깔끔하게 정리할 수 있을까..
   };
 
@@ -31,13 +35,11 @@ export default function House() {
   return (
     <PageLayout
       guestBook={`/${id}/guests`}
-      mission={userId === +id ? handleOpenMissionModal : undefined} // 조건부로 함수 전달
+      mission={userId === +id ? handleOpenMissionModal : undefined}
       goBack={pathname === `/${id}/inside` && `/${id}`} // 하우스 내부에서만 뒤로가기 버튼 존재
     >
       <S.HouseName>{data?.houseName}</S.HouseName>
-      <Suspense>
-        <Outlet />
-      </Suspense>
+      <Outlet />
     </PageLayout>
   );
 }
