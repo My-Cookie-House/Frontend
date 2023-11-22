@@ -26,7 +26,7 @@ export default function BuildLayout() {
     /**
      * 유저 정보 확인해서, 빌드를 한 적 있으면 접속 못하게 막기!
      * (집을 다시 만드는 것을 방지)
-     */
+     
     if (!loggedIn) {
       alert('로그인 해주세요');
       navigate('/login');
@@ -35,6 +35,7 @@ export default function BuildLayout() {
       alert('이미 입주하신 쿠키하우스가 존재합니다!');
       navigate(`/${userId}`);
     }
+    */ //TODO: push할 때 주석 지우기
   }, []);
 
   useEffect(() => {
