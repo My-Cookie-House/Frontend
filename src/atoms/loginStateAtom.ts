@@ -1,4 +1,6 @@
 import {atom} from 'recoil';
+import {recoilPersist} from 'recoil-persist';
+const {persistAtom} = recoilPersist();
 
 export type UserInfo = {
   userId: number | null;
@@ -32,4 +34,5 @@ export const userInfoAtom = atom<UserInfo>({
 export const loginStateAtom = atom<boolean>({
   key: 'loginState',
   default: false,
+  effects_UNSTABLE: [persistAtom],
 });
