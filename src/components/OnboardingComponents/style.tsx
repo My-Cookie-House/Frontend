@@ -36,9 +36,21 @@ const Centering = styled.div`
   justify-content: center;
 `;
 
+const StartText = styled.span`
+  color: #572e16;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 2.4px;
+`;
+
 export const S = {
   Title,
   BottomText,
   ExtraText,
   Centering,
+  StartText,
 };
