@@ -79,14 +79,14 @@ export default function PageLayout({
                 )}
                 <S.LogoImg src={Logo} />
                 <S.ButtonBox>
-                  {mission && (
-                    <Button
-                      width={25}
-                      height={19}
-                      background={Envelope}
-                      onClick={handleMissionClick} // Mission 버튼 클릭 시 핸들러 호출
-                    />
-                  )}
+                  {/* {mission && ( */}
+                  <Button
+                    width={25}
+                    height={19}
+                    background={Envelope}
+                    onClick={handleMissionClick} // Mission 버튼 클릭 시 핸들러 호출
+                  />
+                  {/* )} */}
                   {/** TODO: 방명록 접근 방법 수정될 예정  */}
                   {/* {guestBook && (
                   <Button
