@@ -14,8 +14,6 @@ const Login = () => {
     localStorage.setItem('loginMethod', JSON.stringify('kakao'));
   };
 
-  
-
   return (
     <PageLayout>
       <img
@@ -24,16 +22,16 @@ const Login = () => {
         style={{
           width: '80px',
           height: '19px',
-          marginTop: '40.06px',
-          marginBottom: '41.92px',
+          marginTop: '43px',
+          marginBottom: '30px',
         }}
       />
       <img
         src={WhiteTree}
         alt="White Tree"
         style={{
-          width: '311px',
-          height: '395.5px',
+          width: '328px',
+          height: '439px',
         }}
       />
       <a href={KAKAO_AUTH_URL}>
@@ -43,8 +41,8 @@ const Login = () => {
           style={{
             width: '190px',
             height: '42px',
-            marginTop: '10px',
-            marginBottom: '8px',
+            marginTop: '70px',
+            marginBottom: '10px',
           }}
           onClick={handleKakaoClick}
         />
