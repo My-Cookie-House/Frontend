@@ -69,6 +69,19 @@ const getModalSize = (
   }
 };
 
+// 아래에서 위로 올라가는 애니메이션 정의
+// 세로 모드용 애니메이션
+const slideUpAnimationPortrait = keyframes`
+  from { transform: translate(-50%, 100%); }
+  to { transform: translate(-50%, 30%); }
+`;
+
+// 가로 모드용 애니메이션
+const slideUpAnimationLandscape = keyframes`
+  from { transform: translate(-50%, 100%); }
+  to { transform: translate(-50%, -13%); }
+`;
+
 const ModalContent = styled.div<ModalContentProps>`
   position: fixed;
   top: 50%;
@@ -81,21 +94,30 @@ const ModalContent = styled.div<ModalContentProps>`
   padding: 15px;
   ${({imageType}) => {
     const {width, height} = getModalSize(imageType);
-    return `
-      width: ${width};
-      height: ${height};
-      bottom: ${imageType === 'FurnitureSelectModal' ? '0' : '50%'};
-      transform: ${
-        imageType === 'FurnitureSelectModal'
-          ? 'translate(-50%, 35%)'
-          : 'translate(-50%, -50%)'
-      };
-    `;
+    if (imageType === 'FurnitureSelectModal') {
+      return css`
+        width: ${width};
+        height: ${height};
+        animation: ${slideUpAnimationPortrait} 0.5s ease-out forwards;
+        
+        @media screen and (orientation: landscape) {
+          animation: ${slideUpAnimationLandscape} 0.5s ease-out forwards;
+        }
+      `;
+      } else {
+      return css`
+        width: ${width};
+        height: ${height};
+        bottom: 50%;
+        transform: translate(-50%, -50%);
+      `;
+    }
   }}
   color: #572E16;
   font-size: 20px;
   overflow-y: auto;
 `;
+
 
 const ModalInnerContent = styled.div`
   width: 100%;
