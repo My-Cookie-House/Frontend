@@ -15,6 +15,7 @@ import Name from './pages/Build/Name/Name';
 import House from './pages/House/House';
 import Outside from './pages/House/Outside/Outside';
 import Inside from './pages/House/Inside/Inside';
+import Wallpaper from './pages/Build/Custom/Wallpaper/Wallpaper';
 
 export default function Router() {
   return (
@@ -38,6 +39,7 @@ export default function Router() {
           <Route path="random" element={<Random />} />
           <Route path="custom/cookies" element={<Cookies />} />
           <Route path="custom/icing" element={<Icing />} />
+          <Route path="custom/wallpaper" element={<Wallpaper />} />
           <Route path="preview" element={<Preview />} />
           <Route path="name" element={<Name />} />
         </Route>
