@@ -14,7 +14,7 @@ const useSignout = () => {
     try {
       await instance.get('/auth/unlink');
 
-      queryClient.invalidateQueries({queryKey: ['loginState']});
+      await queryClient.invalidateQueries({queryKey: ['loginState']});
 
       Cookies.remove('accessToken');
       Cookies.remove('refreshToken');
