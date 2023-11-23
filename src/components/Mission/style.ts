@@ -7,7 +7,7 @@ import TodayMessageLineImg from '../../assets/Icons/TodayMessageLine.svg';
 import ShowMoreMenuButtonImg from '../../assets/Button/ShowMoreMenuButton.svg';
 import ChangeButtonImg from '../../assets/Button/ChangeButton.svg';
 
-const ModalInnerWrapper = styled.div`
+export const ModalInnerWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -16,7 +16,7 @@ const ModalInnerWrapper = styled.div`
   margin-top: 68px;
 `;
 
-const ModalText = styled.div`
+export const ModalText = styled.div`
   color: ${(props) => props.theme.colors.textBrown};
   font-size: 14px;
   font-style: normal;
@@ -26,23 +26,23 @@ const ModalText = styled.div`
   margin-bottom: 29px;
 `;
 
-const ModalOkButtonWrapper = styled.div`
+export const ModalOkButtonWrapper = styled.div`
   margin-top: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const ModalText2 = styled(ModalText)`
+export const ModalText2 = styled(ModalText)`
   margin-top: -8px;
 `;
 
-const swapAnimation = keyframes`
+export const swapAnimation = keyframes`
     0%, 50% { background-image: url(${ClosedEnvelopeImg}); }
     50.01%, 100% { background-image: url(${OpenedEnvelopeImg}); }
 `;
 
-const SwappingEnvelope = styled.div`
+export const SwappingEnvelope = styled.div`
   width: 148px;
   height: 148px;
   background-image: url(${ClosedEnvelopeImg});
@@ -51,7 +51,7 @@ const SwappingEnvelope = styled.div`
   margin-bottom: -45px;
 `;
 
-const MessageArea = styled.textarea`
+export const MessageArea = styled.textarea`
   position: relative;
   width: 220px;
   height: 110px;
@@ -70,7 +70,7 @@ const MessageArea = styled.textarea`
   margin-bottom: -22px;
 `;
 
-const Form = styled.form`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -78,7 +78,7 @@ const Form = styled.form`
   justify-content: center;
 `;
 
-const CheckTextLength = styled.div`
+export const CheckTextLength = styled.div`
   margin-top: -10px;
   margin-right: 30px;
   display: flex;
@@ -90,7 +90,7 @@ const CheckTextLength = styled.div`
   margin-bottom: 53px;
 `;
 
-const ImageUploadLabel = styled.label`
+export const ImageUploadLabel = styled.label`
   cursor: pointer;
   width: 236.538px;
   height: 236.538px;
@@ -101,7 +101,7 @@ const ImageUploadLabel = styled.label`
   margin-bottom: 15px;
 `;
 
-const ImageWrapper = styled.div`
+export const ImageWrapper = styled.div`
   cursor: pointer;
   width: 236.538px;
   height: 236.538px;
@@ -112,7 +112,7 @@ const ImageWrapper = styled.div`
   margin-bottom: 15px;
 `;
 
-const ImageInput = styled.input`
+export const ImageInput = styled.input`
   opacity: 0; // 투명하게 설정
   position: absolute; // 절대적 위치 설정
   width: 100%;
@@ -122,7 +122,7 @@ const ImageInput = styled.input`
   left: 0;
 `;
 
-const ImagePreview = styled.div<ImagePreviewProps>`
+export const ImagePreview = styled.div<ImagePreviewProps>`
   width: 232px;
   height: 232px;
   background-size: contain;
@@ -134,7 +134,7 @@ const ImagePreview = styled.div<ImagePreviewProps>`
   margin-left: 2.5px;
 `;
 
-const GuestBookEntryGrid = styled.div`
+export const GuestBookEntryGrid = styled.div`
   max-height: 550px; // 최대 높이
   overflow-y: auto; // 세로 스크롤을 활성화하여 내용이 넘칠 경우 스크롤이 생김
   display: grid;
@@ -142,7 +142,7 @@ const GuestBookEntryGrid = styled.div`
   gap: 12.5px; // 그리드 간격
 `;
 
-const DecorationButtonContainer = styled.div`
+export const DecorationButtonContainer = styled.div`
   display: flex; // 가로로 나열하기 위해 Flexbox를 사용합니다.
   justify-content: space-between; // 버튼 사이의 간격을 균등하게 배치합니다.
   align-items: center; // 수직 가운데 정렬합니다.
@@ -150,7 +150,7 @@ const DecorationButtonContainer = styled.div`
   margin-bottom: -30px;
 `;
 
-const TodayMessageLine = styled.div`
+export const TodayMessageLine = styled.div`
   background-image: url(${TodayMessageLineImg});
   background-size: 237px 26.8px;
   width: 237px;
@@ -158,7 +158,7 @@ const TodayMessageLine = styled.div`
   margin-bottom: 20px;
 `;
 
-const ShowMessage = styled.div`
+export const ShowMessage = styled.div`
   position: relative;
   width: 220px;
   height: 140px;
@@ -173,7 +173,7 @@ const ShowMessage = styled.div`
   margin-bottom: -22px;
 `;
 
-const ShowMoreMenuButton = styled.button`
+export const ShowMoreMenuButton = styled.button`
   position: absolute;
   width: 14px;
   height: 14px;
@@ -186,7 +186,7 @@ const ShowMoreMenuButton = styled.button`
   right: 85px;
 `;
 
-const TextAndButtonWrapper = styled.div`
+export const TextAndButtonWrapper = styled.div`
   display: flex;
   grid-template-columns: repeat(2, 1fr); // 2개의 열
   gap: 5px; // 그리드 간격
@@ -194,7 +194,7 @@ const TextAndButtonWrapper = styled.div`
   align-items: center; // 수직 가운데 정렬합니다.
 `;
 
-const ChangeButton = styled.button`
+export const ChangeButton = styled.button`
   position: absolute;
   width: 108px;
   height: 78px;
@@ -210,25 +210,3 @@ const ChangeButton = styled.button`
   font-size: 12px;
   font-weight: 600;
 `;
-
-export const S = {
-  ModalInnerWrapper,
-  ModalText,
-  SwappingEnvelope,
-  Form,
-  MessageArea,
-  CheckTextLength,
-  ImageInput,
-  ImageUploadLabel,
-  ImagePreview,
-  GuestBookEntryGrid,
-  ModalText2,
-  ModalOkButtonWrapper,
-  DecorationButtonContainer,
-  TodayMessageLine,
-  ShowMessage,
-  ImageWrapper,
-  ShowMoreMenuButton,
-  TextAndButtonWrapper,
-  ChangeButton,
-};
