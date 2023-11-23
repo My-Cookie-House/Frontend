@@ -39,6 +39,7 @@ export const Wrapper = styled.div`
 export const LogoImg = styled.img`
   width: 80px;
   height: 46px;
+  cursor: pointer;
 `;
 
 export const Nav = styled.nav`

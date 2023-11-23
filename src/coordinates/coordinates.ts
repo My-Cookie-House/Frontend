@@ -1,5 +1,13 @@
-export const coordinates = new Map();
+type CoordinateEntries = {
+  width: string;
+  height: string;
+  top: string;
+  left: string;
+};
 
+export const coordinates = new Map<number, CoordinateEntries>();
+
+// 키: missionId
 coordinates
   .set(1, {
     width: '246px',

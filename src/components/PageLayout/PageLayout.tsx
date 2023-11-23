@@ -2,7 +2,7 @@ import {useLayoutEffect, useState} from 'react';
 import Envelope from '../../assets/Button/envelope.png';
 import BackButton from '../../assets/Button/BackButton.svg';
 import * as S from './style';
-import {useLocation} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import Button from '../Buttons/Button';
 import Mission from '../Mission/Mission';
 import Logo from '../../assets/Background/Logo.png';
@@ -35,12 +35,17 @@ export default function PageLayout({
   mission,
   goBack,
 }: Props) {
+  const navigate = useNavigate();
   const [nav, setNav] = useState(true);
   const [button, setButton] = useState(false);
   const location = useLocation();
   const {pathname} = useLocation();
   const [isMissionOpen, setIsMissionOpen] = useState(false);
   const [index, setIndex] = useRecoilState<number>(indexAtom);
+
+  const handleLogoClick = () => {
+    navigate('/');
+  };
 
   // Mission 버튼 클릭 핸들러
   const handleMissionClick = () => {
@@ -77,7 +82,7 @@ export default function PageLayout({
                     />
                   </S.GoBackContainer>
                 )}
-                <S.LogoImg src={Logo} />
+                <S.LogoImg onClick={handleLogoClick} src={Logo} />
                 <S.ButtonBox>
                   {mission && (
                     <Button
