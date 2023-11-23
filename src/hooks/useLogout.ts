@@ -1,8 +1,30 @@
-export default function useLogout() {
-  const logout = () => {
-    // 로그아웃
-    console.log('Logged out');
+import {instance} from '@/apis/axios';
+import Cookies from 'js-cookie';
+import {useQueryClient} from 'react-query';
+import {useNavigate} from 'react-router-dom';
+import {useRecoilState} from 'recoil';
+import {loginStateAtom} from '@/atoms/loginStateAtom';
+
+const useLogout = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const [loginState, setLoginState] = useRecoilState(loginStateAtom);
+
+  const logout = async () => {
+    try {
+      await instance.get('/auth/sign-out');
+
+      queryClient.invalidateQueries({queryKey: ['loginState']});
+
+      Cookies.remove('accessToken');
+      setLoginState(false);
+      navigate('/');
+    } catch (error) {
+      console.error('로그아웃 오류: ', error);
+    }
   };
 
-  return logout;
-}
+  return {logout};
+};
+
+export default useLogout;
