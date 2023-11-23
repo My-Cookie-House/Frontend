@@ -11,17 +11,18 @@ const Container = styled.div`
 
 const TitleContainerBox = styled.div`
     position: absolute;
-    top: 169.88px;
+    top: 87px;
     width: 239.822px;
     height: 50.489px;
     background-image: url(${TitleContainerBoxImg});
     background-size: 239.822px 50.489px;
     color: #572E16;
-    font-size: 20px;
+    font-size: 16px;
     text-align: center;
     flex-direction: column;
     display: flex;
     justify-content: center;
+    z-index: 2;
 `;
 
 export const S = {
