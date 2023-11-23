@@ -22,7 +22,6 @@ instance.interceptors.response.use(
       if (!refreshToken) {
         throw new Error('토큰 없음');
       }
-
       try {
         await sendRefreshToken(refreshToken);
         return instance(originalRequest);

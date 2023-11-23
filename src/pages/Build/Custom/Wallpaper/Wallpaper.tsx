@@ -1,6 +1,5 @@
 import * as S from './style';
 import * as SBuild from '../../style';
-import Icings from '../../../../assets/Icings';
 import WallpaperColor from '@/assets/WallpaperColor';
 import DecorationButton from '../../../../components/Buttons/DecorationButton/DecorationButton';
 import LongButton from '../../../../components/Buttons/LongButton/LongButton';

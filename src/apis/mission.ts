@@ -2,10 +2,10 @@
 import {instance} from './axios';
 
 // 특정 날짜의 완료된 미션 데이터를 가져오는 함수
-export const getCompletedMissionByDate = async (missionDate) => {
+export const getCompletedMissionById = async (missionCompleteId: number) => {
   try {
     const response = await instance.get(
-      `/mission-complete?date=${missionDate}`,
+      `/mission-complete/${missionCompleteId}`,
     );
     return response.data.data;
   } catch (error) {
@@ -48,9 +48,13 @@ export const uploadImageMessageFurnitureId = async (
   }
 };
 
-export const getAllCompletedMissions = async (id) => {
+export const getAllCompletedMissions = async (id: number) => {
   try {
-    const response = await instance.get(`/mission-complete/${id}`);
+    const response = await instance.get(`/mission-complete`, {
+      params: {
+        userId: id,
+      },
+    });
     return response.data.data;
   } catch (error) {
     console.error('데이터를 가져오는데 실패했습니다.', error);

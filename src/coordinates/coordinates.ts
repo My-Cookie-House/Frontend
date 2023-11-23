@@ -18,7 +18,7 @@ coordinates
   .set(2, {
     width: '90px',
     height: '113px',
-    top: '359.5px',
+    top: '259.5px',
     left: `134px`,
   })
   .set(3, {

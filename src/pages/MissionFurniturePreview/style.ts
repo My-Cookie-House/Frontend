@@ -1,6 +1,6 @@
 import {keyframes, styled} from 'styled-components';
-import ClosedEnvelopeImg from '../../assets/Envelope/ClosedEnvelope.svg';
-import OpenedEnvelopeImg from '../../assets/Envelope/OpenedEnvelope.svg';
+import ClosedEnvelopeImg from '../../assets/Envelope/ClosedEnvelope.png';
+import OpenedEnvelopeImg from '../../assets/Envelope/OpenedEnvelope.png';
 import ImageUploadModalImg from '../../assets/Button/ImageUploadButton.svg';
 import {ImagePreviewProps} from '../../type/type';
 import TodayMessageLineImg from '../../assets/Icons/TodayMessageLine.svg';
@@ -61,9 +61,9 @@ const swapAnimation = keyframes`
 
 const SwappingEnvelope = styled.div`
   width: 148px;
-  height: 145px;
+  height: 148px;
   background-image: url(${ClosedEnvelopeImg});
-  background-size: 148px 145px;
+  background-size: 148px 148px;
   animation: ${swapAnimation} 1.5s infinite;
   margin-bottom: -45px;
 `;

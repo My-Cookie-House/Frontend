@@ -15,7 +15,7 @@ import {
 } from '../../../interfaces/mission';
 import {coordinates} from '../../../coordinates/coordinates';
 import CompletedMissionModal from '../../../components/Modal/CompletedMissionModal/CompletedMissionModal';
-import InsideBg from '@/assets/House/Inside/InsideBg.png';
+import Wallpapers from '@/assets/Wallpaper';
 
 // const getFurnitureNum = (furnitureId: number) => {
 //   return furnitureId - 3 * (missionId - 1);
@@ -23,7 +23,8 @@ import InsideBg from '@/assets/House/Inside/InsideBg.png';
 
 export default function Inside() {
   const [shareModalOpen, setShareModalOpen] = useState(false);
-  const [missionModalOpen, setMissionModalOpen] = useState<null | string>(null);
+  const [missionModalOpen, setMissionModalOpen] =
+    useState<null | ICompletedMission>(null);
   const {isMyHouse, id} = useIsMyHouse();
   const handleShare = () => setShareModalOpen(true);
 
@@ -35,14 +36,13 @@ export default function Inside() {
     () => setMissionModalOpen(null),
     [setMissionModalOpen],
   );
-  const {data} = useSuspenseQuery<ICompletedMission[]>({
+  const {data} = useSuspenseQuery<IAllCompletedMissions>({
     queryKey: ['house', 'inside', id],
-    queryFn: () => getAllCompletedMissions(id),
+    queryFn: () => getAllCompletedMissions(+id),
   });
-  console.log(data);
 
   // 가구 레이어 이미지를 가져오는 string형식으로 리턴
-  const furnitures = data?.map(
+  const furnitures = data?.completedMissions?.map(
     (mission) =>
       FurnitureLayer[`FurnitureLayer${mission.missionCompleteFurnitureId}`],
   );
@@ -57,8 +57,8 @@ export default function Inside() {
     return +stringId.slice(0, 2);
   };
 
-  const handleFurnitureClick = (date: string) => {
-    setMissionModalOpen(date);
+  const handleFurnitureClick = (mission: ICompletedMission) => {
+    setMissionModalOpen(mission);
   };
 
   return (
@@ -68,15 +68,18 @@ export default function Inside() {
           width={355}
           height={533}
           margin="40px 0 0 0"
-          imgs={[InsideBg, ...furnitures]}
+          imgs={[
+            data && Wallpapers[`Wallpaper${data.wallpaperId}`],
+            ...furnitures,
+          ]}
         />
-        {data?.map((v: ICompletedMission) => (
+        {data?.completedMissions?.map((v: ICompletedMission) => (
           <S.ButtonLayer
             key={v.missionCompleteId}
             {...coordinates.get(
               getMissionIdFromFurnitureid(v.missionCompleteFurnitureId),
             )}
-            onClick={() => handleFurnitureClick(v.missionCompleteDate)}
+            onClick={() => handleFurnitureClick(v)}
           />
         ))}
       </S.Frame>
@@ -98,7 +101,8 @@ export default function Inside() {
         <CompletedMissionModal
           closeModal={closeMissionModal}
           isOpen={missionModalOpen !== null}
-          date={missionModalOpen}
+          date={missionModalOpen.missionCompleteDate}
+          missionCompleteId={missionModalOpen.missionCompleteId}
         />
       )}
     </>

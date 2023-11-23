@@ -21,13 +21,13 @@ const ButtonWrapper = styled.div`
 
 const WirteGuestBookButton = styled.div`
     position: absolute;
-    top: 186px;
+    top: 102px;
     left: 230px;
     width: 18.933px;
     height: 18.933px;
     background-image: url(${WirteGuestBookButtonImg});
     background-size: 18.933px 18.933px;
-    z-index: 3;
+    z-index: 4;
 `;
 
 const Form = styled.form`

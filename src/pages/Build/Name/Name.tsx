@@ -37,6 +37,7 @@ export default function Name() {
         icingId: buildState.icingId,
         cookieIds: buildState.cookieIds,
         houseName: name.value,
+        wallpaperId: buildState.wallpaperId,
       }),
     onSuccess: () => {
       navigate(`/${userId}`);

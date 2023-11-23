@@ -26,7 +26,7 @@ export const ImgBox = styled.div<{src: string}>`
   background-image: ${(props) => `url(${props.src})`};
   border: 2px dashed #572e16;
   border-radius: 10px;
-  background-size: 236.538px 236.538px;
+  background-size: contain;
 `;
 
 export const Label = styled.p`
