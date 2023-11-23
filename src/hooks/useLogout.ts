@@ -1,6 +1,6 @@
 import {instance} from '@/apis/axios';
 import Cookies from 'js-cookie';
-import {useQueryClient} from 'react-query';
+import {useQueryClient} from '@tanstack/react-query';
 import {useNavigate} from 'react-router-dom';
 import {useRecoilState} from 'recoil';
 import {loginStateAtom} from '@/atoms/loginStateAtom';
@@ -26,6 +26,6 @@ const useLogout = () => {
   };
 
   return logout;
-}
+};
 
 export default useLogout;
