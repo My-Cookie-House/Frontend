@@ -13,7 +13,7 @@ import {
   IAllCompletedMissions,
   ICompletedMission,
 } from '../../../interfaces/mission';
-import {dates} from '../../../coordinates/coordinates';
+import {coordinates} from '../../../coordinates/coordinates';
 import CompletedMissionModal from '../../../components/Modal/CompletedMissionModal/CompletedMissionModal';
 import InsideBg from '@/assets/House/Inside/InsideBg.png';
 
@@ -41,25 +41,26 @@ export default function Inside() {
   });
   console.log(data);
 
-  // const furnitures = data?.completedMissions?.map(
-  //   (mission) => mission.missionCompleteFurniture,
-  // );
-  /**
-   * TODO: furnitures 배열로 부터 가구들의 이미지를 가져와서 imgs 배열에 넣어주기!
-  
-  const furnitures = data?.completedMissions?.map(
-    (mission) => mission.missionCompleteFurniture,
+  // 가구 레이어 이미지를 가져오는 string형식으로 리턴
+  const furnitures = data?.map(
+    (mission) =>
+      FurnitureLayer[`FurnitureLayer${mission.missionCompleteFurnitureId}`],
   );
-*/
-  /**
-   * TODO: 가구 레이어 받으면, 아래 함수를 연결해 준다
-   * 만약 본인 쿠키하우스가 아니면, 가구를 클릭 못하게???
-   */
+
+  const getMissionIdFromFurnitureid = (furnitureId: number) => {
+    const stringId = `${furnitureId}`;
+    if (stringId.length === 2) {
+      // missionId가 한 자리 수인 경우
+      return +stringId.slice(0, 1);
+    }
+    // missionId가 두 자리 수인 경우
+    return +stringId.slice(0, 2);
+  };
+
   const handleFurnitureClick = (date: string) => {
-    console.log(date);
     setMissionModalOpen(date);
   };
-  console.log(missionModalOpen);
+
   return (
     <>
       <S.Frame>
@@ -67,18 +68,14 @@ export default function Inside() {
           width={355}
           height={533}
           margin="40px 0 0 0"
-          imgs={[
-            InsideBg,
-            data &&
-              FurnitureLayer[
-                `FurnitureLayer2${data?.[0]?.missionCompleteFurnitureId - 3}`
-              ],
-          ]}
+          imgs={[InsideBg, ...furnitures]}
         />
         {data?.map((v: ICompletedMission) => (
           <S.ButtonLayer
             key={v.missionCompleteId}
-            {...dates.get(v.missionCompleteDate)}
+            {...coordinates.get(
+              getMissionIdFromFurnitureid(v.missionCompleteFurnitureId),
+            )}
             onClick={() => handleFurnitureClick(v.missionCompleteDate)}
           />
         ))}
