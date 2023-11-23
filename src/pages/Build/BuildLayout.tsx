@@ -47,8 +47,8 @@ export default function BuildLayout() {
       // 아이싱 선택 단계에서 쿠키가 선택되지 않은 경우
       return redirect();
     }
-    if (pathname === WALLPAPER_PATH && cookieIds.includes(null) || icingId === null) {
-      // 아이싱 선택 단계에서 쿠키가 선택되지 않은 경우
+    if (pathname === WALLPAPER_PATH && (cookieIds.includes(null) || icingId === null)) {
+      // 벽지 선택 단계에서 쿠키 또는 아이싱이 선택되지 않은 경우
       return redirect();
     }
     if (
