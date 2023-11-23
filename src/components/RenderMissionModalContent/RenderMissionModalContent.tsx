@@ -4,23 +4,9 @@ import * as S from './style'; // 경로에 따라 수정하세요
 import ModalOKButton from '../ModalOKButton/ModalOKButton';
 import DecorationButton from '../Buttons/DecorationButton/DecorationButton';
 import Furnitures from '../../assets/Furniture';
-import { ICompletedMission } from '../../interfaces/mission';
+import { RenderMissionModalContentProps } from '../../interfaces/mission';
 import {useNavigate} from 'react-router-dom';
 import useInput from '@/hooks/useInput';
-
-interface RenderMissionModalContentProps {
-  modalStep: number;
-  missionMessage: string;
-  missionId: number;
-  data: ICompletedMission | null;
-  uploadedImage: string | ArrayBuffer;
-  contentValue: string;
-  handleFileInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleCheckExistImageMessage: () => void;
-  handleOpenShowMoreMenu: () => void;
-  showChangeButton: boolean;
-  onClose: () => void;
-}
 
 const RenderMissionModalContent: React.FC<RenderMissionModalContentProps> = ({
   modalStep,
@@ -28,7 +14,6 @@ const RenderMissionModalContent: React.FC<RenderMissionModalContentProps> = ({
   missionId,
   data,
   uploadedImage,
-  contentValue,
   handleFileInputChange,
   handleCheckExistImageMessage,
   handleOpenShowMoreMenu,

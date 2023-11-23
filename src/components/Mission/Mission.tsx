@@ -4,11 +4,8 @@ import {useState, useEffect} from 'react';
 import Modal from '../Modal/Modal';
 import useModal from '../../hooks/useModal';
 import ModalCloseButton from '../ModalCloseButton/ModalCloseButton';
-import ModalOKButton from '../ModalOKButton/ModalOKButton';
 import * as S from './style';
 import useInput from '../../hooks/useInput';
-import DecorationButton from '../Buttons/DecorationButton/DecorationButton';
-import Furnitures from '../../assets/Furniture';
 import {useRecoilValue} from 'recoil';
 import {userInfoAtom} from '../../atoms/loginStateAtom';
 import {useQuery} from '@tanstack/react-query';
@@ -85,13 +82,6 @@ function Mission({isOpen, onClose}) {
     staleTime: 10000,
   });
 
-  // 날짜 형식을 "MM월 dd일"로 포매팅하는 함수
-  const formatDate = (missionDate) => {
-    const [year, month, day] = missionDate.split('-');
-    const formatedDate = `${month}월 ${day}일`;
-    return formatedDate;
-  };
-
   // 이미지 업로드 핸들링
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
@@ -118,8 +108,8 @@ function Mission({isOpen, onClose}) {
   const handleCheckExistImageMessage = async () => {
     if (!imageFile || !content.value.trim()) {
       alert('이미지와 메시지를 모두 입력해야 합니다.');
-      //return; //TODO: 실제 환경에서 주석 해제하기
-      setModalStep(3); //TODO: 실제 환경에서 제거하기
+      return; //TODO: 실제 환경에서 주석 해제하기
+      //setModalStep(3); //TODO: 실제 환경에서 제거하기
     } else {
       setModalStep(3);
     }
