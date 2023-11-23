@@ -15,7 +15,6 @@ import {
 } from '../../../interfaces/mission';
 import {coordinates} from '../../../coordinates/coordinates';
 import CompletedMissionModal from '../../../components/Modal/CompletedMissionModal/CompletedMissionModal';
-import InsideBg from '@/assets/House/Inside/InsideBg.png';
 import Wallpapers from '@/assets/Wallpaper';
 
 // const getFurnitureNum = (furnitureId: number) => {
@@ -24,7 +23,8 @@ import Wallpapers from '@/assets/Wallpaper';
 
 export default function Inside() {
   const [shareModalOpen, setShareModalOpen] = useState(false);
-  const [missionModalOpen, setMissionModalOpen] = useState<null | string>(null);
+  const [missionModalOpen, setMissionModalOpen] =
+    useState<null | ICompletedMission>(null);
   const {isMyHouse, id} = useIsMyHouse();
   const handleShare = () => setShareModalOpen(true);
 
@@ -57,8 +57,8 @@ export default function Inside() {
     return +stringId.slice(0, 2);
   };
 
-  const handleFurnitureClick = (date: string) => {
-    setMissionModalOpen(date);
+  const handleFurnitureClick = (mission: ICompletedMission) => {
+    setMissionModalOpen(mission);
   };
 
   return (
@@ -79,7 +79,7 @@ export default function Inside() {
             {...coordinates.get(
               getMissionIdFromFurnitureid(v.missionCompleteFurnitureId),
             )}
-            onClick={() => handleFurnitureClick(v.missionCompleteDate)}
+            onClick={() => handleFurnitureClick(v)}
           />
         ))}
       </S.Frame>
@@ -101,7 +101,8 @@ export default function Inside() {
         <CompletedMissionModal
           closeModal={closeMissionModal}
           isOpen={missionModalOpen !== null}
-          date={missionModalOpen}
+          date={missionModalOpen.missionCompleteDate}
+          missionCompleteId={missionModalOpen.missionCompleteId}
         />
       )}
     </>

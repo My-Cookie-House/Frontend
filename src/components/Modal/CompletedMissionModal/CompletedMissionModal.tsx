@@ -10,17 +10,19 @@ type Props = {
   closeModal: () => void;
   isOpen: boolean;
   date: string;
+  missionCompleteId: number;
 };
 
 export default function CompletedMissionModal({
   isOpen,
   closeModal,
   date,
+  missionCompleteId,
 }: Props) {
   const {id} = useIsMyHouse();
   const {data} = useQuery<ICompletedMission>({
-    queryKey: ['mission', date, id],
-    queryFn: () => getCompletedMissionByDate(date),
+    queryKey: ['mission', missionCompleteId, id],
+    queryFn: () => getCompletedMissionByDate(missionCompleteId),
     staleTime: 10000,
   });
 
