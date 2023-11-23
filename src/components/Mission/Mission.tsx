@@ -1,9 +1,11 @@
+// Mission 컴포넌트 (일부 생략)
+import RenderMissionModalContent from '../RenderMissionModalContent/RenderMissionModalContent';
 import {useState, useEffect} from 'react';
 import Modal from '../Modal/Modal';
 import useModal from '../../hooks/useModal';
 import ModalCloseButton from '../ModalCloseButton/ModalCloseButton';
 import ModalOKButton from '../ModalOKButton/ModalOKButton';
-import {S} from './style';
+import * as S from './style';
 import useInput from '../../hooks/useInput';
 import DecorationButton from '../Buttons/DecorationButton/DecorationButton';
 import Furnitures from '../../assets/Furniture';
@@ -22,8 +24,6 @@ import {missionStateAtom} from '../../atoms/missionState';
 
 function Mission({isOpen, onClose}) {
   const userInfo = useRecoilValue(userInfoAtom);
-  // const {todayMissionComplete} = userInfo; //이걸로 이미지와 메시지 post를 했냐 안했냐 판단
-
   // 모달 상태관리
   const {
     isOpen: isMissionArriveModalOpen,
@@ -134,143 +134,32 @@ function Mission({isOpen, onClose}) {
       setImageType('LargeModal');
     }
   }, [data]);
-  // 모달 내용을 결정하는 함수
-  const renderModalContent = () => {
-    // todayMissionComplete가 true일 때 case 5만 보여줌
-    //TODO: 수정하기 기능 추가
-    if (data) {
-      return (
-        <>
-          <S.ModalText2>{missionMessage}</S.ModalText2>
-          <S.ShowMoreMenuButton />
-          <S.ImageWrapper>
-            <S.ImagePreview src={data?.missionCompleteImage} />
-          </S.ImageWrapper>
-          <S.TodayMessageLine />
-          <S.ShowMessage>{data?.missionCompleteContent}</S.ShowMessage>
-        </>
-      );
-    }
-    switch (modalStep) {
-      case 1:
-        return (
-          <>
-            <S.SwappingEnvelope />
-            <S.ModalText>미션이 도착했어요!</S.ModalText>
-            <S.ModalOkButtonWrapper>
-              <ModalOKButton
-                buttonName="확인하기"
-                onClick={() => {
-                  setModalStep(2);
-                  setImageType('LargeModal');
-                  setModalTitle(formatDate(missionDate));
-                }}
-              />
-            </S.ModalOkButtonWrapper>
-          </>
-        );
-      case 2:
-        return (
-          <>
-            <S.ModalText2>{missionMessage}</S.ModalText2>
-            {/* 이미지 업로드 및 메시지 입력 폼 */}
-            <S.ImageUploadLabel
-              htmlFor="image-upload"
-              onClick={(event) => event.stopPropagation()}
-            >
-              <S.ImageInput
-                id="image-upload"
-                type="file"
-                accept="image/*"
-                onChange={handleFileInputChange}
-              />
-              {uploadedImage ? (
-                <S.ImagePreview src={uploadedImage as string} />
-              ) : (
-                <></>
-              )}
-            </S.ImageUploadLabel>
-            <S.MessageArea
-              placeholder="메시지를 입력하세요."
-              maxLength={200}
-              value={content.value}
-              onChange={content.handleChange}
-            />
-            <S.ModalOkButtonWrapper>
-              <ModalOKButton
-                buttonName="오늘의 가구"
-                onClick={() => {
-                  setImageType('MediumModal');
-                  setModalTitle('오늘의 가구');
-                  handleCheckExistImageMessage();
-                }}
-              />
-            </S.ModalOkButtonWrapper>
-          </>
-        );
-      case 3:
-        return (
-          <>
-            <S.GuestBookEntryGrid>
-              <DecorationButton
-                size={90}
-                image={Furnitures[`Furniture${missionId}1`]}
-              />
-              <DecorationButton
-                size={90}
-                image={Furnitures[`Furniture${missionId}2`]}
-              />
-              <DecorationButton
-                size={90}
-                image={Furnitures[`Furniture${missionId}3`]}
-              />
-            </S.GuestBookEntryGrid>
-            <S.ModalOkButtonWrapper>
-              <ModalOKButton
-                buttonName="보러가기"
-                onClick={() => {
-                  navigate(`custom/furniture`);
-                  onClose();
-                }}
-              />
-            </S.ModalOkButtonWrapper>
-          </>
-        );
-      case 5:
-        return (
-          <>
-            <S.TextAndButtonWrapper>
-              <S.ModalText2>{missionMessage}</S.ModalText2>
-              <S.ShowMoreMenuButton onClick={handleOpenShowMoreMenu} />
-              {showChangeButton && (
-                <S.ChangeButton>이미지/메시지 수정</S.ChangeButton>
-              )}
-            </S.TextAndButtonWrapper>
-
-            <S.ImageWrapper>
-              <S.ImagePreview src={data?.missionCompleteImage} />
-            </S.ImageWrapper>
-            <S.TodayMessageLine />
-            <S.ShowMessage>{data?.missionCompleteContent}</S.ShowMessage>
-          </>
-        );
-      default:
-        return null;
-    }
-  };
 
   return (
-    <>
-      <Modal
-        modalTitle={modalTitle}
-        isOpen={isOpen}
-        onClose={onClose}
-        imageType={imageType}
-      >
-        <ModalCloseButton onClick={onClose} />
-        <S.ModalInnerWrapper>{renderModalContent()}</S.ModalInnerWrapper>
-      </Modal>
-    </>
+    <Modal
+      modalTitle={modalTitle}
+      isOpen={isOpen}
+      onClose={onClose}
+      imageType={imageType}
+    >
+      <ModalCloseButton onClick={onClose} />
+      <S.ModalInnerWrapper>
+        <RenderMissionModalContent
+          modalStep={modalStep}
+          missionMessage={missionMessage}
+          missionId={missionId}
+          data={data}
+          uploadedImage={uploadedImage}
+          contentValue={content.value}
+          handleFileInputChange={handleFileInputChange}
+          handleCheckExistImageMessage={handleCheckExistImageMessage}
+          handleOpenShowMoreMenu={handleOpenShowMoreMenu}
+          showChangeButton={showChangeButton}
+          onClose={onClose}
+        />
+      </S.ModalInnerWrapper>
+    </Modal>
   );
 }
+
 export default Mission;
