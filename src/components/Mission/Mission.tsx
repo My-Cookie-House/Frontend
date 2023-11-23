@@ -13,7 +13,7 @@ import {useQuery} from '@tanstack/react-query';
 import {ICompletedMission} from '../../interfaces/mission';
 import {
   fetchTodayMissionData,
-  getCompletedMissionByDate,
+  getCompletedMissionById,
 } from '../../apis/mission';
 import {useRecoilState} from 'recoil';
 import {missionIdAtom} from '../../atoms/missionAtomState'; // atoms 파일 경로에 따라 수정
@@ -35,6 +35,9 @@ function Mission({isOpen, onClose}) {
   const [uploadedImage, setUploadedImage] = useState<string | ArrayBuffer>(''); // 업로드 된 이미지 url 관리하는 상태
   const [imageFile, setImageFile] = useState(null); // 업로드할 이미지 파일을 관리하는 상태
   const [missionDate, setMissionDate] = useState<string>('');
+  const [missionCompleteId, setMissionCompleteId] = useState<null | number>(
+    null,
+  );
   const [missionMessage, setMissionMessage] =
     useState<string>('오늘 먹은 점심');
   //const [missionId, setMissionId] = useState<number>(1);
@@ -63,6 +66,7 @@ function Mission({isOpen, onClose}) {
         setMissionDate(data.missionDate);
         setMissionMessage(data.missionMessage);
         setMissionId(data.missionId);
+        setMissionCompleteId(data.missionCompleteId);
       }
     };
 
@@ -76,8 +80,8 @@ function Mission({isOpen, onClose}) {
     }));
   }, [content.value]);
   const {data, isSuccess, isError} = useQuery<ICompletedMission>({
-    queryKey: ['mission', missionDate],
-    queryFn: () => getCompletedMissionByDate(missionDate),
+    queryKey: ['mission', missionCompleteId, userInfo.userId],
+    queryFn: () => getCompletedMissionById(missionCompleteId),
     staleTime: 10000,
   });
 

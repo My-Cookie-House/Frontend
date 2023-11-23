@@ -2,7 +2,7 @@ import * as S from './style';
 import Modal from '../Modal';
 import ModalCloseButton from '../../ModalCloseButton/ModalCloseButton';
 import {useQuery} from '@tanstack/react-query';
-import {getCompletedMissionByDate} from '../../../apis/mission';
+import {getCompletedMissionById} from '../../../apis/mission';
 import {ICompletedMission} from '../../../interfaces/mission';
 import useIsMyHouse from '../../../hooks/useIsMyHouse';
 
@@ -22,7 +22,7 @@ export default function CompletedMissionModal({
   const {id} = useIsMyHouse();
   const {data} = useQuery<ICompletedMission>({
     queryKey: ['mission', missionCompleteId, id],
-    queryFn: () => getCompletedMissionByDate(missionCompleteId),
+    queryFn: () => getCompletedMissionById(missionCompleteId),
     staleTime: 10000,
   });
 
