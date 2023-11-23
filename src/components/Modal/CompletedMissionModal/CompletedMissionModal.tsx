@@ -34,7 +34,7 @@ export default function CompletedMissionModal({
       modalTitle={date}
     >
       <ModalCloseButton onClick={closeModal} />
-      <S.ModalText>{data?.missionCompleteContent}</S.ModalText>
+      <S.ModalText>{data?.missionMessage}</S.ModalText>
       <S.Wrapper>
         <S.ImgBox src={data?.missionCompleteImage} />
         <S.Label>오늘의 메시지</S.Label>

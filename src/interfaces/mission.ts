@@ -1,6 +1,7 @@
 import {IFurniture} from './furniture';
 
 export interface ICompletedMission {
+  missionMessage: string;
   missionCompleteId: number;
   missionCompleteImage: string;
   missionCompleteContent: string;
