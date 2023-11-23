@@ -10,4 +10,5 @@ export interface ICompletedMission {
 
 export interface IAllCompletedMissions {
   completedMissions: ICompletedMission[];
+  wallpaperId: number;
 }

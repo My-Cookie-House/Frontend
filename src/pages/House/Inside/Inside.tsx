@@ -35,14 +35,13 @@ export default function Inside() {
     () => setMissionModalOpen(null),
     [setMissionModalOpen],
   );
-  const {data} = useSuspenseQuery<ICompletedMission[]>({
+  const {data} = useSuspenseQuery<IAllCompletedMissions>({
     queryKey: ['house', 'inside', id],
-    queryFn: () => getAllCompletedMissions(id),
+    queryFn: () => getAllCompletedMissions(+id),
   });
-  console.log(data);
 
   // 가구 레이어 이미지를 가져오는 string형식으로 리턴
-  const furnitures = data?.map(
+  const furnitures = data?.completedMissions?.map(
     (mission) =>
       FurnitureLayer[`FurnitureLayer${mission.missionCompleteFurnitureId}`],
   );
@@ -70,7 +69,7 @@ export default function Inside() {
           margin="40px 0 0 0"
           imgs={[InsideBg, ...furnitures]}
         />
-        {data?.map((v: ICompletedMission) => (
+        {data?.completedMissions?.map((v: ICompletedMission) => (
           <S.ButtonLayer
             key={v.missionCompleteId}
             {...coordinates.get(
