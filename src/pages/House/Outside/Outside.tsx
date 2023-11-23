@@ -18,6 +18,7 @@ const STALE_MIN = 5;
 const GC_MIN = 5;
 
 export default function Outside() {
+  window.location.reload();
   const {id, isMyHouse} = useIsMyHouse();
 
   const {data} = useSuspenseQuery<IHouseOutside>({
