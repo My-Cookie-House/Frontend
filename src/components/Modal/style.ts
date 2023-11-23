@@ -100,7 +100,8 @@ const ModalContent = styled.div<ModalContentProps>`
         height: ${height};
         animation: ${slideUpAnimationPortrait} 0.5s ease-out forwards;
         
-        @media screen and (orientation: landscape) {
+        /* 모바일 기기에서 가로 모드일 때만 애니메이션 적용 */
+        @media screen and (max-width: 768px) and (orientation: landscape) {
           animation: ${slideUpAnimationLandscape} 0.5s ease-out forwards;
         }
       `;
