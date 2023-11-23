@@ -59,8 +59,6 @@ export default function Outside() {
 
   const logout = useLogout();
   const signout = useSignout();
-  console.log('isMyHouse');
-  console.log(isMyHouse);
 
   return (
     <>
