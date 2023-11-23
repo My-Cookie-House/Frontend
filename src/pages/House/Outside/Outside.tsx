@@ -81,8 +81,13 @@ export default function Outside() {
       <>
         {isMyHouse && (
           <>
-            <button onClick={() => setlogoutModal(true)}>외출하기</button>
-            <button onClick={() => setSignoutModal(true)}>철거하기</button>
+            <button disabled={!isMyHouse} onClick={() => setlogoutModal(true)}>
+              외출하기
+            </button>
+            <button disabled={!isMyHouse} onClick={() => setSignoutModal(true)}>
+              철거하기
+            </button>
+
             <div>
               <GoOutModal
                 isOpen={logoutModal}
