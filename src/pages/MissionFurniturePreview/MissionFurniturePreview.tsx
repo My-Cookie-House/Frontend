@@ -26,7 +26,7 @@ import useModal from '../../hooks/useModal';
 import ModalCloseButton from '../../components/ModalCloseButton/ModalCloseButton';
 import {Navigate, useNavigate} from 'react-router';
 import {missionStateAtom} from '../../atoms/missionState';
-import InsideBg from '@/assets/House/Inside/InsideBg.png';
+import Wallpapers from '@/assets/Wallpaper';
 
 export default function MissionFurniturePreview() {
   // 모달 상태관리
@@ -76,7 +76,10 @@ export default function MissionFurniturePreview() {
     queryKey: ['house', 'inside', id],
     queryFn: () => getAllCompletedMissions(+id),
   });
-
+  const furnitures = data?.completedMissions?.map(
+    (mission) =>
+      FurnitureLayer[`FurnitureLayer${mission.missionCompleteFurnitureId}`],
+  );
   // 가구 고르기 버튼 클릭
   const handleFurnitureClick = (
     event: React.MouseEvent<HTMLButtonElement>,
@@ -138,7 +141,11 @@ export default function MissionFurniturePreview() {
           width={355}
           height={533}
           margin="23px 0 0 0"
-          imgs={[InsideBg, selectedFurnitureImage && selectedFurnitureImage]}
+          imgs={[
+            data && Wallpapers[`Wallpaper${data.wallpaperId}`],
+            ...furnitures,
+            selectedFurnitureImage && selectedFurnitureImage,
+          ]}
         />
       </S.FurnitureLayerWrapper>
       <Modal
