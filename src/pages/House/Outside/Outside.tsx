@@ -9,6 +9,7 @@ import Cookies from '../../../assets/House/Outside/Cookies';
 import Icings from '../../../assets/House/Outside/Icings';
 import {useEffect} from 'react';
 import InsideBg from '@/assets/House/Inside/InsideBg.png';
+import GoOutButton from '@/components/Buttons/GoOutButton/GoOutButton';
 
 const STALE_MIN = 5;
 const GC_MIN = 5;
@@ -58,6 +59,7 @@ export default function Outside() {
           {isMyHouse ? '집 안으로 들어가기' : '방문하기'}
         </NextStepText>
       </LongButton>
+      {isMyHouse ? <GoOutButton /> : ''}
     </>
   );
 }
