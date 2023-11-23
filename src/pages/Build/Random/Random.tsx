@@ -9,6 +9,7 @@ import BuildComplete from '../../../assets/House/Build/BuildComplete.png';
 
 const COOKIE_COUNT = 6;
 const ICING_COUNT = 4;
+const WALLPAPER_COUNT = 8;
 
 export default function Random() {
   const setBuildState = useSetRecoilState(buildStateAtom);
@@ -34,9 +35,16 @@ export default function Random() {
     setBuildState((prev) => ({...prev, icingId: icing}));
   };
 
+  // 벽지 랜덤 생성
+  const makeRandomWallpaper = () => {
+    const wallpaper = Math.floor(Math.random() * WALLPAPER_COUNT + 1);
+    setBuildState((prev) => ({...prev, wallpaperId: wallpaper}));
+  };
+
   useEffect(() => {
     makeRandomCookies();
     makeRandomIcing();
+    makeRandomWallpaper();
     setTimeout(() => setIsConstructing(false), 1500);
   }, []);
 
