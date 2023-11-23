@@ -16,6 +16,7 @@ import {
 import {coordinates} from '../../../coordinates/coordinates';
 import CompletedMissionModal from '../../../components/Modal/CompletedMissionModal/CompletedMissionModal';
 import InsideBg from '@/assets/House/Inside/InsideBg.png';
+import Wallpapers from '@/assets/Wallpaper';
 
 // const getFurnitureNum = (furnitureId: number) => {
 //   return furnitureId - 3 * (missionId - 1);
@@ -67,7 +68,10 @@ export default function Inside() {
           width={355}
           height={533}
           margin="40px 0 0 0"
-          imgs={[InsideBg, ...furnitures]}
+          imgs={[
+            data && Wallpapers[`Wallpaper${data.wallpaperId}`],
+            ...furnitures,
+          ]}
         />
         {data?.completedMissions?.map((v: ICompletedMission) => (
           <S.ButtonLayer

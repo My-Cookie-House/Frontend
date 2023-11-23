@@ -74,7 +74,7 @@ export default function MissionFurniturePreview() {
 
   const {data} = useSuspenseQuery<IAllCompletedMissions>({
     queryKey: ['house', 'inside', id],
-    queryFn: () => getAllCompletedMissions(id),
+    queryFn: () => getAllCompletedMissions(+id),
   });
 
   // 가구 고르기 버튼 클릭
@@ -111,7 +111,6 @@ export default function MissionFurniturePreview() {
 
     fetchData();
   }, []);
-  
 
   //TODO: post로 할지 put으로 할지에 대한 분기처리 필요.
   const handleUploadImageMessageFurnitureIdWrapper = async () => {
