@@ -6,12 +6,13 @@ import {loginStateAtom, userInfoAtom} from '../../atoms/loginStateAtom';
 import {BuildStateAtom, buildStateAtom} from '../../atoms/buildAtom';
 
 const ICING_PATH = '/build/custom/icing';
+const WALLPAPER_PATH = '/build/custom/wallpaper'
 const PREVIEW_PATH = '/build/preview';
 
 export default function BuildLayout() {
   const {isHouseBuilt, userId} = useRecoilValue(userInfoAtom);
   const loggedIn = useRecoilValue(loginStateAtom);
-  const {cookieIds, icingId, name} =
+  const {cookieIds, icingId, wallpaperId, name} =
     useRecoilValue<BuildStateAtom>(buildStateAtom);
 
   const navigate = useNavigate();
@@ -46,9 +47,13 @@ export default function BuildLayout() {
       // 아이싱 선택 단계에서 쿠키가 선택되지 않은 경우
       return redirect();
     }
+    if (pathname === WALLPAPER_PATH && cookieIds.includes(null) || icingId === null) {
+      // 아이싱 선택 단계에서 쿠키가 선택되지 않은 경우
+      return redirect();
+    }
     if (
       pathname === PREVIEW_PATH &&
-      (cookieIds.includes(null) || icingId === null)
+      (cookieIds.includes(null) || icingId === null || wallpaperId === null)
     ) {
       // 미리보기 단계에서 쿠키나 아이싱을 선택하지 않은 경우
       return redirect();
