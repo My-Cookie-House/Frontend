@@ -52,6 +52,7 @@ export default function Outside() {
 
   const [logoutModal, setlogoutModal] = useState(false);
   const [signoutModal, setSignoutModal] = useState(false);
+  const queryClient = useQueryClient();
 
   const closeLogout = useCallback(() => {
     setlogoutModal(false);
@@ -65,7 +66,6 @@ export default function Outside() {
   const [loginState, setLoginState] = useRecoilState(loginStateAtom);
 
   const logout = async () => {
-    const queryClient = useQueryClient();
     try {
       await instance.get('/auth/sign-out');
 
@@ -81,7 +81,6 @@ export default function Outside() {
   };
 
   const signout = async () => {
-    const queryClient = useQueryClient();
     try {
       await instance.get('/auth/unlink');
 
