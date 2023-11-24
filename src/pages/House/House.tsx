@@ -20,7 +20,9 @@ export default function House() {
 
   const navigate = useNavigate();
 
-  const handleGuestBookClick = () => {};
+  const handleGuestBookClick = () => {
+    navigate(`/${id}/guests`);
+  };
 
   const {data} = useQuery<IHouseOutside>({
     queryKey: ['house', 'outside', id],

@@ -6,5 +6,5 @@ type Props = {
 };
 
 export default function GuestBookButton({onClick}: Props) {
-  return <S.Button></S.Button>;
+  return <S.Button onClick={onClick} />;
 }

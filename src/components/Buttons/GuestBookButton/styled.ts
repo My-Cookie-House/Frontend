@@ -13,5 +13,6 @@ export const Button = styled.button`
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 99;
+  z-index: 9;
+  cursor: pointer;
 `;
