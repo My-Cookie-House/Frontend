@@ -11,12 +11,8 @@ import {useEffect} from 'react';
 import InsideBg from '@/assets/House/Inside/InsideBg.png';
 import GoOutModal from '@/components/Modal/GoOutModal/GoOutModal';
 import {useState, useCallback} from 'react';
-import {instance} from '@/apis/axios';
-import {useQueryClient} from '@tanstack/react-query';
-import {useNavigate} from 'react-router-dom';
-import {useRecoilState} from 'recoil';
-import {loginStateAtom} from '@/atoms/loginStateAtom';
-import JSCookies from 'js-cookie';
+import useLogout from '@/hooks/useLogout';
+import useSignout from '@/hooks/useSignout';
 
 const STALE_MIN = 5;
 const GC_MIN = 5;
@@ -52,7 +48,6 @@ export default function Outside() {
 
   const [logoutModal, setlogoutModal] = useState(false);
   const [signoutModal, setSignoutModal] = useState(false);
-  const queryClient = useQueryClient();
 
   const closeLogout = useCallback(() => {
     setlogoutModal(false);
@@ -62,38 +57,8 @@ export default function Outside() {
     setSignoutModal(false);
   }, []);
 
-  const navigate = useNavigate();
-  const [loginState, setLoginState] = useRecoilState(loginStateAtom);
-
-  const logout = async () => {
-    try {
-      await instance.get('/auth/sign-out');
-
-      queryClient.invalidateQueries({queryKey: ['loginState']});
-
-      JSCookies.remove('accessToken');
-      JSCookies.remove('refreshToken');
-      setLoginState(false);
-      navigate('/');
-    } catch (error) {
-      console.error('로그아웃 오류: ', error);
-    }
-  };
-
-  const signout = async () => {
-    try {
-      await instance.get('/auth/unlink');
-
-      queryClient.invalidateQueries({queryKey: ['loginState']});
-
-      JSCookies.remove('accessToken');
-      JSCookies.remove('refreshToken');
-      setLoginState(false);
-      navigate('/');
-    } catch (error) {
-      console.error('탈퇴 오류: ', error);
-    }
-  };
+  const logout = useLogout();
+  const signout = useSignout();
 
   return (
     <>
