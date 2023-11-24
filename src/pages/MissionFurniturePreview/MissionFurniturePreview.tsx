@@ -79,9 +79,9 @@ export default function MissionFurniturePreview() {
         missionState.missionCompleteFurnitureId,
         'post',
       );
-      await queryClient.invalidateQueries({
-        queryKey: ['mission', 'today', userId],
-      });
+      // await queryClient.invalidateQueries({
+      //   queryKey: ['mission', 'today', userId],
+      // });
       navigate(`/${userId}/inside`);
     } catch (error) {
       alert('업로드에 실패했어요.');
