@@ -82,7 +82,7 @@ export default function MissionFurniturePreview() {
       await queryClient.invalidateQueries({
         queryKey: ['mission', 'today', userId],
       });
-      navigate(`/${id}/inside`);
+      navigate(`/${userId}/inside`);
     } catch (error) {
       alert('업로드에 실패했어요.');
     }
@@ -139,9 +139,7 @@ export default function MissionFurniturePreview() {
           <S.ModalOkButtonWrapper>
             <ModalOKButton
               buttonName="다 골랐어요!"
-              onClick={() => {
-                handleUploadImageMessageFurnitureIdWrapper();
-              }}
+              onClick={handleUploadImageMessageFurnitureIdWrapper}
             />
           </S.ModalOkButtonWrapper>
         </S.ModalInnerWrapper>
