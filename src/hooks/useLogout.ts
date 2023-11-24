@@ -4,29 +4,33 @@ import {useQueryClient} from '@tanstack/react-query';
 import {useNavigate} from 'react-router-dom';
 import {useRecoilState} from 'recoil';
 import {loginStateAtom} from '@/atoms/loginStateAtom';
+import {useEffect} from 'react';
 
 const useLogout = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [loginState, setLoginState] = useRecoilState(loginStateAtom);
-  console.log('rendered');
 
-  const logout = async () => {
-    try {
-      await instance.get('/auth/sign-out');
+  useEffect(() => {
+    const logout = async () => {
+      try {
+        await instance.get('/auth/sign-out');
 
-      await queryClient.invalidateQueries({queryKey: ['loginState']});
+        await queryClient.invalidateQueries({queryKey: ['loginState']});
 
-      Cookies.remove('accessToken');
-      Cookies.remove('refreshToken');
-      setLoginState(false);
-      navigate('/');
-    } catch (error) {
-      console.error('로그아웃 오류: ', error);
-    }
-  };
+        Cookies.remove('accessToken');
+        Cookies.remove('refreshToken');
+        setLoginState(false);
+        navigate('/');
+      } catch (error) {
+        console.error('로그아웃 오류: ', error);
+      }
+    };
 
-  return logout;
+    logout();
+  }, []);
+
+  return null;
 };
 
 export default useLogout;
