@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
@@ -7,10 +6,17 @@ import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {ThemeProvider} from 'styled-components';
 import theme from './theme';
 import {RecoilRoot} from 'recoil';
-import {useEffect} from 'react';
+import {useEffect, useRef} from 'react';
 
 function QueryClientProviderMonitor({children}) {
+  const prevQueryClientRef = useRef<QueryClient | null>(null);
+
   useEffect(() => {
+    if (prevQueryClientRef.current !== queryClient) {
+      console.log('쿼리클라이언트 레퍼런스 바뀜');
+      prevQueryClientRef.current = queryClient;
+    }
+
     return () => {
       console.log('쿼리클라이언트 프로바이더 언마운트');
     };
