@@ -11,7 +11,11 @@ export interface ModalProps {
   onClose: (event?: React.MouseEvent) => void;
   children: React.ReactNode;
   modalTitle: string;
-  imageType?: 'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal';
+  imageType?:
+    | 'SmallModal'
+    | 'MediumModal'
+    | 'LargeModal'
+    | 'FurnitureSelectModal';
 }
 
 export interface SelectFurnitureModalProps {
@@ -24,18 +28,26 @@ export interface ModalOKButtonProps {
 }
 
 export interface ModalButtonProps {
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 // imageType을 위한 인터페이스 정의
 export interface ModalContentProps {
-  imageType?: 'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal';
+  imageType?:
+    | 'SmallModal'
+    | 'MediumModal'
+    | 'LargeModal'
+    | 'FurnitureSelectModal';
 }
 
 // show 프로퍼티를 갖는 ModalWrapperProps 인터페이스를 정의
 export interface ModalWrapperProps {
   show: boolean;
-  imageType?: 'SmallModal' | 'MediumModal' | 'LargeModal' | 'FurnitureSelectModal';
+  imageType?:
+    | 'SmallModal'
+    | 'MediumModal'
+    | 'LargeModal'
+    | 'FurnitureSelectModal';
 }
 
 export interface ImagePreviewProps {

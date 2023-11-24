@@ -4,7 +4,7 @@ import * as S from './style'; // 경로에 따라 수정하세요
 import ModalOKButton from '../ModalOKButton/ModalOKButton';
 import DecorationButton from '../Buttons/DecorationButton/DecorationButton';
 import Furnitures from '../../assets/Furniture';
-import { RenderMissionModalContentProps } from '../../interfaces/mission';
+import {RenderMissionModalContentProps} from '../../interfaces/mission';
 import {useNavigate} from 'react-router-dom';
 import useInput from '@/hooks/useInput';
 
@@ -29,6 +29,7 @@ const RenderMissionModalContent: React.FC<RenderMissionModalContentProps> = ({
     return `${date.getMonth() + 1}월 ${date.getDate()}일`;
   };
 
+  // 5
   if (data) {
     return (
       <>
@@ -43,6 +44,7 @@ const RenderMissionModalContent: React.FC<RenderMissionModalContentProps> = ({
     );
   }
 
+  // 1
   switch (modalStep) {
     case 1:
       return (
@@ -57,6 +59,7 @@ const RenderMissionModalContent: React.FC<RenderMissionModalContentProps> = ({
           </S.ModalOkButtonWrapper>
         </>
       );
+    // 2
     case 2:
       return (
         <>
@@ -83,6 +86,7 @@ const RenderMissionModalContent: React.FC<RenderMissionModalContentProps> = ({
           </S.ModalOkButtonWrapper>
         </>
       );
+    // 3
     case 3:
       return (
         <>
@@ -111,6 +115,7 @@ const RenderMissionModalContent: React.FC<RenderMissionModalContentProps> = ({
           </S.ModalOkButtonWrapper>
         </>
       );
+
     case 5:
       return (
         <>

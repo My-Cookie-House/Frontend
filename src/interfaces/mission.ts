@@ -1,5 +1,6 @@
 import {IFurniture} from './furniture';
 
+// 미션 내용 조회
 export interface ICompletedMission {
   missionMessage: string;
   missionCompleteId: number;
@@ -25,4 +26,12 @@ export interface RenderMissionModalContentProps {
   handleOpenShowMoreMenu: () => void;
   showChangeButton: boolean;
   onClose: () => void;
+}
+
+// 오늘 미션 조회
+export interface ITodayMission {
+  missionId: number;
+  missionDate: string;
+  missionMessage: string;
+  missionCompleteId: null | number;
 }

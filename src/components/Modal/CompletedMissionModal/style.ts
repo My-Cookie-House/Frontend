@@ -19,14 +19,20 @@ export const Wrapper = styled.div`
   justify-content: center;
 `;
 
-export const ImgBox = styled.div<{src: string}>`
+export const ImgBox = styled.div`
   position: relative;
   width: 236.538px;
   height: 236.538px;
-  background-image: ${(props) => `url(${props.src})`};
   border: 2px dashed #572e16;
   border-radius: 10px;
-  background-size: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(87, 46, 22, 0.4);
+`;
+export const Img = styled.img`
+  max-width: 100%;
+  max-height: 100%;
 `;
 
 export const Label = styled.p`
