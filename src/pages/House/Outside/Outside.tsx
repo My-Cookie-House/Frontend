@@ -11,8 +11,6 @@ import {useEffect} from 'react';
 import InsideBg from '@/assets/House/Inside/InsideBg.png';
 import GoOutModal from '@/components/Modal/GoOutModal/GoOutModal';
 import {useState, useCallback} from 'react';
-import useLogout from '@/hooks/useLogout';
-import useSignout from '@/hooks/useSignout';
 import styled from 'styled-components';
 
 const STALE_MIN = 5;
@@ -57,9 +55,6 @@ export default function Outside() {
   const closeSignout = useCallback(() => {
     setSignoutModal(false);
   }, []);
-
-  const logout = useLogout();
-  const signout = useSignout();
 
   return (
     <>
