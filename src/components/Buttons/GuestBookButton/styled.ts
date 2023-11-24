@@ -1,16 +1,17 @@
 import styled from 'styled-components';
+import ButtonImg from '@/assets/GuestBook/Button.png';
 
 export const Button = styled.button`
+  background: url(${ButtonImg});
+  background-size: cover;
   width: 83px;
   height: 83px;
-  border-radius: 41.5px;
-  border: 2px dashed #572e16;
-  background: #ba998b;
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-export const GuestBookImg = styled.img`
-  width: 49.759px;
-  height: 59px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
 `;

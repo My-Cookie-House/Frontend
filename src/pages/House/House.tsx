@@ -9,6 +9,7 @@ import useIsMyHouse from '../../hooks/useIsMyHouse';
 import {useRecoilValue} from 'recoil';
 import {userInfo} from 'os';
 import {userInfoAtom} from '../../atoms/loginStateAtom';
+import GuestBookButton from '@/components/Buttons/GuestBookButton/GuestBookButton';
 
 const STALE_MIN = 5;
 
@@ -18,6 +19,8 @@ export default function House() {
   const {pathname} = useLocation();
 
   const navigate = useNavigate();
+
+  const handleGuestBookClick = () => {};
 
   const {data} = useQuery<IHouseOutside>({
     queryKey: ['house', 'outside', id],
@@ -40,6 +43,7 @@ export default function House() {
     >
       <S.HouseName>{data?.houseName}</S.HouseName>
       <Outlet />
+      <GuestBookButton onClick={handleGuestBookClick} />
     </PageLayout>
   );
 }

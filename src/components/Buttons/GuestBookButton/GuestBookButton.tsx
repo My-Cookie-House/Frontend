@@ -6,9 +6,5 @@ type Props = {
 };
 
 export default function GuestBookButton({onClick}: Props) {
-  return (
-    <S.Button>
-      <S.GuestBookImg src={GuestBookImg} />
-    </S.Button>
-  );
+  return <S.Button></S.Button>;
 }
