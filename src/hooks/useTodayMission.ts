@@ -1,6 +1,7 @@
 import {fetchTodayMissionData} from '@/apis/mission';
 import {ITodayMission} from '@/interfaces/mission';
-import {useQuery, useSuspenseQuery} from '@tanstack/react-query';
+import {useSuspenseQuery} from '@tanstack/react-query';
+import {useEffect, useState} from 'react';
 
 const STALE_MIN = 5;
 
@@ -13,5 +14,6 @@ export default function useTodayMission(
     staleTime: 1000 * 60 * STALE_MIN,
     gcTime: Infinity,
   });
-  return {...data, completed: data?.missionCompleteId !== null};
+  const completed = data.missionCompleteId !== null;
+  return {...data, completed};
 }

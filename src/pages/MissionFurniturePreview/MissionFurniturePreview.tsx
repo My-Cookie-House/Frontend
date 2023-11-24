@@ -3,7 +3,7 @@ import Button from '../../components/Buttons/Button';
 import useIsMyHouse from '../../hooks/useIsMyHouse';
 import {useCallback, useEffect, useState} from 'react';
 import Overlap from '../../components/Overlap/Overlap';
-import {useSuspenseQuery} from '@tanstack/react-query';
+import {useQueryClient, useSuspenseQuery} from '@tanstack/react-query';
 import {
   fetchTodayMissionData,
   getAllCompletedMissions,
@@ -27,6 +27,7 @@ import ModalCloseButton from '../../components/ModalCloseButton/ModalCloseButton
 import {Navigate, useNavigate} from 'react-router';
 import {missionStateAtom} from '../../atoms/missionState';
 import Wallpapers from '@/assets/Wallpaper';
+import {userInfo} from 'os';
 
 export default function MissionFurniturePreview() {
   // 모달 상태관리
@@ -38,7 +39,7 @@ export default function MissionFurniturePreview() {
 
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [missionModalOpen, setMissionModalOpen] = useState(false);
-  const {isMyHouse, id} = useIsMyHouse();
+  const {isMyHouse, id, userId} = useIsMyHouse();
   const handleShare = () => setShareModalOpen(true);
   const [selectedFurnitureImage, setSelectedFurnitureImage] = useState(null);
   const [furnitureNum, setFurnitureNum] = useRecoilState(furnitureNumAtom);
@@ -115,16 +116,23 @@ export default function MissionFurniturePreview() {
     fetchData();
   }, []);
 
+  const queryClient = useQueryClient();
+
   //TODO: post로 할지 put으로 할지에 대한 분기처리 필요.
   const handleUploadImageMessageFurnitureIdWrapper = async () => {
     try {
+      if (missionState.missionCompleteFurnitureId === 0) {
+        throw new Error();
+      }
       await uploadImageMessageFurnitureId(
         missionState.missionCompleteImage,
         missionState.missionCompleteContent,
         missionState.missionCompleteFurnitureId,
         'post',
       );
-      // 업로드 성공 후 처리
+      await queryClient.invalidateQueries({
+        queryKey: ['mission', 'today', userId],
+      });
       setImageFile(null);
       content.reset();
       navigate(`/${id}/inside`);
