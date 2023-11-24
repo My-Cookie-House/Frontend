@@ -5,15 +5,15 @@ import {useNavigate} from 'react-router-dom';
 import {useRecoilState} from 'recoil';
 import {loginStateAtom} from '@/atoms/loginStateAtom';
 
-const useLogout = () => {
+const useLogout = (url) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [loginState, setLoginState] = useRecoilState(loginStateAtom);
 
   const mutation = useMutation({
-    mutationFn: () => instance.post('/auth/sign-out'),
+    mutationFn: () => instance.post(url),
     onError: (error) => {
-      console.error('로그아웃 오류: ', error);
+      console.error('오류: ', error);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey: ['loginState']});
