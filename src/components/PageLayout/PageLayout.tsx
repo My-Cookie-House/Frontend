@@ -115,12 +115,8 @@ export default function PageLayout({
         />
       )}
       {/* Mission 모달 상태에 따라 Mission 컴포넌트 렌더링 */}
-      {isMissionOpen && (
-        <Mission
-          isOpen={isMissionOpen}
-          onClose={() => setIsMissionOpen(false)}
-        />
-      )}
+
+      <Mission isOpen={isMissionOpen} onClose={() => setIsMissionOpen(false)} />
     </S.Layout>
   );
 }

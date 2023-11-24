@@ -24,7 +24,10 @@ const ModalWrapper = styled.div<ModalWrapperProps>`
   height: 100%;
   display: ${(props) => (props.show ? 'block' : 'none')};
   z-index: 999;
-  background-color: ${(props) => (props.imageType === 'FurnitureSelectModal' ? 'transparent' : 'rgba(87, 46, 22, 0.20)')};
+  background-color: ${(props) =>
+    props.imageType === 'FurnitureSelectModal'
+      ? 'transparent'
+      : 'rgba(87, 46, 22, 0.20)'};
 `;
 
 const getModalBackgroundImage = (
@@ -99,13 +102,13 @@ const ModalContent = styled.div<ModalContentProps>`
         width: ${width};
         height: ${height};
         animation: ${slideUpAnimationPortrait} 0.5s ease-out forwards;
-        
+
         /* 모바일 기기에서 가로 모드일 때만 애니메이션 적용 */
         @media screen and (max-width: 768px) and (orientation: landscape) {
           animation: ${slideUpAnimationLandscape} 0.5s ease-out forwards;
         }
       `;
-      } else {
+    } else {
       return css`
         width: ${width};
         height: ${height};
@@ -118,7 +121,6 @@ const ModalContent = styled.div<ModalContentProps>`
   font-size: 20px;
   overflow-y: auto;
 `;
-
 
 const ModalInnerContent = styled.div`
   width: 100%;
@@ -135,6 +137,15 @@ const ModalTitle = styled.div`
   overflow-y: auto;
   white-space: pre;
   overflow: hidden;
+`;
+
+export const ModalInnerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 68px;
 `;
 
 export const S = {
