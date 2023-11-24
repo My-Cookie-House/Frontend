@@ -70,20 +70,26 @@ export default function MissionFurniturePreview() {
   const handleUploadImageMessageFurnitureIdWrapper = async () => {
     try {
       // 가구를 선택하지 않은 경우
+      console.log(missionState);
       if (missionState.missionCompleteFurnitureId === 0) {
+        console.log('1');
         throw new Error();
       }
+      console.log('2');
       await uploadImageMessageFurnitureId(
         missionState.missionCompleteImage,
         missionState.missionCompleteContent,
         missionState.missionCompleteFurnitureId,
         'post',
       );
-      // await queryClient.invalidateQueries({
-      //   queryKey: ['mission', 'today', userId],
-      // });
+      console.log('3');
+      await queryClient.invalidateQueries({
+        queryKey: ['mission', 'today', userId],
+      });
+      console.log('4');
       navigate(`/${userId}/inside`);
     } catch (error) {
+      console.log('5');
       alert('업로드에 실패했어요.');
     }
   };
