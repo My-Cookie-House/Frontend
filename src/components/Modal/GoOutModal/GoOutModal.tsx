@@ -9,6 +9,7 @@ type Props = {
   modalTitle: string;
   modalTexts: string[];
   yesBtnText: string;
+  onYes: () => void;
 };
 
 export default function CustomModal({
@@ -17,6 +18,7 @@ export default function CustomModal({
   modalTitle,
   modalTexts,
   yesBtnText,
+  onYes,
 }: Props) {
   return (
     <Modal

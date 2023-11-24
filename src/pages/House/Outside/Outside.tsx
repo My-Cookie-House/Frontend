@@ -11,6 +11,8 @@ import {useEffect} from 'react';
 import InsideBg from '@/assets/House/Inside/InsideBg.png';
 import GoOutModal from '@/components/Modal/GoOutModal/GoOutModal';
 import {useState, useCallback} from 'react';
+import useLogout from '@/hooks/useLogout';
+import useSignout from '@/hooks/useSignout';
 import styled from 'styled-components';
 
 const STALE_MIN = 5;
@@ -55,6 +57,9 @@ export default function Outside() {
   const closeSignout = useCallback(() => {
     setSignoutModal(false);
   }, []);
+
+  const logout = useLogout();
+  const signout = useSignout();
 
   return (
     <>
@@ -101,6 +106,7 @@ export default function Outside() {
                   '로그아웃 하시겠습니까?',
                 ]}
                 yesBtnText={'예'}
+                onYes={logout}
               />
               <GoOutModal
                 isOpen={signoutModal}
@@ -113,6 +119,7 @@ export default function Outside() {
                   '새로운 집을 만들 수 있습니다',
                 ]}
                 yesBtnText={'탈퇴하기'}
+                onYes={signout}
               />
             </div>
           </>
