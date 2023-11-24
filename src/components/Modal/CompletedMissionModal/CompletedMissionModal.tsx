@@ -36,7 +36,10 @@ export default function CompletedMissionModal({
       <ModalCloseButton onClick={closeModal} />
       <S.ModalText>{data?.missionMessage}</S.ModalText>
       <S.Wrapper>
-        <S.ImgBox src={data?.missionCompleteImage} />
+        <S.ImgBox>
+          <S.Img src={data?.missionCompleteImage} />
+        </S.ImgBox>
+
         <S.Label>오늘의 메시지</S.Label>
         <S.Line />
         <S.MessageArea>{data?.missionCompleteContent}</S.MessageArea>
