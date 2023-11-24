@@ -35,7 +35,7 @@ export default function CustomModal({
         ))}
         <S.GingerManImg src={GingerMan} />
         <S.YesNoBtnWrapper>
-          <S.YesNoBtn>{yesBtnText}</S.YesNoBtn>
+          <S.YesNoBtn onClick={onYes}>{yesBtnText}</S.YesNoBtn>
           <S.YesNoBtn onClick={closeModal}>아니요</S.YesNoBtn>
         </S.YesNoBtnWrapper>
       </S.Wrapper>
