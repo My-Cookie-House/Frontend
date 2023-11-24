@@ -17,8 +17,6 @@ import {useNavigate} from 'react-router-dom';
 import {useRecoilState} from 'recoil';
 import {loginStateAtom} from '@/atoms/loginStateAtom';
 import JSCookies from 'js-cookie';
-import useLogout from '@/hooks/useLogout';
-import useSignout from '@/hooks/useSignout';
 
 const STALE_MIN = 5;
 const GC_MIN = 5;
@@ -65,8 +63,38 @@ export default function Outside() {
 
   const navigate = useNavigate();
   const [loginState, setLoginState] = useRecoilState(loginStateAtom);
-  const logout = useLogout();
-  const signout = useSignout();
+
+  const logout = async () => {
+    const queryClient = useQueryClient();
+    try {
+      await instance.get('/auth/sign-out');
+
+      queryClient.invalidateQueries({queryKey: ['loginState']});
+
+      JSCookies.remove('accessToken');
+      JSCookies.remove('refreshToken');
+      setLoginState(false);
+      navigate('/');
+    } catch (error) {
+      console.error('로그아웃 오류: ', error);
+    }
+  };
+
+  const signout = async () => {
+    const queryClient = useQueryClient();
+    try {
+      await instance.get('/auth/unlink');
+
+      queryClient.invalidateQueries({queryKey: ['loginState']});
+
+      JSCookies.remove('accessToken');
+      JSCookies.remove('refreshToken');
+      setLoginState(false);
+      navigate('/');
+    } catch (error) {
+      console.error('탈퇴 오류: ', error);
+    }
+  };
 
   return (
     <>
