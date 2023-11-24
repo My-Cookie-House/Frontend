@@ -9,6 +9,7 @@ const useLogout = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [loginState, setLoginState] = useRecoilState(loginStateAtom);
+  console.log('rendered');
 
   const logout = async () => {
     try {
