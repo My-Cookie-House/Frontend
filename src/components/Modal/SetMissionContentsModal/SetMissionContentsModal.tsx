@@ -6,7 +6,7 @@ import * as SMission from '../style';
 import useTodayMission from '@/hooks/useTodayMission';
 import {useRecoilValue, useSetRecoilState} from 'recoil';
 import {userInfoAtom} from '@/atoms/loginStateAtom';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import useInput from '@/hooks/useInput';
 import {missionStateAtom} from '@/atoms/missionState';
 import ModalCloseButton from '@/components/ModalCloseButton/ModalCloseButton';
@@ -44,12 +44,19 @@ export default function SetMissionContentsModal({
   };
 
   const handleCheckExistImageMessage = () => {
-    if (!uploadedImg || !content.value.trim()) {
+    if (!uploadedImg || content.value.trim().length === 0) {
       alert('이미지와 메시지를 모두 입력해야 합니다.');
     } else {
       setNextStep();
     }
   };
+
+  useEffect(() => {
+    setMissionState((prev) => ({
+      ...prev,
+      missionCompleteContent: content.value,
+    }));
+  }, [content.value]);
 
   return (
     <Modal

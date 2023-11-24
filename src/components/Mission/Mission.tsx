@@ -21,13 +21,12 @@ import useTodayMission from '@/hooks/useTodayMission';
 import {useCallback} from 'react';
 import EnvelopeModal from '../Modal/EnvelopeModal/EnvelopeModal';
 import SetMissionContentsModal from '../Modal/SetMissionContentsModal/SetMissionContentsModal';
+import SeeFurnitureModal from '../Modal/SeeFurnitureModal/SeeFurnitureModal';
 
 export enum MissionSteps {
-  'NotStarted' = 0, // 아무것도 하지 않은 상태
   'Envelope', // 편지지
   'SetContents', // 이미지, 내용 입력
-  'ShowFurniture', // 가구 제시
-  'FurnitureSelect', // 가구 선택
+  'SeeFurniture', // 가구 제시
   'Edit', // 미션 콘텐츠 수정
   'Finished', // 미션 이미 수행했음
 }
@@ -47,14 +46,14 @@ export type MissionModalProps = {
 function Mission({isOpen, onClose}) {
   const userInfo = useRecoilValue(userInfoAtom);
 
-  const [missionStep, setMissionStep] = useState<MissionSteps>(1);
+  const [missionStep, setMissionStep] = useState<MissionSteps>(
+    MissionSteps.Envelope,
+  );
+
   const todayMissionData = useTodayMission(userInfo.userId);
 
-  console.log(missionStep, todayMissionData.completed);
   useEffect(() => {
-    console.log(todayMissionData.completed);
     if (todayMissionData.completed) {
-      console.log('here');
       // 오늘 미션을 이미 수행 한 경우
       setMissionStep(MissionSteps.Finished);
     } else {
@@ -64,10 +63,6 @@ function Mission({isOpen, onClose}) {
 
   const setNextStep = useCallback(
     () => setMissionStep((prev) => prev + 1),
-    [missionStep],
-  );
-  const closeMission = useCallback(
-    () => setMissionStep(MissionSteps.NotStarted),
     [missionStep],
   );
 
@@ -142,17 +137,6 @@ function Mission({isOpen, onClose}) {
     }
   };
 
-  // 이미지와 메시지를 서버에 업로드하는 함수
-  const handleCheckExistImageMessage = async () => {
-    if (!imageFile || !content.value.trim()) {
-      alert('이미지와 메시지를 모두 입력해야 합니다.');
-      return; //TODO: 실제 환경에서 주석 해제하기
-      //setModalStep(3); //TODO: 실제 환경에서 제거하기
-    } else {
-      setModalStep(3);
-    }
-  };
-
   // ShowMoreMenuButton 클릭 핸들러
   const handleOpenShowMoreMenu = () => {
     setShowChangeButton(!showChangeButton); // 상태를 반전시킵니다.
@@ -176,6 +160,10 @@ function Mission({isOpen, onClose}) {
             isOpen={missionStep === MissionSteps.SetContents}
             closeMission={onClose}
             setNextStep={setNextStep}
+          />
+          <SeeFurnitureModal
+            isOpen={missionStep === MissionSteps.SeeFurniture}
+            closeMission={onClose}
           />
         </>
       )}
