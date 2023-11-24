@@ -9,7 +9,7 @@ type Props = {
   modalTitle: string;
   modalTexts: string[];
   yesBtnText: string;
-  onYes: () => Promise<void>;
+  onYes: () => void;
 };
 
 export default function CustomModal({
