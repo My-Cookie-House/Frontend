@@ -9,7 +9,6 @@ type Props = {
   modalTitle: string;
   modalTexts: string[];
   yesBtnText: string;
-  onYes: () => void;
 };
 
 export default function CustomModal({
@@ -18,7 +17,6 @@ export default function CustomModal({
   modalTitle,
   modalTexts,
   yesBtnText,
-  onYes,
 }: Props) {
   return (
     <Modal
@@ -35,7 +33,7 @@ export default function CustomModal({
         ))}
         <S.GingerManImg src={GingerMan} />
         <S.YesNoBtnWrapper>
-          <S.YesNoBtn onClick={onYes}>{yesBtnText}</S.YesNoBtn>
+          <S.YesNoBtn>{yesBtnText}</S.YesNoBtn>
           <S.YesNoBtn onClick={closeModal}>아니요</S.YesNoBtn>
         </S.YesNoBtnWrapper>
       </S.Wrapper>

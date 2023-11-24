@@ -106,7 +106,6 @@ export default function Outside() {
                   '로그아웃 하시겠습니까?',
                 ]}
                 yesBtnText={'예'}
-                onYes={logout}
               />
               <GoOutModal
                 isOpen={signoutModal}
@@ -119,7 +118,6 @@ export default function Outside() {
                   '새로운 집을 만들 수 있습니다',
                 ]}
                 yesBtnText={'탈퇴하기'}
-                onYes={signout}
               />
             </div>
           </>
