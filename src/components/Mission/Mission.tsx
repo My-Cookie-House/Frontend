@@ -55,26 +55,34 @@ function Mission({isOpen, onClose}) {
     <Suspense>
       {isOpen && (
         <>
-          <EnvelopeModal
-            isOpen={missionStep === MissionSteps.Envelope}
-            closeMission={onClose}
-            setNextStep={setNextStep}
-          />
-          <SetMissionContentsModal
-            isOpen={missionStep === MissionSteps.SetContents}
-            closeMission={onClose}
-            setNextStep={setNextStep}
-          />
-          <SeeFurnitureModal
-            isOpen={missionStep === MissionSteps.SeeFurniture}
-            closeMission={onClose}
-          />
-          <CompletedMissionModal
-            closeModal={onClose}
-            isOpen={missionStep === MissionSteps.Finished}
-            date={todayMissionData.missionDate}
-            missionCompleteId={todayMissionData.missionCompleteId}
-          />
+          {missionStep === MissionSteps.Envelope && (
+            <EnvelopeModal
+              isOpen={missionStep === MissionSteps.Envelope}
+              closeMission={onClose}
+              setNextStep={setNextStep}
+            />
+          )}
+          {missionStep === MissionSteps.SetContents && (
+            <SetMissionContentsModal
+              isOpen={missionStep === MissionSteps.SetContents}
+              closeMission={onClose}
+              setNextStep={setNextStep}
+            />
+          )}
+          {missionStep === MissionSteps.SeeFurniture && (
+            <SeeFurnitureModal
+              isOpen={missionStep === MissionSteps.SeeFurniture}
+              closeMission={onClose}
+            />
+          )}
+          {missionStep === MissionSteps.Finished && (
+            <CompletedMissionModal
+              closeModal={onClose}
+              isOpen={missionStep === MissionSteps.Finished}
+              date={todayMissionData.missionDate}
+              missionCompleteId={todayMissionData.missionCompleteId}
+            />
+          )}
         </>
       )}
     </Suspense>
