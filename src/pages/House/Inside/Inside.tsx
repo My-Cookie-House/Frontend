@@ -7,7 +7,7 @@ import {useCallback, useState} from 'react';
 import ShareModal from '../../../components/Modal/ShareModal/ShareModal';
 import Overlap from '../../../components/Overlap/Overlap';
 import FurnitureLayer from '../../../assets/FurnitureLayer';
-import {useSuspenseQuery} from '@tanstack/react-query';
+import {useQueryClient, useSuspenseQuery} from '@tanstack/react-query';
 import {getAllCompletedMissions} from '../../../apis/mission';
 import {
   IAllCompletedMissions,
@@ -16,17 +16,44 @@ import {
 import {coordinates} from '../../../coordinates/coordinates';
 import CompletedMissionModal from '../../../components/Modal/CompletedMissionModal/CompletedMissionModal';
 import Wallpapers from '@/assets/Wallpaper';
+import {IHouseOutside} from '@/interfaces/house';
+import {useLocation} from 'react-router-dom';
 
-// const getFurnitureNum = (furnitureId: number) => {
-//   return furnitureId - 3 * (missionId - 1);
-// };
+const BASE_URL = 'https://cookiehouse.site';
 
 export default function Inside() {
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [missionModalOpen, setMissionModalOpen] =
     useState<null | ICompletedMission>(null);
   const {isMyHouse, id} = useIsMyHouse();
-  const handleShare = () => setShareModalOpen(true);
+
+  const queryClient = useQueryClient();
+  const houseData = queryClient.getQueryData<IHouseOutside>([
+    'house',
+    'outside',
+    id,
+  ]);
+  const {pathname} = useLocation();
+  const handleShare = async () => {
+    // setShareModalOpen(true);
+    const link = `${BASE_URL}${pathname}`;
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: '쿠키하우스',
+          text: `${houseData.houseName}의 쿠키하우스`,
+          url: link,
+        });
+      } else {
+        // TODO : do something else like copying the data to the clipboard
+        navigator.clipboard.writeText(link);
+        alert('링크가 복사되었습니다.');
+      }
+    } catch (e) {
+      console.log(e);
+      alert('공유 중 오류가 발생했습니다. 다시 시도해주세요!');
+    }
+  };
 
   const closeShareModal = useCallback(
     () => setShareModalOpen(false),
@@ -83,17 +110,16 @@ export default function Inside() {
           />
         ))}
       </S.Frame>
-      {isMyHouse && (
-        <Button
-          width={50}
-          height={50}
-          background={Share}
-          margin="50px 0 0 0"
-          onClick={handleShare}
-        >
-          <S.ShareImg src={ShareIcon} />
-        </Button>
-      )}
+      <Button
+        width={50}
+        height={50}
+        background={Share}
+        margin="50px 0 0 0"
+        onClick={handleShare}
+      >
+        <S.ShareImg src={ShareIcon} />
+      </Button>
+      {/* )} */}
 
       {/* 공유하기 모달 */}
       <ShareModal closeModal={closeShareModal} isOpen={shareModalOpen} />
