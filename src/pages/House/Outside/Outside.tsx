@@ -19,7 +19,6 @@ const GC_MIN = 5;
 
 export default function Outside() {
   const {id, isMyHouse} = useIsMyHouse();
-  console.log('outside');
 
   const {data} = useSuspenseQuery<IHouseOutside>({
     queryKey: ['house', 'outside', id],
