@@ -1,5 +1,7 @@
 import {createGlobalStyle} from 'styled-components';
 import Pretendard from './static/font/Pretendard-Medium.woff2';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 export const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Pretendard';
