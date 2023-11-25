@@ -12,7 +12,7 @@ const RouteChangeTracker = () => {
 
   // 구글 애널리틱스 운영서버만 적용
   useEffect(() => {
-    const key = import.meta.env.REACT_APP_GOOGLE_ANALYTICS;
+    const key = 'G-5VXNV6XPET';
     if (key) {
       ReactGA.initialize(key);
       setInitialized(true);
