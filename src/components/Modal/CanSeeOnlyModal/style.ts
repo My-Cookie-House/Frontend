@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ModalOkButton from '@/assets/Button/ModalOKButton.webp';
+import ModalOkButton from '@/assets/Button/ModalOKButton.png';
 
 export const ModalText = styled.div`
   color: #572e16;
@@ -14,7 +14,7 @@ export const ModalText = styled.div`
 
 export const Wrapper = styled.div`
   display: flex;
-  margin-top: 68px;
+  margin-top: 48px;
 
   flex-direction: column;
 
@@ -24,11 +24,14 @@ export const Wrapper = styled.div`
 
 export const YesNoBtn = styled.button`
   background: url(${ModalOkButton});
+  box-shadow: 0px 4px 4px 0px rgba(87, 46, 22, 0.60);
   background-size: cover;
+  border-radius: 18px;
+  background-color: transparent;
   background-position: center;
   width: 152px;
-  height: 55px;
-  margin-top: 45px;
+  height: 46px;
+  margin-top: 25px;
   border: none;
   outline: none;
   padding: 0;
@@ -43,6 +46,6 @@ export const YesNoBtn = styled.button`
 `;
 
 export const GingerManImg = styled.img`
-  width: 150px;
-  height: 150px;
+  width: 181px;
+  height: 181px;
 `;
