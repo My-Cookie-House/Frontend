@@ -1,7 +1,7 @@
 import Button from '../Button';
 import LongButtonImg from '../../../assets/Button/LongButton.svg';
 
-function SkipButton() {
+function BuildStartButton() {
   return (
     <Button
       route={'/build'}
@@ -14,4 +14,4 @@ function SkipButton() {
   );
 }
 
-export default SkipButton;
+export default BuildStartButton;
