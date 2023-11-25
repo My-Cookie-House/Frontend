@@ -4,8 +4,8 @@ import LongButton from '../../../components/Buttons/LongButton/LongButton';
 import {useEffect, useState} from 'react';
 import {useSetRecoilState} from 'recoil';
 import {buildStateAtom} from '../../../atoms/buildAtom';
-import Building from '../../../assets/House/Build/Building.png';
-import BuildComplete from '../../../assets/House/Build/BuildComplete.png';
+import Building from '../../../assets/House/Build/Building.webp';
+import BuildComplete from '../../../assets/House/Build/BuildComplete.webp';
 
 const COOKIE_COUNT = 6;
 const ICING_COUNT = 4;

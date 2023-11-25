@@ -13,3 +13,15 @@ export async function getLoginUserInfo() {
     return null;
   }
 }
+
+export async function signout(userId: number) {
+  try {
+    await instance.post(`/auth/unlink?userId=${userId}`, {
+      headers: {
+        Authorization: `${Cookies.get('accessToken')}`,
+      },
+    });
+  } catch (err) {
+    throw new Error();
+  }
+}

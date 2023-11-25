@@ -1,8 +1,8 @@
 import * as S from './style';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import LoginText from '../../assets/LoginAssets/LoginText.svg';
-import KakaoLogin from '../../assets/LoginAssets/KakaoLogin.png';
-import WhiteTree from '@/assets/LoginAssets/WhiteTree.png';
+import KakaoLogin from '../../assets/LoginAssets/KakaoLogin.webp';
+import WhiteTree from '@/assets/LoginAssets/WhiteTree.webp';
 
 const Login = () => {
   const KAKAO_REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
@@ -48,7 +48,7 @@ const Login = () => {
         />
       </a>
       <S.LoginTerms
-        href="https://www.notion.so/aeb021139728445598bef71160a07222"
+        href="https://glittery-slayer-60c.notion.site/aeb021139728445598bef71160a07222"
         target="_blank"
       >
         서비스 이용약관

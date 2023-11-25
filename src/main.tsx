@@ -7,19 +7,15 @@ import {ThemeProvider} from 'styled-components';
 import theme from './theme';
 import {RecoilRoot} from 'recoil';
 import {useEffect, useRef} from 'react';
+import ReactGA from 'react-ga4';
 
 function QueryClientProviderMonitor({children}) {
   const prevQueryClientRef = useRef<QueryClient | null>(null);
 
   useEffect(() => {
     if (prevQueryClientRef.current !== queryClient) {
-      console.log('쿼리클라이언트 레퍼런스 바뀜');
       prevQueryClientRef.current = queryClient;
     }
-
-    return () => {
-      console.log('쿼리클라이언트 프로바이더 언마운트');
-    };
   }, []);
 
   return children;

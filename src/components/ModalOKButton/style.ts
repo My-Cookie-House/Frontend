@@ -1,5 +1,5 @@
 import {styled} from 'styled-components';
-import ModalOKButtonImg from '../../assets/Button/ModalOKButton.png';
+import ModalOKButtonImg from '../../assets/Button/ModalOKButton.webp';
 
 const ModalOKButton = styled.button`
   font-weight: normal; // 명시적으로 굵기 설정

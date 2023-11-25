@@ -16,7 +16,6 @@ export default function SplashScreen(): JSX.Element {
   const loggedIn = useRecoilValue(loginStateAtom);
 
   useEffect(() => {
-    console.log(loggedIn, isHouseBuilt);
     const timer = setTimeout(() => {
       if (loggedIn) {
         if (isHouseBuilt) {

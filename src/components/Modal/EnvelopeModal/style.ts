@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import ClosedEnvelopeImg from '@/assets/Envelope/ClosedEnvelope.png';
-import OpenedEnvelopeImg from '@/assets/Envelope/OpenedEnvelope.png';
+import ClosedEnvelopeImg from '@/assets/Envelope/ClosedEnvelope.webp';
+import OpenedEnvelopeImg from '@/assets/Envelope/OpenedEnvelope.webp';
 import {keyframes} from 'styled-components';
 
 export const swapAnimation = keyframes`

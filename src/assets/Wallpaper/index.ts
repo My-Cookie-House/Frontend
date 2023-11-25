@@ -1,11 +1,11 @@
-import Wallpaper1 from './1.png';
-import Wallpaper2 from './2.png';
-import Wallpaper3 from './3.png';
-import Wallpaper4 from './4.png';
-import Wallpaper5 from './5.png';
-import Wallpaper6 from './6.png';
-import Wallpaper7 from './7.png';
-import Wallpaper8 from './8.png';
+import Wallpaper1 from './1.webp';
+import Wallpaper2 from './2.webp';
+import Wallpaper3 from './3.webp';
+import Wallpaper4 from './4.webp';
+import Wallpaper5 from './5.webp';
+import Wallpaper6 from './6.webp';
+import Wallpaper7 from './7.webp';
+import Wallpaper8 from './8.webp';
 
 export default {
   Wallpaper1,

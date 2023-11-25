@@ -42,9 +42,6 @@ const sendRefreshToken = async (refreshToken) => {
       },
     });
 
-    console.log('성공', response.data);
     useSetTokens(response.data.accessToken, response.data.refreshToken);
-  } catch (error) {
-    console.error('실패:', error);
-  }
+  } catch (error) {}
 };

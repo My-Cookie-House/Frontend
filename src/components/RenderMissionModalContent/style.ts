@@ -1,6 +1,6 @@
 import {keyframes, styled} from 'styled-components';
-import ClosedEnvelopeImg from '../../assets/Envelope/ClosedEnvelope.png';
-import OpenedEnvelopeImg from '../../assets/Envelope/OpenedEnvelope.png';
+import ClosedEnvelopeImg from '../../assets/Envelope/ClosedEnvelope.webp';
+import OpenedEnvelopeImg from '../../assets/Envelope/OpenedEnvelope.webp';
 import ImageUploadModalImg from '../../assets/Button/ImageUploadButton.svg';
 import {ImagePreviewProps} from '../../type/type';
 import TodayMessageLineImg from '../../assets/Icons/TodayMessageLine.svg';

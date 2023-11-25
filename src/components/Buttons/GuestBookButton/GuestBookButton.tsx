@@ -1,4 +1,4 @@
-import GuestBookImg from '@/assets/GuestBook/GuestBook.png';
+import GuestBookImg from '@/assets/GuestBook/GuestBook.webp';
 import * as S from './styled';
 
 type Props = {

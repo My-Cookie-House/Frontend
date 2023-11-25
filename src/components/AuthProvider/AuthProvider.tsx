@@ -41,7 +41,6 @@ export default function AuthProvider({children}: Props) {
       setLoginState(false);
       setUserInfoState(initialUserInfoState);
     }
-    console.log(userInfo.userId);
   }, [data]);
 
   return <Suspense>{isSuccess && children}</Suspense>;

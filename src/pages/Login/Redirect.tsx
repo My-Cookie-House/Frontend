@@ -21,8 +21,6 @@ export default function Redirect() {
   const kakaologin = async () => {
     try {
       const response = await instance.get(loginUrl);
-      console.log(response);
-      console.log(response.data.data.accessToken);
       if (response.data.data.accessToken === undefined) {
         console.log('엑세스 토큰을 못 받았어요');
       }

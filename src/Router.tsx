@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import GuestBook from './pages/GuestBook/GuestBook';
 import Onboarding from './pages/Onboarding/Onboarding';
 import Login from './pages/Login/Login';
@@ -15,12 +15,15 @@ import House from './pages/House/House';
 import Outside from './pages/House/Outside/Outside';
 import Inside from './pages/House/Inside/Inside';
 import Redirect from './pages/Login/Redirect';
-import MissionFurniturePreview from './pages/MissionFurniturePreview/MissionFurniturePreview'
+import MissionFurniturePreview from './pages/MissionFurniturePreview/MissionFurniturePreview';
 import Wallpaper from './pages/Build/Custom/Wallpaper/Wallpaper';
+import RouteChangeTracker from './RouteChangeTracker';
 
 export default function Router() {
+  RouteChangeTracker();
+
   return (
-    <BrowserRouter>
+    <>
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<SplashScreen />} />
@@ -33,7 +36,10 @@ export default function Router() {
         <Route path="/:id" element={<House />}>
           <Route path="" element={<Outside />} />
           <Route path="inside" element={<Inside />} />
-          <Route path="custom/furniture" element={<MissionFurniturePreview />} />
+          <Route
+            path="custom/furniture"
+            element={<MissionFurniturePreview />}
+          />
         </Route>
 
         {/* 쿠키하우스 빌딩 하위 경로 */}
@@ -47,6 +53,6 @@ export default function Router() {
           <Route path="name" element={<Name />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
