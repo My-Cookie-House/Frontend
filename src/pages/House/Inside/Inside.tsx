@@ -37,21 +37,16 @@ export default function Inside() {
   const handleShare = async () => {
     // setShareModalOpen(true);
     const link = `${BASE_URL}${pathname}`;
-    try {
-      if (navigator.share) {
-        await navigator.share({
-          title: '쿠키하우스',
-          text: `쿠키하우스`,
-          url: `https://cookiehouse.site/${id}`,
-        });
-      } else {
-        // TODO : do something else like copying the data to the clipboard
-        navigator.clipboard.writeText(link);
-        alert('링크가 복사되었습니다.');
-      }
-    } catch (e) {
-      console.log(e);
-      alert('공유 중 오류가 발생했습니다. 다시 시도해주세요!');
+    if (navigator.share) {
+      await navigator.share({
+        title: '쿠키하우스',
+        text: `쿠키하우스`,
+        url: `https://cookiehouse.site/${id}`,
+      });
+    } else {
+      // TODO : do something else like copying the data to the clipboard
+      navigator.clipboard.writeText(link);
+      alert('링크가 복사되었습니다.');
     }
   };
 
