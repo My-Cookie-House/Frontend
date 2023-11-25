@@ -4,7 +4,7 @@ import SkipButton from '@/components/Buttons/SkipButton/SkipButton';
 function OnboardingPage() {
   return (
     <PageLayout>
-      <OnboardingSlider/>
+      <OnboardingSlider />
       <SkipButton />
     </PageLayout>
   );
