@@ -48,7 +48,7 @@ const Login = () => {
         />
       </a>
       <S.LoginTerms
-        href="https://www.notion.so/aeb021139728445598bef71160a07222"
+        href="https://glittery-slayer-60c.notion.site/aeb021139728445598bef71160a07222"
         target="_blank"
       >
         서비스 이용약관
