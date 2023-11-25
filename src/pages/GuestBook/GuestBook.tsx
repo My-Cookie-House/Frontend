@@ -78,9 +78,6 @@ function GuestBook() {
     } catch (error) {
       // 실패 시 처리
       alert('유저의 정보를 불러오지 못했어요.');
-      setModalStep(3); //TODO: 실제 환경에서는 제겇
-      setImageType('MediumModal'); //TODO: 실제 환경에서는 제겇
-      setModalTitle("방명록") //TODO: 실제 환경에서는 제겇
     }
   };
 
@@ -97,9 +94,6 @@ function GuestBook() {
     // 입력값을 검사합니다.
     if (!author.value.trim() || !content.value.trim()) {
       alert('이름과 방명록 내용을 작성해주세요!');
-      setModalStep(2); //TODO: 실제 환경에서는 제겇
-      setImageType('LargeModal');  //TODO: 실제 환경에서는 제겇
-      setModalTitle("오너먼트 고르기")  //TODO: 실제 환경에서는 제겇
       return;
     } else {
       setModalStep(2);
@@ -221,12 +215,7 @@ function GuestBook() {
     <>
       <S.ButtonWrapper>
         <TitleContainerBox title={houseName} />
-        {
-          isHouseBuilt && !isMyHouse && 
-          (
-            <S.WirteGuestBookButton onClick={openModal} />
-          )
-        }
+        <S.WirteGuestBookButton onClick={openModal} />
       </S.ButtonWrapper>
       <PageLayout goBack={`/${id}/inside`}>
 
