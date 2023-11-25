@@ -41,8 +41,8 @@ export default function Inside() {
       if (navigator.share) {
         await navigator.share({
           title: '쿠키하우스',
-          text: `${houseData.houseName}의 쿠키하우스`,
-          url: link,
+          text: `쿠키하우스`,
+          url: `https://cookiehouse.site/${id}`,
         });
       } else {
         // TODO : do something else like copying the data to the clipboard
