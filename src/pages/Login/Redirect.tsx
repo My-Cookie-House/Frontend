@@ -22,7 +22,7 @@ export default function Redirect() {
     try {
       const response = await instance.get(loginUrl);
       if (response.data.data.accessToken === undefined) {
-        console.log('엑세스 토큰을 못 받았어요');
+        navigate('/'); //TODO: 여기로 하는게 맞을까?
       }
 
       instance.interceptors.request.use(function (config) {
@@ -35,7 +35,7 @@ export default function Redirect() {
       setLoginState(true);
       navigate('/');
     } catch (e) {
-      console.log('로그인 불가');
+      navigate('/'); //TODO: 여기로 하는게 맞을까?
     }
   };
 
