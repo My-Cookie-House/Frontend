@@ -8,6 +8,7 @@ function BuildStartButton() {
       width={237.5}
       height={50}
       background={LongButtonImg}
+      margin={"130px 0 0 0"}
     >
       가볼까요?
     </Button>
