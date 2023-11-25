@@ -9,6 +9,7 @@ export const Title = styled.h1`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  margin-bottom: 43px;
 `;
 
 export const Discription = styled.h2`
@@ -30,6 +31,7 @@ interface ImagesProps {
 export const Image = styled.img<ImagesProps>`
   width: 340px;
   height: 340px;
+  margin-bottom: 23px;
 `;
 
 export const SliderWrapper = styled.div`
@@ -53,9 +55,8 @@ export const Dot = styled.div<{isActive: boolean}>`
   border-radius: 50%;
   background-color: #BA998B ;
   margin: 0 5px;
-  margin-top: 145px;
+  margin-top: 115px;
   ${({ isActive }) => isActive && css`
     background-color: #F9F1E1;
   `}
 `;
-
