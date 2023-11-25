@@ -9,7 +9,7 @@ function BuildStartButton() {
       width={237.5}
       height={50}
       background={LongButtonImg}
-      margin={"130px 0 0 0"}
+      margin={"160px 0 0 0"}
     >
       <S.ButtonText>
         가볼까요?

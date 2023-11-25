@@ -54,13 +54,8 @@ function GuestBook() {
       const guestBookData = await getUserInfoFromServer(id);
       if (guestBookData && Array.isArray(guestBookData.guestBookResponseDtos)) {
         setGuestBook(guestBookData.guestBookResponseDtos);
-        console.log(guestBookData.guestBook)
       }
-      console.log(guestBookData.guestBookResponseDtos)
-
       setHouseName(guestBookData.houseName);
-      console.log(guestBookData.houseName)
-
     };
     fetchUserInfo();
   }, [reloadUserInfo, id]);
@@ -166,7 +161,7 @@ function GuestBook() {
                   {ornaments.map((ornament) => (
                     <DecorationButton
                       key={ornament.id}
-                      size={84}
+                      size={8}
                       image={ornament.image}
                       dark={ornament.id === ornamentId}
                       onClick={(

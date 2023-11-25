@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import Slider from 'react-slick';
+import Slider, {Settings} from 'react-slick';
 import * as S from './style';
 import { OnboardingSliderObject } from '@/assets/OnboardingSlider';
 import BuildStartButton from '../Buttons/BuildStartButton/BuildStartButton';
+import SkipButton from '../Buttons/SkipButton/SkipButton';
 
 export default function OnboardingSlider() {
     const [currentSlide, setCurrentSlide] = useState(0);
 
     const settings = {
         dots: true,
-        infinite: true,
+        infinite: false,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -35,6 +36,7 @@ export default function OnboardingSlider() {
                 </Slider>
             </S.Wrapper>
             {currentSlide === 2 && <BuildStartButton /> }
+            {(currentSlide === 0 || currentSlide === 1) && <SkipButton /> }
         </>
     );
 }
