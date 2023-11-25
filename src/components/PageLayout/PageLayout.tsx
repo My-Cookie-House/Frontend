@@ -80,7 +80,7 @@ export default function PageLayout({
                   {mission && (
                     <>
                       <S.ButtonWrapper>
-                        (!todayMissionComplete && <S.Alarm src={AlarmIcon} />)
+                        {!todayMissionComplete && <S.Alarm src={AlarmIcon} />}
                         <Button
                           width={25}
                           height={19}
