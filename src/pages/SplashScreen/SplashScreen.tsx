@@ -26,7 +26,7 @@ export default function SplashScreen(): JSX.Element {
       } else {
         navigate('/login'); // 로그인하지 않은 경우
       }
-    }, 2500);
+    }, 1700);
 
     return () => clearTimeout(timer); // 컴포넌트가 언마운트되면 타이머를 취소
   }, []);
