@@ -50,6 +50,8 @@ color: ${props => props.theme.colors.textBrown};
 margin-bottom: 32px;
 background-color: transparent;
 font-size: 16px;
+outline: none;
+padding-left:10px;
 &::placeholder {
     color: ${props => props.theme.colors.textBrown};
     font-size: 16px;
@@ -80,6 +82,7 @@ padding: 13px;
 resize: none;
 background-color: rgba(87, 46, 22, 0.15);
 font-size: 16px;
+outline: none;
 &::placeholder {
     color: rgba(87, 46, 22, 0.60);
     font-size: 16px;

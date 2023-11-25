@@ -94,7 +94,7 @@ const ModalContent = styled.div<ModalContentProps>`
   background-repeat: no-repeat;
   background-position: center;
   box-sizing: border-box;
-  padding: 15px;
+  padding: 12px;
   ${({imageType}) => {
     const {width, height} = getModalSize(imageType);
     if (imageType === 'FurnitureSelectModal') {
