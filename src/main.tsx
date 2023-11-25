@@ -12,11 +12,6 @@ import ReactGA from 'react-ga4';
 function QueryClientProviderMonitor({children}) {
   const prevQueryClientRef = useRef<QueryClient | null>(null);
 
-  // 구글 애널리틱스 운영서버만 적용
-  if (process.env.REACT_APP_GOOGLE_ANALYTICS) {
-    ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS);
-  }
-
   useEffect(() => {
     if (prevQueryClientRef.current !== queryClient) {
       prevQueryClientRef.current = queryClient;
