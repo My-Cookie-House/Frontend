@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Slider, {Settings} from 'react-slick';
 import * as S from './style';
-import { OnboardingSliderObject } from '@/assets/OnboardingSlider';
+import {OnboardingSliderObject} from '@/assets/OnboardingSlider';
 import BuildStartButton from '../Buttons/BuildStartButton/BuildStartButton';
 import SkipButton from '../Buttons/SkipButton/SkipButton';
 
 export default function OnboardingSlider() {
-    const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
     const settings = {
         dots: true,
