@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Background from '../../assets/Background/Background.png';
-import SplashScreenBackground from '@/assets/SplashScreenAssets/SplashScreenBackground.png';
+import Background from '../../assets/Background/Background.webp';
+import SplashScreenBackground from '@/assets/SplashScreenAssets/SplashScreenBackground.webp';
 
 export const Layout = styled.div`
   width: 100vw;

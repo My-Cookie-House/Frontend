@@ -7,7 +7,7 @@ import {useRecoilState} from 'recoil';
 import {BuildStateAtom, buildStateAtom} from '../../../../atoms/buildAtom';
 import Overlap from '../../../../components/Overlap/Overlap';
 import WallpaperPreview from '@/assets/WallpaperPreview';
-import InsideNone from '@/assets/House/Build/InsideNone.png';
+import InsideNone from '@/assets/House/Build/InsideNone.webp';
 export default function Wallpaper() {
   const [buildState, setBuildState] =
     useRecoilState<BuildStateAtom>(buildStateAtom);

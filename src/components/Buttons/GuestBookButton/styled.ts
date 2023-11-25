@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ButtonImg from '@/assets/GuestBook/Button.png';
+import ButtonImg from '@/assets/GuestBook/Button.webp';
 
 export const Button = styled.button`
   background: url(${ButtonImg});

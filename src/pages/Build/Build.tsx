@@ -9,8 +9,8 @@ import {
   initalBuildState,
 } from '../../atoms/buildAtom';
 import {userInfoAtom} from '../../atoms/loginStateAtom';
-import Building from '../../assets/House/Build/Building.png';
-import BuildComplete from '../../assets/House/Build/BuildComplete.png';
+import Building from '../../assets/House/Build/Building.webp';
+import BuildComplete from '../../assets/House/Build/BuildComplete.webp';
 
 export default function Build() {
   const [buildState, setBuildState] =

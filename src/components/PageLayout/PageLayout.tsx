@@ -1,11 +1,11 @@
 import {useLayoutEffect, useState} from 'react';
-import Envelope from '../../assets/Button/envelope.png';
+import Envelope from '../../assets/Button/envelope.webp';
 import BackButton from '../../assets/Button/BackButton.svg';
 import * as S from './style';
 import {useLocation, useNavigate} from 'react-router-dom';
 import Button from '../Buttons/Button';
 import Mission from '../Mission/Mission';
-import Logo from '../../assets/Background/Logo.png';
+import Logo from '../../assets/Background/Logo.webp';
 import LeftButton from '../../assets/Button/LeftButton.svg';
 import RightButton from '../../assets/Button/RightButton.svg';
 import {
@@ -18,7 +18,7 @@ import Image3 from '../../assets/OnboardingAssets/onboarding3.svg';
 import CookieHouse from '../../assets/OnboardingAssets/CookieHouse.svg';
 import {indexAtom} from '../../atoms/sideButtonAtom';
 import {useRecoilState} from 'recoil';
-import IcingBackground from '@/assets/Background/BackgroundIcing.png';
+import IcingBackground from '@/assets/Background/BackgroundIcing.webp';
 
 type Props = {
   children: React.ReactNode;
