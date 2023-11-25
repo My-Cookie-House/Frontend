@@ -8,7 +8,7 @@ import Overlap from '../../../components/Overlap/Overlap';
 import Cookies from '../../../assets/House/Outside/Cookies';
 import Icings from '../../../assets/House/Outside/Icings';
 import {useEffect} from 'react';
-import InsideBg from '@/assets/House/Inside/InsideBg.png';
+import InsideBg from '@/assets/House/Inside/InsideBg.webp';
 import GoOutModal from '@/components/Modal/GoOutModal/GoOutModal';
 import {useState, useCallback} from 'react';
 import useGoOut from '@/hooks/useGoOut';
@@ -57,8 +57,7 @@ export default function Outside() {
     setSignoutModal(false);
   }, []);
 
-  const logout = useGoOut('/auth/sign-out');
-  const signout = useGoOut('/auth/unlink');
+  const {logout, signout} = useGoOut('/auth/sign-out');
   return (
     <>
       <Overlap

@@ -2,13 +2,26 @@ import {instance} from '@/apis/axios';
 import Cookies from 'js-cookie';
 import {useQueryClient, useMutation} from '@tanstack/react-query';
 import {useNavigate} from 'react-router-dom';
-import {useRecoilState} from 'recoil';
-import {loginStateAtom} from '@/atoms/loginStateAtom';
+import {useRecoilState, useRecoilValue} from 'recoil';
+import {loginStateAtom, userInfoAtom} from '@/atoms/loginStateAtom';
+import {signout as mutateSignout} from '@/apis/auth';
 
-const useGoOut = (url) => {
+const useLogout = (url) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [loginState, setLoginState] = useRecoilState(loginStateAtom);
+  const {userId} = useRecoilValue(userInfoAtom);
+
+  const {mutate: signout} = useMutation({
+    mutationFn: () => mutateSignout(userId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ['loginState']});
+      Cookies.remove('accessToken');
+      Cookies.remove('refreshToken');
+      setLoginState(false);
+      navigate('/');
+    },
+  });
 
   const mutation = useMutation({
     mutationFn: () => instance.post(url),
@@ -24,11 +37,11 @@ const useGoOut = (url) => {
     },
   });
 
-  const GoOut = () => {
+  const logout = () => {
     mutation.mutate();
   };
 
-  return GoOut;
+  return {logout, signout};
 };
 
-export default useGoOut;
+export default useLogout;
