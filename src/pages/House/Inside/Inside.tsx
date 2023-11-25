@@ -117,7 +117,9 @@ export default function Inside() {
       {/* )} */}
 
       {/* 공유하기 모달 */}
-      <ShareModal closeModal={closeShareModal} isOpen={shareModalOpen} />
+      {isMyHouse && (
+        <ShareModal closeModal={closeShareModal} isOpen={shareModalOpen} />
+      )}
       {missionModalOpen !== null && (
         <CompletedMissionModal
           closeModal={closeMissionModal}
