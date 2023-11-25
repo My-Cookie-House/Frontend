@@ -57,8 +57,7 @@ export default function Outside() {
     setSignoutModal(false);
   }, []);
 
-  const logout = useGoOut('/auth/sign-out');
-  const signout = useGoOut('/auth/unlink');
+  const {logout, signout} = useGoOut('/auth/sign-out');
   return (
     <>
       <Overlap
