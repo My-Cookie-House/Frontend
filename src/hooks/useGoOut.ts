@@ -4,6 +4,7 @@ import {useQueryClient, useMutation} from '@tanstack/react-query';
 import {useNavigate} from 'react-router-dom';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {loginStateAtom, userInfoAtom} from '@/atoms/loginStateAtom';
+import {signout as mutateSignout} from '@/apis/auth';
 
 const useLogout = (url) => {
   const queryClient = useQueryClient();
@@ -12,7 +13,7 @@ const useLogout = (url) => {
   const {userId} = useRecoilValue(userInfoAtom);
 
   const {mutate: signout} = useMutation({
-    mutationFn: () => signout(userId),
+    mutationFn: () => mutateSignout(userId),
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey: ['loginState']});
       Cookies.remove('accessToken');
