@@ -18,6 +18,7 @@ import Redirect from './pages/Login/Redirect';
 import MissionFurniturePreview from './pages/MissionFurniturePreview/MissionFurniturePreview';
 import Wallpaper from './pages/Build/Custom/Wallpaper/Wallpaper';
 import RouteChangeTracker from './RouteChangeTracker';
+import Error from './pages/Error/Error';
 
 export default function Router() {
   RouteChangeTracker();
@@ -52,6 +53,8 @@ export default function Router() {
           <Route path="preview" element={<Preview />} />
           <Route path="name" element={<Name />} />
         </Route>
+
+        <Route path="/error" element={<Error />} />
       </Routes>
     </>
   );

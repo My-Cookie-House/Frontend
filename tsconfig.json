@@ -17,5 +17,8 @@
       "@/*": ["./src/*"]
     }
   },
+  "resolutions": {
+    "@types/react": "17.0.60"
+  },
   "include": ["src", "src/assets", "src/pages/Login/.tsx"]
 }
