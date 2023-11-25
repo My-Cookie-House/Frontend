@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ModalOkButton from '@/assets/Button/ModalOkButton.webp';
+import ModalOkButton from '@/assets/Button/ModalOKButton.webp';
 
 export const ModalText = styled.div`
   color: #572e16;
