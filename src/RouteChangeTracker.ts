@@ -16,7 +16,6 @@ const RouteChangeTracker = () => {
     if (key) {
       ReactGA.initialize(key);
       setInitialized(true);
-      console.log(1);
     }
   }, []);
 
@@ -25,7 +24,6 @@ const RouteChangeTracker = () => {
     if (initialized) {
       ReactGA.set({page: location.pathname});
       ReactGA.send('pageview');
-      console.log(2);
     }
   }, [initialized, location]);
 };
