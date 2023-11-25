@@ -8,10 +8,6 @@ import Mission from '../Mission/Mission';
 import Logo from '../../assets/Background/Logo.png';
 import LeftButton from '../../assets/Button/LeftButton.svg';
 import RightButton from '../../assets/Button/RightButton.svg';
-import {
-  handleLeftClick,
-  handleRightClick,
-} from '../../components/OnboardingComponents/Slider';
 import Image1 from '../../assets/OnboardingAssets/onboarding1.svg';
 import Image2 from '../../assets/OnboardingAssets/onboarding2.svg';
 import Image3 from '../../assets/OnboardingAssets/onboarding3.svg';
@@ -59,12 +55,6 @@ export default function PageLayout({
 
   return (
     <S.Layout>
-      {button && (
-        <S.LeftButtonImage
-          src={LeftButton}
-          onClick={() => handleLeftClick(index, setIndex, images)}
-        />
-      )}
       <S.BgWrapper isSplashScreen={location.pathname === '/'}>
         {nav && <S.IcingImg src={IcingBackground} />}
 
@@ -108,12 +98,6 @@ export default function PageLayout({
           {children}
         </S.Wrapper>
       </S.BgWrapper>
-      {button && (
-        <S.RightButtonImage
-          src={RightButton}
-          onClick={() => handleRightClick(index, setIndex, images)}
-        />
-      )}
       {/* Mission 모달 상태에 따라 Mission 컴포넌트 렌더링 */}
 
       {isMissionOpen && (
