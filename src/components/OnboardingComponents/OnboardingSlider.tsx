@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import Slider,{Settings} from 'react-slick';
+import Slider from 'react-slick';
 import * as S from './style';
 import { OnboardingSliderObject } from '@/assets/OnboardingSlider';
+import BuildStartButton from '../Buttons/BuildStartButton/BuildStartButton';
 
 export default function OnboardingSlider() {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -21,16 +22,19 @@ export default function OnboardingSlider() {
     };
 
     return (
-        <S.Wrapper>
-        <Slider {...settings}>
-            {OnboardingSliderObject.map((object, index) => (
-                <S.SliderWrapper key={index}>
-                <S.Title>{object.title}</S.Title>
-                <S.Image src={object.imgSrc} />
-                <S.Discription>{object.discription}</S.Discription>
-                </S.SliderWrapper>
-            ))}
-        </Slider>
-        </S.Wrapper>
+        <>
+            <S.Wrapper>
+                <Slider {...settings}>
+                    {OnboardingSliderObject.map((object, index) => (
+                        <S.SliderWrapper key={index}>
+                        <S.Title>{object.title}</S.Title>
+                        <S.Image src={object.imgSrc} />
+                        <S.Discription>{object.discription}</S.Discription>
+                        </S.SliderWrapper>
+                    ))}
+                </Slider>
+            </S.Wrapper>
+            {currentSlide === 2 && <BuildStartButton /> }
+        </>
     );
 }
