@@ -1,4 +1,8 @@
-import {useSuspenseQuery} from '@tanstack/react-query';
+import {
+  useQuery,
+  useQueryClient,
+  useSuspenseQuery,
+} from '@tanstack/react-query';
 import {IHouseOutside} from '../../../interfaces/house';
 import house from '../../../apis/house';
 import LongButton from '../../../components/Buttons/LongButton/LongButton';
@@ -13,6 +17,7 @@ import GoOutModal from '@/components/Modal/GoOutModal/GoOutModal';
 import {useState, useCallback} from 'react';
 import useGoOut from '@/hooks/useGoOut';
 import styled from 'styled-components';
+import {useNavigate} from 'react-router-dom';
 
 const STALE_MIN = 5;
 const GC_MIN = 5;
@@ -20,12 +25,19 @@ const GC_MIN = 5;
 export default function Outside() {
   const {id, isMyHouse} = useIsMyHouse();
 
-  const {data} = useSuspenseQuery<IHouseOutside>({
-    queryKey: ['house', 'outside', id],
-    queryFn: () => house.getHouseOutside(+id),
-    staleTime: 1000 * 60 * STALE_MIN,
-    gcTime: 1000 * 60 * GC_MIN,
-  });
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const data = queryClient.getQueryData<IHouseOutside>([
+    'house',
+    'outside',
+    id,
+  ]);
+  // const {data, isError, isFetched} = useSuspenseQuery<IHouseOutside>({
+  //   queryKey: ['house', 'outside', id],
+  //   queryFn: () => house.getHouseOutside(+id),
+  //   staleTime: 1000 * 60 * STALE_MIN,
+  //   gcTime: 1000 * 60 * GC_MIN,
+  // });
 
   const loadImage = async (src: string) =>
     await new Promise<string>((resolve, reject) => {

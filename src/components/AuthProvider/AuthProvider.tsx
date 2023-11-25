@@ -10,6 +10,8 @@ import {
 import {UserInfo} from '@/atoms/loginStateAtom';
 import {instance} from '@/apis/axios';
 import Cookies from 'js-cookie';
+import {ErrorBoundary} from 'react-error-boundary';
+import Error from '@/pages/Error/Error';
 type Props = {
   children: React.ReactNode;
 };
