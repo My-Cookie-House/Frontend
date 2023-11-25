@@ -112,14 +112,9 @@ export default function Inside() {
         margin="50px 0 0 0"
         onClick={handleShare}
       >
-        <S.ShareImg src={ShareIcon} />
+        {isMyHouse && <S.ShareImg src={ShareIcon} />}
       </Button>
-      {/* )} */}
 
-      {/* 공유하기 모달 */}
-      {isMyHouse && (
-        <ShareModal closeModal={closeShareModal} isOpen={shareModalOpen} />
-      )}
       {missionModalOpen !== null && (
         <CompletedMissionModal
           closeModal={closeMissionModal}
