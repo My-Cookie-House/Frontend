@@ -16,7 +16,7 @@ export async function getLoginUserInfo() {
 
 export async function signout(userId: number) {
   try {
-    await instance.post(`/auth/unlink/${userId}`, {
+    await instance.post(`/auth/unlink?userId=${userId}`, {
       headers: {
         Authorization: `${Cookies.get('accessToken')}`,
       },
