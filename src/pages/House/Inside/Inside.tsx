@@ -105,15 +105,17 @@ export default function Inside() {
           />
         ))}
       </S.Frame>
-      <Button
-        width={50}
-        height={50}
-        background={Share}
-        margin="50px 0 0 0"
-        onClick={handleShare}
-      >
-        {isMyHouse && <S.ShareImg src={ShareIcon} />}
-      </Button>
+      {isMyHouse && (
+        <Button
+          width={50}
+          height={50}
+          background={Share}
+          margin="50px 0 0 0"
+          onClick={handleShare}
+        >
+          <S.ShareImg src={ShareIcon} />
+        </Button>
+      )}
 
       {missionModalOpen !== null && (
         <CompletedMissionModal
