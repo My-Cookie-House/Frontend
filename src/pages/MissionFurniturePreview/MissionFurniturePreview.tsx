@@ -5,7 +5,7 @@ import Overlap from '../../components/Overlap/Overlap';
 import {useQueryClient} from '@tanstack/react-query';
 import {uploadImageMessageFurnitureId} from '../../apis/mission';
 import FurnitureLayer from '../../assets/FurnitureLayer';
-import {useRecoilState} from 'recoil';
+import {useRecoilState, useSetRecoilState} from 'recoil';
 import {missionIdAtom, furnitureNumAtom} from '../../atoms/missionAtomState'; // atoms 파일 경로에 따라 수정
 import Modal from '../../components/Modal/Modal';
 import DecorationButton from '../../components/Buttons/DecorationButton/DecorationButton';
@@ -18,6 +18,7 @@ import {missionStateAtom} from '../../atoms/missionState';
 import Wallpapers from '@/assets/Wallpaper';
 import {useAllCompletedMissions} from '@/hooks/useAllCompletedMissions';
 import useTodayMission from '@/hooks/useTodayMission';
+import {userInfoAtom} from '@/atoms/loginStateAtom';
 
 export default function MissionFurniturePreview() {
   // 모달 상태관리
@@ -27,6 +28,7 @@ export default function MissionFurniturePreview() {
     closeModal: closeMissionArriveModal,
   } = useModal();
 
+  const setUserInfo = useSetRecoilState(userInfoAtom);
   const {id, userId} = useIsMyHouse();
   const [selectedFurnitureImage, setSelectedFurnitureImage] = useState(null);
   const [furnitureNum, setFurnitureNum] = useRecoilState(furnitureNumAtom);
@@ -84,7 +86,10 @@ export default function MissionFurniturePreview() {
       await queryClient.invalidateQueries({
         queryKey: ['mission', 'today', userId],
       });
-
+      await queryClient.invalidateQueries({
+        queryKey: ['loginState'],
+      });
+      setUserInfo((prev) => ({...prev, todayMissionComplete: true}));
       navigate(`/${userId}/inside`);
     } catch (error) {
       alert('업로드에 실패했어요.');
