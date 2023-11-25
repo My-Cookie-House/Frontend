@@ -13,8 +13,10 @@ import Image2 from '../../assets/OnboardingAssets/onboarding2.svg';
 import Image3 from '../../assets/OnboardingAssets/onboarding3.svg';
 import CookieHouse from '../../assets/OnboardingAssets/CookieHouse.svg';
 import {indexAtom} from '../../atoms/sideButtonAtom';
-import {useRecoilState} from 'recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
 import IcingBackground from '@/assets/Background/BackgroundIcing.webp';
+import AlarmIcon from '@/assets/Mission/AlarmIcon.webp';
+import {userInfoAtom} from '@/atoms/loginStateAtom';
 
 type Props = {
   children: React.ReactNode;
@@ -38,6 +40,7 @@ export default function PageLayout({
   const {pathname} = useLocation();
   const [isMissionOpen, setIsMissionOpen] = useState(false);
   const [index, setIndex] = useRecoilState<number>(indexAtom);
+  const {todayMissionComplete} = useRecoilValue(userInfoAtom);
 
   const handleLogoClick = () => {
     navigate('/');
@@ -75,22 +78,18 @@ export default function PageLayout({
                 <S.LogoImg onClick={handleLogoClick} src={Logo} />
                 <S.ButtonBox>
                   {mission && (
-                    <Button
-                      width={25}
-                      height={19}
-                      background={Envelope}
-                      onClick={handleMissionClick} // Mission 버튼 클릭 시 핸들러 호출
-                    />
+                    <>
+                      <S.ButtonWrapper>
+                        (!todayMissionComplete && <S.Alarm src={AlarmIcon} />)
+                        <Button
+                          width={25}
+                          height={19}
+                          background={Envelope}
+                          onClick={handleMissionClick} // Mission 버튼 클릭 시 핸들러 호출
+                        />
+                      </S.ButtonWrapper>
+                    </>
                   )}
-                  {/** TODO: 방명록 접근 방법 수정될 예정  */}
-                  {/* {guestBook && (
-                  <Button
-                    width={22}
-                    height={19}
-                    background={Book}
-                    route={guestBook} 
-                  />
-                )} */}
                 </S.ButtonBox>
               </S.Nav>
             </>

@@ -95,3 +95,17 @@ export const RightButtonImage = styled.img`
     display: none;
   }
 `;
+
+export const ButtonWrapper = styled.div`
+  width: 25px;
+  height: 19px;
+  position: relative;
+`;
+
+export const Alarm = styled.img`
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  top: -7px;
+  right: -7px;
+`;
