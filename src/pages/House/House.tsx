@@ -1,13 +1,11 @@
 import * as S from './style';
-import {Outlet, useLocation, useNavigate, useParams} from 'react-router-dom';
+import {Outlet, useLocation, useNavigate} from 'react-router-dom';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import {useQuery} from '@tanstack/react-query';
 import house from '../../apis/house';
 import {IHouseOutside} from '../../interfaces/house';
-import {Suspense, useEffect, useState} from 'react';
 import useIsMyHouse from '../../hooks/useIsMyHouse';
 import {useRecoilValue} from 'recoil';
-import {userInfo} from 'os';
 import {userInfoAtom} from '../../atoms/loginStateAtom';
 import GuestBookButton from '@/components/Buttons/GuestBookButton/GuestBookButton';
 
