@@ -14,6 +14,8 @@ export default function SplashScreen(): JSX.Element {
   const userId = user?.userId;
   const isHouseBuilt = user?.isHouseBuilt;
   const loggedIn = useRecoilValue(loginStateAtom);
+  console.log(isHouseBuilt);
+  console.log(loggedIn);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,7 +31,7 @@ export default function SplashScreen(): JSX.Element {
     }, 1700);
 
     return () => clearTimeout(timer); // 컴포넌트가 언마운트되면 타이머를 취소
-  }, []);
+  }, [loggedIn]);
 
   return (
     <PageLayout>
