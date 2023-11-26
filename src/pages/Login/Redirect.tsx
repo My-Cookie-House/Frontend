@@ -30,8 +30,10 @@ export default function Redirect() {
         return config;
       });
       await queryClient.invalidateQueries({queryKey: ['loginState']});
-      Cookies.set('accessToken', response.data.data.accessToken);
-      Cookies.set('refreshToken', response.data.data.refreshToken);
+      Cookies.set('accessToken', response.data.data.accessToken, {expires: 7});
+      Cookies.set('refreshToken', response.data.data.refreshToken, {
+        expires: 7,
+      });
       setUserInfo({
         ...initialUserInfoState,
         userId: response.data.data.userId,
