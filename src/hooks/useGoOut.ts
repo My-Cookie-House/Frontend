@@ -8,12 +8,10 @@ import {
   userInfoAtom,
   initialUserInfoState,
 } from '@/atoms/loginStateAtom';
-import {signout as mutateSignout} from '@/apis/auth';
 
 const useGoOut = (url) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [loginState, setLoginState] = useRecoilState(loginStateAtom);
   const [userInfoState, setUserInfoState] = useRecoilState(userInfoAtom);
 
   const mutation = useMutation({
@@ -26,7 +24,6 @@ const useGoOut = (url) => {
       Cookies.remove('accessToken');
       Cookies.remove('refreshToken');
       setUserInfoState(initialUserInfoState);
-      setLoginState(false);
       navigate('/');
     },
   });

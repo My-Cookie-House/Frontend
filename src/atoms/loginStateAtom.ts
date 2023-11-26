@@ -1,4 +1,4 @@
-import {atom} from 'recoil';
+import {atom, selector} from 'recoil';
 import {recoilPersist} from 'recoil-persist';
 const {persistAtom} = recoilPersist();
 
@@ -32,8 +32,12 @@ export const userInfoAtom = atom<UserInfo>({
 });
 
 // 로그인 여부
-export const loginStateAtom = atom<boolean>({
-  key: 'loginState',
-  default: false,
-  effects_UNSTABLE: [persistAtom],
+export const loginStateAtom = selector<boolean>({
+  key: 'loginStateAtom',
+  get: ({get}) => {
+    const userInfo = get(userInfoAtom);
+
+    // userInfo가 default 상태인지 확인하고, 그에 따라 true 혹은 false 반환
+    return JSON.stringify(userInfo) !== JSON.stringify(initialUserInfoState);
+  },
 });

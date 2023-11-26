@@ -13,7 +13,7 @@ export default function Redirect() {
   let url = new URL(window.location.href);
   let code = url.searchParams.get('code');
   const navigate = useNavigate();
-  const [loginState, setLoginState] = useRecoilState(loginStateAtom);
+  //const [loginState, setLoginState] = useRecoilState(loginStateAtom);
   const state = Math.floor(Math.random() * 100);
   const loginUrl = `/auth/kakao?code=${code}&state=${state}`;
   const queryClient = useQueryClient();
@@ -32,7 +32,7 @@ export default function Redirect() {
       await queryClient.invalidateQueries({queryKey: ['loginState']});
       Cookies.set('accessToken', response.data.data.accessToken);
       Cookies.set('refreshToken', response.data.data.refreshToken);
-      setLoginState(true);
+      //setLoginState(true);
       navigate('/');
     } catch (e) {
       console.log('로그인 불가');

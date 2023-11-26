@@ -15,7 +15,7 @@ type Props = {
 };
 
 export default function AuthProvider({children}: Props) {
-  const setLoginState = useSetRecoilState(loginStateAtom);
+  //const setLoginState = useSetRecoilState(loginStateAtom);
   const setUserInfoState = useSetRecoilState(userInfoAtom);
   const userInfo = useRecoilValue(userInfoAtom);
 
@@ -35,10 +35,10 @@ export default function AuthProvider({children}: Props) {
   });
   useLayoutEffect(() => {
     if (data !== null) {
-      setLoginState(true);
+      //setLoginState(true);
       setUserInfoState(data);
     } else {
-      setLoginState(false);
+      //setLoginState(false);
       setUserInfoState(initialUserInfoState);
     }
   }, [data]);
