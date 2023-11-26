@@ -5,7 +5,7 @@ import PageLayout from '../../components/PageLayout/PageLayout';
 import CookieHouse from '../../assets/OnboardingAssets/CookieHouse.svg';
 import {Description, Wrapper} from './RedirectStyle';
 import {useRecoilState} from 'recoil';
-import {loginStateAtom} from '../../atoms/loginStateAtom';
+import {userInfoAtom, initialUserInfoState} from '../../atoms/loginStateAtom';
 import Cookies from 'js-cookie';
 import {useQueryClient} from '@tanstack/react-query';
 
@@ -13,7 +13,7 @@ export default function Redirect() {
   let url = new URL(window.location.href);
   let code = url.searchParams.get('code');
   const navigate = useNavigate();
-  //const [loginState, setLoginState] = useRecoilState(loginStateAtom);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const state = Math.floor(Math.random() * 100);
   const loginUrl = `/auth/kakao?code=${code}&state=${state}`;
   const queryClient = useQueryClient();
@@ -32,7 +32,13 @@ export default function Redirect() {
       await queryClient.invalidateQueries({queryKey: ['loginState']});
       Cookies.set('accessToken', response.data.data.accessToken);
       Cookies.set('refreshToken', response.data.data.refreshToken);
-      //setLoginState(true);
+      setUserInfo({
+        ...initialUserInfoState,
+        userId: response.data.data.userId,
+        userName: response.data.data.userName,
+        isHouseBuilt: response.data.data.isHouseBuilt,
+        todayMissionComplete: response.data.data.todayMissionComplete,
+      });
       navigate('/');
     } catch (e) {
       console.log('로그인 불가');
