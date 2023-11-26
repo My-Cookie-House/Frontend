@@ -1,5 +1,4 @@
 import {instance} from '@/apis/axios';
-import Cookies from 'js-cookie';
 import {useQueryClient, useMutation} from '@tanstack/react-query';
 import {useNavigate} from 'react-router-dom';
 import {useRecoilState, useRecoilValue} from 'recoil';
@@ -21,8 +20,8 @@ const useGoOut = (url) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey: ['loginState']});
-      Cookies.remove('accessToken');
-      Cookies.remove('refreshToken');
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
       setUserInfoState(initialUserInfoState);
       navigate('/');
     },

@@ -6,7 +6,6 @@ import CookieHouse from '../../assets/OnboardingAssets/CookieHouse.svg';
 import {Description, Wrapper} from './RedirectStyle';
 import {useRecoilState} from 'recoil';
 import {userInfoAtom, initialUserInfoState} from '../../atoms/loginStateAtom';
-import Cookies from 'js-cookie';
 import {useQueryClient} from '@tanstack/react-query';
 
 export default function Redirect() {
@@ -30,10 +29,8 @@ export default function Redirect() {
         return config;
       });
       await queryClient.invalidateQueries({queryKey: ['loginState']});
-      Cookies.set('accessToken', response.data.data.accessToken, {expires: 7});
-      Cookies.set('refreshToken', response.data.data.refreshToken, {
-        expires: 7,
-      });
+      localStorage.setItem('accessToken', response.data.data.accessToken);
+      localStorage.setItem('refreshToken', response.data.data.refreshToken);
       setUserInfo({
         ...initialUserInfoState,
         userId: response.data.data.userId,

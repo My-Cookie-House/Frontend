@@ -1,11 +1,10 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import useSetTokens from '../hooks/useSetTokens';
 
 export const instance = axios.create({
   baseURL: 'https://cookie-house.store',
   headers: {
-    Authorization: `${Cookies.get('accessToken')}`,
+    Authorization: `${localStorage.getItem('accessToken')}`,
   },
 });
 
@@ -18,7 +17,7 @@ instance.interceptors.response.use(
 
     if (error.response.code === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-      const refreshToken = Cookies.get('refreshToken');
+      const refreshToken = localStorage.getItem('refreshToken');
       if (!refreshToken) {
         throw new Error('토큰 없음');
       }
