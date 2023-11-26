@@ -17,22 +17,18 @@ export default function AuthProvider({children}: Props) {
   const setUserInfoState = useSetRecoilState(userInfoAtom);
   const userInfo = useRecoilValue(userInfoAtom);
 
-  const {data} = useSuspenseQuery<null | UserInfo>({
+  const {data, isSuccess} = useSuspenseQuery<null | UserInfo>({
     queryKey: ['loginState'],
-    queryFn: async () => {
-      instance.interceptors.request.use(function (config) {
-        config.headers.Authorization = `${localStorage.getItem('accessToken')}`;
-        return config;
-      });
-      const data: UserInfo = await getLoginUserInfo();
-      if (data !== null) {
-        setUserInfoState(data);
-      } else {
-        setUserInfoState(initialUserInfoState);
-      }
-      return data;
-    },
+    queryFn: () => getLoginUserInfo(),
   });
 
-  return <Suspense>{data && children}</Suspense>;
+  useLayoutEffect(() => {
+    if (data !== null) {
+      setUserInfoState(data);
+    } else {
+      setUserInfoState(initialUserInfoState);
+    }
+  }, [data]);
+
+  return <Suspense>{isSuccess && children}</Suspense>;
 }
