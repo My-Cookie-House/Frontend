@@ -38,6 +38,6 @@ export const loginStateAtom = selector<boolean>({
     const userInfo = get(userInfoAtom);
 
     // userInfo가 default 상태인지 확인하고, 그에 따라 true 혹은 false 반환
-    return JSON.stringify(userInfo) !== JSON.stringify(initialUserInfoState);
+    return userInfo.userId !== null;
   },
 });
