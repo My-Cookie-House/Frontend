@@ -6,18 +6,12 @@ import {useRecoilValue} from 'recoil';
 
 export default function SplashScreen(): JSX.Element {
   const navigate = useNavigate();
-  const user = useRecoilValue(userInfoAtom);
-
-  // 로그인 상태 가져오기
-  const userId = user?.userId;
-  const isHouseBuilt = user?.isHouseBuilt;
+  const {isHouseBuilt, userId} = useRecoilValue(userInfoAtom);
   const loggedIn = useRecoilValue(loginStateAtom);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (loggedIn) {
-        console.log('isHouseBuilt');
-        console.log(isHouseBuilt);
         if (isHouseBuilt) {
           navigate(`/${userId}`); // 로그인하였고 쿠키하우스를 지은 경우
         } else {
