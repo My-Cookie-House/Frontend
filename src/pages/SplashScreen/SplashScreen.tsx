@@ -14,7 +14,9 @@ export default function SplashScreen(): JSX.Element {
   const userId = user?.userId;
   const isHouseBuilt = user?.isHouseBuilt;
   const loggedIn = useRecoilValue(loginStateAtom);
+  console.log('isHouseBuilt');
   console.log(isHouseBuilt);
+  console.log('loggedIn');
   console.log(loggedIn);
 
   useEffect(() => {
