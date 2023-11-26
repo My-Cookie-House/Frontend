@@ -21,8 +21,8 @@ export type Data = {
 export const initialUserInfoState: UserInfo = {
   userId: null,
   userName: null,
-  isHouseBuilt: false,
-  todayMissionComplete: false,
+  isHouseBuilt: null,
+  todayMissionComplete: null,
 };
 
 export const userInfoAtom = atom<UserInfo>({
