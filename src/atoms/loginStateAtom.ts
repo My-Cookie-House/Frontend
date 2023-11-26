@@ -1,6 +1,4 @@
 import {atom, selector} from 'recoil';
-import {recoilPersist} from 'recoil-persist';
-const {persistAtom} = recoilPersist();
 
 export type UserInfo = {
   userId: number | null;
@@ -28,7 +26,6 @@ export const initialUserInfoState: UserInfo = {
 export const userInfoAtom = atom<UserInfo>({
   key: 'userInfo',
   default: initialUserInfoState,
-  effects_UNSTABLE: [persistAtom],
 });
 
 // 로그인 여부
