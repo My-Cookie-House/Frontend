@@ -28,6 +28,7 @@ export const initialUserInfoState: UserInfo = {
 export const userInfoAtom = atom<UserInfo>({
   key: 'userInfo',
   default: initialUserInfoState,
+  effects_UNSTABLE: [persistAtom],
 });
 
 // 로그인 여부
