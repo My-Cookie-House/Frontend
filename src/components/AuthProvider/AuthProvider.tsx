@@ -19,16 +19,14 @@ export default function AuthProvider({children}: Props) {
 
   const {data, isSuccess} = useSuspenseQuery<null | UserInfo>({
     queryKey: ['loginState'],
-    queryFn: () => getLoginUserInfo(),
+    queryFn: getLoginUserInfo,
   });
 
-  useLayoutEffect(() => {
-    if (data !== null) {
-      setUserInfoState(data);
-    } else {
-      setUserInfoState(initialUserInfoState);
-    }
-  }, [data]);
+  if (data !== null) {
+    setUserInfoState(data);
+  } else {
+    setUserInfoState(initialUserInfoState);
+  }
 
-  return <Suspense>{isSuccess && children}</Suspense>;
+  return <>{isSuccess && children}</>;
 }
