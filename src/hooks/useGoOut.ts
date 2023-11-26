@@ -14,6 +14,7 @@ const useGoOut = (url) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [loginState, setLoginState] = useRecoilState(loginStateAtom);
+  const [userInfoState, setUserInfoState] = useRecoilState(userInfoAtom);
 
   const mutation = useMutation({
     mutationFn: () => instance.post(url),
@@ -24,6 +25,7 @@ const useGoOut = (url) => {
       queryClient.invalidateQueries({queryKey: ['loginState']});
       Cookies.remove('accessToken');
       Cookies.remove('refreshToken');
+      setUserInfoState(initialUserInfoState);
       setLoginState(false);
       navigate('/');
     },
