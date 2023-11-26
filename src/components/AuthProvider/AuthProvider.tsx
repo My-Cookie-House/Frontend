@@ -1,5 +1,5 @@
 import {useSuspenseQuery} from '@tanstack/react-query';
-import {Suspense, useLayoutEffect} from 'react';
+import {Suspense, useEffect, useLayoutEffect} from 'react';
 import {useSetRecoilState, useRecoilValue} from 'recoil';
 import {getLoginUserInfo} from '@/apis/auth';
 import {
@@ -15,7 +15,6 @@ type Props = {
 };
 
 export default function AuthProvider({children}: Props) {
-  //const setLoginState = useSetRecoilState(loginStateAtom);
   const setUserInfoState = useSetRecoilState(userInfoAtom);
   const userInfo = useRecoilValue(userInfoAtom);
 
@@ -31,17 +30,16 @@ export default function AuthProvider({children}: Props) {
 
   const {data, isSuccess} = useSuspenseQuery<null | UserInfo>({
     queryKey: ['loginState'],
-    queryFn: getLoginUserInfo,
+    queryFn: async () => {
+      const data: UserInfo = await getLoginUserInfo();
+      if (data !== null) {
+        setUserInfoState(data);
+      } else {
+        setUserInfoState(initialUserInfoState);
+      }
+      return data;
+    },
   });
-  useLayoutEffect(() => {
-    if (data !== null) {
-      //setLoginState(true);
-      setUserInfoState(data);
-    } else {
-      //setLoginState(false);
-      setUserInfoState(initialUserInfoState);
-    }
-  }, [data]);
 
   return <Suspense>{isSuccess && children}</Suspense>;
 }
