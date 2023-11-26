@@ -5,11 +5,9 @@ import AuthProvider from './components/AuthProvider/AuthProvider';
 const App = () => {
   return (
     <>
-      <AuthProvider>
-        <BrowserRouter>
-          <Router />
-        </BrowserRouter>
-      </AuthProvider>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
     </>
   );
 };
