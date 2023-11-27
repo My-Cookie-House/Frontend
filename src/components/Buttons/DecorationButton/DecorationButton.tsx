@@ -11,6 +11,7 @@ type DecorationButtonProps = Partial<ButtonProps> & {
 export default function DecorationButton(props: DecorationButtonProps) {
   return (
     <Button
+      type="button"
       width={props.size}
       height={props.size}
       background={DecorationButtonImage}

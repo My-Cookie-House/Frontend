@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import WriteContentsModal from './WriteContentsModal/WriteContentsModal';
+import SelectOrnamentModal from './SelectOrnamentModal/SelectOrnamentModal';
 
 enum WriteGuestBookStep {
   'writeContent' = 0, // 내용 작성
@@ -7,7 +8,7 @@ enum WriteGuestBookStep {
   'alertCreated', // '남겼어요'
 }
 
-type Contents = {
+export type Contents = {
   author: string;
   content: string;
 };
@@ -46,7 +47,11 @@ export default function WriteGuestBook({closeWriteModal}: Props) {
         />
       )}
       {writeGuestBookStep === WriteGuestBookStep.selectOrnament && (
-        <>오나먼트 고르기</>
+        <SelectOrnamentModal
+          onClose={closeWriteGuestBook}
+          setNextStep={setNextStep}
+          contents={contents}
+        />
       )}
     </>
   );

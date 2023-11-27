@@ -32,7 +32,7 @@ export default function WriteContentsModal({
       imageType={'MediumModal'} // modalState에 따른 이미지 타입
     >
       <ModalCloseButton onClick={onClose} />
-      <S.Form onSubmit={handleGoSelectOrnament}>
+      <S.Form>
         <S.NameInput
           maxLength={4}
           type="text"
