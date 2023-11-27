@@ -22,7 +22,12 @@ const ModalWrapper = styled.div<ModalWrapperProps>`
   left: 0;
   width: 100%;
   height: 100%;
-  display: ${(props) => (props.show ? 'block' : 'none')};
+  display: ${(props) =>
+    props.show === undefined
+      ? 'block'
+      : props.show === true
+      ? 'block'
+      : 'none'};
   z-index: 999;
   background-color: ${(props) =>
     props.imageType === 'FurnitureSelectModal'
