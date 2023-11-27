@@ -13,16 +13,18 @@ type Props = {
   onClose: () => void;
   setNextStep: () => void;
   contents: Contents;
+  selectedOrnament: null | number;
+  setSelectedOrnament: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export default function SelectOrnamentModal({
   onClose,
   setNextStep,
   contents,
+  selectedOrnament,
+  setSelectedOrnament,
 }: Props) {
   const {id} = useParams();
-  console.log(id);
-  const [selectedOrnament, setSelectedOrnament] = useState<null | number>(null);
 
   const {mutate} = useMutation({
     mutationFn: () =>

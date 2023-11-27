@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import WriteContentsModal from './WriteContentsModal/WriteContentsModal';
 import SelectOrnamentModal from './SelectOrnamentModal/SelectOrnamentModal';
+import AlertCreatedModal from './AlertCreatedModal/AlertCreatedModal';
 
 enum WriteGuestBookStep {
   'writeContent' = 0, // 내용 작성
@@ -22,6 +23,7 @@ export default function WriteGuestBook({closeWriteModal}: Props) {
     useState<WriteGuestBookStep>(WriteGuestBookStep.writeContent);
 
   const [contents, setContents] = useState<Contents>({author: '', content: ''});
+  const [selectedOrnament, setSelectedOrnament] = useState<null | number>(null);
 
   const setNextStep = () => {
     writeGuestBookStep === WriteGuestBookStep.alertCreated
@@ -51,6 +53,16 @@ export default function WriteGuestBook({closeWriteModal}: Props) {
           onClose={closeWriteGuestBook}
           setNextStep={setNextStep}
           contents={contents}
+          selectedOrnament={selectedOrnament}
+          setSelectedOrnament={setSelectedOrnament}
+        />
+      )}
+      {writeGuestBookStep === WriteGuestBookStep.alertCreated && (
+        <AlertCreatedModal
+          onClose={closeWriteGuestBook}
+          setNextStep={setNextStep}
+          contents={contents}
+          selectedOrnament={selectedOrnament}
         />
       )}
     </>
