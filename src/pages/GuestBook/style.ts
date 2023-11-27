@@ -1,103 +1,102 @@
-import { styled } from "styled-components"; 
-import WirteGuestBookButtonImg from '../../assets/Button/WriteGuestBookButton.svg'
-import OrnamentAuthorBoxImg from '../../assets/ContainerBox/OrnamentAuthorBox.svg'
+import {styled} from 'styled-components';
+import WirteGuestBookButtonImg from '../../assets/Button/WriteGuestBookButton.svg';
+import OrnamentAuthorBoxImg from '../../assets/ContainerBox/OrnamentAuthorBox.svg';
 const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 auto;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
 `;
 
 const ButtonWrapper = styled.div`
-    width: 304px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 auto;
+  width: 304px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
 `;
 
 const WirteGuestBookButton = styled.div`
-    position: absolute;
-    top: 102px;
-    left: 230px;
-    width: 18.933px;
-    height: 18.933px;
-    background-image: url(${WirteGuestBookButtonImg});
-    background-size: 18.933px 18.933px;
-    z-index: 4;
+  position: absolute;
+  top: 102px;
+  left: 230px;
+  width: 18.933px;
+  height: 18.933px;
+  background-image: url(${WirteGuestBookButtonImg});
+  background-size: 18.933px 18.933px;
+  z-index: 4;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
 `;
 
 const NameInput = styled.input`
-//position: absolute;
-margin-top: 60px;
-width: 225px;
-height: 40px;
-border: dotted;
-border-color: ${props => props.theme.colors.textBrown};
-border-radius: 30px;
-color: ${props => props.theme.colors.textBrown};
-margin-bottom: 32px;
-background-color: transparent;
-font-size: 16px;
-outline: none;
-padding-left:10px;
-&::placeholder {
-    color: ${props => props.theme.colors.textBrown};
+  //position: absolute;
+  margin-top: 60px;
+  width: 225px;
+  height: 40px;
+  border: dotted;
+  border-color: ${(props) => props.theme.colors.textBrown};
+  border-radius: 30px;
+  color: ${(props) => props.theme.colors.textBrown};
+  margin-bottom: 32px;
+  background-color: transparent;
+  font-size: 16px;
+  outline: none;
+  padding-left: 10px;
+  &::placeholder {
+    color: ${(props) => props.theme.colors.textBrown};
     font-size: 16px;
   }
 `;
 
-
 const CheckTextLength = styled.div`
-margin-top: -10px;
-margin-right: 30px;;
-display: flex;
-flex-direction: column;
-align-self: flex-end;   // 이 부분을 추가
-font-size: 14px;
-font-weight: 400;
-color: rgba(87, 46, 22, 0.60) !important;
-margin-bottom: 53px;
+  margin-top: -10px;
+  margin-right: 30px;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end; // 이 부분을 추가
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(87, 46, 22, 0.6) !important;
+  margin-bottom: 53px;
 `;
 
 const LetterArea = styled.textarea`
-width: 220px;
-height: 110px;
-border: none;
-border-radius: 10px;
-color: ${props => props.theme.colors.textBrown};
-overflow: auto;
-padding: 13px;
-resize: none;
-background-color: rgba(87, 46, 22, 0.15);
-font-size: 16px;
-outline: none;
-&::placeholder {
-    color: rgba(87, 46, 22, 0.60);
+  width: 220px;
+  height: 110px;
+  border: none;
+  border-radius: 10px;
+  color: ${(props) => props.theme.colors.textBrown};
+  overflow: auto;
+  padding: 13px;
+  resize: none;
+  background-color: rgba(87, 46, 22, 0.15);
+  font-size: 16px;
+  outline: none;
+  &::placeholder {
+    color: rgba(87, 46, 22, 0.6);
     font-size: 16px;
   }
   margin-bottom: -22px;
 `;
 
 const ModalText = styled.div`
-color: ${props => props.theme.colors.textBrown};
-font-size: 14px;
-font-style: normal;
-font-weight: 600;
-text-align: center;
-margin-top: 54.01px;
-margin-bottom: 29px;
+  color: ${(props) => props.theme.colors.textBrown};
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 54.01px;
+  margin-bottom: 29px;
 `;
 
 const OrnamentButtonWrapper = styled.div`
@@ -120,7 +119,6 @@ const GuestBookEntryGrid = styled.div`
   margin-top: 130px;
 `;
 
-
 const GuestBookEntry = styled.div`
   display: flex;
   flex-direction: column;
@@ -128,17 +126,17 @@ const GuestBookEntry = styled.div`
 `;
 
 const AuthorName = styled.div`
-    background-image: url(${OrnamentAuthorBoxImg});
-    background-size: 50px 21px;
-    width: 50px;
-    height: 21px;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    margin-top: 14px;
+  background-image: url(${OrnamentAuthorBoxImg});
+  background-size: 50px 21px;
+  width: 50px;
+  height: 21px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
 `;
 
 const OrnamentButton = styled.button`
@@ -165,69 +163,64 @@ const OrnamentImg = styled.div`
   height: 90px; // 이미지 크기에 따라 조정
   border: none;
   cursor: pointer;
-
 `;
 
 const ModalInnerWrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
   margin-top: 68px;
 `;
 
 const GuestBookContent = styled.div`
-    width: 217px;
-    height: 138px;
-    background: rgba(87, 46, 22, 0.15);
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 10px;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    overflow: auto;
+  width: 217px;
+  height: 138px;
+  background: rgba(87, 46, 22, 0.15);
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  overflow: auto;
 `;
 
 const GuestBookNoneWrapper = styled.div`
-  position:relative;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    overflow: auto;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    height: 100vh; 
-    width: 100vw; 
+  position: relative;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  overflow: auto;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
 `;
-
-
-
 
 const GuestBookNone = styled.span`
   color: rgba(87, 46, 22, 1);
-
 `;
 
 export const S = {
-    Container,
-    WirteGuestBookButton,
-    ButtonWrapper,
-    Form,
-    NameInput,
-    CheckTextLength,
-    LetterArea,
-    ModalText,
-    OrnamentButtonWrapper,
-    GuestBookEntryGrid,
-    GuestBookEntry,
-    AuthorName,
-    OrnamentButton,
-    OrnamentImg,
-    ModalInnerWrapper,
-    GuestBookContent,
-    GuestBookNone,
-    GuestBookNoneWrapper
-}
+  Container,
+  WirteGuestBookButton,
+  ButtonWrapper,
+  Form,
+  NameInput,
+  CheckTextLength,
+  LetterArea,
+  ModalText,
+  OrnamentButtonWrapper,
+  GuestBookEntryGrid,
+  GuestBookEntry,
+  AuthorName,
+  OrnamentButton,
+  OrnamentImg,
+  ModalInnerWrapper,
+  GuestBookContent,
+  GuestBookNone,
+  GuestBookNoneWrapper,
+};

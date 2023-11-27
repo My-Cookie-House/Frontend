@@ -4,7 +4,7 @@ import Modal from '../../Modal';
 import {Contents} from '../WriteGuestBook';
 import Ornaments from '@/components/ImportOrnaments/ImportOrnaments';
 import DecorationButton from '@/components/Buttons/DecorationButton/DecorationButton';
-import React, {useState} from 'react';
+import React from 'react';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useParams} from 'react-router-dom';
 import {sendGuestBook} from '@/apis/guestBook';
