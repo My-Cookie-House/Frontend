@@ -9,3 +9,12 @@ export interface IGuestBook {
   guestBookResponseDtos: IGuestBookItem[];
   houseName: string;
 }
+
+export interface ButtonProps {
+  img: string; 
+}
+
+
+export interface GuestBookButtonProps {
+  onClick: () => void;
+}

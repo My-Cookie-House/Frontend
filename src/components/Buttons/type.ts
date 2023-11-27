@@ -11,4 +11,5 @@ export type ButtonProps = {
   disabled?: boolean;
   dark?: boolean;
   type?: string;
+  path?: string;
 };

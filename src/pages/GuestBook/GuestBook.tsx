@@ -10,6 +10,7 @@ import WriteGuestBook from '@/components/Modal/WriteGuestBook/WriteGuestBook';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {IGuestBook, IGuestBookItem} from '@/interfaces/guestBook';
 import GuestBookItemModal from '@/components/Modal/GuestBookItemModal/GuestBookItemModal';
+import GuestBookButton from '@/components/Buttons/GuestBookButton/GuestBookButton';
 
 const STALE_TIME = 1000 * 60 * 60;
 const GC_TIME = 1000 * 60 * 60;
@@ -57,7 +58,6 @@ function GuestBook() {
     <>
       <S.ButtonWrapper>
         <TitleContainerBox title={data?.houseName} />
-        {!isMyHouse && <S.WirteGuestBookButton onClick={openWriteModal} />}
       </S.ButtonWrapper>
       <PageLayout goBack={`/${id}/inside`}>
         {data?.guestBookResponseDtos.length === 0 ? (
@@ -81,6 +81,9 @@ function GuestBook() {
             ))}
           </S.GuestBookEntryGrid>
         )}
+        {!isMyHouse &&
+          <GuestBookButton onClick={openWriteModal} />
+        }
       </PageLayout>
 
       {/* 방명록 작성  */}

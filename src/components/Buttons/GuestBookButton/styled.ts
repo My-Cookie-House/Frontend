@@ -1,16 +1,18 @@
+import { ButtonProps } from '@/interfaces/guestBook';
 import styled from 'styled-components';
-import ButtonImg from '@/assets/GuestBook/Button.webp';
 
-export const Button = styled.button`
-  background: url(${ButtonImg});
+
+
+export const Button = styled.button<ButtonProps>`
+  background: url(${props => props.img});
   background-size: cover;
-  width: 83px;
-  height: 83px;
-  border: none;
-  display: flex;
   justify-content: center;
   align-items: center;
+  display: flex;
+  border: none;
   position: fixed;
+  width: 83px;
+  height: 83px;
   bottom: 20px;
   right: 20px;
   z-index: 9;

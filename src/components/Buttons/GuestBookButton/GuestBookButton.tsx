@@ -1,10 +1,27 @@
-import GuestBookImg from '@/assets/GuestBook/GuestBook.webp';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import * as S from './styled';
+import GoGuesrBookButtonImg from '@/assets/GuestBook/Button.webp';
+import WriteGuestBookButtonImg from '@/assets/GuestBook/Button.webp'; //TODO: 새로운 이미지로 바꿔야함.
+import useIsMyHouse from '@/hooks/useIsMyHouse';
+import { GuestBookButtonProps } from '@/interfaces/guestBook';
 
-type Props = {
-  onClick(): void;
-};
 
-export default function GuestBookButton({onClick}: Props) {
-  return <S.Button onClick={onClick} />;
+function GuestBookButton({ onClick }: GuestBookButtonProps) {
+  const location = useLocation();
+  const {id, userId, isMyHouse} = useIsMyHouse();
+
+  // 현재 URL에 따라 이미지 결정
+  const getImageForPath = (path: string) => {
+    if (path === `/${userId}/guest` && !isMyHouse) {
+      return WriteGuestBookButtonImg;
+    }
+    return GoGuesrBookButtonImg;
+  };
+
+  const currentImg = getImageForPath(location.pathname);
+
+  return <S.Button onClick={onClick} img={currentImg} />;
 }
+
+export default GuestBookButton;
