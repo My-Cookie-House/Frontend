@@ -12,6 +12,8 @@ import {
 import Cookies from '../../../../assets/House/Outside/Cookies';
 import Overlap from '../../../../components/Overlap/Overlap';
 import IcingLayers from '../../../../assets/House/Outside/Icings/index';
+import WallpaperPreview from '@/assets/WallpaperPreview';
+import {useEffect} from 'react';
 
 export default function Icing() {
   const [buildState, setBuildState] =
@@ -22,6 +24,13 @@ export default function Icing() {
   const handleSelect = (id: number) => {
     setBuildState((prev) => ({...prev, icingId: id}));
   };
+
+  useEffect(() => {
+    Object.values(WallpaperPreview).forEach((wallpaper) => {
+      const img = new Image();
+      img.src = wallpaper;
+    });
+  }, []);
   return (
     <>
       <SBuild.Title marginTop="40px">

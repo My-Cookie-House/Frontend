@@ -23,7 +23,7 @@ export default function Wallpaper() {
 
       <Overlap
         width={300}
-        height={414}
+        height={450}
         margin="30px 0 0 0"
         imgs={[
           InsideNone,
