@@ -18,6 +18,7 @@ import Redirect from './pages/Login/Redirect';
 import MissionFurniturePreview from './pages/MissionFurniturePreview/MissionFurniturePreview';
 import Wallpaper from './pages/Build/Custom/Wallpaper/Wallpaper';
 import RouteChangeTracker from './RouteChangeTracker';
+import {Suspense} from 'react';
 
 export default function Router() {
   RouteChangeTracker();
@@ -29,7 +30,9 @@ export default function Router() {
         <Route path="/" element={<SplashScreen />} />
         <Route path="/login" element={<Login />} />
         <Route path="/onboarding" element={<Onboarding />} />
+
         <Route path="/:id/guests" element={<GuestBook />} />
+
         <Route path="/redirect" element={<Redirect />} />
 
         {/* 쿠키하우스 하위 경로 */}

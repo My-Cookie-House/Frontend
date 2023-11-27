@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState} from 'react';
 import {S} from './style';
 import TitleContainerBox from '../../components/TitleContainerBox/TitleContainerBox';
 import Modal from '../../components/Modal/Modal';
@@ -6,27 +6,38 @@ import PageLayout from '../../components/PageLayout/PageLayout';
 import ModalOKButton from '../../components/ModalOKButton/ModalOKButton';
 import ModalCloseButton from '../../components/ModalCloseButton/ModalCloseButton';
 import useModal from '../../hooks/useModal';
-import DecorationButton from '../../components/Buttons/DecorationButton/DecorationButton';
 import ornaments from '../../components/ImportOrnaments/ImportOrnaments';
 import useInput from '../../hooks/useInput';
 import useIsMyHouse from '../../hooks/useIsMyHouse';
-import {getUserInfoFromServer, sendGuestBook} from '../../apis/guestBook';
+import {getGuestBookInfo} from '../../apis/guestBook';
 import {useRecoilValue} from 'recoil';
 import {userInfoAtom} from '../../atoms/loginStateAtom';
 import CanSeeOnlyModal from '@/components/Modal/CanSeeOnlyModal/CanSeeOnlyModal';
 import WriteGuestBookModal from '@/components/Modal/WriteGuestBook/WriteContentsModal/WriteContentsModal';
 import WriteGuestBook from '@/components/Modal/WriteGuestBook/WriteGuestBook';
+import {useQuery, useSuspenseQuery} from '@tanstack/react-query';
+import {IGuestBook, IGuestBookItem} from '@/interfaces/guestBook';
+
+const STALE_TIME = 1000 * 60 * 60;
+const GC_TIME = 1000 * 60 * 60;
 
 function GuestBook() {
   // 방명록 페이지 진입 -> 작성 버튼 클릭->작성 모달 on -> 작성 내용 입력 -> 오나먼트 선택 모달 -> 방명록을 남겼어요 모달 -> 모달 꺼짐
+  const {id, userId, isMyHouse} = useIsMyHouse();
   const [writeModalOpen, setWriteModalOpen] = useState(false);
   const closeWriteModal = () => setWriteModalOpen(false);
 
   const openWriteModal = () => setWriteModalOpen(true);
 
+  const {data, isFetching} = useSuspenseQuery<IGuestBook>({
+    queryKey: ['guestBook', id],
+    queryFn: () => getGuestBookInfo(+id),
+    staleTime: STALE_TIME,
+    gcTime: GC_TIME,
+  });
   //////////////////////////
   const {isHouseBuilt} = useRecoilValue(userInfoAtom);
-  const {id, userId, isMyHouse} = useIsMyHouse();
+
   const [houseName, setHouseName] = useState<string>('코알라하우스');
   const author = useInput<HTMLInputElement>(); // 보내는 사람 이름을 관리하는 상태
   const content = useInput<HTMLTextAreaElement>(); // 편지 내용을 관리하는 상태
@@ -63,63 +74,7 @@ function GuestBook() {
   const [isCanSeeOnlyModalOpen, setCanSeeOnlyModalOpen] =
     useState<boolean>(false);
 
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      const guestBookData = await getUserInfoFromServer(id);
-      if (guestBookData && Array.isArray(guestBookData.guestBookResponseDtos)) {
-        setGuestBook(guestBookData.guestBookResponseDtos);
-      }
-
-      setHouseName(guestBookData.houseName);
-    };
-    fetchUserInfo();
-  }, [reloadUserInfo, id]);
-
-  // 편지를 보내는 함수입니다.
-  const handleSendGuestBook = async (event: React.FormEvent) => {
-    event.preventDefault();
-    try {
-      await sendGuestBook(id, author.value, ornamentId, content.value);
-      // 성공 후 처리
-      setReloadUserInfo((prev) => !prev);
-      setModalStep(3);
-      setImageType('MediumModal');
-      setModalTitle('방명록');
-    } catch (error) {
-      // 실패 시 처리
-      alert('유저의 정보를 불러오지 못했어요.');
-    }
-  };
-
-  const handleModalClose = () => {
-    author.reset();
-    content.reset();
-    closeModal();
-    setModalStep(1);
-    setImageType('MediumModal');
-    setModalTitle('방명록');
-  };
-
-  const handleCheckBlank = () => {
-    // 입력값을 검사합니다.
-    if (!author.value.trim() || !content.value.trim()) {
-      alert('이름과 방명록 내용을 작성해주세요!');
-      return;
-    } else {
-      setModalStep(2);
-      setImageType('LargeModal');
-      setModalTitle('오너먼트 고르기');
-    }
-  };
-
-  // 버튼 클릭 이벤트 핸들러
-  const handleOrnamentClick = (
-    id: number,
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    event.preventDefault(); // 기본 동작 방지
-    setOrnamentId(id);
-  };
+  // useEffect(() => {}, [reloadUserInfo, id]);
 
   // 방명록 조회 함수, userId로 판별해 주인만 볼 수 있게 로직 추가해야 함.
   const handleShowGuestBookContent = (
@@ -133,97 +88,10 @@ function GuestBook() {
     setReadingGuestBookContent(content);
   };
 
-  const renderModalContent = () => {
-    switch (modalStep) {
-      case 1:
-        return (
-          // 방명록 작성 관련 내용
-          <>
-            <S.Form onSubmit={handleSendGuestBook}>
-              <S.NameInput
-                maxLength={4}
-                type="text"
-                name="guestName" // 상태와 일치하는 name 속성
-                placeholder="이름을 남겨주세요."
-                value={author.value}
-                onChange={author.handleChange}
-              />
-              <S.LetterArea
-                placeholder="방명록을 남겨주세요."
-                maxLength={500}
-                value={content.value}
-                onChange={content.handleChange}
-              />
-              <S.CheckTextLength>
-                {content.value.length}/500자
-              </S.CheckTextLength>
-              <ModalOKButton
-                buttonName="오너먼트 고르기"
-                onClick={() => {
-                  handleCheckBlank();
-                }}
-              />
-            </S.Form>
-          </>
-        );
-      case 2:
-        return (
-          // 오너먼트 선택 관련 내용
-          <>
-            {/* 오너먼트 고르기 모달 */}
-            <S.ModalText>오너먼트 1개를 골라주세요</S.ModalText>
-            <S.Form>
-              <S.OrnamentButtonWrapper>
-                {ornaments.map((ornament) => (
-                  <DecorationButton
-                    key={ornament.id}
-                    size={84}
-                    image={ornament.image}
-                    dark={ornament.id === ornamentId}
-                    onClick={(
-                      event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-                    ) => handleOrnamentClick(ornament.id, event)}
-                  />
-                ))}
-              </S.OrnamentButtonWrapper>
-              <ModalOKButton
-                buttonName="선택완료"
-                onClick={(event) => {
-                  handleSendGuestBook(event);
-                }}
-              />
-            </S.Form>
-          </>
-        );
-      case 3:
-        return (
-          // 방명록 전송 성공 관련 내용
-          <>
-            {/* 방명록 남겼다고 알림 모달 */}
-            <ModalCloseButton onClick={handleModalClose} />
-            <S.ModalInnerWrapper>
-              {ornaments[ornamentId - 1] && (
-                <S.OrnamentImg
-                  style={{
-                    backgroundImage: `url(${ornaments[ornamentId - 1].image})`,
-                  }}
-                />
-              )}
-              <S.AuthorName>{author.value}</S.AuthorName>
-              <S.ModalText>방명록을 남겼어요!</S.ModalText>
-              <ModalOKButton buttonName="확인하기" onClick={handleModalClose} />
-            </S.ModalInnerWrapper>
-          </>
-        );
-      default:
-        return null; // 기본값으로는 아무것도 렌더링하지 않음
-    }
-  };
-
   return (
     <>
       <S.ButtonWrapper>
-        <TitleContainerBox title={houseName} />
+        <TitleContainerBox title={data?.houseName} />
         {isMyHouse ? (
           <></>
         ) : (
@@ -231,13 +99,13 @@ function GuestBook() {
         )}
       </S.ButtonWrapper>
       <PageLayout goBack={`/${id}/inside`}>
-        {guestBook.length === 0 ? (
+        {data?.guestBookResponseDtos.length === 0 ? (
           <S.GuestBookNoneWrapper>
             <S.GuestBookNone>방명록이 없어요.</S.GuestBookNone>
           </S.GuestBookNoneWrapper>
         ) : (
           <S.GuestBookEntryGrid>
-            {guestBook.map((entry: any) => (
+            {data?.guestBookResponseDtos.map((entry: IGuestBookItem) => (
               <S.GuestBookEntry key={entry.ornamentId}>
                 <S.OrnamentButton
                   style={{
@@ -266,16 +134,6 @@ function GuestBook() {
       </PageLayout>
 
       {writeModalOpen && <WriteGuestBook closeWriteModal={closeWriteModal} />}
-
-      {/* <Modal
-        modalTitle={modalTitle} // modalState에 따른 타이틀
-        isOpen={isModalOpen}
-        onClose={handleModalClose}
-        imageType={imageType} // modalState에 따른 이미지 타입
-      >
-        <ModalCloseButton onClick={handleModalClose} />
-        {renderModalContent()}
-      </Modal> */}
 
       {/* 방명록 내용 보기 모달 */}
       <Modal

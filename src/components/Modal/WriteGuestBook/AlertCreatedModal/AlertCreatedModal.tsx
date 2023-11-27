@@ -20,7 +20,7 @@ export default function AlertCreatedModal({
 }: Props) {
   return (
     <Modal
-      modalTitle={'오너먼트 고르기'} // modalState에 따른 타이틀
+      modalTitle={'방명록'} // modalState에 따른 타이틀
       onClose={onClose}
       imageType={'MediumModal'} // modalState에 따른 이미지 타입
     >

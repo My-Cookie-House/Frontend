@@ -5,7 +5,7 @@ import {Contents} from '../WriteGuestBook';
 import Ornaments from '@/components/ImportOrnaments/ImportOrnaments';
 import DecorationButton from '@/components/Buttons/DecorationButton/DecorationButton';
 import React, {useState} from 'react';
-import {useMutation} from '@tanstack/react-query';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useParams} from 'react-router-dom';
 import {sendGuestBook} from '@/apis/guestBook';
 
@@ -26,10 +26,13 @@ export default function SelectOrnamentModal({
 }: Props) {
   const {id} = useParams();
 
+  const queryClient = useQueryClient();
+
   const {mutate} = useMutation({
     mutationFn: () =>
       sendGuestBook(id, contents.author, selectedOrnament, contents.content),
-    onSuccess: () => {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({queryKey: ['guestBook', id]});
       setNextStep();
     },
   });
