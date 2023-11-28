@@ -13,7 +13,7 @@ export async function getLoginUserInfo() {
     return response.data.data;
   } catch (err) {
     if (axios.isAxiosError(err)) {
-      Sentry.captureException(new ApiError(err, 'getLoginUserInfo'));
+      // Sentry.captureException(new ApiError(err, 'getLoginUserInfo'));
     }
     return null;
   }
