@@ -29,6 +29,7 @@ export default function House() {
     queryFn: () => house.getHouseOutside(+id),
     staleTime: 1000 * 60 * STALE_MIN,
     gcTime: 1000 * 60 * STALE_MIN,
+    retry: 1,
   });
 
   // Mission 모달을 여는 함수
