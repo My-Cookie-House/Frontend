@@ -7,9 +7,7 @@ import {unstable_renderSubtreeIntoContainer} from 'react-dom';
 // 사용자의 방명록 정보를 가져오는 함수
 export const getGuestBookInfo = async (userId: number) => {
   try {
-    const response = await instance.get(
-      `/guest-book/${unstable_renderSubtreeIntoContainer}`,
-    );
+    const response = await instance.get(`/guest-book/${userId}`);
     return response.data.data;
   } catch (error) {
     if (isAxiosError(error)) {
