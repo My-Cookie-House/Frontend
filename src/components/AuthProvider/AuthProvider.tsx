@@ -8,14 +8,14 @@ import {
   userInfoAtom,
 } from '@/atoms/loginStateAtom';
 import {UserInfo} from '@/atoms/loginStateAtom';
-import {instance} from '@/apis/axios';
+import * as Sentry from '@sentry/react';
+
 type Props = {
   children: React.ReactNode;
 };
 
 export default function AuthProvider({children}: Props) {
   const setUserInfoState = useSetRecoilState(userInfoAtom);
-  const userInfo = useRecoilValue(userInfoAtom);
 
   const {data, isSuccess} = useSuspenseQuery<null | UserInfo>({
     queryKey: ['loginState'],
@@ -24,9 +24,18 @@ export default function AuthProvider({children}: Props) {
 
   if (data !== null) {
     setUserInfoState(data);
+    Sentry.configureScope((scope: Sentry.Scope) => {
+      scope.setUser({
+        id: data.userId,
+      });
+    });
   } else {
     setUserInfoState(initialUserInfoState);
+    Sentry.configureScope((scope: Sentry.Scope) => {
+      scope.setUser({
+        id: '로그인 안한 유저',
+      });
+    });
   }
-
   return <>{isSuccess && children}</>;
 }

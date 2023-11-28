@@ -14,6 +14,7 @@ import {useState, useCallback} from 'react';
 import useGoOut from '@/hooks/useGoOut';
 import * as S from './style';
 import * as Sentry from '@sentry/react';
+import {TestError} from '@/Error/TestError';
 
 const STALE_MIN = 5;
 const GC_MIN = 5;
@@ -40,12 +41,6 @@ export default function Outside() {
   const closeSignout = useCallback(() => {
     setSignoutModal(false);
   }, []);
-
-  Sentry.configureScope((scope: Sentry.Scope) => {
-    scope.setUser({
-      id: userId === null ? '로그인 안한 유저' : userId,
-    });
-  });
 
   const logout = useGoOut('/auth/sign-out');
   const signout = useGoOut('/auth/unlink');
@@ -115,8 +110,7 @@ export default function Outside() {
         <button
           type="button"
           onClick={() => {
-            Sentry.captureMessage('Something went wrong');
-            throw new Error('Sentry Test Error');
+            throw new TestError('테스트 에렁');
           }}
         >
           Break the world

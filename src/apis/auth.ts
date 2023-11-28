@@ -1,4 +1,7 @@
+import {ApiError} from '@/Error/ApiError';
 import {instance} from './axios';
+import axios, {AxiosError} from 'axios';
+import * as Sentry from '@sentry/react';
 
 export async function getLoginUserInfo() {
   try {
@@ -9,6 +12,9 @@ export async function getLoginUserInfo() {
     });
     return response.data.data;
   } catch (err) {
+    if (axios.isAxiosError(err)) {
+      Sentry.captureException(new ApiError(err, 'getLoginUserInfo'));
+    }
     return null;
   }
 }

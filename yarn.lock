@@ -516,6 +516,13 @@
     "@sentry/types" "7.82.0"
     "@sentry/utils" "7.82.0"
 
+"@sentry/tracing@^7.82.0":
+  version "7.82.0"
+  resolved "https://registry.yarnpkg.com/@sentry/tracing/-/tracing-7.82.0.tgz#6f902b580989a95726ab6be387a18ac81b2f095b"
+  integrity sha512-GLk63iuxJnOheZ4j7lr1dlEV60lOwDz4u54xZiY/hE7LE6+0v/SM+kSOQXLwKOVcS1yZYamf+T2mDU80bg0zOA==
+  dependencies:
+    "@sentry-internal/tracing" "7.82.0"
+
 "@sentry/types@7.82.0":
   version "7.82.0"
   resolved "https://registry.yarnpkg.com/@sentry/types/-/types-7.82.0.tgz#8f12f089069306bfe04d00f471fa1607a96eed80"
