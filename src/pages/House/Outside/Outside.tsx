@@ -13,12 +13,13 @@ import GoOutModal from '@/components/Modal/GoOutModal/GoOutModal';
 import {useState, useCallback} from 'react';
 import useGoOut from '@/hooks/useGoOut';
 import * as S from './style';
+import * as Sentry from '@sentry/react';
 
 const STALE_MIN = 5;
 const GC_MIN = 5;
 
 export default function Outside() {
-  const {id, isMyHouse} = useIsMyHouse();
+  const {id, userId, isMyHouse} = useIsMyHouse();
 
   const {data} = useSuspenseQuery<IHouseOutside>({
     queryKey: ['house', 'outside', id],
@@ -27,24 +28,7 @@ export default function Outside() {
     gcTime: 1000 * 60 * GC_MIN,
   });
 
-  const loadImage = async (src: string) =>
-    await new Promise<string>((resolve, reject) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        resolve(src);
-      };
-      img.onerror = (e) => {
-        reject(e);
-      };
-    });
-
   const [num1, num2] = data.cookieIds;
-
-  useEffect(() => {
-    // 하우스 내부 배경 이미지 preload
-    loadImage(InsideBg);
-  }, []);
 
   const [logoutModal, setlogoutModal] = useState(false);
   const [signoutModal, setSignoutModal] = useState(false);
@@ -56,6 +40,12 @@ export default function Outside() {
   const closeSignout = useCallback(() => {
     setSignoutModal(false);
   }, []);
+
+  Sentry.configureScope((scope: Sentry.Scope) => {
+    scope.setUser({
+      id: userId === null ? '로그인 안한 유저' : userId,
+    });
+  });
 
   const logout = useGoOut('/auth/sign-out');
   const signout = useGoOut('/auth/unlink');
@@ -122,6 +112,15 @@ export default function Outside() {
             </div>
           </>
         )}
+        <button
+          type="button"
+          onClick={() => {
+            Sentry.captureMessage('Something went wrong');
+            throw new Error('Sentry Test Error');
+          }}
+        >
+          Break the world
+        </button>
       </>
     </>
   );
