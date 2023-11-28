@@ -2,7 +2,6 @@ import {ApiError} from '@/Error/ApiError';
 import {isAxiosError} from 'axios';
 import {instance} from './axios';
 import * as Sentry from '@sentry/react';
-import {unstable_renderSubtreeIntoContainer} from 'react-dom';
 
 // 사용자의 방명록 정보를 가져오는 함수
 export const getGuestBookInfo = async (userId: number) => {
