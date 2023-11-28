@@ -27,6 +27,7 @@ export default function AuthProvider({children}: Props) {
     Sentry.configureScope((scope: Sentry.Scope) => {
       scope.setUser({
         id: data.userId,
+        name: data.userName,
       });
     });
   } else {
