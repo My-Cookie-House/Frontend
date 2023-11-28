@@ -1,6 +1,5 @@
 import {useSuspenseQuery} from '@tanstack/react-query';
-import {Suspense, useEffect, useLayoutEffect} from 'react';
-import {useSetRecoilState, useRecoilValue} from 'recoil';
+import {useSetRecoilState} from 'recoil';
 import {getLoginUserInfo} from '@/apis/auth';
 import {
   initialUserInfoState,
