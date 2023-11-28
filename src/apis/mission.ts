@@ -1,5 +1,8 @@
 // mission.ts
+import {ApiError} from '@/Error/ApiError';
+import {isAxiosError} from 'axios';
 import {instance} from './axios';
+import * as Sentry from '@sentry/react';
 
 // 특정 날짜의 완료된 미션 데이터를 가져오는 함수
 export const getCompletedMissionById = async (missionCompleteId: number) => {
@@ -9,9 +12,12 @@ export const getCompletedMissionById = async (missionCompleteId: number) => {
     );
     return response.data.data;
   } catch (error) {
-    // console.error('미션 데이터를 가져오는데 실패했습니다.', error);
+    if (isAxiosError(error) && error.response.status !== 404) {
+      throw Sentry.captureException(
+        new ApiError(error, 'getCompletedMissionById'),
+      );
+    }
     return null;
-    // throw error;
   }
 };
 
@@ -21,8 +27,11 @@ export const fetchTodayMissionData = async () => {
     const response = await instance.get('/missions/today-mission');
     return response.data.data; // 데이터 반환
   } catch (error) {
-    console.error('데이터를 가져오는데 실패했습니다.', error);
-    throw error;
+    if (isAxiosError(error)) {
+      throw Sentry.captureException(
+        new ApiError(error, 'fetchTodayMissionData'),
+      );
+    }
   }
 };
 
@@ -40,11 +49,13 @@ export const uploadImageMessageFurnitureId = async (
 
   try {
     await instance.post('/mission-complete', formData);
-
     // 성공 처리 로직
   } catch (error) {
-    console.error('업로드에 실패했습니다.', error);
-    throw error;
+    if (isAxiosError(error)) {
+      throw Sentry.captureException(
+        new ApiError(error, 'uploadImageMessageFurnitureId'),
+      );
+    }
   }
 };
 
@@ -57,7 +68,10 @@ export const getAllCompletedMissions = async (id: number) => {
     });
     return response.data.data;
   } catch (error) {
-    console.error('데이터를 가져오는데 실패했습니다.', error);
-    throw error;
+    if (isAxiosError(error)) {
+      throw Sentry.captureException(
+        new ApiError(error, 'getAllCompletedMissions'),
+      );
+    }
   }
 };
