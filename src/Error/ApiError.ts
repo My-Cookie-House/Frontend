@@ -24,21 +24,7 @@ export class ApiError<T = unknown> extends Error implements AxiosError<T, any> {
     let name = 'ApiError';
 
     // 에러 Context 설정
-    const {method, url, params, headers} = error.config;
-    const {data, status} = error.response;
-
-    Sentry.setTag(`${errorStatus}`, apiFn);
-
-    Sentry.setContext('API 요청 내용', {
-      method,
-      url,
-      params,
-      token: headers.Authorization, // 입력된 토큰 정보
-    });
-    Sentry.setContext('API 응답 내용', {
-      data,
-      status,
-    });
+    this.setSentryOptions(error, apiFn);
 
     switch (errorStatus) {
       case HTTP_ERROR_STATUS.UNAUTHORIZED: // 401
@@ -56,5 +42,23 @@ export class ApiError<T = unknown> extends Error implements AxiosError<T, any> {
     this.response = error.response;
     this.isAxiosError = error.isAxiosError;
     this.toJSON = error.toJSON;
+  }
+
+  private setSentryOptions(error: AxiosError<T>, apiFn?: string) {
+    const {method, url, params, headers} = error.config;
+    const {data, status} = error.response;
+
+    Sentry.setTag(`${error.response?.status || 0}`, apiFn);
+
+    Sentry.setContext('API 요청 내용', {
+      method,
+      url,
+      params,
+      token: headers.Authorization, // 입력된 토큰 정보
+    });
+    Sentry.setContext('API 응답 내용', {
+      data,
+      status,
+    });
   }
 }
