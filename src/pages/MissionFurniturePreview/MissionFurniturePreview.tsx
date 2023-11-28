@@ -92,7 +92,6 @@ export default function MissionFurniturePreview() {
       setUserInfo((prev) => ({...prev, todayMissionComplete: true}));
       navigate(`/${userId}/inside`);
     } catch (error) {
-      console.log(error);
       alert('업로드에 실패했어요.');
     }
   };
