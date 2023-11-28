@@ -92,7 +92,9 @@ export default function MissionFurniturePreview() {
       setUserInfo((prev) => ({...prev, todayMissionComplete: true}));
       navigate(`/${userId}/inside`);
     } catch (error) {
-      if ((error.response.message = '지원하지 않는 이미지 파일 형식입니다')) {
+      if (
+        (error.response.data.message = '지원하지 않는 이미지 파일 형식입니다')
+      ) {
         alert('지원하지 않는 이미지 파일 형식입니다');
       } else {
         alert('업로드에 실패했어요.');
