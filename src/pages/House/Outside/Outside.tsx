@@ -22,7 +22,7 @@ export default function Outside() {
 
   const {data} = useSuspenseQuery<IHouseOutside>({
     queryKey: ['house', 'outside', id],
-    queryFn: () => house.getHouseOutside(+id),
+    queryFn: () => house.getHouseOutside(id),
     staleTime: 1000 * 60 * STALE_MIN,
     gcTime: 1000 * 60 * GC_MIN,
   });

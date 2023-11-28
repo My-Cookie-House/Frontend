@@ -11,9 +11,9 @@ export async function getLoginUserInfo() {
       },
     });
     return response.data.data;
-  } catch (err) {
-    if (axios.isAxiosError(err)) {
-      // Sentry.captureException(new ApiError(err, 'getLoginUserInfo'));
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response.status !== 404) {
+      Sentry.captureException(new ApiError(error, 'getLoginUserInfo'));
     }
     return null;
   }

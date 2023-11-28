@@ -25,7 +25,7 @@ export default function House() {
 
   const {data} = useQuery<IHouseOutside>({
     queryKey: ['house', 'outside', id],
-    queryFn: () => house.getHouseOutside(+id),
+    queryFn: () => house.getHouseOutside(id),
     staleTime: 1000 * 60 * STALE_MIN,
     gcTime: 1000 * 60 * STALE_MIN,
     retry: 1,
