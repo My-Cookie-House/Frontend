@@ -12,7 +12,7 @@ import InsideBg from '@/assets/House/Inside/InsideBg.webp';
 import GoOutModal from '@/components/Modal/GoOutModal/GoOutModal';
 import {useState, useCallback} from 'react';
 import useGoOut from '@/hooks/useGoOut';
-import styled from 'styled-components';
+import * as S from './style';
 
 const STALE_MIN = 5;
 const GC_MIN = 5;
@@ -78,21 +78,21 @@ export default function Outside() {
       <>
         {isMyHouse && (
           <>
-            <ButtonContainer>
-              <Button
+            <S.ButtonContainer>
+              <S.Button
                 disabled={!isMyHouse}
                 onClick={() => setlogoutModal(true)}
               >
                 외출하기
-              </Button>
-              <P>|</P>
-              <Button
+              </S.Button>
+              <S.P>|</S.P>
+              <S.Button
                 disabled={!isMyHouse}
                 onClick={() => setSignoutModal(true)}
               >
                 철거하기
-              </Button>
-            </ButtonContainer>
+              </S.Button>
+            </S.ButtonContainer>
             <div>
               <GoOutModal
                 isOpen={logoutModal}
@@ -126,35 +126,3 @@ export default function Outside() {
     </>
   );
 }
-
-const Button = styled.button`
-  color: #fff;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  border: none;
-  background: none;
-  cursor: pointer;
-  margin-top: 14.07px;
-`;
-
-const P = styled.p`
-  color: #fff;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  margin-left: 13px;
-  margin-right: 13px;
-  margin-top: 14.07px;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
