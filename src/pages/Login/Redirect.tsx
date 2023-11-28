@@ -6,37 +6,39 @@ import CookieHouse from '../../assets/OnboardingAssets/CookieHouse.svg';
 import {Description, Wrapper} from './RedirectStyle';
 import {useRecoilState} from 'recoil';
 import {userInfoAtom, initialUserInfoState} from '../../atoms/loginStateAtom';
-import {useQueryClient} from '@tanstack/react-query';
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import {login} from '@/apis/auth';
+import {ILoginResponse} from '@/interfaces/auth';
 
 export default function Redirect() {
   let url = new URL(window.location.href);
   let code = url.searchParams.get('code');
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
-  const state = Math.floor(Math.random() * 100);
-  const loginUrl = `/auth/kakao?code=${code}&state=${state}`;
+  const state = Math.floor(Math.random() * 100).toString();
   const queryClient = useQueryClient();
 
   const kakaologin = async () => {
     try {
-      const response = await instance.get(loginUrl);
-      if (response.data.data.accessToken === undefined) {
+      const response: ILoginResponse = await login(code, state);
+      if (response.accessToken === undefined) {
         console.log('엑세스 토큰을 못 받았어요');
       }
 
       instance.interceptors.request.use(function (config) {
-        config.headers.Authorization = `${response.data.data.accessToken}`;
+        config.headers.Authorization = `${response.accessToken}`;
         return config;
       });
+
       await queryClient.invalidateQueries({queryKey: ['loginState']});
-      localStorage.setItem('accessToken', response.data.data.accessToken);
-      localStorage.setItem('refreshToken', response.data.data.refreshToken);
+      localStorage.setItem('accessToken', response.accessToken);
+      localStorage.setItem('refreshToken', response.refreshToken);
       setUserInfo({
         ...initialUserInfoState,
-        userId: response.data.data.userId,
-        userName: response.data.data.userName,
-        isHouseBuilt: response.data.data.isHouseBuilt,
-        todayMissionComplete: response.data.data.todayMissionComplete,
+        userId: response.userId,
+        userName: response.userName,
+        isHouseBuilt: response.isHouseBuilt,
+        todayMissionComplete: response.todayMissionComplete,
       });
       navigate('/');
     } catch (e) {
