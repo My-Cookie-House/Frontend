@@ -18,33 +18,16 @@ const STALE_MIN = 5;
 const GC_MIN = 5;
 
 export default function Outside() {
-  const {id, isMyHouse} = useIsMyHouse();
+  const {id, userId, isMyHouse} = useIsMyHouse();
 
   const {data} = useSuspenseQuery<IHouseOutside>({
     queryKey: ['house', 'outside', id],
-    queryFn: () => house.getHouseOutside(+id),
+    queryFn: () => house.getHouseOutside(id),
     staleTime: 1000 * 60 * STALE_MIN,
     gcTime: 1000 * 60 * GC_MIN,
   });
 
-  const loadImage = async (src: string) =>
-    await new Promise<string>((resolve, reject) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        resolve(src);
-      };
-      img.onerror = (e) => {
-        reject(e);
-      };
-    });
-
   const [num1, num2] = data.cookieIds;
-
-  useEffect(() => {
-    // 하우스 내부 배경 이미지 preload
-    loadImage(InsideBg);
-  }, []);
 
   const [logoutModal, setlogoutModal] = useState(false);
   const [signoutModal, setSignoutModal] = useState(false);

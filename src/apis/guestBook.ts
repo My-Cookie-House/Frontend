@@ -1,4 +1,7 @@
+import {ApiError} from '@/Error/ApiError';
+import {isAxiosError} from 'axios';
 import {instance} from './axios';
+import * as Sentry from '@sentry/react';
 
 // 사용자의 방명록 정보를 가져오는 함수
 export const getGuestBookInfo = async (userId: number) => {
@@ -6,7 +9,9 @@ export const getGuestBookInfo = async (userId: number) => {
     const response = await instance.get(`/guest-book/${userId}`);
     return response.data.data;
   } catch (error) {
-    throw error;
+    if (isAxiosError(error)) {
+      throw Sentry.captureException(new ApiError(error, 'getGuestBookInfo'));
+    }
   }
 };
 
@@ -20,6 +25,8 @@ export const sendGuestBook = async (userId, author, ornamentId, content) => {
       content: content,
     });
   } catch (error) {
-    throw error;
+    if (isAxiosError(error)) {
+      throw Sentry.captureException(new ApiError(error, 'sendGuestBook'));
+    }
   }
 };
