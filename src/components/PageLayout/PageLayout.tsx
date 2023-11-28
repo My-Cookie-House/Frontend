@@ -20,19 +20,13 @@ import {userInfoAtom} from '@/atoms/loginStateAtom';
 
 type Props = {
   children: React.ReactNode;
-  guestBook?: string; // 방문록 (경로)
-  mission?: () => void; // mission prop을 함수 타입으로
+  mission?: boolean; // mission prop을 함수 타입으로
   goBack?: string; // 뒤로가기 (경로)
 };
 
 const images = [CookieHouse, Image1, Image2, Image3];
 
-export default function PageLayout({
-  children,
-  guestBook,
-  mission,
-  goBack,
-}: Props) {
+export default function PageLayout({children, mission = false, goBack}: Props) {
   const navigate = useNavigate();
   const [nav, setNav] = useState(true);
   const [button, setButton] = useState(false);

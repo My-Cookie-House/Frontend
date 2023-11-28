@@ -15,7 +15,6 @@ const STALE_MIN = 5;
 
 export default function House() {
   const {id, userId, isMyHouse} = useIsMyHouse();
-  const {isHouseBuilt} = useRecoilValue(userInfoAtom);
   const {pathname} = useLocation();
 
   const navigate = useNavigate();
@@ -32,17 +31,11 @@ export default function House() {
     retry: 1,
   });
 
-  // Mission 모달을 여는 함수
-  const handleOpenMissionModal = () => {
-    // TODO: 이 쓸데없는 함수 없이 어떻게 깔끔하게 정리할 수 있을까..
-  };
-
   // 방문한 쿠키하우스의 아이디와 현재 로그인한 유저의 아이디가 같은 경우만 미션 버튼 노출!
   return (
     <Sentry.ErrorBoundary fallback={<Error />}>
       <PageLayout
-        guestBook={`/${id}/guests`}
-        mission={userId === +id ? handleOpenMissionModal : undefined}
+        mission={userId === +id}
         goBack={pathname === `/${id}/inside` && `/${id}`} // 하우스 내부에서만 뒤로가기 버튼 존재
       >
         <S.HouseName>{data?.houseName}</S.HouseName>
