@@ -12,12 +12,11 @@ export const getCompletedMissionById = async (missionCompleteId: number) => {
     );
     return response.data.data;
   } catch (error) {
-    if (isAxiosError(error) && error.response.status !== 404) {
+    if (isAxiosError(error)) {
       throw Sentry.captureException(
         new ApiError(error, 'getCompletedMissionById'),
       );
     }
-    return null;
   }
 };
 
