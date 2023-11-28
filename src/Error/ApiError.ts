@@ -27,10 +27,16 @@ export class ApiError<T = unknown> extends Error implements AxiosError<T, any> {
     this.setSentryOptions(error, apiFn);
 
     switch (errorStatus) {
-      case HTTP_ERROR_STATUS.UNAUTHORIZED: // 401
-        name = `존재하지 않는 유저 `;
+      case HTTP_ERROR_STATUS.BAD_REQUEST: // 400
+        name = '잘못된 요청';
         break;
-      case HTTP_ERROR_STATUS.UNKNOWN_SERVER_ERROR: // 500
+      case HTTP_ERROR_STATUS.UNAUTHORIZED: // 401
+        name = `토큰 만료`;
+        break;
+      case HTTP_ERROR_STATUS.NOT_FOUND: // 404
+        name = '존재하지 않는 유저';
+        break;
+      case HTTP_ERROR_STATUS.INTERNAL_SERVER_ERROR: // 500
         name = '알 수 없는 서버 에러';
         break;
     }
