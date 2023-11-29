@@ -1,24 +1,29 @@
+import {lazy} from 'react';
 import {Route, Routes} from 'react-router-dom';
-import GuestBook from './pages/GuestBook/GuestBook';
-import Onboarding from './pages/Onboarding/Onboarding';
-import Login from './pages/Login/Login';
-import Build from './pages/Build/Build';
-import Random from './pages/Build/Random/Random';
-import Preview from './pages/Build/Preview/Preview';
 import SplashScreen from './pages/SplashScreen/SplashScreen';
-import Cookies from './pages/Build/Custom/Cookies/Cookies';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
-import Icing from './pages/Build/Custom/Icing/Icing';
 import BuildLayout from './pages/Build/BuildLayout';
-import Name from './pages/Build/Name/Name';
-import House from './pages/House/House';
-import Outside from './pages/House/Outside/Outside';
-import Inside from './pages/House/Inside/Inside';
-import Redirect from './pages/Login/Redirect';
-import MissionFurniturePreview from './pages/MissionFurniturePreview/MissionFurniturePreview';
-import Wallpaper from './pages/Build/Custom/Wallpaper/Wallpaper';
 import RouteChangeTracker from './RouteChangeTracker';
-import {Suspense} from 'react';
+
+const Login = lazy(() => import('./pages/Login/Login'));
+const Build = lazy(() => import('./pages/Build/Build'));
+const Random = lazy(() => import('./pages/Build/Random/Random'));
+const Preview = lazy(() => import('./pages/Build/Preview/Preview'));
+const Cookies = lazy(() => import('./pages/Build/Custom/Cookies/Cookies'));
+const Icing = lazy(() => import('./pages/Build/Custom/Icing/Icing'));
+const Name = lazy(() => import('./pages/Build/Name/Name'));
+const House = lazy(() => import('./pages/House/House'));
+const Outside = lazy(() => import('./pages/House/Outside/Outside'));
+const Inside = lazy(() => import('./pages/House/Inside/Inside'));
+const MissionFurniturePreview = lazy(
+  () => import('./pages/MissionFurniturePreview/MissionFurniturePreview'),
+);
+const Redirect = lazy(() => import('./pages/Login/Redirect'));
+const GuestBook = lazy(() => import('./pages/GuestBook/GuestBook'));
+const Onboarding = lazy(() => import('./pages/Onboarding/Onboarding'));
+const Wallpaper = lazy(
+  () => import('./pages/Build/Custom/Wallpaper/Wallpaper'),
+);
 
 export default function Router() {
   RouteChangeTracker();
