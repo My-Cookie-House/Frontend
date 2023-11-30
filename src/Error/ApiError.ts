@@ -51,7 +51,7 @@ export class ApiError<T = unknown> extends Error implements AxiosError<T, any> {
   }
 
   private setSentryOptions(error: AxiosError<T>, apiFn?: string) {
-    const {method, url, params, headers} = error.config;
+    const {method, url, params, headers, data: requestData} = error.config;
     const {data, status} = error.response;
 
     Sentry.setTag(`${error.response?.status || 0}`, apiFn);
@@ -60,6 +60,7 @@ export class ApiError<T = unknown> extends Error implements AxiosError<T, any> {
       method,
       url,
       params,
+      data: requestData,
       token: headers.Authorization, // 입력된 토큰 정보
     });
     Sentry.setContext('API 응답 내용', {
