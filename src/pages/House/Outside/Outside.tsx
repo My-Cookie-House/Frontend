@@ -10,6 +10,7 @@ import Icings from '../../../assets/House/Outside/Icings';
 import GoOutModal from '@/components/Modal/GoOutModal/GoOutModal';
 import {useState, useCallback} from 'react';
 import useGoOut from '@/hooks/useGoOut';
+import useSignOut from '@/hooks/useSignOut';
 import * as S from './style';
 import {authCodeAtom} from '@/atoms/loginStateAtom';
 import {useRecoilValue} from 'recoil';
@@ -41,10 +42,10 @@ export default function Outside() {
   const closeSignout = useCallback(() => {
     setSignoutModal(false);
   }, []);
-  const logout = useGoOut(
-    `/auth/sign-out/kakao?code=${authCode}&state=${state}`,
+  const logout = useGoOut('/auth/sign-out/');
+  const signout = useSignOut(
+    `/auth/unlink/kakao?code=${authCode}&state=${state}`,
   );
-  const signout = useGoOut('/auth/unlink');
   return (
     <>
       <Overlap
