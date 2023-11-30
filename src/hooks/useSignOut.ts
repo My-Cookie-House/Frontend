@@ -1,5 +1,5 @@
 import {instance} from '@/apis/axios';
-import {useQueryClient, useMutation} from '@tanstack/react-query';
+import {useQueryClient, useMutation, useQuery} from '@tanstack/react-query';
 import {useNavigate} from 'react-router-dom';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {
@@ -12,29 +12,20 @@ import {
 const useSignOut = (url) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [authCode, setAuthCode] = useRecoilState(authCodeAtom);
   const [userInfoState, setUserInfoState] = useRecoilState(userInfoAtom);
 
-  const mutation = useMutation({
-    mutationFn: () => instance.get(url),
-    onError: (error) => {
-      console.error('오류: ', error);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ['loginState']});
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-      setAuthCode(null);
-      setUserInfoState(initialUserInfoState);
-      navigate('/');
-    },
-  });
+  async function fetchData() {
+    const response = await instance.get(url);
+    queryClient.invalidateQueries({queryKey: ['loginState']});
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    setUserInfoState(initialUserInfoState);
+    navigate('/');
 
-  const SignOut = () => {
-    mutation.mutate();
-  };
-
-  return SignOut;
+    if (response.status !== 200) {
+      throw new Error('오류: ' + response.status);
+    }
+    return response.data;
+  }
 };
-
 export default useSignOut;

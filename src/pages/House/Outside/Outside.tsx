@@ -10,16 +10,24 @@ import Icings from '../../../assets/House/Outside/Icings';
 import GoOutModal from '@/components/Modal/GoOutModal/GoOutModal';
 import {useState, useCallback} from 'react';
 import useGoOut from '@/hooks/useGoOut';
-import useSignOut from '@/hooks/useSignOut';
 import * as S from './style';
-import {authCodeAtom} from '@/atoms/loginStateAtom';
-import {useRecoilValue} from 'recoil';
+import {
+  authCodeAtom,
+  userInfoAtom,
+  initialUserInfoState,
+} from '@/atoms/loginStateAtom';
+import {useRecoilValue, useRecoilState} from 'recoil';
+import {instance} from '@/apis/axios';
+import {useQueryClient, useMutation, useQuery} from '@tanstack/react-query';
+import {useNavigate} from 'react-router-dom';
 
 const STALE_MIN = 5;
 const GC_MIN = 5;
 
 export default function Outside() {
   const {id, userId, isMyHouse} = useIsMyHouse();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const {data} = useSuspenseQuery<IHouseOutside>({
     queryKey: ['house', 'outside', id],
@@ -32,6 +40,7 @@ export default function Outside() {
 
   const [logoutModal, setlogoutModal] = useState(false);
   const [signoutModal, setSignoutModal] = useState(false);
+  const [userInfoState, setUserInfoState] = useRecoilState(userInfoAtom);
   const state = Math.floor(Math.random() * 100).toString();
   const authCode = useRecoilValue(authCodeAtom);
 
@@ -42,10 +51,26 @@ export default function Outside() {
   const closeSignout = useCallback(() => {
     setSignoutModal(false);
   }, []);
+
+  async function fetchData(url) {
+    const response = await instance.get(url);
+    queryClient.invalidateQueries({queryKey: ['loginState']});
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    setUserInfoState(initialUserInfoState);
+    navigate('/');
+
+    if (response.status !== 200) {
+      throw new Error('오류: ' + response.status);
+    }
+    return response.data;
+  }
+
   const logout = useGoOut('/auth/sign-out/');
-  const signout = useSignOut(
+  const signout = fetchData(
     `/auth/unlink/kakao?code=${authCode}&state=${state}`,
   );
+
   return (
     <>
       <Overlap
@@ -104,7 +129,7 @@ export default function Outside() {
                   '새로운 집을 만들 수 있습니다',
                 ]}
                 yesBtnText={'탈퇴하기'}
-                onYes={signout}
+                onYes={() => signout}
               />
             </div>
           </>
