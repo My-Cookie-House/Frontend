@@ -7,12 +7,12 @@ import useIsMyHouse from '../../../hooks/useIsMyHouse';
 import Overlap from '../../../components/Overlap/Overlap';
 import Cookies from '../../../assets/House/Outside/Cookies';
 import Icings from '../../../assets/House/Outside/Icings';
-import {useEffect} from 'react';
-import InsideBg from '@/assets/House/Inside/InsideBg.webp';
 import GoOutModal from '@/components/Modal/GoOutModal/GoOutModal';
 import {useState, useCallback} from 'react';
 import useGoOut from '@/hooks/useGoOut';
 import * as S from './style';
+import {authCodeAtom} from '@/atoms/loginStateAtom';
+import {useRecoilValue} from 'recoil';
 
 const STALE_MIN = 5;
 const GC_MIN = 5;
@@ -31,6 +31,8 @@ export default function Outside() {
 
   const [logoutModal, setlogoutModal] = useState(false);
   const [signoutModal, setSignoutModal] = useState(false);
+  const state = Math.floor(Math.random() * 100).toString();
+  const authCode = useRecoilValue(authCodeAtom);
 
   const closeLogout = useCallback(() => {
     setlogoutModal(false);
@@ -39,8 +41,9 @@ export default function Outside() {
   const closeSignout = useCallback(() => {
     setSignoutModal(false);
   }, []);
-
-  const logout = useGoOut('/auth/sign-out');
+  const logout = useGoOut(
+    `/auth/sign-out/kakao?code=${authCode}&state=${state}`,
+  );
   const signout = useGoOut('/auth/unlink');
   return (
     <>
