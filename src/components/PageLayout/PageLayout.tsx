@@ -28,7 +28,6 @@ export default function PageLayout({children, mission = false, goBack}: Props) {
   const navigate = useNavigate();
   const [nav, setNav] = useState(true);
   const [button, setButton] = useState(false);
-  const location = useLocation();
   const {pathname} = useLocation();
   const [isMissionOpen, setIsMissionOpen] = useState(false);
   const [index, setIndex] = useRecoilState<number>(indexAtom);
@@ -45,15 +44,14 @@ export default function PageLayout({children, mission = false, goBack}: Props) {
 
   useLayoutEffect(() => {
     if (pathname.includes('/custom/furniture')) setNav(false);
+    if (pathname === '/') setNav(false);
     else setNav(true);
   }, [pathname]);
 
   return (
     <S.Layout>
-      <S.BgWrapper isSplashScreen={location.pathname === '/'}>
-        {location.pathname !== '/' && nav && (
-          <S.IcingImg src={IcingBackground} />
-        )}
+      <S.BgWrapper isSplashScreen={pathname === '/'}>
+        {nav && <S.IcingImg src={IcingBackground} />}
 
         <S.Wrapper>
           {nav && (
@@ -69,7 +67,7 @@ export default function PageLayout({children, mission = false, goBack}: Props) {
                     />
                   </S.GoBackContainer>
                 )}
-                {location.pathname !== '/' && (
+                {pathname !== '/' && (
                   <S.LogoImg onClick={handleLogoClick} src={Logo} />
                 )}
                 <S.ButtonBox>
