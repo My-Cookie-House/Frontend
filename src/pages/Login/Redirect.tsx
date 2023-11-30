@@ -5,21 +5,14 @@ import PageLayout from '../../components/PageLayout/PageLayout';
 import CookieHouse from '../../assets/OnboardingAssets/CookieHouse.svg';
 import {Description, Wrapper} from './RedirectStyle';
 import {useRecoilState} from 'recoil';
-import {
-  userInfoAtom,
-  initialUserInfoState,
-  authCodeAtom,
-} from '../../atoms/loginStateAtom';
+import {userInfoAtom, initialUserInfoState} from '../../atoms/loginStateAtom';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {login} from '@/apis/auth';
 import {ILoginResponse} from '@/interfaces/auth';
 
 export default function Redirect() {
-  const [authCode, setAuthCode] = useRecoilState(authCodeAtom);
   let url = new URL(window.location.href);
   let code = url.searchParams.get('code');
-  setAuthCode({authCode: code});
-
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const state = Math.floor(Math.random() * 100).toString();
