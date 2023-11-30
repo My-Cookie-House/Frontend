@@ -127,9 +127,9 @@ const GuestBookEntry = styled.div`
 
 const AuthorName = styled.div`
   background-image: url(${OrnamentAuthorBoxImg});
-  background-size: 56px 23.52px;
-  width: 56px;
-  height: 23.52px;
+  background-size: 60px 25.2px;
+  width: 60px;
+  height: 25.2px;
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
