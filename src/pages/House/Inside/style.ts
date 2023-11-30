@@ -28,3 +28,14 @@ export const ButtonLayer = styled.button<{
   cursor: pointer;
   z-index: 100;
 `;
+
+export const ButtonText = styled.p`
+  color: #572e16;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1px;
+`;

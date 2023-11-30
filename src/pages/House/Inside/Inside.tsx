@@ -18,6 +18,7 @@ import CompletedMissionModal from '../../../components/Modal/CompletedMissionMod
 import Wallpapers from '@/assets/Wallpaper';
 import {IHouseOutside} from '@/interfaces/house';
 import {useLocation} from 'react-router-dom';
+import LongButton from '@/components/Buttons/LongButton/LongButton';
 
 const BASE_URL = 'https://cookiehouse.site';
 
@@ -106,15 +107,14 @@ export default function Inside() {
         ))}
       </S.Frame>
       {isMyHouse && (
-        <Button
-          width={50}
+        <LongButton
+          width={237.5}
           height={50}
-          background={Share}
           margin="50px 0 0 0"
           onClick={handleShare}
         >
-          <S.ShareImg src={ShareIcon} />
-        </Button>
+          <S.ButtonText>집들이 초대하기</S.ButtonText>
+        </LongButton>
       )}
 
       {missionModalOpen !== null && (
