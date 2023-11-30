@@ -6,8 +6,6 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import Button from '../Buttons/Button';
 import Mission from '../Mission/Mission';
 import Logo from '../../assets/Background/Logo.webp';
-import LeftButton from '../../assets/Button/LeftButton.svg';
-import RightButton from '../../assets/Button/RightButton.svg';
 import Image1 from '../../assets/OnboardingAssets/onboarding1.svg';
 import Image2 from '../../assets/OnboardingAssets/onboarding2.svg';
 import Image3 from '../../assets/OnboardingAssets/onboarding3.svg';
@@ -53,7 +51,9 @@ export default function PageLayout({children, mission = false, goBack}: Props) {
   return (
     <S.Layout>
       <S.BgWrapper isSplashScreen={location.pathname === '/'}>
-        {nav && <S.IcingImg src={IcingBackground} />}
+        {location.pathname !== '/' && nav && (
+          <S.IcingImg src={IcingBackground} />
+        )}
 
         <S.Wrapper>
           {nav && (
@@ -69,7 +69,9 @@ export default function PageLayout({children, mission = false, goBack}: Props) {
                     />
                   </S.GoBackContainer>
                 )}
-                <S.LogoImg onClick={handleLogoClick} src={Logo} />
+                {location.pathname !== '/' && (
+                  <S.LogoImg onClick={handleLogoClick} src={Logo} />
+                )}
                 <S.ButtonBox>
                   {mission && (
                     <>
