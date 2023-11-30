@@ -48,7 +48,9 @@ export default function WriteContentsModal({
           onChange={content.handleChange}
         />
         <S.CheckTextLength>{content.value.length}/500자</S.CheckTextLength>
-        <S.Discription>작성하신 방명록은 집주인만 열람이 가능해요.</S.Discription>
+        <S.Discription>
+          작성하신 방명록은 집주인만 열람이 가능해요.
+        </S.Discription>
         <ModalOKButton
           onClick={handleGoSelectOrnament}
           buttonName="오너먼트 고르기"
