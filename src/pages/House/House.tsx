@@ -10,6 +10,7 @@ import {userInfoAtom} from '../../atoms/loginStateAtom';
 import GuestBookButton from '@/components/Buttons/GuestBookButton/GuestBookButton';
 import * as Sentry from '@sentry/react';
 import Error from '@/components/Error/Error';
+import NameTag from '@/components/NameTag/NameTag';
 
 const STALE_MIN = 5;
 
@@ -38,7 +39,7 @@ export default function House() {
         mission={userId === +id}
         goBack={pathname === `/${id}/inside` && `/${id}`} // 하우스 내부에서만 뒤로가기 버튼 존재
       >
-        <S.HouseName>{data?.houseName}</S.HouseName>
+        <NameTag name={data?.houseName} />
         <Outlet />
         <GuestBookButton onClick={handleGuestBookClick} />
       </PageLayout>

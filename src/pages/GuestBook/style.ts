@@ -116,7 +116,7 @@ const GuestBookEntryGrid = styled.div`
   grid-template-columns: repeat(3, 1fr); // 3개의 열
   gap: 34.71px; // 그리드 간격
   margin-bottom: 16px; // 하단 여백
-  margin-top: 130px;
+  margin-top: 50px;
 `;
 
 const GuestBookEntry = styled.div`
@@ -188,16 +188,13 @@ const GuestBookContent = styled.div`
 `;
 
 const GuestBookNoneWrapper = styled.div`
-  position: relative;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  overflow: auto;
   align-items: center;
   justify-content: center;
   display: flex;
-  height: 100vh;
-  width: 100vw;
+  margin-top: 150px;
 `;
 
 const GuestBookNone = styled.span`

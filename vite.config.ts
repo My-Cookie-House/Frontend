@@ -14,4 +14,13 @@ export default defineConfig({
       },
     ],
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-router-dom', 'react-dom'],
+        },
+      },
+    },
+  },
 });
