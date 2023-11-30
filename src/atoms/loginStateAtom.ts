@@ -37,7 +37,7 @@ export type authCode = {
 };
 
 export const authCodeAtom = atom<authCode>({
-  key: 'userInfo',
+  key: 'authCode',
   default: initialAuthCode,
 });
 
