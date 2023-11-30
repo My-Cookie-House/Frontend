@@ -58,3 +58,13 @@ export const LetterArea = styled.textarea`
   }
   margin-bottom: -22px;
 `;
+
+export const Discription = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+  font-weight: 400;
+  margin-top: -20px;
+  margin-bottom: 10px;
+  color: rgba(87, 46, 22, 0.6) !important;
+`;
