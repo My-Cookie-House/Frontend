@@ -33,6 +33,7 @@ export const MessageArea = styled.textarea`
     font-size: 16px;
   }
   margin-bottom: -22px;
+  font-family: inherit;
 `;
 
 export const Form = styled.form`
