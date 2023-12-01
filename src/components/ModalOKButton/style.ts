@@ -17,6 +17,7 @@ const ModalOKButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: inherit;
 `;
 
 export const S = {
