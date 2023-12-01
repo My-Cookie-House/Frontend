@@ -9,7 +9,6 @@ export const Form = styled.form`
 `;
 
 export const NameInput = styled.input`
-  //position: absolute;
   margin-top: 60px;
   width: 225px;
   height: 40px;
@@ -17,7 +16,7 @@ export const NameInput = styled.input`
   border-color: ${(props) => props.theme.colors.textBrown};
   border-radius: 30px;
   color: ${(props) => props.theme.colors.textBrown};
-  margin-bottom: 32px;
+  margin-bottom: 12px;
   background-color: transparent;
   font-size: 16px;
   outline: none;
@@ -33,7 +32,7 @@ export const Discription = styled.div`
   flex-direction: column;
   font-size: 10px;
   font-weight: 400;
-  margin-top: -30px;
+  margin-top: 15px;
   margin-bottom: 10px;
   color: rgba(87, 46, 22, 0.6) !important;
 `;
@@ -47,7 +46,6 @@ export const CheckTextLength = styled.div`
   font-size: 12px;
   font-weight: 400;
   color: rgba(87, 46, 22, 0.6) !important;
-  margin-bottom: 53px;
 `;
 
 export const LetterArea = styled.div`
@@ -55,12 +53,10 @@ export const LetterArea = styled.div`
   height: 136px;
   border: none;
   border-radius: 10px;
-  color: ${(props) => props.theme.colors.textBrown};
-  overflow: auto;
   resize: none;
   background-color: rgba(87, 46, 22, 0.15);
   outline: none;
-  margin-bottom: -22px;
+  margin-top: 5px;
 `;
 
 export const LetterTextArea = styled.textarea`
@@ -79,6 +75,5 @@ export const LetterTextArea = styled.textarea`
     color: rgba(87, 46, 22, 0.6);
     font-size: 16px;
   }
-  margin-bottom: -22px;
   position: relative;
 `;
