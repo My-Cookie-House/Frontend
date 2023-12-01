@@ -32,9 +32,9 @@ export const ModalInnerWrapper = styled.div`
 
 export const AuthorName = styled.div`
   background-image: url(${OrnamentAuthorBoxImg});
-  background-size: 50px 21px;
-  width: 50px;
-  height: 21px;
+  background-size: 60px 25.2px;
+  width: 60px;
+  height: 25.2px;
   font-size: 12px;
   font-style: normal;
   font-weight: 600;

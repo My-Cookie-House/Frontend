@@ -32,4 +32,5 @@ export const NextStepText = styled.span`
   font-weight: 700;
   line-height: normal;
   letter-spacing: 1px;
+  font-family: inherit;
 `;

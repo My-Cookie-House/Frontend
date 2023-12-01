@@ -28,6 +28,19 @@ export const userInfoAtom = atom<UserInfo>({
   default: initialUserInfoState,
 });
 
+export const initialAuthCode: authCode = {
+  authCode: null,
+};
+
+export type authCode = {
+  authCode: string | null;
+};
+
+export const authCodeAtom = atom<authCode>({
+  key: 'authCode',
+  default: initialAuthCode,
+});
+
 // 로그인 여부
 export const loginStateAtom = selector<boolean>({
   key: 'loginStateAtom',
