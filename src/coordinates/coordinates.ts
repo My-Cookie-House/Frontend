@@ -106,10 +106,10 @@ coordinates
     left: `109px`,
   })
   .set(17, {
-    width: '40px',
-    height: '74px',
-    top: '273px',
-    left: `69px`,
+    width: '27px',
+    height: '27px',
+    top: '216.5px',
+    left: `127px`,
   })
   .set(18, {
     width: '41px',
