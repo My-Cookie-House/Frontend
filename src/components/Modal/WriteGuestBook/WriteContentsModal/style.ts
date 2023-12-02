@@ -17,7 +17,7 @@ export const NameInput = styled.input`
   border-color: ${(props) => props.theme.colors.textBrown};
   border-radius: 30px;
   color: ${(props) => props.theme.colors.textBrown};
-  margin-bottom: 32px;
+  margin-bottom: 12px;
   background-color: transparent;
   font-size: 16px;
   outline: none;
@@ -28,28 +28,49 @@ export const NameInput = styled.input`
   }
 `;
 
+export const Discription = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+  font-weight: 400;
+  margin-top: -30px;
+  margin-bottom: 10px;
+  color: rgba(87, 46, 22, 0.6) !important;
+`;
+
 export const CheckTextLength = styled.div`
-  margin-top: -10px;
-  margin-right: 30px;
+  margin-top: 3px;
+  margin-right: 18px;
   display: flex;
   flex-direction: column;
   align-self: flex-end; // 이 부분을 추가
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   color: rgba(87, 46, 22, 0.6) !important;
   margin-bottom: 53px;
 `;
 
-export const LetterArea = styled.textarea`
+export const LetterArea = styled.div`
+  width: 246px;
+  height: 156px;
+  border: none;
+  border-radius: 10px;
+  resize: none;
+  background-color: rgba(87, 46, 22, 0.15);
+  outline: none;
+  margin-bottom: -22px;
+`;
+
+export const LetterTextArea = styled.textarea`
   width: 220px;
-  height: 110px;
+  height: 105px;
   border: none;
   border-radius: 10px;
   color: ${(props) => props.theme.colors.textBrown};
   overflow: auto;
   padding: 13px;
   resize: none;
-  background-color: rgba(87, 46, 22, 0.15);
+  background-color: transparent;
   font-size: 16px;
   outline: none;
   &::placeholder {
@@ -57,15 +78,5 @@ export const LetterArea = styled.textarea`
     font-size: 16px;
   }
   margin-bottom: -22px;
-  font-family: inherit;
-`;
-
-export const Discription = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 10px;
-  font-weight: 400;
-  margin-top: -20px;
-  margin-bottom: 10px;
-  color: rgba(87, 46, 22, 0.6) !important;
+  position: relative;
 `;

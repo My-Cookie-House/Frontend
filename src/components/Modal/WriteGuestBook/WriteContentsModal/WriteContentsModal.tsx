@@ -41,12 +41,15 @@ export default function WriteContentsModal({
           value={author.value}
           onChange={author.handleChange}
         />
-        <S.LetterArea
-          placeholder="방명록을 남겨주세요."
-          maxLength={500}
-          value={content.value}
-          onChange={content.handleChange}
-        />
+        <S.LetterArea>
+          <S.LetterTextArea
+            placeholder="방명록을 남겨주세요."
+            maxLength={500}
+            value={content.value}
+            onChange={content.handleChange}
+          />
+        </S.LetterArea>
+
         <S.CheckTextLength>{content.value.length}/500자</S.CheckTextLength>
         <S.Discription>
           작성하신 방명록은 집주인만 열람이 가능해요.
