@@ -48,7 +48,6 @@ export const uploadImageMessageFurnitureId = async (
 
   try {
     await instance.post('/mission-complete', formData);
-    // 성공 처리 로직
   } catch (error) {
     if (isAxiosError(error)) {
       if (

@@ -4,10 +4,10 @@ import {ModalOKButtonProps, ModalButtonProps} from '../../type/type';
 
 interface CombinedProps extends ModalOKButtonProps, ModalButtonProps {}
 
-function ModalOKButton({buttonName, onClick}: CombinedProps) {
+function ModalOKButton({buttonName, onClick, disabled = false}: CombinedProps) {
   return (
     <>
-      <S.ModalOKButton type="submit" onClick={onClick}>
+      <S.ModalOKButton type="submit" onClick={onClick} disabled={disabled}>
         {buttonName}
       </S.ModalOKButton>
     </>

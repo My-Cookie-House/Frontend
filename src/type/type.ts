@@ -25,6 +25,7 @@ export interface SelectFurnitureModalProps {
 
 export interface ModalOKButtonProps {
   buttonName: string;
+  disabled?: boolean;
 }
 
 export interface ModalButtonProps {

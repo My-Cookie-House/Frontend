@@ -19,7 +19,7 @@ import Wallpapers from '@/assets/Wallpaper';
 import {useAllCompletedMissions} from '@/hooks/useAllCompletedMissions';
 import useTodayMission from '@/hooks/useTodayMission';
 import {userInfoAtom} from '@/atoms/loginStateAtom';
-import {AxiosError} from 'axios';
+import Spinner from '@/components/Spinner/Spinner';
 
 export default function MissionFurniturePreview() {
   // 모달 상태관리
@@ -43,7 +43,7 @@ export default function MissionFurniturePreview() {
   };
   const [missionState, setMissionState] = useRecoilState(missionStateAtom);
 
-  const {mutate} = useMutation({
+  const {mutate, isPending} = useMutation({
     mutationFn: () =>
       uploadImageMessageFurnitureId(
         missionState.missionCompleteImage,
@@ -95,13 +95,14 @@ export default function MissionFurniturePreview() {
   //TODO: post로 할지 put으로 할지에 대한 분기처리 필요.
   const handleUploadImageMessageFurnitureIdWrapper = async () => {
     if (missionState.missionCompleteFurnitureId === 0) {
-      throw new Error();
+      throw new Error('이전 과정을 완료하지 않았습니다');
     }
     mutate();
   };
 
   return (
     <>
+      {isPending && <Spinner />}
       <S.FurnitureLayerWrapper>
         <Overlap
           width={355}
@@ -152,6 +153,7 @@ export default function MissionFurniturePreview() {
             <ModalOKButton
               buttonName="다 골랐어요!"
               onClick={handleUploadImageMessageFurnitureIdWrapper}
+              disabled={isPending}
             />
           </S.ModalOkButtonWrapper>
         </S.ModalInnerWrapper>
