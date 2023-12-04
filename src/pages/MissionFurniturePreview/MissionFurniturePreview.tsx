@@ -2,7 +2,7 @@ import {S} from './style';
 import useIsMyHouse from '../../hooks/useIsMyHouse';
 import {useEffect, useState} from 'react';
 import Overlap from '../../components/Overlap/Overlap';
-import {useQueryClient} from '@tanstack/react-query';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {uploadImageMessageFurnitureId} from '../../apis/mission';
 import FurnitureLayer from '../../assets/FurnitureLayer';
 import {useRecoilState, useSetRecoilState} from 'recoil';
@@ -19,6 +19,7 @@ import Wallpapers from '@/assets/Wallpaper';
 import {useAllCompletedMissions} from '@/hooks/useAllCompletedMissions';
 import useTodayMission from '@/hooks/useTodayMission';
 import {userInfoAtom} from '@/atoms/loginStateAtom';
+import {AxiosError} from 'axios';
 
 export default function MissionFurniturePreview() {
   // 모달 상태관리
@@ -41,6 +42,29 @@ export default function MissionFurniturePreview() {
     setSelectedFurnitureImage(furnitureImage);
   };
   const [missionState, setMissionState] = useRecoilState(missionStateAtom);
+
+  const {mutate} = useMutation({
+    mutationFn: () =>
+      uploadImageMessageFurnitureId(
+        missionState.missionCompleteImage,
+        missionState.missionCompleteContent,
+        missionState.missionCompleteFurnitureId,
+        'post',
+      ),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ['mission', 'today', userId],
+      });
+      await queryClient.invalidateQueries({
+        queryKey: ['loginState'],
+      });
+      setUserInfo((prev) => ({...prev, todayMissionComplete: true}));
+      navigate(`/${userId}/inside`);
+    },
+    onError: () => {
+      navigate(-1);
+    },
+  });
 
   useEffect(() => {
     handleFurnitureSelected();
@@ -70,36 +94,10 @@ export default function MissionFurniturePreview() {
 
   //TODO: post로 할지 put으로 할지에 대한 분기처리 필요.
   const handleUploadImageMessageFurnitureIdWrapper = async () => {
-    try {
-      // 가구를 선택하지 않은 경우
-      if (missionState.missionCompleteFurnitureId === 0) {
-        throw new Error();
-      }
-
-      await uploadImageMessageFurnitureId(
-        missionState.missionCompleteImage,
-        missionState.missionCompleteContent,
-        missionState.missionCompleteFurnitureId,
-        'post',
-      );
-
-      await queryClient.invalidateQueries({
-        queryKey: ['mission', 'today', userId],
-      });
-      await queryClient.invalidateQueries({
-        queryKey: ['loginState'],
-      });
-      setUserInfo((prev) => ({...prev, todayMissionComplete: true}));
-      navigate(`/${userId}/inside`);
-    } catch (error) {
-      if (
-        (error.response.data.message = '지원하지 않는 이미지 파일 형식입니다')
-      ) {
-        alert('지원하지 않는 이미지 파일 형식입니다');
-      } else {
-        alert('업로드에 실패했어요.');
-      }
+    if (missionState.missionCompleteFurnitureId === 0) {
+      throw new Error();
     }
+    mutate();
   };
 
   return (
