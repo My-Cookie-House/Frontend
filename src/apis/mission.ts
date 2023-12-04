@@ -1,6 +1,6 @@
 // mission.ts
 import {ApiError} from '@/Error/ApiError';
-import {isAxiosError} from 'axios';
+import {AxiosError, isAxiosError} from 'axios';
 import {instance} from './axios';
 import * as Sentry from '@sentry/react';
 
@@ -48,9 +48,13 @@ export const uploadImageMessageFurnitureId = async (
 
   try {
     await instance.post('/mission-complete', formData);
-    // 성공 처리 로직
   } catch (error) {
     if (isAxiosError(error)) {
+      if (
+        error.response.data.message === '지원하지 않는 이미지 파일 형식입니다'
+      ) {
+        alert('지원하지 않는 이미지 형식입니다. png, jpg 파일로 선택해주세요.');
+      }
       throw Sentry.captureException(
         new ApiError(error, 'uploadImageMessageFurnitureId'),
       );
