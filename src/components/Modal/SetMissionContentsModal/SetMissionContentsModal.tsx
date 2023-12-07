@@ -72,7 +72,7 @@ export default function SetMissionContentsModal({
           <S.ImageInput
             id="image-upload"
             type="file"
-            accept=".png,.jpg,.jpeg,.PNG,.JPG,.webp,.HEIC,.HEIF,.svg"
+            accept=".png,.jpg,.jpeg,.webp,.HEIC,.HEIF,.svg"
             onChange={handleFileInputChange}
           />
           {uploadedImg && <S.ImagePreview src={uploadedImg as string} />}
