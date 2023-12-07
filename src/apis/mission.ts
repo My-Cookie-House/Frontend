@@ -1,6 +1,6 @@
 // mission.ts
 import {ApiError} from '@/Error/ApiError';
-import {AxiosError, isAxiosError} from 'axios';
+import {isAxiosError} from 'axios';
 import {instance} from './axios';
 import * as Sentry from '@sentry/react';
 
