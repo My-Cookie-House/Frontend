@@ -20,6 +20,7 @@ import {useAllCompletedMissions} from '@/hooks/useAllCompletedMissions';
 import useTodayMission from '@/hooks/useTodayMission';
 import {userInfoAtom} from '@/atoms/loginStateAtom';
 import Spinner from '@/components/Spinner/Spinner';
+import {ICompletedMission} from '@/interfaces/mission';
 
 export default function MissionFurniturePreview() {
   // 모달 상태관리
@@ -74,7 +75,8 @@ export default function MissionFurniturePreview() {
     openMissionArriveModal();
   });
   const {missionId} = useTodayMission(userId);
-  const {furnitureImgs, wallpaperId} = useAllCompletedMissions(userId);
+  const {furnitureImgs, wallpaperId, completedMissions} =
+    useAllCompletedMissions(userId);
 
   // 가구 고르기 버튼 클릭
   const handleFurnitureClick = (
@@ -89,6 +91,18 @@ export default function MissionFurniturePreview() {
       missionCompleteFurnitureId: +`${missionId}${furnitureNum}`,
     }));
   };
+  const furnitures = completedMissions
+    ?.sort(
+      (a, b) =>
+        +a.missionCompleteFurnitureId.toString().slice(0, -1) -
+        +b.missionCompleteFurnitureId.toString().slice(0, -1),
+    )
+    .map(
+      (mission: ICompletedMission) =>
+        FurnitureLayer[`FurnitureLayer${mission.missionCompleteFurnitureId}`],
+    );
+  furnitures.splice(missionId - 1, 0, selectedFurnitureImage);
+  console.log(furnitures);
 
   const queryClient = useQueryClient();
 
@@ -108,11 +122,7 @@ export default function MissionFurniturePreview() {
           width={355}
           height={533}
           margin="23px 0 0 0"
-          imgs={[
-            Wallpapers[`Wallpaper${wallpaperId}`],
-            selectedFurnitureImage && selectedFurnitureImage,
-            ...furnitureImgs,
-          ]}
+          imgs={[Wallpapers[`Wallpaper${wallpaperId}`], ...furnitures]}
         />
       </S.FurnitureLayerWrapper>
       <Modal
