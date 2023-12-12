@@ -110,8 +110,8 @@ export default function MissionFurniturePreview() {
           margin="23px 0 0 0"
           imgs={[
             Wallpapers[`Wallpaper${wallpaperId}`],
-            ...furnitureImgs,
             selectedFurnitureImage && selectedFurnitureImage,
+            ...furnitureImgs,
           ]}
         />
       </S.FurnitureLayerWrapper>

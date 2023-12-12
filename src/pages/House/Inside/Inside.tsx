@@ -65,11 +65,17 @@ export default function Inside() {
   });
 
   // 가구 레이어 이미지를 가져오는 string형식으로 리턴
-  const furnitures = data?.completedMissions?.map(
-    (mission) =>
-      FurnitureLayer[`FurnitureLayer${mission.missionCompleteFurnitureId}`],
-  );
-
+  const furnitures = data?.completedMissions
+    ?.sort(
+      (a, b) =>
+        +a.missionCompleteFurnitureId.toString().slice(0, -1) -
+        +b.missionCompleteFurnitureId.toString().slice(0, -1),
+    )
+    .map(
+      (mission: ICompletedMission) =>
+        FurnitureLayer[`FurnitureLayer${mission.missionCompleteFurnitureId}`],
+    );
+  console.log(data?.completedMissions);
   const getMissionIdFromFurnitureid = (furnitureId: number) => {
     const stringId = `${furnitureId}`;
     if (stringId.length === 2) {
