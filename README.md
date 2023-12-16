@@ -79,10 +79,11 @@
 
 
 ## 기타
-### 🍪마이쿠키하우스🍪 개발 회고
 [🍪마이쿠키하우스🍪 개발 회고
 ](https://velog.io/@stakbucks/%EB%A7%88%EC%9D%B4%EC%BF%A0%ED%82%A4%ED%95%98%EC%9A%B0%EC%8A%A4-%EA%B0%9C%EB%B0%9C-%ED%9A%8C%EA%B3%A0
 )
-### [goormthon univ] 구름톤 유니브 1기 단풍톤을 마치며.. 결과는..?!
+
 [구름톤 유니브 1기 단풍톤을 마치며.. 결과는..?!
 ](https://velog.io/@kwan0324/goormthon-univ-%EA%B5%AC%EB%A6%84%ED%86%A4-%EC%9C%A0%EB%8B%88%EB%B8%8C-1%EA%B8%B0-%EB%8B%A8%ED%92%8D%ED%86%A4%EC%9D%84-%EB%A7%88%EC%B9%98%EB%A9%B0..-%EA%B2%B0%EA%B3%BC%EB%8A%94)
+
+[[마이쿠키하우스] Sentry로 모니터링 하기](https://velog.io/@stakbucks/%EB%A7%88%EC%9D%B4%EC%BF%A0%ED%82%A4%ED%95%98%EC%9A%B0%EC%8A%A4-Sentry%EB%A1%9C-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%ED%95%98%EA%B8%B0)
