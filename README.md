@@ -86,4 +86,3 @@
 ### [goormthon univ] 구름톤 유니브 1기 단풍톤을 마치며.. 결과는..?!
 [구름톤 유니브 1기 단풍톤을 마치며.. 결과는..?!
 ](https://velog.io/@kwan0324/goormthon-univ-%EA%B5%AC%EB%A6%84%ED%86%A4-%EC%9C%A0%EB%8B%88%EB%B8%8C-1%EA%B8%B0-%EB%8B%A8%ED%92%8D%ED%86%A4%EC%9D%84-%EB%A7%88%EC%B9%98%EB%A9%B0..-%EA%B2%B0%EA%B3%BC%EB%8A%94)
-![Uploading image.png…]()
